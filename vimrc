@@ -33,5 +33,8 @@ set showmode
 set relativenumber              "Show the line number relative to the line with the cursor in front of each line. 
 set pastetoggle=<F2>
 
-let g:CommandTMaxHeight=10
-"let mapleader = "<D->"
+let g:CommandTMaxHeight=20
+let mapleader = ","
+
+compiler ruby
+
