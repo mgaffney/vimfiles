@@ -25,3 +25,4 @@
 [submodule "bundle/vim-afterimage"]
 	path = bundle/vim-afterimage
 	url = git://github.com/tpope/vim-afterimage.git
+  ignore = dirty
