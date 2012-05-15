@@ -5,7 +5,7 @@ call pathogen#infect()
 
 set nocompatible                " choose no compatibility with legacy vi
 syntax enable
-set encoding=utf-8
+"set encoding=utf-8
 set showcmd                     " display incomplete commands
 filetype plugin indent on       " load file type plugins + indentation
 
@@ -37,4 +37,5 @@ let g:CommandTMaxHeight=20
 let mapleader = ","
 
 compiler ruby
+nnoremap <f5> :!ctags -R<CR>
 
