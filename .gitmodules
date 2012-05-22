@@ -26,3 +26,7 @@
 	path = bundle/vim-afterimage
 	url = git://github.com/tpope/vim-afterimage.git
   ignore = dirty
+[submodule "bundle/vim-unimpaired"]
+	path = bundle/vim-unimpaired
+	url = git://github.com/tpope/vim-unimpaired.git
+  ignore = dirty

@@ -30,11 +30,14 @@ set ruler
 set showmatch
 set showmode
 
-set relativenumber              "Show the line number relative to the line with the cursor in front of each line. 
+"set relativenumber              "Show the line number relative to the line with the cursor in front of each line. 
+set nu
 set pastetoggle=<F2>
 
 let g:CommandTMaxHeight=20
 let mapleader = ","
+let g:netrw_browse_split=2
+let g:netrw_liststyle=3
 
 compiler ruby
 nnoremap <f5> :!ctags -R<CR>
