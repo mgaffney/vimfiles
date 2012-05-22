@@ -27,9 +27,25 @@ set smartcase                   " ... unless they contain at least one capital l
 set background=dark
 
 set ruler
+set laststatus=2
 set showmatch
 set showmode
 
+" set statusline
+set statusline=   " clear the statusline for when vimrc is reloaded
+set statusline+=%-3.3n\                      " buffer number
+set statusline+=%t\                          " file name
+set statusline+=%h%m%r%w                     " flags
+set statusline+=[%{strlen(&ft)?&ft:'none'},  " filetype
+set statusline+=%{strlen(&fenc)?&fenc:&enc}, " encoding
+set statusline+=%{&fileformat}]              " file format
+set statusline+=%=                           " right align
+set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\  " highlight
+set statusline+=%b,0x%-8B\                   " current char
+set statusline+=%-14.(%l,%c%V%)\             " offset
+set statusline+=%<%P                         " Percentage of file
+
+"set statusline=%<%t%h%m%r\ filetype:%Y\ %a\ %-22.30{strftime(\"%c\")}%=0x%B\ line:%l,\ \ col:%c%V\ %P
 "set relativenumber              "Show the line number relative to the line with the cursor in front of each line. 
 set nu
 set pastetoggle=<F2>
@@ -37,7 +53,7 @@ set pastetoggle=<F2>
 let g:CommandTMaxHeight=20
 let mapleader = ","
 let g:netrw_browse_split=2
-let g:netrw_liststyle=3
+let g:netrw_liststyle=1
 
 compiler ruby
 nnoremap <f5> :!ctags -R<CR>
