@@ -61,3 +61,7 @@ let g:netrw_list_hide="^\.git*,^\.rvmrc,\.swp"
 compiler ruby
 nnoremap <f5> :!ctags -R<CR>
 
+" get Vim to search all gems in your current RVM gemset (requires pathogen.vim)
+autocmd FileType ruby let &l:tags = pathogen#legacyjoin(pathogen#uniq(
+      \ pathogen#split(&tags) +
+      \ map(split($GEM_PATH,':'),'v:val."/gems/*/tags"')))
