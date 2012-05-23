@@ -16,6 +16,9 @@ set expandtab                   " use spaces, not tabs (optional)
 set backspace=indent,eol,start  " backspace through everything in insert mode
 set autoindent
 
+set clipboard+=unnamed          " Yanks go on clipboard instead.
+set autowrite                   " Writes on make/shell commands
+
 "" Searching
 set hlsearch                    " highlight matches
 set incsearch                   " incremental searching
@@ -24,7 +27,7 @@ set smartcase                   " ... unless they contain at least one capital l
 
 "" Color
 "set background=light
-set background=dark
+"set background=dark
 
 set ruler
 set laststatus=2
@@ -54,7 +57,7 @@ let g:CommandTMaxHeight=20
 let mapleader = ","
 let g:netrw_browse_split=2
 let g:netrw_liststyle=1
-
+let g:netrw_list_hide="^\.git*,^\.rvmrc,\.swp"
 compiler ruby
 nnoremap <f5> :!ctags -R<CR>
 
