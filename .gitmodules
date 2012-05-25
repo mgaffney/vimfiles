@@ -62,3 +62,11 @@
 	path = bundle/vim-eunuch
 	url = git://github.com/tpope/vim-eunuch.git
   ignore = dirty
+[submodule "bundle/vim-textobj-user"]
+	path = bundle/vim-textobj-user
+	url = git://github.com/kana/vim-textobj-user.git
+  ignore = dirty
+[submodule "bundle/vim-textobj-rubyblock"]
+	path = bundle/vim-textobj-rubyblock
+	url = git://github.com/nelstrom/vim-textobj-rubyblock.git
+  ignore = dirty

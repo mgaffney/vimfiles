@@ -8,6 +8,7 @@ syntax enable
 "set encoding=utf-8
 set showcmd                     " display incomplete commands
 filetype plugin indent on       " load file type plugins + indentation
+runtime macros/matchit.vim
 
 "" Whitespace
 set nowrap                      " don't wrap lines
@@ -27,7 +28,7 @@ set smartcase                   " ... unless they contain at least one capital l
 
 "" Color
 "set background=light
-"set background=dark
+set background=dark
 
 set ruler
 set laststatus=2
@@ -55,7 +56,7 @@ set pastetoggle=<F2>
 
 let g:CommandTMaxHeight=20
 let mapleader = ","
-let g:netrw_browse_split=2
+"let g:netrw_browse_split=2
 let g:netrw_liststyle=1
 let g:netrw_list_hide="^\.git*,^\.rvmrc,\.swp"
 compiler ruby
