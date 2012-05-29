@@ -66,8 +66,8 @@
 		set winminheight=0				" windows can be 0 line high 
 		set ignorecase					" case insensitive search
 		set smartcase					" case sensitive when uc present
-		set wildmenu					" show list instead of just completing
-		set wildmode=list:longest,full			" command <Tab> completion, list matches, then longest common part, then all.
+		"set wildmenu					" show list instead of just completing
+		"set wildmode=list:longest,full			" command <Tab> completion, list matches, then longest common part, then all.
 		set whichwrap=b,s,h,l,<,>,[,]			" backspace and cursor keys wrap to
 		set scrolljump=5				" lines to scroll when cursor leaves screen
 		set scrolloff=3					" minimum lines to keep above and below cursor
@@ -134,10 +134,10 @@
 
 	" Fix home and end keybindings for screen, particularly on mac
 	" - for some reason this fixes the arrow keys too. huh.
-	map [F $
-	imap [F $
-	map [H g0
-	imap [H g0
+	" map [F $
+	" imap [F $
+	" map [H g0
+	" imap [H g0
 
 	" For when you forget to sudo.. Really Write the file.
 	cmap w!! w !sudo tee % >/dev/null
