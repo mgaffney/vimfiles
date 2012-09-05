@@ -70,3 +70,7 @@
 	path = bundle/vim-textobj-rubyblock
 	url = git://github.com/nelstrom/vim-textobj-rubyblock.git
   ignore = dirty
+[submodule "bundle/vim-json"]
+	path = bundle/vim-json
+	url = git://github.com/jakar/vim-json.git
+  ignore = dirty
