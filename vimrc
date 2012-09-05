@@ -23,6 +23,8 @@
 		set history=2000
 		set clipboard+=unnamed			" Yanks go on clipboard instead.
 		set autowrite					" Writes on make/shell commands
+		"set grepprg=ack\ --nogroup\ --column\ $*
+		"set grepformat=%f:%l:%c:%m
 
 		" Setting up the directories {
 			"set undofile
@@ -143,10 +145,11 @@
 	cmap w!! w !sudo tee % >/dev/null
 
 	" Shortcut to rapidly toggle `set list`
-	nmap <leader>l :set list!<CR>
+	nmap <leader>l :set list!<cr>
 
 	" Edit .vimrc file quickly
-	nmap <leader>v :tabedit $MYVIMRC<CR>
+	nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+	nnoremap <leader>sv :source $MYVIMRC<cr>
 " }
 
 
@@ -168,7 +171,10 @@
 			\ map(split($GEM_PATH,':'),'v:val."/gems/*/tags"')))
 " }
 
-
+" Zip Files {
+	" Additional file extensions that vim can open as zip files see :h zip
+	au BufReadCmd *.jar,*.xpi,*.sar,*.war,*.ear,*.mar,*.aar call zip#Browse(expand("<amatch>"))
+" }
 
 " GUI Settings {
 	" GVIM- (here instead of .gvimrc)
@@ -187,6 +193,11 @@
 	endif
 " }
 
+" FileType Overrides {
+
+	au BufNewFile,BufRead *.md set filetype=markdown
+
+" }
 " Source the vimrc file after saving it
 "if has("autocmd")
 "	autocmd bufwritepost .vimrc source $MYVIMRC
