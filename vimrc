@@ -196,8 +196,11 @@
 " FileType Overrides {
 
 	au BufNewFile,BufRead *.md set filetype=markdown
-
+	au BufNewFile,BufRead *.json set filetype=json
 " }
+
+
+
 " Source the vimrc file after saving it
 "if has("autocmd")
 "	autocmd bufwritepost .vimrc source $MYVIMRC
