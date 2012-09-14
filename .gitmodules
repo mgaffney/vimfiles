@@ -78,3 +78,7 @@
 	path = bundle/vim-markdown
 	url = https://github.com/mgaffney/vim-markdown.git
   ignore = dirty
+[submodule "bundle/vim-git"]
+	path = bundle/vim-git
+	url = git://github.com/tpope/vim-git.git
+  ignore = dirty
