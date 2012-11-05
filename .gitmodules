@@ -82,3 +82,7 @@
 	path = bundle/vim-git
 	url = git://github.com/tpope/vim-git.git
   ignore = dirty
+[submodule "bundle/plantuml-syntax"]
+	path = bundle/plantuml-syntax
+	url = git://github.com/aklt/plantuml-syntax.git
+  ignore = dirty
