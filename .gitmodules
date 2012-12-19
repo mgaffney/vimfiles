@@ -86,3 +86,7 @@
 	path = bundle/plantuml-syntax
 	url = git://github.com/aklt/plantuml-syntax.git
   ignore = dirty
+[submodule "bundle/vim-ack"]
+	path = bundle/vim-ack
+	url = git://github.com/mileszs/ack.vim.git
+  ignore = dirty
