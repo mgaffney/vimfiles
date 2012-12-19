@@ -105,7 +105,7 @@
 
 	"The default leader is '\', but many people prefer ',' as it's in a standard
 	"location
-	let mapleader = ','
+	"let mapleader = ','
 
 	" Yank from the cursor to the end of the line, to be consistent with C and D.
 	nnoremap Y y$
@@ -179,7 +179,8 @@
 " GUI Settings {
 	" GVIM- (here instead of .gvimrc)
 	if has('gui_running')
-		set guifont=Consolas:h13
+		"set guifont=Consolas:h13
+		set guifont=Source\ Code\ Pro:h12
 		set background=light
 		"colorscheme solarized
 		if has("gui_macvim")
