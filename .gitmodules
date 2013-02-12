@@ -90,3 +90,7 @@
 	path = bundle/vim-ack
 	url = git://github.com/mileszs/ack.vim.git
   ignore = dirty
+[submodule "bundle/vim-bash-support"]
+	path = bundle/vim-bash-support
+	url = git://github.com/vim-scripts/bash-support.vim.git
+  ignore = dirty
