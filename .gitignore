@@ -10,4 +10,6 @@ obj/
 _ReSharper.*
 *.sln.cache
 .netrwhist
+.netrwbook
+view/
 
