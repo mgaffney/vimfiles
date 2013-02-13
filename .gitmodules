@@ -90,3 +90,7 @@
 	path = bundle/vim-bash-support
 	url = git://github.com/vim-scripts/bash-support.vim.git
   ignore = dirty
+[submodule "bundle/dwm.vim"]
+	path = bundle/dwm.vim
+	url = git://github.com/spolu/dwm.vim.git
+  ignore = dirty
