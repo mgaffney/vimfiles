@@ -90,3 +90,7 @@
 	path = bundle/dwm.vim
 	url = git://github.com/spolu/dwm.vim.git
   ignore = dirty
+[submodule "bundle/wmgraphviz.vim"]
+	path = bundle/wmgraphviz.vim
+	url = git://github.com/wannesm/wmgraphviz.vim.git
+  ignore = dirty
