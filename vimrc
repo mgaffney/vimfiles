@@ -160,7 +160,7 @@
 	let g:netrw_list_hide="^\.git*,^\.rvmrc,\.swp"
 
 	" CommandT Window Height
-	let g:CommandTMaxHeight=20
+	" let g:CommandTMaxHeight=20
 
 	" runtime macros/matchit.vim
 
@@ -176,6 +176,9 @@
 	au BufReadCmd *.jar,*.xpi,*.sar,*.war,*.ear,*.mar,*.aar call zip#Browse(expand("<amatch>"))
 " }
 
+" man pages {
+    runtime ftplugin/man.vim
+"}
 " GUI Settings {
 	" GVIM- (here instead of .gvimrc)
 	if has('gui_running')
@@ -185,7 +188,7 @@
 		"colorscheme solarized
 		if has("gui_macvim")
 			macmenu &File.New\ Tab key=<nop>
-			map <D-t> :CommandT<CR>
+			" map <D-t> :CommandT<CR>
 		endif
 		set guioptions-=T	" remove the toolbar
 		"set lines=40		" 40 lines of text instead of 24,
