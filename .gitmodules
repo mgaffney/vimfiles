@@ -94,3 +94,7 @@
 	path = bundle/wmgraphviz.vim
 	url = git://github.com/wannesm/wmgraphviz.vim.git
   ignore = dirty
+[submodule "bundle/taglist.vim"]
+	path = bundle/taglist.vim
+	url = git@github.com:vim-scripts/taglist.vim.git
+  ignore = dirty
