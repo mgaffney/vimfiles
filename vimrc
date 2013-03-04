@@ -87,15 +87,15 @@
 " }
 
 " Formatting {
-	set nowrap			" wrap long lines
+	set nowrap			    " do not wrap long lines
 	set autoindent			" indent at the same level of the previous line
 	set shiftwidth=4		" use indents of 4 spaces
 	set expandtab			" tabs are spaces, not tabs
 	set tabstop=4			" an indentation every four columns
 	set softtabstop=4 		" let backspace delete indent
-	"set matchpairs+=<:>		" match, to be used witoph % 
-	"set pastetoggle=<F12>		" pastetoggle (sane indentation on pastes)
-	"set comments=sl:/*,mb:*,elx:*/ " auto format comment blocks
+	set matchpairs+=<:>	    " match, to be used with % 
+	"set pastetoggle=<F12>	" pastetoggle (sane indentation on pastes)
+	set comments=sl:/*,mb:*,elx:*/ " auto format comment blocks
 	" Remove trailing whitespaces and ^M chars
 	"autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 " }
@@ -208,8 +208,8 @@
 	" GVIM- (here instead of .gvimrc)
 	if has('gui_running')
 		"set guifont=Consolas:h13
-		" set guifont=Source\ Code\ Pro:h12
-		set guifont=Source\ Code\ Pro\ Light:h12    " Retina Display Setting
+		set guifont=Source\ Code\ Pro:h12
+		" set guifont=Source\ Code\ Pro\ Light:h12    " Retina Display Setting
 		set background=light
 		"colorscheme solarized
 		if has("gui_macvim")
