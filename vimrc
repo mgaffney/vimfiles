@@ -30,6 +30,7 @@
 			"set undofile
 			set undolevels=1000
 			set undoreload=10000
+            set nrformats=              " sets number formats to decimal so 007 <C-a> results in 008.
 		" }
 " }
 
@@ -70,6 +71,7 @@
 		set smartcase					" case sensitive when uc present
 		"set wildmenu					" show list instead of just completing
 		"set wildmode=list:longest,full			" command <Tab> completion, list matches, then longest common part, then all.
+        set wildmode=longest,list       " tab completion like bash's
 		set whichwrap=b,s,h,l,<,>,[,]			" backspace and cursor keys wrap to
 		set scrolljump=5				" lines to scroll when cursor leaves screen
 		set scrolloff=3					" minimum lines to keep above and below cursor
@@ -91,7 +93,7 @@
 	set expandtab			" tabs are spaces, not tabs
 	set tabstop=4			" an indentation every four columns
 	set softtabstop=4 		" let backspace delete indent
-	"set matchpairs+=<:>		" match, to be used with % 
+	"set matchpairs+=<:>		" match, to be used witoph % 
 	"set pastetoggle=<F12>		" pastetoggle (sane indentation on pastes)
 	"set comments=sl:/*,mb:*,elx:*/ " auto format comment blocks
 	" Remove trailing whitespaces and ^M chars
@@ -109,6 +111,9 @@
 
 	" Yank from the cursor to the end of the line, to be consistent with C and D.
 	nnoremap Y y$
+
+    " Make program
+    nnoremap <f7> :make<CR>
 
 	""" Code folding options
 	nmap <leader>f0 :set foldlevel=0<CR>
@@ -130,6 +135,11 @@
 	cmap cwd lcd %:p:h
 	cmap cd. lcd %:p:h
 
+    " On command-line mode %% automatically expands to the path of the active
+    " buffer example:
+    " :edit %%Pr<Tab> 
+    cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
+
 	" visual shifting (does not exit Visual mode)
 	vnoremap < <gv
 	vnoremap > >gv 
@@ -150,10 +160,22 @@
 	" Edit .vimrc file quickly
 	nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 	nnoremap <leader>sv :source $MYVIMRC<cr>
+
+    " Disable the arrow keys (good for learning vim)
+    noremap <Up> <Nop>
+    noremap <Down> <Nop>
+    noremap <Left> <Nop>
+    noremap <Right> <Nop>
 " }
 
 
 " Plugins {
+
+    " DWM plugin
+
+      nmap <C-Left> <Plug>DWMRotateCounterclockwise
+      nmap <C-Right> <Plug>DWMRotateClockwise
+
 	" netrw settings
 	"let g:netrw_browse_split=2
 	let g:netrw_liststyle=1
@@ -162,7 +184,10 @@
 	" CommandT Window Height
 	" let g:CommandTMaxHeight=20
 
-	" runtime macros/matchit.vim
+	runtime macros/matchit.vim
+
+    " WMGraphviz
+    let g:WMGraphviz_output="png"
 
 	" Pathogen - this should be moved to a ruby filetype settings file
 	" get Vim to search all gems in your current RVM gemset (requires pathogen.vim)
@@ -184,6 +209,7 @@
 	if has('gui_running')
 		"set guifont=Consolas:h13
 		set guifont=Source\ Code\ Pro:h12
+		" set guifont=Source\ Code\ Pro\ Light:h12    " Retina Display Setting
 		set background=light
 		"colorscheme solarized
 		if has("gui_macvim")
