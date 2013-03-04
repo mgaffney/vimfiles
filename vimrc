@@ -208,8 +208,8 @@
 	" GVIM- (here instead of .gvimrc)
 	if has('gui_running')
 		"set guifont=Consolas:h13
-		set guifont=Source\ Code\ Pro:h12
-		" set guifont=Source\ Code\ Pro\ Light:h12    " Retina Display Setting
+		" set guifont=Source\ Code\ Pro:h12
+		set guifont=Source\ Code\ Pro\ Light:h12    " Retina Display Setting
 		set background=light
 		"colorscheme solarized
 		if has("gui_macvim")
