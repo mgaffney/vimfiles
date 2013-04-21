@@ -114,6 +114,8 @@
 
     " Make program
     nnoremap <f7> :make<CR>
+    " Toggle TagList window
+    nnoremap <silent> <F8> :TlistToggle<CR>
 
 	""" Code folding options
 	nmap <leader>f0 :set foldlevel=0<CR>
