@@ -175,8 +175,8 @@
 
     " DWM plugin
 
-      nmap <C-Left> <Plug>DWMRotateCounterclockwise
-      nmap <C-Right> <Plug>DWMRotateClockwise
+    nmap <C-Left> <Plug>DWMRotateCounterclockwise
+    nmap <C-Right> <Plug>DWMRotateClockwise
 
 	" netrw settings
 	"let g:netrw_browse_split=2
@@ -230,76 +230,5 @@
 	au BufNewFile,BufRead *.md set filetype=markdown
 	au BufNewFile,BufRead *.json set filetype=json
 " }
-
-
-
-" Source the vimrc file after saving it
-"if has("autocmd")
-"	autocmd bufwritepost .vimrc source $MYVIMRC
-"endif
-
-
-"" Whitespace
-""set nowrap											" don't wrap lines
-""set tabstop=2 shiftwidth=2			" a tab is two spaces (or set this to 4)
-"set expandtab										" use spaces, not tabs (optional)
-""set backspace=indent,eol,start	" backspace through everything in insert mode
-"set autoindent
-"set smartindent
-
-
-"" Searching
-"set nohlsearch									" Turn off highlight matches - instead, use :set hls when needed
-"set hlsearch										" highlight matches
-"set incsearch										" incremental searching
-"set ignorecase									" searches are case insensitive...
-"set smartcase										" ... unless they contain at least one capital letter
-
-"" Color
-
-"if has("gui_running")
-"	set background=light
-"else
-"	set background=dark
-"endif
-
-"set ruler
-"set laststatus=2
-"set showmatch
-
-"set nofoldenable				"dont fold by default
-
-" set statusline
-" set statusline=		" clear the statusline for when vimrc is reloaded
-" set statusline+=%-3.3n\											 " buffer number
-" set statusline+=%t\													 " file name
-" set statusline+=%h%m%r%w										 " flags
-" set statusline+=[%{strlen(&ft)?&ft:'none'},  " filetype
-" set statusline+=%{strlen(&fenc)?&fenc:&enc}, " encoding
-" set statusline+=%{&fileformat}]							 " file format
-" set statusline+=%=													 " right align
-" set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\  " highlight
-" set statusline+=%b,0x%-8B\									 " current char
-" set statusline+=%-14.(%l,%c%V%)\						 " offset
-" set statusline+=%<%P												 " Percentage of file
-
-"set statusline=%<%t%h%m%r\ filetype:%Y\ %a\ %-22.30{strftime(\"%c\")}%=0x%B\ line:%l,\ \ col:%c%V\ %P
-"set relativenumber							 "Show the line number relative to the line with the cursor in front of each line. 
-" set nu
-" set pastetoggle=<F2>
-
-" compiler ruby
-" nnoremap <f5> :!ctags -R<CR>
-
-
-"au BufNewFile,BufRead *.md set filetype=markdown
-
-" Key mappings
-" map - :Explore<cr>													" Pressing - brings up the File Explorer
-" cmap w!! %!sudo tee > /dev/null %						" use :w!! to write to a file using sudo
-" imap jj <esc>																" Insert Mode - jj to esc
-
-" noremap <F4> :set hlsearch! hlsearch?<CR>		" Press F4 to toggle highlighting on/off, and show current value.
-
 
 
