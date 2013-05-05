@@ -113,7 +113,7 @@
 	nnoremap Y y$
 
     " Make program
-    nnoremap <f7> :make<CR>
+    nnoremap <F5> :w<CR> :silent make<CR>
     " Toggle TagList window
     nnoremap <silent> <F8> :TlistToggle<CR>
 
@@ -196,6 +196,10 @@
 	autocmd FileType ruby let &l:tags = pathogen#legacyjoin(pathogen#uniq(
 			\ pathogen#split(&tags) +
 			\ map(split($GEM_PATH,':'),'v:val."/gems/*/tags"')))
+
+    " PlantUML settings
+    let g:plantuml_executable_script='java -jar ~/bin/plantuml.jar'
+
 " }
 
 " Zip Files {
