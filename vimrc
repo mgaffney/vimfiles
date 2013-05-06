@@ -114,6 +114,7 @@
 
     " Make program
     nnoremap <F5> :w<CR> :silent make<CR>
+    " nnoremap <F5> :silent make<CR>
     " Toggle TagList window
     nnoremap <silent> <F8> :TlistToggle<CR>
 
@@ -168,6 +169,9 @@
     noremap <Down> <Nop>
     noremap <Left> <Nop>
     noremap <Right> <Nop>
+
+    " Highlight word under cursor but do not jump to the next one
+    " nnoremap * *``
 " }
 
 
@@ -198,7 +202,7 @@
 			\ map(split($GEM_PATH,':'),'v:val."/gems/*/tags"')))
 
     " PlantUML settings
-    let g:plantuml_executable_script='java -jar ~/bin/plantuml.jar'
+"    let g:plantuml_executable_script='java -jar ~/bin/plantuml.jar'
 
 " }
 
