@@ -102,3 +102,7 @@
 	path = bundle/vim-scriptease
 	url = git://github.com/tpope/vim-scriptease.git
   ignore = dirty
+[submodule "bundle/vim-vividchalk"]
+	path = bundle/vim-vividchalk
+	url = git://github.com/tpope/vim-vividchalk.git
+  ignore = dirty
