@@ -114,3 +114,7 @@
 	path = bundle/molokai
 	url = git://github.com/tomasr/molokai.git
   ignore = dirty
+[submodule "bundle/gruvbox"]
+	path = bundle/gruvbox
+	url = git://github.com/morhetz/gruvbox.git
+  ignore = dirty
