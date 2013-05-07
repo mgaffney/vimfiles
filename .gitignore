@@ -13,3 +13,4 @@ _ReSharper.*
 .netrwbook
 view/
 spell/
+bundle/vim-cheatsheet
