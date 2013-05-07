@@ -110,3 +110,7 @@
 	path = bundle/jellybeans.vim
 	url = git://github.com/nanotech/jellybeans.vim.git
   ignore = dirty
+[submodule "bundle/molokai"]
+	path = bundle/molokai
+	url = git://github.com/tomasr/molokai.git
+  ignore = dirty
