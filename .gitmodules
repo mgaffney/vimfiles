@@ -106,3 +106,7 @@
 	path = bundle/vim-vividchalk
 	url = git://github.com/tpope/vim-vividchalk.git
   ignore = dirty
+[submodule "bundle/jellybeans.vim"]
+	path = bundle/jellybeans.vim
+	url = git://github.com/nanotech/jellybeans.vim.git
+  ignore = dirty
