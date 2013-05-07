@@ -112,6 +112,16 @@
 	" Yank from the cursor to the end of the line, to be consistent with C and D.
 	nnoremap Y y$
 
+    " Toggle background between dark and light
+    map <F2> :call ToggleBg()<CR>
+    function! ToggleBg()
+        if &background == 'dark'
+            set bg=light
+        else
+            set bg=dark
+        endif
+    endfunc
+
     " Make program
     nnoremap <F5> :w<CR> :silent make<CR>
     " nnoremap <F5> :silent make<CR>
