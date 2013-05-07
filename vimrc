@@ -159,6 +159,14 @@
 
 	" Shortcut to rapidly toggle `set list`
 	nmap <leader>l :set list!<cr>
+	
+	" Shortcut to toggle `set syntax` - helpful when writing VIM help
+    map <leader>s :if exists("g:syntax_on") <Bar>
+	\   syntax off <Bar>
+	\ else <Bar>
+	\   syntax enable <Bar>
+	\ endif <CR>
+
 
 	" Edit .vimrc file quickly
 	nnoremap <leader>ev :vsplit $MYVIMRC<cr>
