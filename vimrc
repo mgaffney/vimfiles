@@ -75,7 +75,7 @@
 		set whichwrap=b,s,h,l,<,>,[,]			" backspace and cursor keys wrap to
 		set scrolljump=5				" lines to scroll when cursor leaves screen
 		set scrolloff=3					" minimum lines to keep above and below cursor
-		set nofoldenable				" do not auto fold code
+		" set nofoldenable				" do not auto fold code
 		set gdefault					" the /g flag on :s substitutions by default
 		"set list
 		" set listchars=tab:>.,trail:.,extends:#,nbsp:.	" Highlight problematic whitespace
@@ -124,6 +124,7 @@
 
     " Make program
     nnoremap <F5> :w<CR> :silent make<CR>
+    nnoremap <F3> :.m$<CR> `.
     " nnoremap <F5> :silent make<CR>
     " Toggle TagList window
     nnoremap <silent> <F8> :TlistToggle<CR>
@@ -171,22 +172,29 @@
 	nmap <leader>l :set list!<cr>
 	
 	" Shortcut to toggle `set syntax` - helpful when writing VIM help
-    map <leader>s :if exists("g:syntax_on") <Bar>
+    map <F6> :if exists("g:syntax_on") <Bar>
 	\   syntax off <Bar>
 	\ else <Bar>
 	\   syntax enable <Bar>
 	\ endif <CR>
 
+    " Edit cheatsheet
+    nnoremap <leader>ec :vsplit $HOME/.vim/bundle/vim-cheatsheet/doc/cheatsheet.txt<cr>
 
 	" Edit .vimrc file quickly
 	nnoremap <leader>ev :vsplit $MYVIMRC<cr>
-	nnoremap <leader>sv :source $MYVIMRC<cr>
-
+	nnoremap <leader>sv :source $MYVIMRC<cr> 
     " Disable the arrow keys (good for learning vim)
     noremap <Up> <Nop>
     noremap <Down> <Nop>
     noremap <Left> <Nop>
     noremap <Right> <Nop>
+	
+	" Enable [[ and ]] even when the { or } don't start in the first column
+	map [[ ?{<CR>w99[{
+	map ][ /}<CR>b99]}
+	map ]] j0[[%/{<CR>
+	map [] k$][%?}<CR>
 
     " Highlight word under cursor but do not jump to the next one
     " nnoremap * *``
