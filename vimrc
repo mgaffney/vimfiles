@@ -1,6 +1,6 @@
 " Environment {
 	" Basics {
-			set nocompatible								" choose no compatibility with legacy vi must
+			set nocompatible			" choose no compatibility with legacy vi must
 	" }
 
 	" Setup Bundle Support {
@@ -60,9 +60,9 @@
 			set statusline+=%-14.(%l,%c%V%)\ %p%% 		" Right aligned file nav info
 		endif
 
-		set backspace=indent,eol,start			" backspace for dummys
+		set backspace=indent,eol,start	" backspace for dummys
 		set linespace=0					" No extra spaces between rows
-		set nu						" Line numbers on
+		set number						" Line numbers on
 		set showmatch					" show matching brackets/parenthesis
 		set incsearch					" find as you type search
 		set hlsearch					" highlight search terms
@@ -70,9 +70,9 @@
 		set ignorecase					" case insensitive search
 		set smartcase					" case sensitive when uc present
 		"set wildmenu					" show list instead of just completing
-		"set wildmode=list:longest,full			" command <Tab> completion, list matches, then longest common part, then all.
+		"set wildmode=list:longest,full	" command <Tab> completion, list matches, then longest common part, then all.
         set wildmode=longest,list       " tab completion like bash's
-		set whichwrap=b,s,h,l,<,>,[,]			" backspace and cursor keys wrap to
+		set whichwrap=b,s,h,l,<,>,[,]	" backspace and cursor keys wrap to
 		set scrolljump=5				" lines to scroll when cursor leaves screen
 		set scrolloff=3					" minimum lines to keep above and below cursor
 		" set nofoldenable				" do not auto fold code
@@ -124,6 +124,7 @@
 
     " Make program
     nnoremap <F5> :w<CR> :silent make<CR>
+    " Move current line to end of file but keep cursor in current location
     nnoremap <F3> :.m$<CR> `.
     " nnoremap <F5> :silent make<CR>
     " Toggle TagList window
