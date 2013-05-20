@@ -16,11 +16,11 @@
 		set background=dark				" Assume a dark background
 		filetype plugin indent on		" load file type plugins + indentation
 		syntax enable					" syntax enable keeps your current color settings. :syntax
-		scriptencoding utf-8	
+"		scriptencoding utf-8	
 
 		set shortmess+=filmnrxoOtT		" abbrev. of messages (avoids 'hit enter')
 		set virtualedit=onemore			" allow for cursor beyond last character
-		set history=2000
+"		set history=2000
 		set clipboard+=unnamed			" Yanks go on clipboard instead.
 		set autowrite					" Writes on make/shell commands
 		"set grepprg=ack\ --nogroup\ --column\ $*
@@ -28,9 +28,9 @@
 
 		" Setting up the directories {
 			"set undofile
-			set undolevels=1000
-			set undoreload=10000
-            set nrformats=              " sets number formats to decimal so 007 <C-a> results in 008.
+"			set undolevels=1000
+"			set undoreload=10000
+"            set nrformats=              " sets number formats to decimal so 007 <C-a> results in 008.
 		" }
 " }
 
@@ -39,14 +39,14 @@
 		set showmode					" display the current mode
 
 		if has('cmdline_info')
-			set ruler						" show the ruler
-			set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)	" a ruler on steroids
-			set showcmd						" show partial commands in status line and
+"			set ruler						" show the ruler
+"			set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)	" a ruler on steroids
+"			set showcmd						" show partial commands in status line and
 										" selected characters/lines in visual mode
 		endif
 
 		if has('statusline')
-			set laststatus=2
+"			set laststatus=2
 			" Broken down into easily includeable segments
 			set statusline= 		" clear the statusline for when vimrc is reloaded
 			set statusline=%<%f\ 				" Filename
@@ -60,26 +60,26 @@
 			set statusline+=%-14.(%l,%c%V%)\ %p%% 		" Right aligned file nav info
 		endif
 
-		set backspace=indent,eol,start	" backspace for dummys
+"		set backspace=indent,eol,start	" backspace for dummys
 		set linespace=0					" No extra spaces between rows
 		set number						" Line numbers on
-		set showmatch					" show matching brackets/parenthesis
-		set incsearch					" find as you type search
-		set hlsearch					" highlight search terms
+"		set showmatch					" show matching brackets/parenthesis
+"		set incsearch					" find as you type search
+"		set hlsearch					" highlight search terms
 		set winminheight=0				" windows can be 0 line high 
 		set ignorecase					" case insensitive search
 		set smartcase					" case sensitive when uc present
 		"set wildmenu					" show list instead of just completing
 		"set wildmode=list:longest,full	" command <Tab> completion, list matches, then longest common part, then all.
-        set wildmode=longest,list       " tab completion like bash's
+"        set wildmode=longest,list       " tab completion like bash's
 		set whichwrap=b,s,h,l,<,>,[,]	" backspace and cursor keys wrap to
-		set scrolljump=5				" lines to scroll when cursor leaves screen
-		set scrolloff=3					" minimum lines to keep above and below cursor
+"		set scrolljump=5				" lines to scroll when cursor leaves screen
+"		set scrolloff=3					" minimum lines to keep above and below cursor
 		" set nofoldenable				" do not auto fold code
 		set gdefault					" the /g flag on :s substitutions by default
 		"set list
 		" set listchars=tab:>.,trail:.,extends:#,nbsp:.	" Highlight problematic whitespace
-		set listchars=tab:▸\ ,eol:¬			" Use the same symbols as TextMate for tabstops and EOLs
+"		set listchars=tab:▸\ ,eol:¬			" Use the same symbols as TextMate for tabstops and EOLs
 		"Invisible character colors
 		highlight NonText guifg=#4a4a59 guibg=bg
 		highlight SpecialKey guifg=#4a4a59 guibg=bg
@@ -87,15 +87,15 @@
 " }
 
 " Formatting {
-	set nowrap			    " do not wrap long lines
-	set autoindent			" indent at the same level of the previous line
-	set shiftwidth=4		" use indents of 4 spaces
-	set expandtab			" tabs are spaces, not tabs
-	set tabstop=4			" an indentation every four columns
-	set softtabstop=4 		" let backspace delete indent
-	set matchpairs+=<:>	    " match, to be used with % 
+"	set nowrap			    " do not wrap long lines
+"	set autoindent			" indent at the same level of the previous line
+"	set shiftwidth=4		" use indents of 4 spaces
+"	set expandtab			" tabs are spaces, not tabs
+"	set tabstop=4			" an indentation every four columns
+"	set softtabstop=4 		" let backspace delete indent
+"	set matchpairs+=<:>	    " match, to be used with % 
 	"set pastetoggle=<F12>	" pastetoggle (sane indentation on pastes)
-	set comments=sl:/*,mb:*,elx:*/ " auto format comment blocks
+"	set comments=sl:/*,mb:*,elx:*/ " auto format comment blocks
 	" Remove trailing whitespaces and ^M chars
 	"autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 " }
@@ -110,7 +110,7 @@
 	"let mapleader = ','
 
 	" Yank from the cursor to the end of the line, to be consistent with C and D.
-	nnoremap Y y$
+"	nnoremap Y y$
 
     " Toggle background between dark and light
     map <F2> :call ToggleBg()<CR>
@@ -217,7 +217,7 @@
 	" CommandT Window Height
 	" let g:CommandTMaxHeight=20
 
-	runtime macros/matchit.vim
+"	runtime macros/matchit.vim
 
     " WMGraphviz
     let g:WMGraphviz_output="png"
