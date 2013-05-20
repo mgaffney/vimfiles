@@ -64,8 +64,8 @@
 		set linespace=0					" No extra spaces between rows
 		set number						" Line numbers on
 "		set showmatch					" show matching brackets/parenthesis
-"		set incsearch					" find as you type search
-"		set hlsearch					" highlight search terms
+		set incsearch					" find as you type search
+		set hlsearch					" highlight search terms
 		set winminheight=0				" windows can be 0 line high 
 		set ignorecase					" case insensitive search
 		set smartcase					" case sensitive when uc present
@@ -145,6 +145,9 @@
 	"clearing highlighted search
 	nmap <silent> <leader>/ :nohlsearch<CR>
 
+	"insert random string
+	map <leader>r mx:r! od -vAn -N16 -tx4 < /dev/urandom<CR>ddk:s/\s//<CR>"zyiwdd`x"zP
+
 	" Shortcuts
 	" Change Working Directory to that of the current file
 	cmap cwd lcd %:p:h
@@ -184,7 +187,7 @@
 
 	" Edit .vimrc file quickly
 	nnoremap <leader>ev :tabnew $MYVIMRC<cr>
-	nnoremap <leader>sv :source $MYVIMRC<cr> 
+	nnoremap <leader>sv :source $MYVIMRC<cr>
     " Disable the arrow keys (good for learning vim)
     noremap <Up> <Nop>
     noremap <Down> <Nop>
@@ -268,7 +271,7 @@
 " FileType Overrides {
 
 	au BufNewFile,BufRead *.md set filetype=markdown
-	au BufNewFile,BufRead *.json set filetype=json
+"	au BufNewFile,BufRead *.json set filetype=json
 " }
 
 
