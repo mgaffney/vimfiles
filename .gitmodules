@@ -122,3 +122,7 @@
 	path = bundle/vim-golang
 	url = git://github.com/jnwhiteh/vim-golang.git
   ignore = dirty
+[submodule "bundle/vim-sensible"]
+	path = bundle/vim-sensible
+	url = git://github.com/tpope/vim-sensible.git
+  ignore = dirty
