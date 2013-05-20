@@ -130,3 +130,7 @@
 	path = bundle/vim-sleuth
 	url = git://github.com/tpope/vim-sleuth.git
   ignore = dirty
+[submodule "bundle/jshint.vim"]
+	path = bundle/jshint.vim
+	url = git://github.com/wookiehangover/jshint.vim.git
+  ignore = dirty
