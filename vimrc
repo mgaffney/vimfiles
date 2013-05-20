@@ -182,7 +182,7 @@
     nnoremap <leader>ec :vsplit $HOME/.vim/bundle/vim-cheatsheet/doc/cheatsheet.txt<cr>
 
 	" Edit .vimrc file quickly
-	nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+	nnoremap <leader>ev :tabnew $MYVIMRC<cr>
 	nnoremap <leader>sv :source $MYVIMRC<cr> 
     " Disable the arrow keys (good for learning vim)
     noremap <Up> <Nop>
@@ -226,6 +226,11 @@
 	autocmd FileType ruby let &l:tags = pathogen#legacyjoin(pathogen#uniq(
 			\ pathogen#split(&tags) +
 			\ map(split($GEM_PATH,':'),'v:val."/gems/*/tags"')))
+
+    " Golang 
+    autocmd FileType go compiler golang
+    "let g:golang_goroot = "/usr/local/Cellar/go/1.1"
+    let g:golang_goroot = "/Users/mike/sandbox/go-workspace"
 
     " PlantUML settings
 "    let g:plantuml_executable_script='java -jar ~/bin/plantuml.jar'
