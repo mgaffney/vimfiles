@@ -172,6 +172,9 @@
 	" For when you forget to sudo.. Really Write the file.
 	cmap w!! w !sudo tee % >/dev/null
 
+	" Toggle Tagbar
+	nmap <F8> :TagbarToggle<CR>
+
 	" Shortcut to rapidly toggle `set list`
 	nmap <leader>l :set list!<cr>
 	
