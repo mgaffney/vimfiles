@@ -146,7 +146,7 @@
 	nmap <silent> <leader>/ :nohlsearch<CR>
 
 	"insert random string
-	map <leader>r mx:r! od -vAn -N16 -tx4 < /dev/urandom<CR>ddk:s/\s//<CR>"zyiwdd`x"zP
+	map <leader>r mx:r! od -vAn -N16 -tx4 < /dev/urandom<CR>ddk:s/\s//<CR>:nohlsearch<CR>"zyiwdd`x"zP
 
 	" Shortcuts
 	" Change Working Directory to that of the current file
@@ -233,8 +233,8 @@
 
     " Golang 
     autocmd FileType go compiler golang
-    "let g:golang_goroot = "/usr/local/Cellar/go/1.1"
-    let g:golang_goroot = "/Users/mike/sandbox/go-workspace"
+    let g:golang_goroot = "/usr/local/Cellar/go/1.1"
+    "let g:golang_goroot = "/Users/mike/sandbox/go-workspace"
 
     " PlantUML settings
 "    let g:plantuml_executable_script='java -jar ~/bin/plantuml.jar'
@@ -247,7 +247,7 @@
 " }
 
 " man pages {
-    runtime ftplugin/man.vim
+    " runtime ftplugin/man.vim
 "}
 " GUI Settings {
 	" GVIM- (here instead of .gvimrc)
@@ -255,7 +255,7 @@
 		"set guifont=Consolas:h13
 		set guifont=Source\ Code\ Pro:h12
 		" set guifont=Source\ Code\ Pro\ Light:h12    " Retina Display Setting
-		set background=light
+		"set background=light
 		"colorscheme solarized
 		if has("gui_macvim")
 			macmenu &File.New\ Tab key=<nop>
