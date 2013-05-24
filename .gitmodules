@@ -142,3 +142,7 @@
 	path = bundle/syntastic
 	url = git://github.com/scrooloose/syntastic.git
   ignore = dirty
+[submodule "bundle/vim-godef"]
+	path = bundle/vim-godef
+	url = git://github.com/dgryski/vim-godef.git
+  ignore = dirty
