@@ -134,3 +134,7 @@
 	path = bundle/jshint.vim
 	url = git://github.com/wookiehangover/jshint.vim.git
   ignore = dirty
+[submodule "bundle/tagbar"]
+	path = bundle/tagbar
+	url = git://github.com/majutsushi/tagbar.git
+  ignore = dirty
