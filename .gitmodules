@@ -118,10 +118,6 @@
 	path = bundle/gruvbox
 	url = git://github.com/morhetz/gruvbox.git
   ignore = dirty
-[submodule "bundle/vim-golang"]
-	path = bundle/vim-golang
-	url = git://github.com/jnwhiteh/vim-golang.git
-  ignore = dirty
 [submodule "bundle/vim-sensible"]
 	path = bundle/vim-sensible
 	url = git://github.com/tpope/vim-sensible.git
