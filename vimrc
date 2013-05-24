@@ -235,8 +235,8 @@
 			\ map(split($GEM_PATH,':'),'v:val."/gems/*/tags"')))
 
     " Golang 
-    autocmd FileType go compiler golang
-    let g:golang_goroot = "/usr/local/Cellar/go/1.1"
+    " autocmd FileType go compiler golang
+    " let g:golang_goroot = "/usr/local/Cellar/go/1.1"
     "let g:golang_goroot = "/Users/mike/sandbox/go-workspace"
 
     " PlantUML settings
