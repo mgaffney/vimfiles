@@ -134,3 +134,7 @@
 	path = bundle/tagbar
 	url = git://github.com/majutsushi/tagbar.git
   ignore = dirty
+[submodule "bundle/vim-gocode"]
+	path = bundle/vim-gocode
+	url = git://github.com/Blackrush/vim-gocode.git
+  ignore = dirty
