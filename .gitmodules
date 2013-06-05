@@ -146,3 +146,7 @@
 	path = bundle/vim-godef
 	url = git://github.com/dgryski/vim-godef.git
   ignore = dirty
+[submodule "bundle/rfc-syntax"]
+	path = bundle/rfc-syntax
+	url = git://github.com/vim-scripts/rfc-syntax.git
+  ignore = dirty
