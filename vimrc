@@ -258,7 +258,7 @@
 		"set guifont=Consolas:h13
 		set guifont=Source\ Code\ Pro:h12
 		" set guifont=Source\ Code\ Pro\ Light:h12    " Retina Display Setting
-		"set background=light
+		set background=light
 		"colorscheme solarized
 		if has("gui_macvim")
 			macmenu &File.New\ Tab key=<nop>
