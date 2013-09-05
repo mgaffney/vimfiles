@@ -150,3 +150,7 @@
 	path = bundle/rfc-syntax
 	url = git://github.com/vim-scripts/rfc-syntax.git
   ignore = dirty
+[submodule "bundle/vim-airline"]
+	path = bundle/vim-airline
+	url = git@github.com:bling/vim-airline.git
+  ignore = dirty
