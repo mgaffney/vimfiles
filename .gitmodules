@@ -154,3 +154,7 @@
 	path = bundle/vim-airline
 	url = git@github.com:bling/vim-airline.git
   ignore = dirty
+[submodule "bundle/vim-gitgutter"]
+	path = bundle/vim-gitgutter
+	url = git://github.com/airblade/vim-gitgutter.git
+  ignore = dirty
