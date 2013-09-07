@@ -6,129 +6,123 @@
 	" Setup Bundle Support {
 	" The next two lines ensure that the ~/.vim/bundle/ system works
 	
-			runtime bundle/vim-pathogen/autoload/pathogen.vim
-			call pathogen#infect()
-			" silent! call pathogen#helptags()
+		runtime bundle/vim-pathogen/autoload/pathogen.vim
+		call pathogen#infect()
+		" silent! call pathogen#helptags()
 	" }
 " }
 
 " General {
-		set background=dark				" Assume a dark background
-		filetype plugin indent on		" load file type plugins + indentation
-		syntax enable					" syntax enable keeps your current color settings. :syntax
-"		scriptencoding utf-8	
+	set background=dark				" Assume a dark background
+	filetype plugin indent on		" load file type plugins + indentation
+	syntax enable					" syntax enable keeps your current color settings. :syntax
+"	scriptencoding utf-8	
 
-		set shortmess+=filmnrxoOtT		" abbrev. of messages (avoids 'hit enter')
-		set virtualedit=onemore			" allow for cursor beyond last character
-"		set history=2000
-		set clipboard+=unnamed			" Yanks go on clipboard instead.
-		set autowrite					" Writes on make/shell commands
-		"set grepprg=ack\ --nogroup\ --column\ $*
-		"set grepformat=%f:%l:%c:%m
+	set shortmess+=filmnrxoOtT		" abbrev. of messages (avoids 'hit enter')
+	set virtualedit=onemore			" allow for cursor beyond last character
+"	set history=2000
+	set clipboard+=unnamed			" Yanks go on clipboard instead.
+	set autowrite					" Writes on make/shell commands
+	"set grepprg=ack\ --nogroup\ --column\ $*
+	"set grepformat=%f:%l:%c:%m
 
-		" Setting up the directories {
-			"set undofile
-"			set undolevels=1000
-"			set undoreload=10000
-"            set nrformats=              " sets number formats to decimal so 007 <C-a> results in 008.
-		" }
+	" Setting up the directories {
+		"set undofile
+"		set undolevels=1000
+"		set undoreload=10000
+"		 set nrformats=				 " sets number formats to decimal so 007 <C-a> results in 008.
+	" }
 " }
 
 " Vim UI {
-		colorscheme solarized
-		set showmode					" display the current mode
+	colorscheme solarized
+	set showmode					" display the current mode
 
-		if has('cmdline_info')
-"			set ruler						" show the ruler
-"			set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)	" a ruler on steroids
-"			set showcmd						" show partial commands in status line and
+	if has('cmdline_info')
+"		set ruler						" show the ruler
+"		set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)	" a ruler on steroids
+"		set showcmd						" show partial commands in status line and
 										" selected characters/lines in visual mode
-		endif
+	endif
 
-		if has('statusline')
-"			set laststatus=2
-			" Broken down into easily includeable segments
-			set statusline= 		" clear the statusline for when vimrc is reloaded
-			set statusline=%<%f\ 				" Filename
-			set statusline+=%w%h%m%r " Options
-			set statusline+=\ %{fugitive#statusline()} 	" Git Hotness
-			set statusline+=\ [%{&ff}/%Y] 			" filetype
-			"set statusline+=\ [%{getcwd()}] 			" current dir
-			"set statusline+=\ [A=\%03.3b/H=\%02.2B]	" ASCII / Hexadecimal value of char
-			set statusline+=%= 													 " right align
-			set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\  " highlight
-			set statusline+=%-14.(%l,%c%V%)\ %p%% 		" Right aligned file nav info
-		endif
+	if has('statusline')
+"		set laststatus=2
+		" Broken down into easily includeable segments
+		set statusline=			" clear the statusline for when vimrc is reloaded
+		set statusline=%<%f\				" Filename
+		set statusline+=%w%h%m%r " Options
+		set statusline+=\ %{fugitive#statusline()}	" Git Hotness
+		set statusline+=\ [%{&ff}/%Y]			" filetype
+		"set statusline+=\ [%{getcwd()}]			" current dir
+		"set statusline+=\ [A=\%03.3b/H=\%02.2B]	" ASCII / Hexadecimal value of char
+		set statusline+=%=													 " right align
+		set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\  " highlight
+		set statusline+=%-14.(%l,%c%V%)\ %p%%		" Right aligned file nav info
+	endif
 
-"		set backspace=indent,eol,start	" backspace for dummys
-		set linespace=0					" No extra spaces between rows
-		set number						" Line numbers on
-"		set showmatch					" show matching brackets/parenthesis
-		set incsearch					" find as you type search
-		set hlsearch					" highlight search terms
-		set winminheight=0				" windows can be 0 line high 
-		set ignorecase					" case insensitive search
-		set smartcase					" case sensitive when uc present
-		"set wildmenu					" show list instead of just completing
-		"set wildmode=list:longest,full	" command <Tab> completion, list matches, then longest common part, then all.
-"        set wildmode=longest,list       " tab completion like bash's
-		set whichwrap=b,s,h,l,<,>,[,]	" backspace and cursor keys wrap to
-"		set scrolljump=5				" lines to scroll when cursor leaves screen
-"		set scrolloff=3					" minimum lines to keep above and below cursor
-		" set nofoldenable				" do not auto fold code
-		set gdefault					" the /g flag on :s substitutions by default
-		"set list
-		" set listchars=tab:>.,trail:.,extends:#,nbsp:.	" Highlight problematic whitespace
-"		set listchars=tab:▸\ ,eol:¬			" Use the same symbols as TextMate for tabstops and EOLs
-		"Invisible character colors
-		highlight NonText guifg=#4a4a59 guibg=bg
-		highlight SpecialKey guifg=#4a4a59 guibg=bg
-
+"	set backspace=indent,eol,start	" backspace for dummys
+	set linespace=0					" No extra spaces between rows
+	set number						" Line numbers on
+"	set showmatch					" show matching brackets/parenthesis
+	set incsearch					" find as you type search
+	set hlsearch					" highlight search terms
+	set winminheight=0				" windows can be 0 line high 
+	set ignorecase					" case insensitive search
+	set smartcase					" case sensitive when uc present
+	"set wildmenu					" show list instead of just completing
+	"set wildmode=list:longest,full	" command <Tab> completion, list matches, then longest common part, then all.
+	 set wildmode=longest,list		 " tab completion like bash's
+	set whichwrap=b,s,h,l,<,>,[,]	" backspace and cursor keys wrap to
+"	set scrolljump=5				" lines to scroll when cursor leaves screen
+"	set scrolloff=3					" minimum lines to keep above and below cursor
+	" set nofoldenable				" do not auto fold code
+	set gdefault					" the /g flag on :s substitutions by default
+	"set list
+	" set listchars=tab:>.,trail:.,extends:#,nbsp:.	" Highlight problematic whitespace
+"	set listchars=tab:▸\ ,eol:¬			" Use the same symbols as TextMate for tabstops and EOLs
+	"Invisible character colors
+	highlight NonText guifg=#4a4a59 guibg=bg
+	highlight SpecialKey guifg=#4a4a59 guibg=bg
 " }
 
 " Formatting {
-"	set nowrap			    " do not wrap long lines
+"	set nowrap				" do not wrap long lines
 "	set autoindent			" indent at the same level of the previous line
 "	set shiftwidth=4		" use indents of 4 spaces
 "	set expandtab			" tabs are spaces, not tabs
 "	set tabstop=4			" an indentation every four columns
-"	set softtabstop=4 		" let backspace delete indent
-"	set matchpairs+=<:>	    " match, to be used with % 
+"	set softtabstop=4		" let backspace delete indent
+"	set matchpairs+=<:>		" match, to be used with % 
 	"set pastetoggle=<F12>	" pastetoggle (sane indentation on pastes)
 "	set comments=sl:/*,mb:*,elx:*/ " auto format comment blocks
 	" Remove trailing whitespaces and ^M chars
 	"autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 " }
 
-
-
-
 " Key (re)Mappings {
-
 	"The default leader is '\', but many people prefer ',' as it's in a standard
 	"location
 	"let mapleader = ','
-
 	" Yank from the cursor to the end of the line, to be consistent with C and D.
 "	nnoremap Y y$
 
-    " Toggle background between dark and light
-    map <F2> :call ToggleBg()<CR>
-    function! ToggleBg()
-        if &background == 'dark'
-            set bg=light
-        else
-            set bg=dark
-        endif
-    endfunc
+	" Toggle background between dark and light
+	map <F2> :call ToggleBg()<CR>
+	function! ToggleBg()
+		if &background == 'dark'
+			set bg=light
+		else
+			set bg=dark
+		endif
+	endfunc
 
-    " Make program
-    nnoremap <F5> :w<CR> :silent make<CR>
-    " Move current line to end of file but keep cursor in current location
-    nnoremap <F3> :.m$<CR> `.
-    " nnoremap <F5> :silent make<CR>
-    " Toggle TagList window
-    nnoremap <silent> <F8> :TlistToggle<CR>
+	" Make program
+	nnoremap <F5> :w<CR> :silent make<CR>
+	" Move current line to end of file but keep cursor in current location
+	nnoremap <F3> :.m$<CR> `.
+	" nnoremap <F5> :silent make<CR>
+	" Toggle TagList window
+	nnoremap <silent> <F8> :TlistToggle<CR>
 
 	""" Code folding options
 	nmap <leader>f0 :set foldlevel=0<CR>
@@ -153,10 +147,10 @@
 	cmap cwd lcd %:p:h
 	cmap cd. lcd %:p:h
 
-    " On command-line mode %% automatically expands to the path of the active
-    " buffer example:
-    " :edit %%Pr<Tab> 
-    cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
+	" On command-line mode %% automatically expands to the path of the active
+	" buffer example:
+	" :edit %%Pr<Tab> 
+	cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
 	" visual shifting (does not exit Visual mode)
 	vnoremap < <gv
@@ -179,23 +173,23 @@
 	nmap <leader>l :set list!<cr>
 	
 	" Shortcut to toggle `set syntax` - helpful when writing VIM help
-    map <F6> :if exists("g:syntax_on") <Bar>
-	\   syntax off <Bar>
+	map <F6> :if exists("g:syntax_on") <Bar>
+	\	syntax off <Bar>
 	\ else <Bar>
-	\   syntax enable <Bar>
+	\	syntax enable <Bar>
 	\ endif <CR>
 
-    " Edit cheatsheet
-    nnoremap <leader>ec :vsplit $HOME/.vim/bundle/vim-cheatsheet/doc/cheatsheet.txt<cr>
+	" Edit cheatsheet
+	nnoremap <leader>ec :vsplit $HOME/.vim/bundle/vim-cheatsheet/doc/cheatsheet.txt<cr>
 
 	" Edit .vimrc file quickly
 	nnoremap <leader>ev :tabnew $MYVIMRC<cr>
 	nnoremap <leader>sv :source $MYVIMRC<cr>
-    " Disable the arrow keys (good for learning vim)
-    noremap <Up> <Nop>
-    noremap <Down> <Nop>
-    noremap <Left> <Nop>
-    noremap <Right> <Nop>
+	" Disable the arrow keys (good for learning vim)
+	noremap <Up> <Nop>
+	noremap <Down> <Nop>
+	noremap <Left> <Nop>
+	noremap <Right> <Nop>
 	
 	" Enable [[ and ]] even when the { or } don't start in the first column
 	map [[ ?{<CR>w99[{
@@ -203,17 +197,17 @@
 	map ]] j0[[%/{<CR>
 	map [] k$][%?}<CR>
 
-    " Highlight word under cursor but do not jump to the next one
-    " nnoremap * *``
+	" Highlight word under cursor but do not jump to the next one
+	" nnoremap * *``
 " }
 
 
 " Plugins {
 
-    " DWM plugin
+	" DWM plugin
 
-    nmap <C-Left> <Plug>DWMRotateCounterclockwise
-    nmap <C-Right> <Plug>DWMRotateClockwise
+	nmap <C-Left> <Plug>DWMRotateCounterclockwise
+	nmap <C-Right> <Plug>DWMRotateClockwise
 
 	" netrw settings
 	"let g:netrw_browse_split=2
@@ -225,8 +219,8 @@
 
 "	runtime macros/matchit.vim
 
-    " WMGraphviz
-    let g:WMGraphviz_output="png"
+	" WMGraphviz
+	let g:WMGraphviz_output="png"
 
 	" Pathogen - this should be moved to a ruby filetype settings file
 	" get Vim to search all gems in your current RVM gemset (requires pathogen.vim)
@@ -234,13 +228,13 @@
 			\ pathogen#split(&tags) +
 			\ map(split($GEM_PATH,':'),'v:val."/gems/*/tags"')))
 
-    " Golang 
-    " autocmd FileType go compiler golang
-    " let g:golang_goroot = "/usr/local/Cellar/go/1.1"
-    "let g:golang_goroot = "/Users/mike/sandbox/go-workspace"
+	" Golang
+	" autocmd FileType go compiler golang
+	" let g:golang_goroot = "/usr/local/Cellar/go/1.1"
+	"let g:golang_goroot = "/Users/mike/sandbox/go-workspace"
 
-    " PlantUML settings
-"    let g:plantuml_executable_script='java -jar ~/bin/plantuml.jar'
+	" PlantUML settings
+"	 let g:plantuml_executable_script='java -jar ~/bin/plantuml.jar'
 
 " }
 
@@ -250,14 +244,14 @@
 " }
 
 " man pages {
-    " runtime ftplugin/man.vim
+	" runtime ftplugin/man.vim
 "}
 " GUI Settings {
 	" GVIM- (here instead of .gvimrc)
 	if has('gui_running')
 		"set guifont=Consolas:h13
 		set guifont=Source\ Code\ Pro:h12
-		" set guifont=Source\ Code\ Pro\ Light:h12    " Retina Display Setting
+		" set guifont=Source\ Code\ Pro\ Light:h12	  " Retina Display Setting
 		set background=light
 		"colorscheme solarized
 		if has("gui_macvim")
@@ -277,4 +271,4 @@
 "	au BufNewFile,BufRead *.json set filetype=json
 " }
 
-
+ " vim:tw=78:ts=4:sw=4:norl:
