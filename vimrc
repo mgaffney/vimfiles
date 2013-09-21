@@ -48,16 +48,16 @@
 	if has('statusline')
 "		set laststatus=2
 		" Broken down into easily includeable segments
-		" set statusline=			" clear the statusline for when vimrc is reloaded
-		" set statusline=%<%f\				" Filename
-		" set statusline+=%w%h%m%r " Options
-		" set statusline+=\ %{fugitive#statusline()}	" Git Hotness
-		" set statusline+=\ [%{&ff}/%Y]			" filetype
-		" "set statusline+=\ [%{getcwd()}]			" current dir
-		" "set statusline+=\ [A=\%03.3b/H=\%02.2B]	" ASCII / Hexadecimal value of char
-		" set statusline+=%=													 " right align
-		" set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\  " highlight
-		" set statusline+=%-14.(%l,%c%V%)\ %p%%		" Right aligned file nav info
+		set statusline=			" clear the statusline for when vimrc is reloaded
+		set statusline=%<%f\				" Filename
+		set statusline+=%w%h%m%r " Options
+		set statusline+=\ %{fugitive#statusline()}	" Git Hotness
+		set statusline+=\ [%{&ff}/%Y]			" filetype
+		"set statusline+=\ [%{getcwd()}]			" current dir
+		"set statusline+=\ [A=\%03.3b/H=\%02.2B]	" ASCII / Hexadecimal value of char
+		set statusline+=%=													 " right align
+		set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\  " highlight
+		set statusline+=%-14.(%l,%c%V%)\ %p%%		" Right aligned file nav info
 	endif
 
 "	set backspace=indent,eol,start	" backspace for dummys
@@ -108,14 +108,7 @@
 
 	" Toggle background between dark and light
 	map <F2> :call ToggleBg()<CR>
-	function! ToggleBg()
-		if &background == 'dark'
-			set bg=light
-		else
-			set bg=dark
-		endif
-	endfunc
-
+	
 	" Make program
 	nnoremap <F5> :w<CR> :silent make<CR>
 	" Move current line to end of file but keep cursor in current location
@@ -204,13 +197,23 @@
 
 " Plugins {
 
+	" setup :Man for viewing man pages
+	runtime ftplugin/man.vim
+
+
+	" set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\  " highlight
+	
 	" vim-airline
 	let g:airline_powerline_fonts=1
 	let g:airline#extensions#hunks#enabled = 0
-	let g:airline#extensions#tabline#enabled = 1
+	let g:airline#extensions#tabline#enabled = 0
+	let g:airline#extensions#tabline#show_buffers = 0
 	" let g:airline#extensions#tabline#fnamemod = ':p:.'
 	let g:airline#extensions#tabline#fnamemod = ':p:t'
 	" let g:airline#extensions#tabline#fnamemod = ':t'
+	let g:airline#extensions#bufferline#enabled = 0
+	let g:airline#extensions#whitespace#enabled = 0
+	
 
 	" DWM plugin
 	nmap <C-Left> <Plug>DWMRotateCounterclockwise
@@ -276,6 +279,16 @@
 
 	au BufNewFile,BufRead *.md set filetype=markdown
 "	au BufNewFile,BufRead *.json set filetype=json
+" }
+
+" Functions {
+	function! ToggleBg()
+		if &background == 'dark'
+			set bg=light
+		else
+			set bg=dark
+		endif
+	endfunc
 " }
 
  " vim:tw=78:ts=4:sw=4:norl:
