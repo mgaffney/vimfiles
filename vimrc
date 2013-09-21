@@ -48,16 +48,16 @@
 	if has('statusline')
 "		set laststatus=2
 		" Broken down into easily includeable segments
-		set statusline=			" clear the statusline for when vimrc is reloaded
-		set statusline=%<%f\				" Filename
-		set statusline+=%w%h%m%r " Options
-		set statusline+=\ %{fugitive#statusline()}	" Git Hotness
-		set statusline+=\ [%{&ff}/%Y]			" filetype
-		"set statusline+=\ [%{getcwd()}]			" current dir
-		"set statusline+=\ [A=\%03.3b/H=\%02.2B]	" ASCII / Hexadecimal value of char
-		set statusline+=%=													 " right align
-		set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\  " highlight
-		set statusline+=%-14.(%l,%c%V%)\ %p%%		" Right aligned file nav info
+		" set statusline=			" clear the statusline for when vimrc is reloaded
+		" set statusline=%<%f\				" Filename
+		" set statusline+=%w%h%m%r " Options
+		" set statusline+=\ %{fugitive#statusline()}	" Git Hotness
+		" set statusline+=\ [%{&ff}/%Y]			" filetype
+		" "set statusline+=\ [%{getcwd()}]			" current dir
+		" "set statusline+=\ [A=\%03.3b/H=\%02.2B]	" ASCII / Hexadecimal value of char
+		" set statusline+=%=													 " right align
+		" set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\  " highlight
+		" set statusline+=%-14.(%l,%c%V%)\ %p%%		" Right aligned file nav info
 	endif
 
 "	set backspace=indent,eol,start	" backspace for dummys
@@ -66,7 +66,7 @@
 "	set showmatch					" show matching brackets/parenthesis
 	set incsearch					" find as you type search
 	set hlsearch					" highlight search terms
-	set winminheight=0				" windows can be 0 line high 
+	set winminheight=0				" windows can be 0 line high
 	set ignorecase					" case insensitive search
 	set smartcase					" case sensitive when uc present
 	"set wildmenu					" show list instead of just completing
@@ -92,7 +92,7 @@
 "	set expandtab			" tabs are spaces, not tabs
 "	set tabstop=4			" an indentation every four columns
 "	set softtabstop=4		" let backspace delete indent
-"	set matchpairs+=<:>		" match, to be used with % 
+"	set matchpairs+=<:>		" match, to be used with %
 	"set pastetoggle=<F12>	" pastetoggle (sane indentation on pastes)
 "	set comments=sl:/*,mb:*,elx:*/ " auto format comment blocks
 	" Remove trailing whitespaces and ^M chars
@@ -104,7 +104,7 @@
 	"location
 	"let mapleader = ','
 	" Yank from the cursor to the end of the line, to be consistent with C and D.
-"	nnoremap Y y$
+	nnoremap Y y$
 
 	" Toggle background between dark and light
 	map <F2> :call ToggleBg()<CR>
@@ -149,12 +149,12 @@
 
 	" On command-line mode %% automatically expands to the path of the active
 	" buffer example:
-	" :edit %%Pr<Tab> 
+	" :edit %%Pr<Tab>
 	cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
 	" visual shifting (does not exit Visual mode)
 	vnoremap < <gv
-	vnoremap > >gv 
+	vnoremap > >gv
 
 	" Fix home and end keybindings for screen, particularly on mac
 	" - for some reason this fixes the arrow keys too. huh.
@@ -204,8 +204,15 @@
 
 " Plugins {
 
-	" DWM plugin
+	" vim-airline
+	let g:airline_powerline_fonts=1
+	let g:airline#extensions#hunks#enabled = 0
+	let g:airline#extensions#tabline#enabled = 1
+	" let g:airline#extensions#tabline#fnamemod = ':p:.'
+	let g:airline#extensions#tabline#fnamemod = ':p:t'
+	" let g:airline#extensions#tabline#fnamemod = ':t'
 
+	" DWM plugin
 	nmap <C-Left> <Plug>DWMRotateCounterclockwise
 	nmap <C-Right> <Plug>DWMRotateClockwise
 
@@ -250,7 +257,7 @@
 	" GVIM- (here instead of .gvimrc)
 	if has('gui_running')
 		"set guifont=Consolas:h13
-		set guifont=Source\ Code\ Pro:h12
+		set guifont=Source\ Code\ Pro\ for\ Powerline:h12
 		" set guifont=Source\ Code\ Pro\ Light:h12	  " Retina Display Setting
 		set background=light
 		"colorscheme solarized
