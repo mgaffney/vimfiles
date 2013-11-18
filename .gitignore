@@ -14,3 +14,8 @@ _ReSharper.*
 view/
 spell/
 bundle/vim-cheatsheet
+
+after/ftplugin/plantuml.vim
+bundle/vim-java/
+bundle/vimtips/
+ruby-syntax-groups.txt
