@@ -162,3 +162,7 @@
 	path = bundle/vim-bufferline
 	url = git@github.com:bling/vim-bufferline.git
   ignore = dirty
+[submodule "bundle/pig.vim"]
+	path = bundle/pig.vim
+	url = git@github.com:motus/pig.vim.git
+  ignore = dirty
