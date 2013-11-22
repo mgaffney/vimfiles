@@ -107,6 +107,14 @@
 	" Yank from the cursor to the end of the line, to be consistent with C and D.
 	nnoremap Y y$
 
+	" Insert the current date e.g.: Friday November 22, 2013
+	inoremap \zd <C-R>=strftime("%A %B %e, %Y")<CR>
+	" Insert the current time e.g.: 1.12 PM
+	inoremap \zt <C-R>=strftime("%l.%M %p")<CR>
+	" inoremap \zt <C-R>=strftime("%r")<CR>
+	" Insert the current date and time e.g.: Friday November 22, 2013 • 1.12 PM 
+	inoremap \zs <C-R>=strftime("%A %B %e, %Y • %l.%M %p")<CR>
+
 	" Toggle background between dark and light
 	map <F2> :call ToggleBg()<CR>
 	
