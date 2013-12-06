@@ -62,7 +62,7 @@
 	endif
 
 "	set backspace=indent,eol,start	" backspace for dummys
-	set linespace=0					" No extra spaces between rows
+	" set linespace=0					" No extra spaces between rows
 	set number						" Line numbers on
 "	set showmatch					" show matching brackets/parenthesis
 	set incsearch					" find as you type search
@@ -73,7 +73,7 @@
 	"set wildmenu					" show list instead of just completing
 	"set wildmode=list:longest,full	" command <Tab> completion, list matches, then longest common part, then all.
 	 set wildmode=longest,list		 " tab completion like bash's
-	set whichwrap=b,s,h,l,<,>,[,]	" backspace and cursor keys wrap to
+	" set whichwrap=b,s,h,l,<,>,[,]	" backspace and cursor keys wrap to
 "	set scrolljump=5				" lines to scroll when cursor leaves screen
 "	set scrolloff=3					" minimum lines to keep above and below cursor
 	" set nofoldenable				" do not auto fold code
