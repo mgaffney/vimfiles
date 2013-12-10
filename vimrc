@@ -9,6 +9,7 @@
 		runtime bundle/vim-pathogen/autoload/pathogen.vim
 		call pathogen#infect()
 		" silent! call pathogen#helptags()
+		" Run :Helptags after installing or updating bundles
 	" }
 " }
 
@@ -225,8 +226,10 @@
 	
 
 	" DWM plugin
-	nmap <C-Left> <Plug>DWMRotateCounterclockwise
-	nmap <C-Right> <Plug>DWMRotateClockwise
+	" nmap <C-Left> <Plug>DWMRotateCounterclockwise
+	" nmap <C-Right> <Plug>DWMRotateClockwise
+
+	" let g:dwm_map_keys=0
 
 	" netrw settings
 	"let g:netrw_browse_split=2
