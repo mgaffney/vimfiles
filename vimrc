@@ -224,6 +224,8 @@
 	let g:airline#extensions#bufferline#enabled = 0
 	let g:airline#extensions#whitespace#enabled = 0
 	
+	" vim-gitgutter
+	let g:gitgutter_diff_args = '-w' "Ignore whitespaces
 
 	" DWM plugin
 	" nmap <C-Left> <Plug>DWMRotateCounterclockwise
