@@ -292,6 +292,7 @@
 " FileType Overrides {
 
 	au BufNewFile,BufRead *.md set filetype=markdown
+	au BufNewFile,BufRead *.avsc set filetype=json
 "	au BufNewFile,BufRead *.json set filetype=json
 " }
 
