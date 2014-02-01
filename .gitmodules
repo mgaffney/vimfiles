@@ -162,3 +162,7 @@
 	path = bundle/cql-vim
 	url = git@github.com:elubow/cql-vim.git
   ignore = dirty
+[submodule "bundle/vim-scala"]
+	path = bundle/vim-scala
+	url = git@github.com:derekwyatt/vim-scala.git
+  ignore = dirty
