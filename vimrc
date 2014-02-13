@@ -102,6 +102,20 @@
 " }
 
 " Key (re)Mappings {
+
+	" Edit cheatsheet
+	nnoremap <leader>ec :tabnew $HOME/.vim/bundle/vim-cheatsheet/doc/cheatsheet.txt<cr>
+
+	" Edit .vimrc file quickly
+	nnoremap <leader>ev :tabnew $MYVIMRC<cr>
+	nnoremap <leader>sv :source $MYVIMRC<cr>
+
+	" Shortcut to rapidly toggle `set list`
+	nmap <leader>l :set list!<cr>
+	
+	"clearing highlighted search
+	nmap <silent> <leader>/ :nohlsearch<CR>
+
 	"The default leader is '\', but many people prefer ',' as it's in a standard
 	"location
 	"let mapleader = ','
@@ -139,9 +153,6 @@
 	nmap <leader>f8 :set foldlevel=8<CR>
 	nmap <leader>f9 :set foldlevel=9<CR>
 
-	"clearing highlighted search
-	nmap <silent> <leader>/ :nohlsearch<CR>
-
 	"insert random string
 	map <leader>r mx:r! od -vAn -N16 -tx4 < /dev/urandom<CR>ddk:s/\s//<CR>:nohlsearch<CR>"zyiwdd`x"zP
 
@@ -172,9 +183,6 @@
 	" Toggle Tagbar
 	nmap <F8> :TagbarToggle<CR>
 
-	" Shortcut to rapidly toggle `set list`
-	nmap <leader>l :set list!<cr>
-	
 	" Shortcut to toggle `set syntax` - helpful when writing VIM help
 	map <F6> :if exists("g:syntax_on") <Bar>
 	\	syntax off <Bar>
@@ -182,12 +190,6 @@
 	\	syntax enable <Bar>
 	\ endif <CR>
 
-	" Edit cheatsheet
-	nnoremap <leader>ec :vsplit $HOME/.vim/bundle/vim-cheatsheet/doc/cheatsheet.txt<cr>
-
-	" Edit .vimrc file quickly
-	nnoremap <leader>ev :tabnew $MYVIMRC<cr>
-	nnoremap <leader>sv :source $MYVIMRC<cr>
 	" Disable the arrow keys (good for learning vim)
 	noremap <Up> <Nop>
 	noremap <Down> <Nop>
@@ -305,5 +307,14 @@
 		endif
 	endfunc
 " }
+
+" Use - `:CopyMatches x` where x is any register to hold the result 
+function! CopyMatches(reg)
+  let hits = []
+  %s//\=len(add(hits, submatch(0))) ? submatch(0) : ''/ge
+  let reg = empty(a:reg) ? '+' : a:reg
+  execute 'let @'.reg.' = join(hits, "\n") . "\n"'
+endfunction
+command! -register CopyMatches call CopyMatches(<q-reg>)
 
  " vim:tw=78:ts=4:sw=4:norl:
