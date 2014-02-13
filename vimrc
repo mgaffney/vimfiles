@@ -89,9 +89,9 @@
 
 " Formatting {
 "	set nowrap				" do not wrap long lines
-"	set autoindent			" indent at the same level of the previous line
+	set autoindent			" indent at the same level of the previous line
 "	set shiftwidth=4		" use indents of 4 spaces
-"	set expandtab			" tabs are spaces, not tabs
+	set noexpandtab			" tabs are tabs not spaces
 "	set tabstop=4			" an indentation every four columns
 "	set softtabstop=4		" let backspace delete indent
 "	set matchpairs+=<:>		" match, to be used with %
@@ -99,6 +99,12 @@
 "	set comments=sl:/*,mb:*,elx:*/ " auto format comment blocks
 	" Remove trailing whitespaces and ^M chars
 	"autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+	
+	" Set the tab width
+	let s:tabwidth=4
+	exec 'set tabstop='	.s:tabwidth
+	exec 'set shiftwidth='	.s:tabwidth
+	exec 'set softtabstop='	.s:tabwidth
 " }
 
 " Key (re)Mappings {
