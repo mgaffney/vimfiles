@@ -101,10 +101,10 @@
 	"autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 	
 	" Set the tab width
-	let s:tabwidth=4
-	exec 'set tabstop='	.s:tabwidth
-	exec 'set shiftwidth='	.s:tabwidth
-	exec 'set softtabstop='	.s:tabwidth
+	" let s:tabwidth=4
+	" exec 'set tabstop='	.s:tabwidth
+	" exec 'set shiftwidth='	.s:tabwidth
+	" exec 'set softtabstop='	.s:tabwidth
 " }
 
 " Key (re)Mappings {
