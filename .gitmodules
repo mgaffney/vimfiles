@@ -170,3 +170,7 @@
 	path = bundle/vim-gradle
 	url = git@github.com:tfnico/vim-gradle.git
   ignore = dirty
+[submodule "bundle/base16-vim"]
+	path = bundle/base16-vim
+	url = git@github.com:chriskempson/base16-vim.git
+ ignore = dirty
