@@ -216,8 +216,8 @@
 " Plugins {
 
 	" tagbar
-	autocmd VimEnter * nested :call tagbar#autoopen(1)
-	autocmd FileType * nested :call tagbar#autoopen(0)
+	" autocmd VimEnter * nested :call tagbar#autoopen(1)
+	" autocmd FileType * nested :call tagbar#autoopen(0)
 
 	" setup :Man for viewing man pages
 	runtime ftplugin/man.vim
