@@ -186,3 +186,7 @@
 	path = bundle/vim-vinegar
 	url = git@github.com:tpope/vim-vinegar.git
  ignore = dirty
+[submodule "bundle/vim-obsession"]
+	path = bundle/vim-obsession
+	url = git@github.com:tpope/vim-obsession.git
+ ignore = dirty
