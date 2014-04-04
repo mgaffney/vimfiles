@@ -215,6 +215,10 @@
 
 " Plugins {
 
+	" tagbar
+	autocmd VimEnter * nested :call tagbar#autoopen(1)
+	autocmd FileType * nested :call tagbar#autoopen(0)
+
 	" setup :Man for viewing man pages
 	runtime ftplugin/man.vim
 
@@ -322,43 +326,6 @@ function! CopyMatches(reg)
   execute 'let @'.reg.' = join(hits, "\n") . "\n"'
 endfunction
 command! -register CopyMatches call CopyMatches(<q-reg>)
-
-" Tags {
-
-	" Go Tags {
-
-let g:tagbar_type_go = {
-    \ 'ctagstype' : 'go',
-    \ 'kinds'     : [
-        \ 'p:package',
-        \ 'i:imports:1',
-        \ 'c:constants',
-        \ 'v:variables',
-        \ 't:types',
-        \ 'n:interfaces',
-        \ 'w:fields',
-        \ 'e:embedded',
-        \ 'm:methods',
-        \ 'r:constructor',
-        \ 'f:functions'
-    \ ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : {
-        \ 't' : 'ctype',
-        \ 'n' : 'ntype'
-    \ },
-    \ 'scope2kind' : {
-        \ 'ctype' : 't',
-        \ 'ntype' : 'n'
-    \ },
-    \ 'ctagsbin'  : 'gotags',
-    \ 'ctagsargs' : '-sort -silent'
-    \ }
-
-	" }
-" }
-
-
 
 
  " vim:tw=78:ts=4:sw=4:norl:
