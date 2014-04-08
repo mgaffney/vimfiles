@@ -187,7 +187,7 @@
 	cmap w!! w !sudo tee % >/dev/null
 
 	" Toggle Tagbar
-	nmap <F8> :TagbarToggle<CR>
+	" nmap <F8> :TagbarToggle<CR>
 
 	" Shortcut to toggle `set syntax` - helpful when writing VIM help
 	map <F6> :if exists("g:syntax_on") <Bar>
