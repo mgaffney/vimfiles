@@ -304,7 +304,9 @@
 " FileType Overrides {
 
 	au BufNewFile,BufRead *.md set filetype=markdown
+"Avro files
 	au BufNewFile,BufRead *.avsc set filetype=json
+	au BufNewFile,BufRead *.avdl set filetype=idl
 "	au BufNewFile,BufRead *.json set filetype=json
 " }
 
