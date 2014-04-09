@@ -190,3 +190,4 @@
 	path = bundle/vim-obsession
 	url = git@github.com:tpope/vim-obsession.git
  ignore = dirty
+ ignore = dirty
