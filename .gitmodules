@@ -191,3 +191,7 @@
 	url = git@github.com:tpope/vim-obsession.git
  ignore = dirty
  ignore = dirty
+[submodule "bundle/semweb.vim"]
+	path = bundle/semweb.vim
+	url = git@github.com:seebi/semweb.vim.git
+ ignore = dirty
