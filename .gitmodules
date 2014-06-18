@@ -195,3 +195,7 @@
 	path = bundle/semweb.vim
 	url = git@github.com:seebi/semweb.vim.git
  ignore = dirty
+[submodule "bundle/pyclewn"]
+	path = bundle/pyclewn
+	url = git@github.com:xieyu/pyclewn.git
+ ignore = dirty
