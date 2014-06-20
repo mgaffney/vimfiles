@@ -211,3 +211,7 @@
 	path = bundle/gitv
 	url = git@github.com:gregsexton/gitv.git
  ignore = dirty
+[submodule "bundle/camelcasemotion"]
+	path = bundle/camelcasemotion
+	url = git@github.com:vim-scripts/camelcasemotion.git
+ ignore = dirty
