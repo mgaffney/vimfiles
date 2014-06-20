@@ -215,3 +215,7 @@
 	path = bundle/camelcasemotion
 	url = git@github.com:vim-scripts/camelcasemotion.git
  ignore = dirty
+[submodule "bundle/vim-autoclose"]
+	path = bundle/vim-autoclose
+	url = git@github.com:Townk/vim-autoclose.git
+ ignore = dirty
