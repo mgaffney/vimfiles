@@ -203,3 +203,7 @@
 	path = bundle/ag.vim
 	url = git@github.com:rking/ag.vim.git
  ignore = dirty
+[submodule "bundle/vim-quickrun"]
+	path = bundle/vim-quickrun
+	url = git@github.com:thinca/vim-quickrun.git
+ ignore = dirty
