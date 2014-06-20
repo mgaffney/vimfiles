@@ -73,7 +73,8 @@
 	set smartcase					" case sensitive when uc present
 	"set wildmenu					" show list instead of just completing
 	"set wildmode=list:longest,full	" command <Tab> completion, list matches, then longest common part, then all.
-	 set wildmode=longest,list		 " tab completion like bash's
+	"set wildmode=longest,list		 " tab completion like bash's
+	 set wildmode=longest,list:longest		 " tab completion like zsh's
 	" set whichwrap=b,s,h,l,<,>,[,]	" backspace and cursor keys wrap to
 "	set scrolljump=5				" lines to scroll when cursor leaves screen
 "	set scrolloff=3					" minimum lines to keep above and below cursor
@@ -225,6 +226,9 @@
 
 
 " Plugins {
+
+	"SuperTab
+	let g:SuperTabDefaultCompletionType = "context"
 
 	" tagbar
 	" autocmd VimEnter * nested :call tagbar#autoopen(1)
