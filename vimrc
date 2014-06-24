@@ -25,6 +25,7 @@
 "	set history=2000
 	set clipboard+=unnamed			" Yanks go on clipboard instead.
 	set autowrite					" Writes on make/shell commands
+	set cursorline 					" Highlight the line the cursor is on
 	"set grepprg=ack\ --nogroup\ --column\ $*
 	"set grepformat=%f:%l:%c:%m
 
@@ -39,6 +40,10 @@
 " Vim UI {
 	colorscheme solarized
 	set showmode					" display the current mode
+
+	if has("balloon_eval") && has("unix")
+		set ballooneval
+	endif
 
 	if has('cmdline_info')
 "		set ruler						" show the ruler
@@ -71,6 +76,10 @@
 	set winminheight=0				" windows can be 0 line high
 	set ignorecase					" case insensitive search
 	set smartcase					" case sensitive when uc present
+	set smarttab        " sw at the start of the line, sts everywhere else
+	set timeoutlen=1200 " A little bit more time for macros
+	set ttimeoutlen=50  " Make Esc work faster
+
 	"set wildmenu					" show list instead of just completing
 	"set wildmode=list:longest,full	" command <Tab> completion, list matches, then longest common part, then all.
 	"set wildmode=longest,list		 " tab completion like bash's
@@ -132,7 +141,12 @@
 	nmap <leader>l :set list!<cr>
 	
 	"clearing highlighted search
-	nmap <silent> <leader>/ :nohlsearch<CR>
+	nnoremap <silent> <leader>/ :nohlsearch<CR>
+	if exists(":nohls")
+		"Mac keyboard - Option-; or <M-;>
+		" nnoremap <silent> … :nohls<CR>…
+		nmap … :nohls<CR>
+	endif
 
 	"The default leader is '\', but many people prefer ',' as it's in a standard
 	"location
@@ -152,7 +166,7 @@
 	map <F2> :call ToggleBg()<CR>
 	
 	" Make program
-	nnoremap <F5> :w<CR> :silent make<CR>
+	nnoremap <F5> :w<CR> :make<CR>
 	" Move current line to end of file but keep cursor in current location
 	nnoremap <F3> :.m$<CR> `.
 	" nnoremap <F5> :silent make<CR>
@@ -215,10 +229,10 @@
 	noremap <Right> <Nop>
 	
 	" Enable [[ and ]] even when the { or } don't start in the first column
-	map [[ ?{<CR>w99[{
-	map ][ /}<CR>b99]}
-	map ]] j0[[%/{<CR>
-	map [] k$][%?}<CR>
+	map [[ ?{<CR>w99[{…
+	map ][ /}<CR>b99]}…
+	map ]] j0[[%/{<CR>…
+	map [] k$][%?}<CR>…
 
 	" Highlight word under cursor but do not jump to the next one
 	" nnoremap * *``
