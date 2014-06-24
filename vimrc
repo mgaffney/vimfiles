@@ -5,11 +5,13 @@
 
 	" Setup Bundle Support {
 	" The next two lines ensure that the ~/.vim/bundle/ system works
-	
+
 		runtime bundle/vim-pathogen/autoload/pathogen.vim
 		call pathogen#infect()
 		" silent! call pathogen#helptags()
 		" Run :Helptags after installing or updating bundles
+
+		set sessionoptions-=options " Make sessions Pathogen friendly
 	" }
 " }
 
