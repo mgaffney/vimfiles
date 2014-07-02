@@ -219,3 +219,7 @@
 	path = bundle/vim-autoclose
 	url = git@github.com:Townk/vim-autoclose.git
  ignore = dirty
+[submodule "bundle/vim-characterize"]
+	path = bundle/vim-characterize
+	url = git@github.com:tpope/vim-characterize.git
+ ignore = dirty
