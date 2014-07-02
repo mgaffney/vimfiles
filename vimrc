@@ -19,7 +19,8 @@
 	set background=dark				" Assume a dark background
 	filetype plugin indent on		" load file type plugins + indentation
 	syntax enable					" syntax enable keeps your current color settings. :syntax
-	set encoding=utf-8
+	set encoding=utf-8				" The encoding displayed
+	" set fileencoding=utf-8			" The encoding written to a file
 "	scriptencoding utf-8	
 
 	set shortmess+=filmnrxoOtT		" abbrev. of messages (avoids 'hit enter')
