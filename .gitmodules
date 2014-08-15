@@ -223,3 +223,7 @@
 	path = bundle/vim-characterize
 	url = git@github.com:tpope/vim-characterize.git
  ignore = dirty
+[submodule "bundle/vim-qargs"]
+	path = bundle/vim-qargs
+	url = git@github.com:nelstrom/vim-qargs.git
+ ignore = dirty
