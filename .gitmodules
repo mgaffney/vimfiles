@@ -219,3 +219,7 @@
 	path = bundle/vim-qargs
 	url = git@github.com:nelstrom/vim-qargs.git
  ignore = dirty
+[submodule "bundle/vim-go"]
+	path = bundle/vim-go
+	url = git@github.com:fatih/vim-go.git
+ ignore = dirty
