@@ -223,3 +223,7 @@
 	path = bundle/vim-go
 	url = git@github.com:fatih/vim-go.git
  ignore = dirty
+[submodule "bundle/vim-javascript-syntax"]
+	path = bundle/vim-javascript-syntax
+	url = git@github.com:jelera/vim-javascript-syntax.git
+ ignore = dirty
