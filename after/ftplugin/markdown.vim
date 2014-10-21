@@ -2,6 +2,10 @@
 " setlocal linebreak
 " setlocal nolist    " list disables linebreak
 
+setlocal tabstop=4
+setlocal shiftwidth=4
+setlocal softtabstop=4
+
 " Prevent vim from automatically inserting line breaks in newly entered text
 setlocal textwidth=72
 setlocal formatoptions+=t
