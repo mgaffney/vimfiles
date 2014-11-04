@@ -124,6 +124,7 @@
 	set splitbelow
 	set splitright
 
+	set diffopt=filler,vertical
 " }
 " Key (re)Mappings {
 
