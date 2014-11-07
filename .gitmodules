@@ -235,10 +235,6 @@
 	path = bundle/vim-projectionist
 	url = git@github.com:tpope/vim-projectionist.git
  ignore = dirty
-[submodule "bundle/gem-ctags"]
-	path = bundle/gem-ctags
-	url = git@github.com:tpope/gem-ctags.git
- ignore = dirty
 [submodule "bundle/vim-dispatch"]
 	path = bundle/vim-dispatch
 	url = git@github.com:tpope/vim-dispatch.git
