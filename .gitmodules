@@ -231,3 +231,7 @@
 	path = bundle/vim-javascript
 	url = git@github.com:pangloss/vim-javascript.git
  ignore = dirty
+[submodule "bundle/vim-projectionist"]
+	path = bundle/vim-projectionist
+	url = git@github.com:tpope/vim-projectionist.git
+ ignore = dirty
