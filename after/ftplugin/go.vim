@@ -38,6 +38,12 @@ au FileType go nmap <Leader>e <Plug>(go-rename)
 " Enable goimports to automatically insert import paths instead of gofmt:
 let g:go_fmt_command = "goimports"
 
+" Enable highlighting
+let g:go_highlight_operators = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+
 " Tagbag settings
 let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',
