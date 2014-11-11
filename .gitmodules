@@ -239,3 +239,7 @@
 	path = bundle/vim-dispatch
 	url = git@github.com:tpope/vim-dispatch.git
  ignore = dirty
+[submodule "bundle/vim-raml"]
+	path = bundle/vim-raml
+	url = git@github.com:kennethzfeng/vim-raml.git
+ ignore = dirty
