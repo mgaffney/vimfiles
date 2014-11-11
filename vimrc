@@ -175,7 +175,7 @@
 	nnoremap <F3> :.m$<CR> `.
 	" nnoremap <F5> :silent make<CR>
 	" Toggle TagList window
-	nnoremap <silent> <F8> :TlistToggle<CR>
+	" nnoremap <silent> <F8> :TlistToggle<CR>
 
 	""" Code folding options
 	nmap <leader>f0 :set foldlevel=0<CR>
@@ -217,7 +217,7 @@
 	cmap w!! w !sudo tee % >/dev/null
 
 	" Toggle Tagbar
-	" nmap <F8> :TagbarToggle<CR>
+	nmap <F8> :TagbarToggle<CR>
 
 	" Shortcut to toggle `set syntax` - helpful when writing VIM help
 	map <F6> :if exists("g:syntax_on") <Bar>
