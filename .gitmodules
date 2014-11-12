@@ -239,3 +239,7 @@
 	path = bundle/vim-raml
 	url = git@github.com:kennethzfeng/vim-raml.git
  ignore = dirty
+[submodule "bundle/vim-colors-solarized"]
+	path = bundle/vim-colors-solarized
+	url = git@github.com:mgaffney/vim-colors-solarized.git
+ ignore = dirty
