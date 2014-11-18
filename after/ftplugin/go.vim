@@ -5,14 +5,16 @@ setlocal shiftwidth=4
 " Mappings for vim-go bundle
 
 " Show a list of interfaces which is implemented by the type under your cursor
-" with <leader>s
-au FileType go nmap <Leader>s <Plug>(go-implements)
+" with <leader>gh (think 'go hierarchy')
+au FileType go nmap <Leader>gh <Plug>(go-implements)
 " Open the relevant Godoc for the word under the cursor with <leader>gd
 au FileType go nmap <Leader>gd <Plug>(go-doc)
 " open it vertically with <leader>gv
-au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+au FileType go nmap <Leader>gdv <Plug>(go-doc-vertical)
+" open it in a new tab with <leader>gt
+au FileType go nmap <Leader>gdt <Plug>(go-doc-tab)
 " open the Godoc in browser
-au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
+au FileType go nmap <Leader>gdb <Plug>(go-doc-browser)
 
 " Run commands, such as go run with <leader>r for the current file or go build
 " and go test for the current package with <leader>b and <leader>t. Display a
@@ -32,7 +34,7 @@ au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
 au FileType go nmap <Leader>dt <Plug>(go-def-tab)
 
 " Rename the identifier under the cursor to a new name
-au FileType go nmap <Leader>e <Plug>(go-rename)
+au FileType go nmap <S-F6> <Plug>(go-rename)
 
 " Settings for vim-go bundle
 
