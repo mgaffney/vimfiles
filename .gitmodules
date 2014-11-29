@@ -243,3 +243,7 @@
 	path = bundle/vim-colors-solarized
 	url = git@github.com:mgaffney/vim-colors-solarized.git
  ignore = dirty
+[submodule "bundle/ultisnips"]
+	path = bundle/ultisnips
+	url = git@github.com:SirVer/ultisnips.git
+ ignore = dirty
