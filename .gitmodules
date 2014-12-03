@@ -162,10 +162,6 @@
 	path = bundle/base16-vim
 	url = git@github.com:chriskempson/base16-vim.git
  ignore = dirty
-[submodule "bundle/supertab"]
-	path = bundle/supertab
-	url = git@github.com:ervandew/supertab.git
- ignore = dirty
 [submodule "bundle/vim-classpath"]
 	path = bundle/vim-classpath
 	url = git@github.com:tpope/vim-classpath.git
