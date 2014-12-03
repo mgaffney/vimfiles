@@ -246,7 +246,7 @@
 " Plugins {
 
 	"SuperTab
-	let g:SuperTabDefaultCompletionType = "context"
+	" let g:SuperTabDefaultCompletionType = "context"
 
 	" tagbar
 	" autocmd VimEnter * nested :call tagbar#autoopen(1)
