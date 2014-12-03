@@ -247,3 +247,7 @@
 	path = bundle/YouCompleteMe
 	url = git@github.com:Valloric/YouCompleteMe.git
  ignore = dirty
+[submodule "bundle/vim-snippets"]
+	path = bundle/vim-snippets
+	url = git@github.com:honza/vim-snippets.git
+ ignore = dirty
