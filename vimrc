@@ -98,6 +98,7 @@
 	"Invisible character colors
 	highlight NonText guifg=#4a4a59 guibg=bg
 	highlight SpecialKey guifg=#4a4a59 guibg=bg
+	set completeopt-=preview 
 " }
 
 " Formatting {
@@ -244,6 +245,13 @@
 
 
 " Plugins {
+
+	" ultisnips
+	let g:UltiSnipsExpandTrigger="<D-j>"
+	" let g:UltiSnipsExpandTrigger="<CR>"
+	" If you want :UltiSnipsEdit to split your window.
+	let g:UltiSnipsEditSplit="vertical"
+
 
 	"SuperTab
 	" let g:SuperTabDefaultCompletionType = "context"
