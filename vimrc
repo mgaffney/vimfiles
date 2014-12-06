@@ -115,6 +115,8 @@ Plugin 'tpope/vim-markdown'
 " Python
 " Plugin 'xieyu/pyclewn'
 
+" Local plugins
+Plugin 'file:///Users/mike/sandbox/vim-myplugins/vim-cheatsheet'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
