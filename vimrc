@@ -28,10 +28,9 @@ Plugin 'mgaffney/vim-colors-solarized'
 " Plugin 'tomasr/molokai'
 " Plugin 'chriskempson/base16-vim'
 
-
 " Snips
-" Plugin 'SirVer/ultisnips'
-" Plugin 'honza/vim-snippets'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 
 " Completion
 Plugin 'Valloric/YouCompleteMe'
@@ -71,7 +70,7 @@ Plugin 'scrooloose/syntastic'
 
 " Tags
 " Plugin 'vim-scripts/taglist.vim'
-" Plugin 'majutsushi/tagbar'
+Plugin 'majutsushi/tagbar'
 
 " Unix Helpers
 Plugin 'tpope/vim-eunuch'
