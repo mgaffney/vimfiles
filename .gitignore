@@ -20,3 +20,6 @@ bundle/vim-java/
 bundle/vimtips/
 bundle/vim-docker/
 ruby-syntax-groups.txt
+
+bundle/**
+temp/

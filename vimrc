@@ -3,15 +3,130 @@
 			set nocompatible			" choose no compatibility with legacy vi must
 	" }
 
-	" Setup Bundle Support {
-	" The next two lines ensure that the ~/.vim/bundle/ system works
+	" Setup Vundle Support {
+		filetype off
+		if !isdirectory(expand("~/.vim/bundle/Vundle.vim/.git"))
+			!git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+		endif
+		set runtimepath+=~/.vim/bundle/Vundle.vim
+		call vundle#begin()
+		Plugin 'gmarik/Vundle.vim'	" let Vundle manage Vundle, required
 
-		runtime bundle/vim-pathogen/autoload/pathogen.vim
-		call pathogen#infect()
+" Keep Plugin commands between vundle#begin/end. 
+
+" Git
+Plugin 'tpope/vim-git'
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
+" Plugin 'gregsexton/gitv'
+
+" Colors
+Plugin 'mgaffney/vim-colors-solarized'
+" Plugin 'tpope/vim-vividchalk'
+" Plugin 'morhetz/gruvbox'
+" Plugin 'nanotech/jellybeans.vim'
+" Plugin 'tomasr/molokai'
+" Plugin 'chriskempson/base16-vim'
+
+
+" Snips
+" Plugin 'SirVer/ultisnips'
+" Plugin 'honza/vim-snippets'
+
+" Completion
+Plugin 'Valloric/YouCompleteMe'
+
+if executable('ag')
+  Plugin 'rking/ag.vim'
+elseif executable('ack')
+  Plugin 'mileszs/ack.vim'
+endif
+
+" Text-objects
+Plugin 'kana/vim-textobj-user'
+
+" Status line
+Plugin 'bling/vim-airline'
+
+" Fuzzy file, buffer, mru, tag, etc finder.
+" Plugin 'kien/ctrlp.vim'
+
+" Vim Helpers 
+Plugin 'tpope/vim-sensible'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-vinegar'
+Plugin 'tpope/vim-obsession'
+Plugin 'tpope/vim-characterize'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-dispatch'
+Plugin 'tpope/vim-projectionist'
+Plugin 'tpope/vim-scriptease'
+Plugin 'tpope/vim-repeat'
+" Plugin 'tpope/vim-afterimage'
+" Plugin 'nelstrom/vim-qargs'
+Plugin 'vim-scripts/camelcasemotion'
+Plugin 'scrooloose/syntastic'
+" Plugin 'thinca/vim-quickrun'
+
+" Tags
+" Plugin 'vim-scripts/taglist.vim'
+" Plugin 'majutsushi/tagbar'
+
+" Unix Helpers
+Plugin 'tpope/vim-eunuch'
+
+" Go
+Plugin 'fatih/vim-go'
+
+" Ruby
+" Plugin 'tpope/vim-bundler'
+" Plugin 'tpope/vim-rails'
+" Plugin 'tpope/vim-rake'
+" Plugin 'tpope/vim-rvm'
+" Plugin 'tpope/vim-endwise'
+" Plugin 'nelstrom/vim-textobj-rubyblock'
+" Plugin 'vim-ruby/vim-ruby'
+
+" Java
+" Plugin 'tpope/vim-classpath'
+" Plugin 'tfnico/vim-gradle'
+
+" JavaScript 
+" Plugin 'jelera/vim-javascript-syntax'
+" Plugin 'mgaffney/vim-json'
+" Plugin 'pangloss/vim-javascript'
+" Plugin 'wookiehangover/jshint.vim'
+" Plugin 'kennethzfeng/vim-raml'
+
+" Semantic Web
+" Plugin 'elubow/cql-vim'
+" Plugin 'seebi/semweb.vim'
+
+" Other Programming Languages and Filetypes
+" Plugin 'derekwyatt/vim-scala'
+Plugin 'tpope/vim-markdown'
+" Plugin 'motus/pig.vim'
+" Plugin 'vim-scripts/rfc-syntax'
+
+" Diagrams
+" Plugin 'wannesm/wmgraphviz.vim'
+" Plugin 'aklt/plantuml-syntax'
+
+" Python
+" Plugin 'xieyu/pyclewn'
+
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+		" runtime bundle/vim-pathogen/autoload/pathogen.vim
+		" call pathogen#infect()
 		" silent! call pathogen#helptags()
 		" Run :Helptags after installing or updating bundles
 
-		set sessionoptions-=options " Make sessions Pathogen friendly
+		" set sessionoptions-=options " Make sessions Pathogen friendly
 	" }
 " }
 
