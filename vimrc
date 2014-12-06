@@ -129,6 +129,16 @@
 " }
 " Key (re)Mappings {
 
+	" Fugitive Mappings
+	nnoremap gst :Gstatus<CR>
+	nnoremap gsl :Glog<CR>
+	nnoremap gsd :Gdiff<CR>
+	nnoremap gsb :Gblame<CR>
+	nnoremap gsw :Gwrite<CR>
+	nnoremap gsC :Gcommit<CR>
+	nnoremap gscd :Gcd<Bar>pwd<CR>
+	nnoremap gsld :Glcd<Bar>pwd<CR>
+
 	" Easier split navigations
 	nnoremap <C-J> <C-W><C-J>
 	nnoremap <C-K> <C-W><C-K>
@@ -243,6 +253,11 @@
 	" nnoremap * *``
 " }
 
+" Filetype settings {
+
+	autocmd Filetype gitcommit setlocal spell textwidth=72 formatoptions+=t
+
+" }
 
 " Plugins {
 
