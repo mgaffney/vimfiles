@@ -17,7 +17,22 @@
 " Git
 Plugin 'tpope/vim-git'
 Plugin 'tpope/vim-fugitive'
+
+	" Fugitive Mappings
+	nnoremap gst :Gstatus<CR>
+	nnoremap gsl :Glog<CR>
+	nnoremap gsd :Gdiff<CR>
+	nnoremap gsb :Gblame<CR>
+	nnoremap gsw :Gwrite<CR>
+	nnoremap gsC :Gcommit<CR>
+	nnoremap gscd :Gcd<Bar>pwd<CR>
+	nnoremap gsld :Glcd<Bar>pwd<CR>
+
 Plugin 'airblade/vim-gitgutter'
+
+	" vim-gitgutter
+	let g:gitgutter_diff_args = '-w' "Ignore whitespaces
+
 " Plugin 'gregsexton/gitv'
 
 " Colors
@@ -29,8 +44,15 @@ Plugin 'mgaffney/vim-colors-solarized'
 " Plugin 'chriskempson/base16-vim'
 
 " Snips
-Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+Plugin 'SirVer/ultisnips'
+
+	" ultisnips
+	let g:UltiSnipsExpandTrigger="<D-j>"
+	" let g:UltiSnipsExpandTrigger="<CR>"
+	" If you want :UltiSnipsEdit to split your window.
+	let g:UltiSnipsEditSplit="vertical"
+	nnoremap gse :UltiSnipsEdit<CR>
 
 " Completion
 Plugin 'Valloric/YouCompleteMe'
@@ -46,6 +68,17 @@ Plugin 'kana/vim-textobj-user'
 
 " Status line
 Plugin 'bling/vim-airline'
+	" vim-airline
+	let g:airline_powerline_fonts=1
+	let g:airline#extensions#hunks#enabled = 0
+	let g:airline#extensions#tabline#enabled = 0
+	let g:airline#extensions#tabline#show_buffers = 0
+	" let g:airline#extensions#tabline#fnamemod = ':p:.'
+	let g:airline#extensions#tabline#fnamemod = ':p:t'
+	" let g:airline#extensions#tabline#fnamemod = ':t'
+	let g:airline#extensions#bufferline#enabled = 0
+	let g:airline#extensions#whitespace#enabled = 0
+	
 
 " Fuzzy file, buffer, mru, tag, etc finder.
 " Plugin 'kien/ctrlp.vim'
@@ -245,16 +278,6 @@ filetype plugin indent on    " required
 " }
 " Key (re)Mappings {
 
-	" Fugitive Mappings
-	nnoremap gst :Gstatus<CR>
-	nnoremap gsl :Glog<CR>
-	nnoremap gsd :Gdiff<CR>
-	nnoremap gsb :Gblame<CR>
-	nnoremap gsw :Gwrite<CR>
-	nnoremap gsC :Gcommit<CR>
-	nnoremap gscd :Gcd<Bar>pwd<CR>
-	nnoremap gsld :Glcd<Bar>pwd<CR>
-
 	" Easier split navigations
 	nnoremap <C-J> <C-W><C-J>
 	nnoremap <C-K> <C-W><C-K>
@@ -377,13 +400,6 @@ filetype plugin indent on    " required
 
 " Plugins {
 
-	" ultisnips
-	let g:UltiSnipsExpandTrigger="<D-j>"
-	" let g:UltiSnipsExpandTrigger="<CR>"
-	" If you want :UltiSnipsEdit to split your window.
-	let g:UltiSnipsEditSplit="vertical"
-
-
 	"SuperTab
 	" let g:SuperTabDefaultCompletionType = "context"
 
@@ -397,20 +413,6 @@ filetype plugin indent on    " required
 
 	" set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\  " highlight
 	
-	" vim-airline
-	let g:airline_powerline_fonts=1
-	let g:airline#extensions#hunks#enabled = 0
-	let g:airline#extensions#tabline#enabled = 0
-	let g:airline#extensions#tabline#show_buffers = 0
-	" let g:airline#extensions#tabline#fnamemod = ':p:.'
-	let g:airline#extensions#tabline#fnamemod = ':p:t'
-	" let g:airline#extensions#tabline#fnamemod = ':t'
-	let g:airline#extensions#bufferline#enabled = 0
-	let g:airline#extensions#whitespace#enabled = 0
-	
-	" vim-gitgutter
-	let g:gitgutter_diff_args = '-w' "Ignore whitespaces
-
 	" DWM plugin
 	" nmap <C-Left> <Plug>DWMRotateCounterclockwise
 	" nmap <C-Right> <Plug>DWMRotateClockwise
