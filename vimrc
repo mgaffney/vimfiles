@@ -55,7 +55,11 @@ Plugin 'SirVer/ultisnips'
 	nnoremap gse :UltiSnipsEdit<CR>
 
 " Completion
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
+Plugin 'ervandew/supertab'
+	"SuperTab
+	let g:SuperTabDefaultCompletionType = "context"
+
 
 if executable('ag')
   Plugin 'rking/ag.vim'
@@ -399,9 +403,6 @@ filetype plugin indent on    " required
 " }
 
 " Plugins {
-
-	"SuperTab
-	" let g:SuperTabDefaultCompletionType = "context"
 
 	" tagbar
 	" autocmd VimEnter * nested :call tagbar#autoopen(1)
