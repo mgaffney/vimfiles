@@ -105,6 +105,7 @@ Plugin 'vim-scripts/camelcasemotion'
 Plugin 'scrooloose/syntastic'
 " Plugin 'thinca/vim-quickrun'
 Plugin 'tommcdo/vim-exchange'
+Plugin 'tpope/vim-abolish'
 
 " Tags
 " Plugin 'vim-scripts/taglist.vim'
@@ -283,6 +284,13 @@ filetype plugin indent on    " required
 " }
 " Key (re)Mappings {
 
+	map  <F1>   <Esc>
+	map! <F1>   <Esc>
+
+	" Visually select the text that was last edited/pasted
+	" Suggestion from http://vimcasts.org/episodes/bubbling-text/
+	nmap gV `[v`]
+
 	" Easier split navigations
 	nnoremap <C-J> <C-W><C-J>
 	nnoremap <C-K> <C-W><C-K>
@@ -294,7 +302,8 @@ filetype plugin indent on    " required
 
 	" Edit .vimrc file quickly
 	nnoremap <leader>ev :tabnew $MYVIMRC<cr>
-	nnoremap <leader>sv :source $MYVIMRC<cr>
+	" nnoremap <leader>sv :source $MYVIMRC<cr>
+	map <Leader>v  :so $MYVIMRC<CR>
 
 	" Shortcut to rapidly toggle `set list`
 	nmap <leader>l :set list!<cr>
