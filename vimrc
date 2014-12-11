@@ -104,6 +104,7 @@ Plugin 'tpope/vim-repeat'
 Plugin 'vim-scripts/camelcasemotion'
 Plugin 'scrooloose/syntastic'
 " Plugin 'thinca/vim-quickrun'
+Plugin 'tommcdo/vim-exchange'
 
 " Tags
 " Plugin 'vim-scripts/taglist.vim'
