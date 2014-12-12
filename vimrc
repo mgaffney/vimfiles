@@ -43,23 +43,28 @@ Plugin 'mgaffney/vim-colors-solarized'
 " Plugin 'tomasr/molokai'
 " Plugin 'chriskempson/base16-vim'
 
-" Snips
-Plugin 'honza/vim-snippets'
-Plugin 'SirVer/ultisnips'
-
-	" ultisnips
-	let g:UltiSnipsExpandTrigger="<D-j>"
-	" let g:UltiSnipsExpandTrigger="<CR>"
-	" If you want :UltiSnipsEdit to split your window.
-	let g:UltiSnipsEditSplit="vertical"
-	nnoremap gse :UltiSnipsEdit<CR>
-
 " Completion
 " Plugin 'Valloric/YouCompleteMe'
 Plugin 'ervandew/supertab'
 	"SuperTab
 	let g:SuperTabDefaultCompletionType = "context"
+	let g:SuperTabClosePreviewOnPopupClose = 1
+	let g:SuperTabLongestHighlight = 1
 
+" Snips
+" Plugin 'honza/vim-snippets'
+Plugin 'SirVer/ultisnips'
+	" ultisnips
+	let g:UltiSnipsExpandTrigger="<tab>"
+	let g:UltiSnipsJumpForwardTrigger="<tab>"
+	let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+    let g:UltiSnipsListSnippets="<c-tab>"
+	" let g:UltiSnipsExpandTrigger="<D-j>"
+	" let g:UltiSnipsExpandTrigger="<CR>"
+	" If you want :UltiSnipsEdit to split your window.
+	let g:UltiSnipsEditSplit="vertical"
+	" ges - Go Edit Snippets
+	nnoremap ges :UltiSnipsEdit<CR>
 
 if executable('ag')
   Plugin 'rking/ag.vim'
@@ -301,12 +306,15 @@ filetype plugin indent on    " required
 	nnoremap <leader>ec :tabnew $HOME/.vim/bundle/vim-cheatsheet/doc/cheatsheet.txt<cr>
 
 	" Edit .vimrc file quickly
-	nnoremap <leader>ev :tabnew $MYVIMRC<cr>
-	" nnoremap <leader>sv :source $MYVIMRC<cr>
-	map <Leader>v  :so $MYVIMRC<CR>
+	" gev - Go Edit Vimrc
+	nnoremap gev :tabnew $MYVIMRC<cr>
+	" gsv - Go Source Vimrc
+	nnoremap gsv :source $MYVIMRC<cr>
+	" map <Leader>v  :so $MYVIMRC<CR>
 
 	" Shortcut to rapidly toggle `set list`
-	nmap <leader>l :set list!<cr>
+	" use col from unimpaired plugin
+	" nmap <leader>l :set list!<cr>
 	
 	"clearing highlighted search
 	nnoremap <silent> <leader>/ :nohlsearch<CR>
