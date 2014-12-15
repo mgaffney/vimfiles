@@ -453,9 +453,9 @@ filetype plugin indent on    " required
 
 	" Pathogen - this should be moved to a ruby filetype settings file
 	" get Vim to search all gems in your current RVM gemset (requires pathogen.vim)
-	autocmd FileType ruby let &l:tags = pathogen#legacyjoin(pathogen#uniq(
-			\ pathogen#split(&tags) +
-			\ map(split($GEM_PATH,':'),'v:val."/gems/*/tags"')))
+	" autocmd FileType ruby let &l:tags = pathogen#legacyjoin(pathogen#uniq(
+			" \ pathogen#split(&tags) +
+			" \ map(split($GEM_PATH,':'),'v:val."/gems/*/tags"')))
 
 	" Golang
 	" autocmd FileType go compiler golang
