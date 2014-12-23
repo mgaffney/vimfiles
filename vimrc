@@ -122,6 +122,9 @@ Plugin 'tpope/vim-eunuch'
 " Go
 Plugin 'fatih/vim-go'
 
+" Docker
+Plugin 'honza/dockerfile.vim'
+
 " Ruby
 " Plugin 'tpope/vim-bundler'
 " Plugin 'tpope/vim-rails'
