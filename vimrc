@@ -315,6 +315,9 @@ filetype plugin indent on    " required
 	nnoremap gsv :source $MYVIMRC<cr>
 	" map <Leader>v  :so $MYVIMRC<CR>
 
+	" Yank CVE
+	" nnoremap yc "V3yap3}n
+
 	" Shortcut to rapidly toggle `set list`
 	" use col from unimpaired plugin
 	" nmap <leader>l :set list!<cr>
@@ -353,16 +356,16 @@ filetype plugin indent on    " required
 	" nnoremap <silent> <F8> :TlistToggle<CR>
 
 	""" Code folding options
-	" nmap <leader>f0 :set foldlevel=0<CR>
-	" nmap <leader>f1 :set foldlevel=1<CR>
-	" nmap <leader>f2 :set foldlevel=2<CR>
-	" nmap <leader>f3 :set foldlevel=3<CR>
-	" nmap <leader>f4 :set foldlevel=4<CR>
-	" nmap <leader>f5 :set foldlevel=5<CR>
-	" nmap <leader>f6 :set foldlevel=6<CR>
-	" nmap <leader>f7 :set foldlevel=7<CR>
-	" nmap <leader>f8 :set foldlevel=8<CR>
-	" nmap <leader>f9 :set foldlevel=9<CR>
+	 nmap <leader>f0 :set foldlevel=0<CR>
+	 nmap <leader>f1 :set foldlevel=1<CR>
+	 nmap <leader>f2 :set foldlevel=2<CR>
+	 nmap <leader>f3 :set foldlevel=3<CR>
+	 nmap <leader>f4 :set foldlevel=4<CR>
+	 nmap <leader>f5 :set foldlevel=5<CR>
+	 nmap <leader>f6 :set foldlevel=6<CR>
+	 nmap <leader>f7 :set foldlevel=7<CR>
+	 nmap <leader>f8 :set foldlevel=8<CR>
+	 nmap <leader>f9 :set foldlevel=9<CR>
 
 	"insert random string
 	map <leader>r mx:r! od -vAn -N16 -tx4 < /dev/urandom<CR>ddk:s/\s//<CR>:nohlsearch<CR>"zyiwdd`x"zP
@@ -498,6 +501,8 @@ filetype plugin indent on    " required
 " }
 
 " FileType Overrides {
+	" let g:xml_syntax_folding=1
+	" au FileType xml setlocal foldmethod=syntax
 
 	au BufNewFile,BufRead *.md set filetype=markdown
 "Avro files
