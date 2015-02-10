@@ -501,6 +501,11 @@ filetype plugin indent on    " required
 	endif
 " }
 
+
+" File Templates {
+	autocmd BufNewFile *.sh 0r $HOME/.vim/templates/template.sh
+" }
+
 " FileType Overrides {
 	" let g:xml_syntax_folding=1
 	" au FileType xml setlocal foldmethod=syntax
@@ -532,4 +537,4 @@ endfunction
 command! -register CopyMatches call CopyMatches(<q-reg>)
 
 
- " vim:tw=78:ts=4:sw=4:norl:
+" vim:tw=78:ts=4:sw=4:norl:
