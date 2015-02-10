@@ -65,7 +65,7 @@ Plugin 'SirVer/ultisnips'
 	" ges - Go Edit Snippets
 	nnoremap ges :UltiSnipsEdit<CR>
 
-Plugin 'honza/vim-snippets'
+" Plugin 'honza/vim-snippets'
 
 if executable('ag')
   Plugin 'rking/ag.vim'
