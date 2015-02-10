@@ -52,19 +52,20 @@ Plugin 'ervandew/supertab'
 	let g:SuperTabLongestHighlight = 1
 
 " Snips
-" Plugin 'honza/vim-snippets'
 Plugin 'SirVer/ultisnips'
 	" ultisnips
 	let g:UltiSnipsExpandTrigger="<tab>"
-	let g:UltiSnipsJumpForwardTrigger="<tab>"
-	let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
     let g:UltiSnipsListSnippets="<c-tab>"
+	let g:UltiSnipsJumpForwardTrigger="<c-j>"
+	let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 	" let g:UltiSnipsExpandTrigger="<D-j>"
 	" let g:UltiSnipsExpandTrigger="<CR>"
 	" If you want :UltiSnipsEdit to split your window.
 	let g:UltiSnipsEditSplit="vertical"
 	" ges - Go Edit Snippets
 	nnoremap ges :UltiSnipsEdit<CR>
+
+Plugin 'honza/vim-snippets'
 
 if executable('ag')
   Plugin 'rking/ag.vim'
