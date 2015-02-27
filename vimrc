@@ -14,6 +14,13 @@
 
 " Keep Plugin commands between vundle#begin/end. 
 
+" Vim Applications (?)
+Plugin 'itchyny/calendar.vim'
+	let g:calendar_google_calendar = 1
+	let g:calendar_clock_12hour=1
+	let g:calendar_view="day"
+	nnoremap gec :Calendar -split=vertical -position=topright -width=40<cr>
+
 " Git
 Plugin 'tpope/vim-git'
 Plugin 'tpope/vim-fugitive'
@@ -302,10 +309,27 @@ filetype plugin indent on    " required
 	nmap gV `[v`]
 
 	" Easier split navigations
-	nnoremap <C-J> <C-W><C-J>
-	nnoremap <C-K> <C-W><C-K>
-	nnoremap <C-L> <C-W><C-L>
-	nnoremap <C-H> <C-W><C-H>
+	nnoremap <C-j> <C-W><C-J>
+	nnoremap <C-k> <C-W><C-K>
+	nnoremap <C-l> <C-W><C-L>
+	nnoremap <C-h> <C-W><C-H>
+
+	augroup CalendarKey
+		autocmd!
+		" autocmd FileType calendar nmap <buffer> {key}
+			" \ <Plug>(calendar_...)
+		autocmd FileType calendar nunmap <buffer> <C-j>
+		autocmd FileType calendar nunmap <buffer> <C-k>
+		autocmd FileType calendar nunmap <buffer> <C-l>
+		autocmd FileType calendar nunmap <buffer> <C-h>
+
+		" Easier split navigations
+		autocmd FileType calendar nmap <buffer> <C-j> <C-W><C-J>
+		autocmd FileType calendar nmap <buffer> <C-k> <C-W><C-K>
+		autocmd FileType calendar nmap <buffer> <C-l> <C-W><C-L>
+		autocmd FileType calendar nmap <buffer> <C-h> <C-W><C-H>
+
+	augroup END
 
 	" Edit cheatsheet
 	nnoremap <leader>ec :tabnew $HOME/.vim/bundle/vim-cheatsheet/doc/cheatsheet.txt<cr>
