@@ -132,7 +132,8 @@ Plugin 'tpope/vim-eunuch'
 Plugin 'fatih/vim-go'
 
 " Docker
-Plugin 'honza/dockerfile.vim'
+" Plugin 'honza/dockerfile.vim'
+Plugin 'ekalinin/Dockerfile.vim'
 
 " Ruby
 " Plugin 'tpope/vim-bundler'
