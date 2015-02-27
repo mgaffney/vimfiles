@@ -334,6 +334,29 @@ filetype plugin indent on    " required
 	" Edit cheatsheet
 	nnoremap <leader>ec :tabnew $HOME/.vim/bundle/vim-cheatsheet/doc/cheatsheet.txt<cr>
 
+	" Move visual block
+	vnoremap J :m '>+1<CR>gv=gv
+	vnoremap K :m '<-2<CR>gv=gv
+
+	" add easy date insertion
+	imap <Leader>ds     <C-R>=strftime("%Y-%m-%d %T")<CR>
+	imap <Leader>ymd    <C-R>=strftime("%Y-%m-%d")<CR>
+	imap <Leader>mdy    <C-R>=strftime("%m/%d/%y")<CR>
+	imap <Leader>Mdy    <C-R>=strftime("%b %d, %Y")<CR>
+	imap <Leader>hms    <C-R>=strftime("%T")<CR>
+
+	" :Reg - Display the numbered registers, press a key and paste it to the buffer.
+	function! Reg()
+		reg
+		echo "Register: "
+		let char = nr2char(getchar())
+		if char != "\<Esc>"
+			execute "normal! \"".char."p"
+		endif
+		redraw
+	endfunction
+	command! -nargs=0 Reg call Reg()
+
 	" Edit .vimrc file quickly
 	" gev - Go Edit Vimrc
 	nnoremap gev :tabnew $MYVIMRC<cr>
