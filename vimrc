@@ -339,13 +339,6 @@ filetype plugin indent on    " required
 	vnoremap J :m '>+1<CR>gv=gv
 	vnoremap K :m '<-2<CR>gv=gv
 
-	" add easy date insertion
-	imap <Leader>ds     <C-R>=strftime("%Y-%m-%d %T")<CR>
-	imap <Leader>ymd    <C-R>=strftime("%Y-%m-%d")<CR>
-	imap <Leader>mdy    <C-R>=strftime("%m/%d/%y")<CR>
-	imap <Leader>Mdy    <C-R>=strftime("%b %d, %Y")<CR>
-	imap <Leader>hms    <C-R>=strftime("%T")<CR>
-
 	" :Reg - Display the numbered registers, press a key and paste it to the buffer.
 	function! Reg()
 		reg
@@ -385,6 +378,15 @@ filetype plugin indent on    " required
 	"let mapleader = ','
 	" Yank from the cursor to the end of the line, to be consistent with C and D.
 	nnoremap Y y$
+
+
+	" add easy date insertion
+	" imap <Leader>ds     <C-R>=strftime("%A %B %d, %Y")<CR>
+	imap <Leader>ds     <C-R>=strftime("%A %B %e, %Y")<CR>
+	imap <Leader>ymd    <C-R>=strftime("%Y-%m-%d")<CR>
+	imap <Leader>mdy    <C-R>=strftime("%m/%d/%y")<CR>
+	imap <Leader>Mdy    <C-R>=strftime("%b %d, %Y")<CR>
+	imap <Leader>hms    <C-R>=strftime("%T")<CR>
 
 	" Insert the current date e.g.: Friday November 22, 2013
 	inoremap \zd <C-R>=strftime("%A %B %e, %Y")<CR>
