@@ -172,6 +172,8 @@ Plugin 'tpope/vim-markdown'
 " Python
 " Plugin 'xieyu/pyclewn'
 
+Plugin 'yuratomo/w3m.vim'
+
 " Local plugins
 Plugin 'file:///Users/mike/sandbox/vim-myplugins/vim-cheatsheet'
 
@@ -527,7 +529,7 @@ filetype plugin indent on    " required
 
 " Zip Files {
 	" Additional file extensions that vim can open as zip files see :h zip
-	au BufReadCmd *.jar,*.xpi,*.sar,*.war,*.ear,*.mar,*.aar call zip#Browse(expand("<amatch>"))
+	au BufReadCmd *.jar,*.xpi,*.sar,*.war,*.ear,*.mar,*.aar,*.ipa call zip#Browse(expand("<amatch>"))
 " }
 
 " man pages {
