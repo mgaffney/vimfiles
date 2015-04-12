@@ -132,6 +132,8 @@ Plugin 'tpope/vim-eunuch'
 Plugin 'fatih/vim-go'
 let g:go_def_mapping_enabled = 0
 
+Plugin 'cespare/vim-go-templates'
+
 " Docker
 " Plugin 'honza/dockerfile.vim'
 Plugin 'ekalinin/Dockerfile.vim'
@@ -558,6 +560,7 @@ filetype plugin indent on    " required
 
 " File Templates {
 	autocmd BufNewFile *.sh 0r $HOME/.vim/templates/template.sh
+	autocmd BufNewFile *.html 0r $HOME/.vim/templates/template.html
 " }
 
 " FileType Overrides {
