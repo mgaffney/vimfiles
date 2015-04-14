@@ -33,7 +33,7 @@ au FileType go nmap <leader>v <Plug>(go-vet)
 " current buffer. You can also open the definition/declaration in a new
 " vertical, horizontal or tab for the word under your cursor:
 
-au FileType go nmap gd <Plug>(go-def-vertical)
+" au FileType go nmap gd <Plug>(go-def-vertical)
 au FileType go nmap <Leader>ds <Plug>(go-def-split)
 au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
 au FileType go nmap <Leader>dt <Plug>(go-def-tab)
