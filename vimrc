@@ -131,6 +131,8 @@ Plugin 'tpope/vim-eunuch'
 " Go
 Plugin 'fatih/vim-go'
 " let g:go_def_mapping_enabled = 0
+" geg - Go Edit Go.vim file
+nnoremap geg :tabnew $HOME/.vim/after/ftplugin/go.vim<cr>
 
 Plugin 'cespare/vim-go-templates'
 
