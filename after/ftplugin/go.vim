@@ -27,6 +27,7 @@ au FileType go nmap <leader>i <Plug>(go-install)
 au FileType go nmap <leader>t <Plug>(go-test)
 au FileType go nmap <leader>c <Plug>(go-coverage)
 au FileType go nmap <leader>v <Plug>(go-vet)
+au FileType go nmap <leader>l :GoLint<CR>
 
 
 " By default the mapping gd is enabled which opens the target identifier in
