@@ -134,7 +134,7 @@ Plugin 'fatih/vim-go'
 " geg - Go Edit Go.vim file
 nnoremap geg :tabnew $HOME/.vim/after/ftplugin/go.vim<cr>
 
-Plugin 'cespare/vim-go-templates'
+" Plugin 'cespare/vim-go-templates'
 
 " Docker
 " Plugin 'honza/dockerfile.vim'
