@@ -117,6 +117,9 @@ Plugin 'tpope/vim-repeat'
 " Plugin 'nelstrom/vim-qargs'
 Plugin 'vim-scripts/camelcasemotion'
 Plugin 'scrooloose/syntastic'
+    let g:syntastic_auto_loc_list = 1
+    let g:syntastic_always_populate_loc_list = 1
+
 " Plugin 'thinca/vim-quickrun'
 Plugin 'tommcdo/vim-exchange'
 Plugin 'tpope/vim-abolish'
@@ -161,8 +164,12 @@ Plugin 'ekalinin/Dockerfile.vim'
 " Plugin 'kennethzfeng/vim-raml'
 
 " Semantic Web
-" Plugin 'elubow/cql-vim'
 " Plugin 'seebi/semweb.vim'
+
+" Cassandra
+" Plugin 'elubow/cql-vim'
+Plugin 'veegee/cql-vim'
+
 
 " Other Programming Languages and Filetypes
 " Plugin 'derekwyatt/vim-scala'
