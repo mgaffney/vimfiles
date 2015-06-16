@@ -130,6 +130,11 @@ Plugin 'majutsushi/tagbar'
 
 " Unix Helpers
 Plugin 'tpope/vim-eunuch'
+" Unix systemd syntax
+Plugin 'Matt-Deacalion/vim-systemd-syntax'
+
+" Plist
+Plugin 'darfink/vim-plist'
 
 " Go
 Plugin 'fatih/vim-go'
