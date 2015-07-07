@@ -546,7 +546,7 @@ filetype plugin indent on    " required
 
 " Zip Files {
 	" Additional file extensions that vim can open as zip files see :h zip
-	au BufReadCmd *.jar,*.xpi,*.sar,*.war,*.ear,*.mar,*.aar,*.ipa call zip#Browse(expand("<amatch>"))
+	au BufReadCmd *.jar,*.xpi,*.sar,*.war,*.ear,*.mar,*.aar,*.ipa,*.epub call zip#Browse(expand("<amatch>"))
 " }
 
 " man pages {
