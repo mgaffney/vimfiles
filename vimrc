@@ -167,6 +167,7 @@ Plugin 'ekalinin/Dockerfile.vim'
 " Plugin 'pangloss/vim-javascript'
 " Plugin 'wookiehangover/jshint.vim'
 " Plugin 'kennethzfeng/vim-raml'
+Plugin 'tpope/vim-jdaddy'
 
 " Semantic Web
 " Plugin 'seebi/semweb.vim'
