@@ -82,6 +82,34 @@ endif
 
 " Text-objects
 Plugin 'kana/vim-textobj-user'
+Plugin 'unblevable/quick-scope'
+
+" Insert into your .vimrc after quick-scope is loaded.
+" Obviously depends on <https://github.com/unblevable/quick-scope> being installed.
+" https://gist.github.com/cszentkiralyi/dc61ee28ab81d23a67aa
+" Thanks to @VanLaser for cleaning the code up and expanding capabilities to include e.g. `df`
+
+let g:qs_enable = 0
+let g:qs_enable_char_list = [ 'f', 'F', 't', 'T' ]
+
+function! Quick_scope_selective(movement)
+    let needs_disabling = 0
+    if !g:qs_enable
+        QuickScopeToggle
+        redraw
+        let needs_disabling = 1
+    endif
+    let letter = nr2char(getchar())
+    if needs_disabling
+        QuickScopeToggle
+    endif
+    return a:movement . letter
+endfunction
+
+for i in g:qs_enable_char_list
+	execute 'noremap <expr> <silent>' . i . " Quick_scope_selective('". i . "')"
+endfor
+
 
 " Status line
 Plugin 'bling/vim-airline'
@@ -558,6 +586,7 @@ filetype plugin indent on    " required
 	if has('gui_running')
 		"set guifont=Consolas:h13
 		set guifont=Source\ Code\ Pro\ for\ Powerline:h12
+		" set guifont=Source\ Code\ Pro\ for\ Powerline:h14
 		" set guifont=Source\ Code\ Pro\ Light:h12	  " Retina Display Setting
 		set background=light
 		"colorscheme solarized
