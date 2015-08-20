@@ -50,6 +50,10 @@ Plugin 'mgaffney/vim-colors-solarized'
 " Plugin 'tomasr/molokai'
 " Plugin 'chriskempson/base16-vim'
 
+" tmux
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'tmux-plugins/vim-tmux'
+
 " Completion
 " Plugin 'Valloric/YouCompleteMe'
 Plugin 'ervandew/supertab'
@@ -237,9 +241,9 @@ filetype plugin indent on    " required
 " }
 
 " General {
+	syntax enable					" syntax enable keeps your current color settings. :syntax
 	set background=dark				" Assume a dark background
 	filetype plugin indent on		" load file type plugins + indentation
-	syntax enable					" syntax enable keeps your current color settings. :syntax
 	set encoding=utf-8				" The encoding displayed
 	" set fileencoding=utf-8			" The encoding written to a file
 "	scriptencoding utf-8	
@@ -597,7 +601,10 @@ filetype plugin indent on    " required
 		set guioptions-=T	" remove the toolbar
 		"set lines=40		" 40 lines of text instead of 24,
 	else
-		set term=builtin_ansi	" Make arrow and other keys work
+		" set term=builtin_ansi	" Make arrow and other keys work
+		" let g:solarized_termcolors=256
+		" let g:solarized_termtrans=1
+		" let g:solarized_
 	endif
 " }
 
