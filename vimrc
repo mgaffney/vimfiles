@@ -53,6 +53,7 @@ Plugin 'mgaffney/vim-colors-solarized'
 " tmux
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'tmux-plugins/vim-tmux'
+Plugin 'tmux-plugins/vim-tmux-focus-events'
 
 " Completion
 " Plugin 'Valloric/YouCompleteMe'
