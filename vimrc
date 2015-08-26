@@ -611,9 +611,18 @@ filetype plugin indent on    " required
 
 
 " File Templates {
-	autocmd BufNewFile *.sh 0r $HOME/.vim/templates/template.sh
-	autocmd BufNewFile *.html 0r $HOME/.vim/templates/template.html
+	" autocmd BufNewFile *.sh 0r $HOME/.vim/templates/template.sh
+	" autocmd BufNewFile *.html 0r $HOME/.vim/templates/template.html
 " }
+"
+augroup templates
+  au!
+  " read in template files
+  autocmd BufNewFile *.* silent! execute '0r $HOME/.vim/templates/template.'.expand("<afile>:e")
+
+  " parse special text in the templates after the read
+  autocmd BufNewFile * %substitute#\[:VIM_EVAL:\]\(.\{-\}\)\[:END_EVAL:\]#\=eval(submatch(1))#ge
+augroup END
 
 " FileType Overrides {
 	" let g:xml_syntax_folding=1
