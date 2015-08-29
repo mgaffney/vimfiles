@@ -54,6 +54,25 @@ Plugin 'mgaffney/vim-colors-solarized'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'tmux-plugins/vim-tmux'
 Plugin 'tmux-plugins/vim-tmux-focus-events'
+Plugin 'edkolev/tmuxline.vim'
+	" tmux-line
+	let g:tmuxline_powerline_separators = 1
+
+
+        " \ 'a': ['#S', '#{session_windows}'],
+        " \ 'c': ['#{pane_height}', '#{pane_current_command}'],
+
+ let g:tmuxline_preset = {
+        \ 'a': ['#S'],
+        \ 'b': '#W',
+        \ 'c': ['#{pane_current_command}'],
+        \ 'cwin': ['#I', '#W'],
+        \ 'win': ['#I', '#W'],
+		\ 'x': '#{cursor_y}: #{cursor_x}',
+        \ 'y': [ '%l:%M', '%a %b %e'],
+        \ 'z': '#h'}
+
+
 
 " Completion
 " Plugin 'Valloric/YouCompleteMe'
@@ -128,7 +147,7 @@ Plugin 'bling/vim-airline'
 	" let g:airline#extensions#tabline#fnamemod = ':t'
 	let g:airline#extensions#bufferline#enabled = 0
 	let g:airline#extensions#whitespace#enabled = 0
-	
+	let g:airline#extensions#tmuxline#enabled = 0
 
 " Fuzzy file, buffer, mru, tag, etc finder.
 " Plugin 'kien/ctrlp.vim'
@@ -217,7 +236,7 @@ Plugin 'tpope/vim-markdown'
 " Plugin 'vim-scripts/rfc-syntax'
 
 " Diagrams
-" Plugin 'wannesm/wmgraphviz.vim'
+Plugin 'wannesm/wmgraphviz.vim'
 " Plugin 'aklt/plantuml-syntax'
 
 " Python
@@ -284,16 +303,16 @@ filetype plugin indent on    " required
 	if has('statusline')
 "		set laststatus=2
 		" Broken down into easily includeable segments
-		set statusline=			" clear the statusline for when vimrc is reloaded
-		set statusline=%<%f\				" Filename
-		set statusline+=%w%h%m%r " Options
-		set statusline+=\ %{fugitive#statusline()}	" Git Hotness
-		set statusline+=\ [%{&ff}/%Y]			" filetype
+		" set statusline=			" clear the statusline for when vimrc is reloaded
+		" set statusline=%<%f\				" Filename
+		" set statusline+=%w%h%m%r " Options
+		" set statusline+=\ %{fugitive#statusline()}	" Git Hotness
+		" set statusline+=\ [%{&ff}/%Y]			" filetype
 		"set statusline+=\ [%{getcwd()}]			" current dir
 		"set statusline+=\ [A=\%03.3b/H=\%02.2B]	" ASCII / Hexadecimal value of char
-		set statusline+=%=													 " right align
-		set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\  " highlight
-		set statusline+=%-14.(%l,%c%V%)\ %p%%		" Right aligned file nav info
+		" set statusline+=%=													 " right align
+		" set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\  " highlight
+		" set statusline+=%-14.(%l,%c%V%)\ %p%%		" Right aligned file nav info
 	endif
 
 "	set backspace=indent,eol,start	" backspace for dummys
@@ -450,8 +469,9 @@ filetype plugin indent on    " required
 	inoremap \zs <C-R>=strftime("%A %B %e, %Y • %l.%M %p")<CR>
 
 	" Toggle background between dark and light
-	map <F2> :call ToggleBg()<CR>
-	
+	" map <F2> :call ToggleBg()<CR>
+	call togglebg#map("<F2>")
+
 	" Make program
 	nnoremap <F5> :w<CR> :make<CR>
 	" Move current line to end of file but keep cursor in current location
@@ -590,6 +610,7 @@ filetype plugin indent on    " required
 	" GVIM- (here instead of .gvimrc)
 	if has('gui_running')
 		"set guifont=Consolas:h13
+		" set guifont=Sauce\ Code\ Powerline\ Plus\ Nerd\ File\ Types\ Mono\ Plus\ Font\ Awesome\ Plus\ Octicons\ Plus\ Pomicons:h12
 		set guifont=Source\ Code\ Pro\ for\ Powerline:h12
 		" set guifont=Source\ Code\ Pro\ for\ Powerline:h14
 		" set guifont=Source\ Code\ Pro\ Light:h12	  " Retina Display Setting
