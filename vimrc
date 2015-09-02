@@ -35,10 +35,10 @@ Plugin 'tpope/vim-fugitive'
 	nnoremap gscd :Gcd<Bar>pwd<CR>
 	nnoremap gsld :Glcd<Bar>pwd<CR>
 
-Plugin 'airblade/vim-gitgutter'
+" Plugin 'airblade/vim-gitgutter'
 
 	" vim-gitgutter
-	let g:gitgutter_diff_args = '-w' "Ignore whitespaces
+	" let g:gitgutter_diff_args = '-w' "Ignore whitespaces
 
 " Plugin 'gregsexton/gitv'
 
@@ -72,7 +72,8 @@ Plugin 'edkolev/tmuxline.vim'
         \ 'y': [ '%l:%M', '%a %b %e'],
         \ 'z': '#h'}
 
-
+" this must be in vimrc file to work
+" let g:go_fmt_autosave = 0
 
 " Completion
 " Plugin 'Valloric/YouCompleteMe'
