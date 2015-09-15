@@ -240,6 +240,9 @@ Plugin 'tpope/vim-markdown'
 Plugin 'wannesm/wmgraphviz.vim'
 " Plugin 'aklt/plantuml-syntax'
 
+" Terraform
+Plugin 'bkad/vim-terraform'
+
 " Python
 " Plugin 'xieyu/pyclewn'
 
