@@ -1,18 +1,16 @@
 " Environment {
-	" Basics {
-			set nocompatible			" choose no compatibility with legacy vi must
-	" }
 
-	" Setup Vundle Support {
-		filetype off
-		if !isdirectory(expand("~/.vim/bundle/Vundle.vim/.git"))
-			!git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-		endif
-		set runtimepath+=~/.vim/bundle/Vundle.vim
-		call vundle#begin()
-		Plugin 'gmarik/Vundle.vim'	" let Vundle manage Vundle, required
+set nocompatible			" choose no compatibility with legacy vi must
 
-" Keep Plugin commands between vundle#begin/end. 
+" Setup Vundle Support {
+filetype off
+
+" set the runtime path to include Vundle and initialize
+set runtimepath+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" Keep Plugin commands between vundle#begin/end.
+Plugin 'VundleVim/Vundle.vim' " let Vundle manage Vundle
 
 " Vim Applications (?)
 " Plugin 'itchyny/calendar.vim'
