@@ -170,6 +170,7 @@ Plugin 'vim-scripts/camelcasemotion'
 Plugin 'scrooloose/syntastic'
     let g:syntastic_auto_loc_list = 1
     let g:syntastic_always_populate_loc_list = 1
+	" let g:syntastic_html_tidy_exec = 'tidy5'
 
 " Plugin 'thinca/vim-quickrun'
 Plugin 'tommcdo/vim-exchange'
