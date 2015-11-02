@@ -213,6 +213,7 @@ Plugin 'ekalinin/Dockerfile.vim'
 " Plugin 'tpope/vim-classpath'
 " Plugin 'tfnico/vim-gradle'
 
+" Web Front End
 " JavaScript 
 " Plugin 'jelera/vim-javascript-syntax'
 " Plugin 'mgaffney/vim-json'
@@ -220,6 +221,18 @@ Plugin 'ekalinin/Dockerfile.vim'
 " Plugin 'wookiehangover/jshint.vim'
 " Plugin 'kennethzfeng/vim-raml'
 Plugin 'tpope/vim-jdaddy'
+
+Plugin 'othree/yajs.vim'
+Plugin 'elzr/vim-json'
+
+" html5
+Plugin 'othree/html5.vim'
+
+" css
+Plugin 'JulesWang/css.vim'
+
+" Zen coding
+Plugin 'mattn/emmet-vim'
 
 " Semantic Web
 " Plugin 'seebi/semweb.vim'
