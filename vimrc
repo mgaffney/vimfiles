@@ -171,6 +171,8 @@ Plugin 'scrooloose/syntastic'
     let g:syntastic_auto_loc_list = 1
     let g:syntastic_always_populate_loc_list = 1
 	" let g:syntastic_html_tidy_exec = 'tidy5'
+	" use jshint
+	let g:syntastic_javascript_checkers = ['jshint']
 
 " Plugin 'thinca/vim-quickrun'
 Plugin 'tommcdo/vim-exchange'
@@ -217,15 +219,16 @@ Plugin 'ekalinin/Dockerfile.vim'
 " JavaScript 
 " Plugin 'jelera/vim-javascript-syntax'
 " Plugin 'mgaffney/vim-json'
-" Plugin 'pangloss/vim-javascript'
+Plugin 'pangloss/vim-javascript'
 " Plugin 'wookiehangover/jshint.vim'
 " Plugin 'kennethzfeng/vim-raml'
-Plugin 'tpope/vim-jdaddy'
+" Plugin 'tpope/vim-jdaddy'
 
 Plugin 'othree/yajs.vim'
 Plugin 'elzr/vim-json'
 
 " html5
+Plugin 'othree/html5-syntax.vim'
 Plugin 'othree/html5.vim'
 
 " css
@@ -693,6 +696,29 @@ function! CopyMatches(reg)
   execute 'let @'.reg.' = join(hits, "\n") . "\n"'
 endfunction
 command! -register CopyMatches call CopyMatches(<q-reg>)
+
+" Custom syntastic settings:
+function s:find_jshintrc(dir)
+    let l:found = globpath(a:dir, '.jshintrc')
+    if filereadable(l:found)
+        return l:found
+    endif
+
+    let l:parent = fnamemodify(a:dir, ':h')
+    if l:parent != a:dir
+        return s:find_jshintrc(l:parent)
+    endif
+
+    return "~/.jshintrc"
+endfunction
+
+function UpdateJsHintConf()
+    let l:dir = expand('%:p:h')
+    let l:jshintrc = s:find_jshintrc(l:dir)
+    let g:syntastic_javascript_jshint_args = l:jshintrc
+endfunction
+
+au BufEnter * call UpdateJsHintConf()
 
 
 " vim:tw=78:ts=4:sw=4:norl:
