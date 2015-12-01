@@ -49,6 +49,7 @@ Plugin 'mgaffney/vim-colors-solarized'
 " Plugin 'chriskempson/base16-vim'
 
 " tmux
+if exists('$TMUX')
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'tmux-plugins/vim-tmux'
 Plugin 'tmux-plugins/vim-tmux-focus-events'
@@ -57,18 +58,19 @@ Plugin 'edkolev/tmuxline.vim'
 	let g:tmuxline_powerline_separators = 1
 
 
-        " \ 'a': ['#S', '#{session_windows}'],
-        " \ 'c': ['#{pane_height}', '#{pane_current_command}'],
+		" \ 'a': ['#S', '#{session_windows}'],
+		" \ 'c': ['#{pane_height}', '#{pane_current_command}'],
 
  let g:tmuxline_preset = {
-        \ 'a': ['#S'],
-        \ 'b': '#W',
-        \ 'c': ['#{pane_current_command}'],
-        \ 'cwin': ['#I', '#W'],
-        \ 'win': ['#I', '#W'],
+		\ 'a': ['#S'],
+		\ 'b': '#W',
+		\ 'c': ['#{pane_current_command}'],
+		\ 'cwin': ['#I', '#W'],
+		\ 'win': ['#I', '#W'],
 		\ 'x': '#{cursor_y}: #{cursor_x}',
-        \ 'y': [ '%l:%M', '%a %b %e'],
-        \ 'z': '#h'}
+		\ 'y': [ '%l:%M', '%a %b %e'],
+		\ 'z': '#h'}
+endif
 
 " this must be in vimrc file to work
 " let g:go_fmt_autosave = 0
@@ -85,7 +87,7 @@ Plugin 'ervandew/supertab'
 Plugin 'SirVer/ultisnips'
 	" ultisnips
 	let g:UltiSnipsExpandTrigger="<tab>"
-    let g:UltiSnipsListSnippets="<c-tab>"
+	let g:UltiSnipsListSnippets="<c-tab>"
 	let g:UltiSnipsJumpForwardTrigger="<c-j>"
 	let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 	" let g:UltiSnipsExpandTrigger="<D-j>"
@@ -98,9 +100,9 @@ Plugin 'SirVer/ultisnips'
 " Plugin 'honza/vim-snippets'
 
 if executable('ag')
-  Plugin 'rking/ag.vim'
+	Plugin 'rking/ag.vim'
 elseif executable('ack')
-  Plugin 'mileszs/ack.vim'
+	Plugin 'mileszs/ack.vim'
 endif
 
 " Text-objects
@@ -116,17 +118,17 @@ let g:qs_enable = 0
 let g:qs_enable_char_list = [ 'f', 'F', 't', 'T' ]
 
 function! Quick_scope_selective(movement)
-    let needs_disabling = 0
-    if !g:qs_enable
-        QuickScopeToggle
-        redraw
-        let needs_disabling = 1
-    endif
-    let letter = nr2char(getchar())
-    if needs_disabling
-        QuickScopeToggle
-    endif
-    return a:movement . letter
+	let needs_disabling = 0
+	if !g:qs_enable
+		QuickScopeToggle
+		redraw
+		let needs_disabling = 1
+	endif
+	let letter = nr2char(getchar())
+	if needs_disabling
+		QuickScopeToggle
+	endif
+	return a:movement . letter
 endfunction
 
 for i in g:qs_enable_char_list
@@ -146,7 +148,9 @@ Plugin 'bling/vim-airline'
 	" let g:airline#extensions#tabline#fnamemod = ':t'
 	let g:airline#extensions#bufferline#enabled = 0
 	let g:airline#extensions#whitespace#enabled = 0
+if exists('$TMUX')
 	let g:airline#extensions#tmuxline#enabled = 0
+endif
 
 " Fuzzy file, buffer, mru, tag, etc finder.
 " Plugin 'kien/ctrlp.vim'
@@ -168,8 +172,8 @@ Plugin 'tpope/vim-repeat'
 " Plugin 'nelstrom/vim-qargs'
 Plugin 'vim-scripts/camelcasemotion'
 Plugin 'scrooloose/syntastic'
-    let g:syntastic_auto_loc_list = 1
-    let g:syntastic_always_populate_loc_list = 1
+	let g:syntastic_auto_loc_list = 1
+	let g:syntastic_always_populate_loc_list = 1
 	" let g:syntastic_html_tidy_exec = 'tidy5'
 	" use jshint
 	let g:syntastic_javascript_checkers = ['jshint']
@@ -267,8 +271,8 @@ Plugin 'yuratomo/w3m.vim'
 Plugin 'file:///Users/mike/sandbox/vim-myplugins/vim-cheatsheet'
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+call vundle#end()			 " required
+filetype plugin indent on	 " required
 
 		" runtime bundle/vim-pathogen/autoload/pathogen.vim
 		" call pathogen#infect()
@@ -292,7 +296,7 @@ filetype plugin indent on    " required
 "	set history=2000
 	set clipboard+=unnamed			" Yanks go on clipboard instead.
 	set autowrite					" Writes on make/shell commands
-	set cursorline 					" Highlight the line the cursor is on
+	set cursorline					" Highlight the line the cursor is on
 	"set grepprg=ack\ --nogroup\ --column\ $*
 	"set grepformat=%f:%l:%c:%m
 
@@ -343,9 +347,9 @@ filetype plugin indent on    " required
 	set winminheight=0				" windows can be 0 line high
 	set ignorecase					" case insensitive search
 	set smartcase					" case sensitive when uc present
-	set smarttab        " sw at the start of the line, sts everywhere else
+	set smarttab		" sw at the start of the line, sts everywhere else
 	set timeoutlen=1200 " A little bit more time for macros
-	set ttimeoutlen=50  " Make Esc work faster
+	set ttimeoutlen=50	" Make Esc work faster
 
 	"set wildmenu					" show list instead of just completing
 	"set wildmode=list:longest,full	" command <Tab> completion, list matches, then longest common part, then all.
@@ -393,8 +397,8 @@ filetype plugin indent on    " required
 " }
 " Key (re)Mappings {
 
-	map  <F1>   <Esc>
-	map! <F1>   <Esc>
+	map  <F1>	<Esc>
+	map! <F1>	<Esc>
 
 	" Visually select the text that was last edited/pasted
 	" Suggestion from http://vimcasts.org/episodes/bubbling-text/
@@ -472,12 +476,12 @@ filetype plugin indent on    " required
 
 
 	" add easy date insertion
-	" imap <Leader>ds     <C-R>=strftime("%A %B %d, %Y")<CR>
-	imap <Leader>ds     <C-R>=strftime("%A %B %e, %Y")<CR>
-	imap <Leader>ymd    <C-R>=strftime("%Y-%m-%d")<CR>
-	imap <Leader>mdy    <C-R>=strftime("%m/%d/%y")<CR>
-	imap <Leader>Mdy    <C-R>=strftime("%b %d, %Y")<CR>
-	imap <Leader>hms    <C-R>=strftime("%T")<CR>
+	" imap <Leader>ds	  <C-R>=strftime("%A %B %d, %Y")<CR>
+	imap <Leader>ds		<C-R>=strftime("%A %B %e, %Y")<CR>
+	imap <Leader>ymd	<C-R>=strftime("%Y-%m-%d")<CR>
+	imap <Leader>mdy	<C-R>=strftime("%m/%d/%y")<CR>
+	imap <Leader>Mdy	<C-R>=strftime("%b %d, %Y")<CR>
+	imap <Leader>hms	<C-R>=strftime("%T")<CR>
 
 	" Insert the current date e.g.: Friday November 22, 2013
 	inoremap \zd <C-R>=strftime("%A %B %e, %Y")<CR>
@@ -656,26 +660,28 @@ filetype plugin indent on    " required
 " }
 "
 augroup templates
-  au!
-  " read in template files
-  autocmd BufNewFile *.* silent! execute '0r $HOME/.vim/templates/template.'.expand("<afile>:e")
+	autocmd!
+	" read in template files
+	autocmd BufNewFile *.* silent! execute '0r $HOME/.vim/templates/template.'.expand("<afile>:e")
 
-  " parse special text in the templates after the read
-  autocmd BufNewFile * %substitute#\[:VIM_EVAL:\]\(.\{-\}\)\[:END_EVAL:\]#\=eval(submatch(1))#ge
+	" parse special text in the templates after the read
+	autocmd BufNewFile * %substitute#\[:VIM_EVAL:\]\(.\{-\}\)\[:END_EVAL:\]#\=eval(submatch(1))#ge
 augroup END
 
 " FileType Overrides {
+augroup fileconfigs
+	autocmd!
 	" let g:xml_syntax_folding=1
 	" au FileType xml setlocal foldmethod=syntax
-
 	au BufNewFile,BufRead *.md set filetype=markdown
-"Avro files
-	au BufNewFile,BufRead *.avsc set filetype=json
-	au BufNewFile,BufRead *.avdl set filetype=idl
+" Avro files
+	au BufNewFile,BufRead *.avsc set filetype=json	"avro file
+	au BufNewFile,BufRead *.avdl set filetype=idl	"avro file
 "	au BufNewFile,BufRead *.json set filetype=json
 
 	au BufRead,BufNewFile *.ctmpl set filetype=gotexttmpl
 
+augroup END
 " }
 
 " Functions {
@@ -690,32 +696,32 @@ augroup END
 
 " Use - `:CopyMatches x` where x is any register to hold the result 
 function! CopyMatches(reg)
-  let hits = []
-  %s//\=len(add(hits, submatch(0))) ? submatch(0) : ''/ge
-  let reg = empty(a:reg) ? '+' : a:reg
-  execute 'let @'.reg.' = join(hits, "\n") . "\n"'
+	let hits = []
+	%s//\=len(add(hits, submatch(0))) ? submatch(0) : ''/ge
+	let reg = empty(a:reg) ? '+' : a:reg
+	execute 'let @'.reg.' = join(hits, "\n") . "\n"'
 endfunction
 command! -register CopyMatches call CopyMatches(<q-reg>)
 
 " Custom syntastic settings:
 function s:find_jshintrc(dir)
-    let l:found = globpath(a:dir, '.jshintrc')
-    if filereadable(l:found)
-        return l:found
-    endif
+	let l:found = globpath(a:dir, '.jshintrc')
+	if filereadable(l:found)
+		return l:found
+	endif
 
-    let l:parent = fnamemodify(a:dir, ':h')
-    if l:parent != a:dir
-        return s:find_jshintrc(l:parent)
-    endif
+	let l:parent = fnamemodify(a:dir, ':h')
+	if l:parent != a:dir
+		return s:find_jshintrc(l:parent)
+	endif
 
-    return "~/.jshintrc"
+	return "~/.jshintrc"
 endfunction
 
 function UpdateJsHintConf()
-    let l:dir = expand('%:p:h')
-    let l:jshintrc = s:find_jshintrc(l:dir)
-    let g:syntastic_javascript_jshint_args = l:jshintrc
+	let l:dir = expand('%:p:h')
+	let l:jshintrc = s:find_jshintrc(l:dir)
+	let g:syntastic_javascript_jshint_args = l:jshintrc
 endfunction
 
 au BufEnter * call UpdateJsHintConf()
