@@ -22,6 +22,7 @@ Plugin 'VundleVim/Vundle.vim' " let Vundle manage Vundle
 " Git
 Plugin 'tpope/vim-git'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rhubarb'
 
 	" Fugitive Mappings
 	nnoremap gst :Gstatus<CR>
