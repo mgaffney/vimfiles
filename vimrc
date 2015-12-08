@@ -292,6 +292,7 @@ filetype plugin indent on	 " required
 	" set fileencoding=utf-8			" The encoding written to a file
 "	scriptencoding utf-8	
 
+	set nojoinspaces 				" One space between sentences not two 
 	set shortmess+=filmnrxoOtT		" abbrev. of messages (avoids 'hit enter')
 	set virtualedit=onemore			" allow for cursor beyond last character
 "	set history=2000
