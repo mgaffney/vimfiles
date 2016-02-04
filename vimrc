@@ -153,6 +153,8 @@ if exists('$TMUX')
 	let g:airline#extensions#tmuxline#enabled = 0
 endif
 
+Plugin 'vim-airline/vim-airline-themes'
+
 " Fuzzy file, buffer, mru, tag, etc finder.
 " Plugin 'kien/ctrlp.vim'
 
