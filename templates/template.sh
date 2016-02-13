@@ -26,4 +26,7 @@ exitscript()
 declare -r script_dir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 
+# Wait for all background processes to finish
+wait 
+
 exitscript
