@@ -255,6 +255,8 @@ Plugin 'veegee/cql-vim'
 " Other Programming Languages and Filetypes
 " Plugin 'derekwyatt/vim-scala'
 Plugin 'tpope/vim-markdown'
+Plugin 'jtratner/vim-flavored-markdown'
+
 " Plugin 'motus/pig.vim'
 " Plugin 'vim-scripts/rfc-syntax'
 
@@ -686,13 +688,13 @@ augroup fileconfigs
 	autocmd!
 	" let g:xml_syntax_folding=1
 	" au FileType xml setlocal foldmethod=syntax
-	au BufNewFile,BufRead *.md set filetype=markdown
+	au BufNewFile,BufRead *.md,*.markdown, *.note setlocal filetype=ghmarkdown
 " Avro files
-	au BufNewFile,BufRead *.avsc set filetype=json	"avro file
-	au BufNewFile,BufRead *.avdl set filetype=idl	"avro file
+	au BufNewFile,BufRead *.avsc setlocal filetype=json	"avro file
+	au BufNewFile,BufRead *.avdl setlocal filetype=idl	"avro file
 "	au BufNewFile,BufRead *.json set filetype=json
 
-	au BufRead,BufNewFile *.ctmpl set filetype=gotexttmpl
+	au BufRead,BufNewFile *.ctmpl setlocal filetype=gotexttmpl
 
 augroup END
 " }
