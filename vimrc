@@ -39,7 +39,7 @@ Plugin 'tpope/vim-rhubarb'
 	" vim-gitgutter
 	" let g:gitgutter_diff_args = '-w' "Ignore whitespaces
 
-" Plugin 'gregsexton/gitv'
+Plugin 'gregsexton/gitv'
 
 " Colors
 Plugin 'mgaffney/vim-colors-solarized'
@@ -263,7 +263,16 @@ Plugin 'wannesm/wmgraphviz.vim'
 " Plugin 'aklt/plantuml-syntax'
 
 " Terraform
-Plugin 'bkad/vim-terraform'
+" Plugin 'bkad/vim-terraform'
+
+" Plugins for Hashicorp Tools
+Plugin 'hashivim/vim-terraform'
+Plugin 'hashivim/vim-vaultproject'
+Plugin 'hashivim/vim-vagrant'
+Plugin 'hashivim/vim-packer'
+Plugin 'hashivim/vim-ottoproject'
+Plugin 'hashivim/vim-consul'
+Plugin 'hashivim/vim-nomadproject'
 
 " Python
 " Plugin 'xieyu/pyclewn'
