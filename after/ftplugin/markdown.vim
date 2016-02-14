@@ -16,3 +16,5 @@ setlocal formatoptions+=t
 " setlocal noexpandtab
 
 setlocal comments+=fb::
+
+nnoremap <buffer> yit O_<C-R>=tolower(strftime('%l:%M %p'))<CR>_<esc>j

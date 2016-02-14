@@ -412,12 +412,16 @@ filetype plugin indent on	 " required
 " }
 " Key (re)Mappings {
 
-	map  <F1>	<Esc>
-	map! <F1>	<Esc>
+	" noremap  <F1>	<Esc>
+	" noremap! <F1>	<Esc>
+
+	" learn to use jk instead of <esc>
+	inoremap <esc> <nop>
+	inoremap jk <esc>
 
 	" Visually select the text that was last edited/pasted
 	" Suggestion from http://vimcasts.org/episodes/bubbling-text/
-	nmap gV `[v`]
+	nnoremap gV `[v`]
 
 	" Easier split navigations
 	nnoremap <C-j> <C-W><C-J>
@@ -480,7 +484,7 @@ filetype plugin indent on	 " required
 	if exists(":nohls")
 		"Mac keyboard - Option-; or <M-;>
 		" nnoremap <silent> … :nohls<CR>…
-		nmap … :nohls<CR>
+		nnoremap … :nohls<CR>
 	endif
 
 	"The default leader is '\', but many people prefer ',' as it's in a standard
@@ -492,11 +496,12 @@ filetype plugin indent on	 " required
 
 	" add easy date insertion
 	" imap <Leader>ds	  <C-R>=strftime("%A %B %d, %Y")<CR>
-	imap <Leader>ds		<C-R>=strftime("%A %B %e, %Y")<CR>
-	imap <Leader>ymd	<C-R>=strftime("%Y-%m-%d")<CR>
-	imap <Leader>mdy	<C-R>=strftime("%m/%d/%y")<CR>
-	imap <Leader>Mdy	<C-R>=strftime("%b %d, %Y")<CR>
-	imap <Leader>hms	<C-R>=strftime("%T")<CR>
+	" Friday November 22, 2013
+	inoremap <Leader>ds		<C-R>=strftime("%A %B %e, %Y")<CR>
+	inoremap <Leader>ymd	<C-R>=strftime("%Y-%m-%d")<CR>
+	inoremap <Leader>mdy	<C-R>=strftime("%m/%d/%y")<CR>
+	inoremap <Leader>Mdy	<C-R>=strftime("%b %d, %Y")<CR>
+	inoremap <Leader>hms	<C-R>=strftime("%T")<CR>
 
 	" Insert the current date e.g.: Friday November 22, 2013
 	inoremap \zd <C-R>=strftime("%A %B %e, %Y")<CR>
@@ -519,24 +524,24 @@ filetype plugin indent on	 " required
 	" nnoremap <silent> <F8> :TlistToggle<CR>
 
 	""" Code folding options
-	 nmap <leader>f0 :set foldlevel=0<CR>
-	 nmap <leader>f1 :set foldlevel=1<CR>
-	 nmap <leader>f2 :set foldlevel=2<CR>
-	 nmap <leader>f3 :set foldlevel=3<CR>
-	 nmap <leader>f4 :set foldlevel=4<CR>
-	 nmap <leader>f5 :set foldlevel=5<CR>
-	 nmap <leader>f6 :set foldlevel=6<CR>
-	 nmap <leader>f7 :set foldlevel=7<CR>
-	 nmap <leader>f8 :set foldlevel=8<CR>
-	 nmap <leader>f9 :set foldlevel=9<CR>
+	 nnoremap <leader>f0 :set foldlevel=0<CR>
+	 nnoremap <leader>f1 :set foldlevel=1<CR>
+	 nnoremap <leader>f2 :set foldlevel=2<CR>
+	 nnoremap <leader>f3 :set foldlevel=3<CR>
+	 nnoremap <leader>f4 :set foldlevel=4<CR>
+	 nnoremap <leader>f5 :set foldlevel=5<CR>
+	 nnoremap <leader>f6 :set foldlevel=6<CR>
+	 nnoremap <leader>f7 :set foldlevel=7<CR>
+	 nnoremap <leader>f8 :set foldlevel=8<CR>
+	 nnoremap <leader>f9 :set foldlevel=9<CR>
 
 	"insert random string
-	map <leader>r mx:r! od -vAn -N16 -tx4 < /dev/urandom<CR>ddk:s/\s//<CR>:nohlsearch<CR>"zyiwdd`x"zP
+	nnoremap <leader>r mx:r! od -vAn -N16 -tx4 < /dev/urandom<CR>ddk:s/\s//<CR>:nohlsearch<CR>"zyiwdd`x"zP
 
 	" Shortcuts
 	" Change Working Directory to that of the current file
-	cmap cwd lcd %:p:h
-	cmap cd. lcd %:p:h
+	cnoremap cwd lcd %:p:h
+	cnoremap cd. lcd %:p:h
 
 	" On command-line mode %% automatically expands to the path of the active
 	" buffer example:
@@ -555,13 +560,13 @@ filetype plugin indent on	 " required
 	" imap [H g0
 
 	" For when you forget to sudo.. Really Write the file.
-	cmap w!! w !sudo tee % >/dev/null
+	cnoremap w!! w !sudo tee % >/dev/null
 
 	" Toggle Tagbar
-	nmap <F8> :TagbarToggle<CR>
+	nnoremap <F8> :TagbarToggle<CR>
 
 	" Shortcut to toggle `set syntax` - helpful when writing VIM help
-	map <F6> :if exists("g:syntax_on") <Bar>
+	noremap <F6> :if exists("g:syntax_on") <Bar>
 	\	syntax off <Bar>
 	\ else <Bar>
 	\	syntax enable <Bar>
@@ -574,10 +579,10 @@ filetype plugin indent on	 " required
 	noremap <Right> <Nop>
 	
 	" Enable [[ and ]] even when the { or } don't start in the first column
-	map [[ ?{<CR>w99[{…
-	map ][ /}<CR>b99]}…
-	map ]] j0[[%/{<CR>…
-	map [] k$][%?}<CR>…
+	noremap [[ ?{<CR>w99[{…
+	noremap ][ /}<CR>b99]}…
+	noremap ]] j0[[%/{<CR>…
+	noremap [] k$][%?}<CR>…
 
 	" Highlight word under cursor but do not jump to the next one
 	" nnoremap * *``
@@ -638,7 +643,10 @@ filetype plugin indent on	 " required
 
 " Zip Files {
 	" Additional file extensions that vim can open as zip files see :h zip
-	au BufReadCmd *.jar,*.xpi,*.sar,*.war,*.ear,*.mar,*.aar,*.ipa,*.epub call zip#Browse(expand("<amatch>"))
+augroup zips
+	autocmd!
+	autocmd BufReadCmd *.jar,*.xpi,*.sar,*.war,*.ear,*.mar,*.aar,*.ipa,*.epub call zip#Browse(expand("<amatch>"))
+augroup END
 " }
 
 " man pages {
@@ -687,14 +695,14 @@ augroup END
 augroup fileconfigs
 	autocmd!
 	" let g:xml_syntax_folding=1
-	" au FileType xml setlocal foldmethod=syntax
-	au BufNewFile,BufRead *.md,*.markdown, *.note setlocal filetype=ghmarkdown
+	" autocmd FileType xml setlocal foldmethod=syntax
+	autocmd BufNewFile,BufRead *.md,*.markdown,*.mdown,*.note setlocal filetype=ghmarkdown
 " Avro files
-	au BufNewFile,BufRead *.avsc setlocal filetype=json	"avro file
-	au BufNewFile,BufRead *.avdl setlocal filetype=idl	"avro file
-"	au BufNewFile,BufRead *.json set filetype=json
+	autocmd BufNewFile,BufRead *.avsc setlocal filetype=json	"avro file
+	autocmd BufNewFile,BufRead *.avdl setlocal filetype=idl	"avro file
+"	autocmd BufNewFile,BufRead *.json set filetype=json
 
-	au BufRead,BufNewFile *.ctmpl setlocal filetype=gotexttmpl
+	autocmd BufRead,BufNewFile *.ctmpl setlocal filetype=gotexttmpl
 
 augroup END
 " }
@@ -719,7 +727,7 @@ endfunction
 command! -register CopyMatches call CopyMatches(<q-reg>)
 
 " Custom syntastic settings:
-function s:find_jshintrc(dir)
+function! s:find_jshintrc(dir)
 	let l:found = globpath(a:dir, '.jshintrc')
 	if filereadable(l:found)
 		return l:found
@@ -733,13 +741,16 @@ function s:find_jshintrc(dir)
 	return "~/.jshintrc"
 endfunction
 
-function UpdateJsHintConf()
+function! UpdateJsHintConf()
 	let l:dir = expand('%:p:h')
 	let l:jshintrc = s:find_jshintrc(l:dir)
 	let g:syntastic_javascript_jshint_args = l:jshintrc
 endfunction
 
-au BufEnter * call UpdateJsHintConf()
+augroup js_files
+	autocmd!
+	autocmd BufEnter * call UpdateJsHintConf()
+augroup END
 
 
 " vim:tw=78:ts=4:sw=4:norl:
