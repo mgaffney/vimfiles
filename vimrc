@@ -40,6 +40,7 @@ Plugin 'tpope/vim-rhubarb'
 	" let g:gitgutter_diff_args = '-w' "Ignore whitespaces
 
 Plugin 'gregsexton/gitv'
+let g:Gitv_OpenHorizontal = 1
 
 " Colors
 Plugin 'mgaffney/vim-colors-solarized'
