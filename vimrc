@@ -22,7 +22,7 @@ Plugin 'VundleVim/Vundle.vim' " let Vundle manage Vundle
 " Git
 Plugin 'tpope/vim-git'
 Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-rhubarb'
+" Plugin 'tpope/vim-rhubarb'
 
 	" Fugitive Mappings
 	nnoremap gst :Gstatus<CR>
@@ -39,8 +39,8 @@ Plugin 'tpope/vim-rhubarb'
 	" vim-gitgutter
 	" let g:gitgutter_diff_args = '-w' "Ignore whitespaces
 
-Plugin 'gregsexton/gitv'
-let g:Gitv_OpenHorizontal = 1
+" Plugin 'gregsexton/gitv'
+" let g:Gitv_OpenHorizontal = 1
 
 " Colors
 Plugin 'mgaffney/vim-colors-solarized'
@@ -79,25 +79,26 @@ endif
 
 " Completion
 " Plugin 'Valloric/YouCompleteMe'
-Plugin 'ervandew/supertab'
+
+" Plugin 'ervandew/supertab'
 	"SuperTab
-	let g:SuperTabDefaultCompletionType = "context"
-	let g:SuperTabClosePreviewOnPopupClose = 1
-	let g:SuperTabLongestHighlight = 1
+	" let g:SuperTabDefaultCompletionType = "context"
+	" let g:SuperTabClosePreviewOnPopupClose = 1
+	" let g:SuperTabLongestHighlight = 1
 
 " Snips
-Plugin 'SirVer/ultisnips'
+" Plugin 'SirVer/ultisnips'
 	" ultisnips
-	let g:UltiSnipsExpandTrigger="<tab>"
-	let g:UltiSnipsListSnippets="<c-tab>"
-	let g:UltiSnipsJumpForwardTrigger="<c-j>"
-	let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-	" let g:UltiSnipsExpandTrigger="<D-j>"
-	" let g:UltiSnipsExpandTrigger="<CR>"
+	" let g:UltiSnipsExpandTrigger="<tab>"
+	" let g:UltiSnipsListSnippets="<c-tab>"
+	" let g:UltiSnipsJumpForwardTrigger="<c-j>"
+	" let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+	"" let g:UltiSnipsExpandTrigger="<D-j>"
+	"" let g:UltiSnipsExpandTrigger="<CR>"
 	" If you want :UltiSnipsEdit to split your window.
-	let g:UltiSnipsEditSplit="vertical"
+	" let g:UltiSnipsEditSplit="vertical"
 	" ges - Go Edit Snippets
-	nnoremap ges :UltiSnipsEdit<CR>
+	" nnoremap ges :UltiSnipsEdit<CR>
 
 " Plugin 'honza/vim-snippets'
 
@@ -108,7 +109,7 @@ elseif executable('ack')
 endif
 
 " Text-objects
-Plugin 'kana/vim-textobj-user'
+" Plugin 'kana/vim-textobj-user'
 Plugin 'unblevable/quick-scope'
 
 " Insert into your .vimrc after quick-scope is loaded.
@@ -183,12 +184,12 @@ Plugin 'scrooloose/syntastic'
 	let g:syntastic_javascript_checkers = ['jshint']
 
 " Plugin 'thinca/vim-quickrun'
-Plugin 'tommcdo/vim-exchange'
+" Plugin 'tommcdo/vim-exchange'
 Plugin 'tpope/vim-abolish'
 
 " Tags
 " Plugin 'vim-scripts/taglist.vim'
-Plugin 'majutsushi/tagbar'
+" Plugin 'majutsushi/tagbar'
 
 " Unix Helpers
 Plugin 'tpope/vim-eunuch'
@@ -225,32 +226,32 @@ Plugin 'ekalinin/Dockerfile.vim'
 
 " Web Front End
 " JavaScript 
-" Plugin 'jelera/vim-javascript-syntax'
-" Plugin 'mgaffney/vim-json'
-Plugin 'pangloss/vim-javascript'
-" Plugin 'wookiehangover/jshint.vim'
-" Plugin 'kennethzfeng/vim-raml'
-" Plugin 'tpope/vim-jdaddy'
+"" Plugin 'jelera/vim-javascript-syntax'
+"" Plugin 'mgaffney/vim-json'
+"Plugin 'pangloss/vim-javascript'
+"" Plugin 'wookiehangover/jshint.vim'
+"" Plugin 'kennethzfeng/vim-raml'
+"" Plugin 'tpope/vim-jdaddy'
 
-Plugin 'othree/yajs.vim'
-Plugin 'elzr/vim-json'
+"Plugin 'othree/yajs.vim'
+"Plugin 'elzr/vim-json'
 
 " html5
-Plugin 'othree/html5-syntax.vim'
-Plugin 'othree/html5.vim'
+"Plugin 'othree/html5-syntax.vim'
+"Plugin 'othree/html5.vim'
 
 " css
-Plugin 'JulesWang/css.vim'
+"Plugin 'JulesWang/css.vim'
 
 " Zen coding
-Plugin 'mattn/emmet-vim'
+" Plugin 'mattn/emmet-vim'
 
 " Semantic Web
 " Plugin 'seebi/semweb.vim'
 
 " Cassandra
 " Plugin 'elubow/cql-vim'
-Plugin 'veegee/cql-vim'
+" Plugin 'veegee/cql-vim'
 
 
 " Other Programming Languages and Filetypes
@@ -262,7 +263,7 @@ Plugin 'jtratner/vim-flavored-markdown'
 " Plugin 'vim-scripts/rfc-syntax'
 
 " Diagrams
-Plugin 'wannesm/wmgraphviz.vim'
+" Plugin 'wannesm/wmgraphviz.vim'
 " Plugin 'aklt/plantuml-syntax'
 
 " Terraform
@@ -280,7 +281,7 @@ Plugin 'hashivim/vim-nomadproject'
 " Python
 " Plugin 'xieyu/pyclewn'
 
-Plugin 'yuratomo/w3m.vim'
+" Plugin 'yuratomo/w3m.vim'
 
 " Local plugins
 Plugin 'file:///Users/mike/sandbox/vim-myplugins/vim-cheatsheet'
