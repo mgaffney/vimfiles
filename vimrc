@@ -270,6 +270,7 @@ Plugin 'jtratner/vim-flavored-markdown'
 " Plugin 'bkad/vim-terraform'
 
 " Plugins for Hashicorp Tools
+Plugin 'fatih/vim-hclfmt'
 Plugin 'hashivim/vim-terraform'
 Plugin 'hashivim/vim-vaultproject'
 Plugin 'hashivim/vim-vagrant'
@@ -418,7 +419,7 @@ filetype plugin indent on	 " required
 	" noremap! <F1>	<Esc>
 
 	" learn to use jk instead of <esc>
-	inoremap <esc> <nop>
+	" inoremap <esc> <nop>
 	inoremap jk <esc>
 
 	" Visually select the text that was last edited/pasted
