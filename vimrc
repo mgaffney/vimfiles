@@ -576,10 +576,10 @@ filetype plugin indent on	 " required
 	\ endif <CR>
 
 	" Disable the arrow keys (good for learning vim)
-	noremap <Up> <Nop>
-	noremap <Down> <Nop>
-	noremap <Left> <Nop>
-	noremap <Right> <Nop>
+	" noremap <Up> <Nop>
+	" noremap <Down> <Nop>
+	" noremap <Left> <Nop>
+	" noremap <Right> <Nop>
 	
 	" Enable [[ and ]] even when the { or } don't start in the first column
 	noremap [[ ?{<CR>w99[{…
@@ -705,8 +705,8 @@ augroup fileconfigs
 	autocmd BufNewFile,BufRead *.avdl setlocal filetype=idl	"avro file
 "	autocmd BufNewFile,BufRead *.json set filetype=json
 
-	autocmd BufRead,BufNewFile *.ctmpl setlocal filetype=gotexttmpl
-
+	autocmd BufNewFile,BufRead *.ctmpl setlocal filetype=gotexttmpl
+	" autocmd BufNewFile,BufRead *.
 augroup END
 " }
 
