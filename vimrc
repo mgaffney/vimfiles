@@ -271,6 +271,8 @@ Plugin 'jtratner/vim-flavored-markdown'
 
 " Plugins for Hashicorp Tools
 Plugin 'fatih/vim-hclfmt'
+let g:tf_fmt_autosave = 0
+
 Plugin 'hashivim/vim-terraform'
 Plugin 'hashivim/vim-vaultproject'
 Plugin 'hashivim/vim-vagrant'
