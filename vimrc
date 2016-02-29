@@ -708,6 +708,7 @@ augroup fileconfigs
 "	autocmd BufNewFile,BufRead *.json set filetype=json
 
 	autocmd BufNewFile,BufRead *.ctmpl setlocal filetype=gotexttmpl
+	autocmd BufNewFile,BufRead *.sh.tpl setlocal filetype=gotexttmpl
 	" autocmd BufNewFile,BufRead *.
 augroup END
 " }
