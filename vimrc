@@ -80,25 +80,25 @@ endif
 " Completion
 " Plugin 'Valloric/YouCompleteMe'
 
-" Plugin 'ervandew/supertab'
+Plugin 'ervandew/supertab'
 	"SuperTab
-	" let g:SuperTabDefaultCompletionType = "context"
-	" let g:SuperTabClosePreviewOnPopupClose = 1
-	" let g:SuperTabLongestHighlight = 1
+	let g:SuperTabDefaultCompletionType = "context"
+	let g:SuperTabClosePreviewOnPopupClose = 1
+	let g:SuperTabLongestHighlight = 1
 
 " Snips
-" Plugin 'SirVer/ultisnips'
+Plugin 'SirVer/ultisnips'
 	" ultisnips
-	" let g:UltiSnipsExpandTrigger="<tab>"
-	" let g:UltiSnipsListSnippets="<c-tab>"
-	" let g:UltiSnipsJumpForwardTrigger="<c-j>"
-	" let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-	"" let g:UltiSnipsExpandTrigger="<D-j>"
-	"" let g:UltiSnipsExpandTrigger="<CR>"
+	let g:UltiSnipsExpandTrigger="<tab>"
+	let g:UltiSnipsListSnippets="<c-tab>"
+	let g:UltiSnipsJumpForwardTrigger="<c-j>"
+	let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+	" let g:UltiSnipsExpandTrigger="<D-j>"
+	" let g:UltiSnipsExpandTrigger="<CR>"
 	" If you want :UltiSnipsEdit to split your window.
-	" let g:UltiSnipsEditSplit="vertical"
+	let g:UltiSnipsEditSplit="vertical"
 	" ges - Go Edit Snippets
-	" nnoremap ges :UltiSnipsEdit<CR>
+	nnoremap ges :UltiSnipsEdit<CR>
 
 " Plugin 'honza/vim-snippets'
 
