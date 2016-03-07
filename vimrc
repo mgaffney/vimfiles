@@ -451,6 +451,15 @@ filetype plugin indent on	 " required
 
 	" augroup END
 
+	" Use the l register as an append only log
+	"
+	" delete log
+	nnoremap <leader>dl qlq
+	" yank line to log
+	nnoremap <leader>yl "Lyy
+	" paste log
+	nnoremap <leader>pl "lp
+
 	" Edit cheatsheet
 	nnoremap <leader>ec :tabnew $HOME/.vim/bundle/vim-cheatsheet/doc/cheatsheet.txt<cr>
 
