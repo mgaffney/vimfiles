@@ -264,7 +264,7 @@ Plugin 'jtratner/vim-flavored-markdown'
 
 " Diagrams
 " Plugin 'wannesm/wmgraphviz.vim'
-" Plugin 'aklt/plantuml-syntax'
+Plugin 'aklt/plantuml-syntax'
 
 " Terraform
 " Plugin 'bkad/vim-terraform'
