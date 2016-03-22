@@ -8,7 +8,7 @@ setlocal textwidth=80
 
 " Show a list of interfaces which is implemented by the type under your cursor
 " with <leader>gh (think 'go hierarchy')
-au FileType go nmap <Leader>gh <Plug>(go-implements)
+au FileType go nmap <Leader>s <Plug>(go-implements)
 " Open the relevant Godoc for the word under the cursor with <leader>gd
 au FileType go nmap <Leader>gd <Plug>(go-doc-vertical)
 " open it vertically with <leader>gv
@@ -41,10 +41,18 @@ au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
 au FileType go nmap <Leader>dt <Plug>(go-def-tab)
 
 " Rename the identifier under the cursor to a new name
-au FileType go nmap <S-F6> <Plug>(go-rename)
+au FileType go nmap <Leader>e <Plug>(go-rename)
+
+" Show type info for the word under your cursor with <leader>i (useful if you
+" have disabled auto showing type info via g:go_auto_type_info)
+au FileType go nmap <Leader>i <Plug>(go-info)
 
 " Settings for vim-go bundle
 
+" Sometimes when using both vim-go and syntastic Vim will start lagging while
+" saving and opening files. The following fixes this:
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 " Enable goimports to automatically insert import paths instead of gofmt:
 let g:go_fmt_command = "goimports"
@@ -58,10 +66,11 @@ let g:go_fmt_experimental = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
+let g:go_highlight_interfaces = 1
 let g:go_highlight_build_constraints = 1
 
 let g:go_dispatch_enabled = 1
-let g:go_auto_type_info = 0  " this doesn't seem to work so turn it off
+let g:go_auto_type_info = 1  " this doesn't seem to work so turn it off
 
 " let g:go_oracle_scope = ''
 

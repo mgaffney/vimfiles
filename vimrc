@@ -158,7 +158,7 @@ endif
 Plugin 'vim-airline/vim-airline-themes'
 
 " Fuzzy file, buffer, mru, tag, etc finder.
-" Plugin 'kien/ctrlp.vim'
+Plugin 'kien/ctrlp.vim'
 
 " Vim Helpers 
 Plugin 'tpope/vim-sensible'
