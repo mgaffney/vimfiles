@@ -74,6 +74,15 @@ Plugin 'edkolev/tmuxline.vim'
 		\ 'z': '#h'}
 endif
 
+" Alignment of text
+Plugin 'junegunn/vim-easy-align'
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
 " this must be in vimrc file to work
 " let g:go_fmt_autosave = 0
 
