@@ -175,7 +175,9 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-vinegar'
 Plugin 'tpope/vim-obsession'
-Plugin 'tpope/vim-characterize'
+
+" vim-chacterize mapping conflicts with junegunn/vim-easy-align
+" Plugin 'tpope/vim-characterize'
 " Plugin 'tpope/vim-commentary'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'tpope/vim-dispatch'
