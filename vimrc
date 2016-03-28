@@ -86,6 +86,9 @@ nmap ga <Plug>(EasyAlign)
 " this must be in vimrc file to work
 " let g:go_fmt_autosave = 0
 
+" haproxy
+Plugin 'zimbatm/haproxy.vim'
+
 " Completion
 " Plugin 'Valloric/YouCompleteMe'
 
