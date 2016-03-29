@@ -6,27 +6,26 @@ set -o errexit
 # accessing an unset variable or parameter should cause an error (-u)
 set -o nounset
 # print a trace of commands (-x)
-set -x xtrace
+# set -x xtrace
 
 #  Trap non-normal exit signals: 1/HUP, 2/INT, 3/QUIT, 15/TERM, ERR
-trap founderror 1 2 3 15 ERR
+trap caught_error 1 2 3 15 ERR
 
-founderror()
-{
-        exit 1
+function caught_error() {
+  exit 1
 }
 
-exitscript()
-{
-        #remove lock file
-        #rm $lockfile
-        exit 0
+function exitscript() {
+  exit 0
 }
 
-declare -r script_dir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+function err() {
+  echo "$@" >&2
+}
+
+declare -r SCRIPT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 
 # Wait for all background processes to finish
-wait 
-
+wait
 exitscript
