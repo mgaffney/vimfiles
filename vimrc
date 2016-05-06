@@ -63,15 +63,15 @@ Plugin 'edkolev/tmuxline.vim'
 		" \ 'a': ['#S', '#{session_windows}'],
 		" \ 'c': ['#{pane_height}', '#{pane_current_command}'],
 
- let g:tmuxline_preset = {
-		\ 'a': ['#S'],
-		\ 'b': '#W',
-		\ 'c': ['#{pane_current_command}'],
-		\ 'cwin': ['#I', '#W'],
-		\ 'win': ['#I', '#W'],
-		\ 'x': '#{cursor_y}: #{cursor_x}',
-		\ 'y': [ '%l:%M', '%a %b %e'],
-		\ 'z': '#h'}
+let g:tmuxline_preset = {
+	\ 'a': ['#S'],
+	\ 'b': '#W',
+	\ 'c': ['#{pane_current_command}'],
+	\ 'cwin': ['#I', '#W'],
+	\ 'win': ['#I', '#W'],
+	\ 'x': '#{cursor_y}: #{cursor_x}',
+	\ 'y': [ '%l:%M', '%a %b %e'],
+	\ 'z': '#h'}
 endif
 
 " Alignment of text
@@ -152,7 +152,8 @@ endfor
 
 
 " Status line
-Plugin 'bling/vim-airline'
+"Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
 	" vim-airline
 	let g:airline_powerline_fonts=1
 	let g:airline#extensions#hunks#enabled = 0
@@ -163,6 +164,10 @@ Plugin 'bling/vim-airline'
 	" let g:airline#extensions#tabline#fnamemod = ':t'
 	let g:airline#extensions#bufferline#enabled = 0
 	let g:airline#extensions#whitespace#enabled = 0
+	let g:airline#extensions#wordcount#enabled = 0
+
+	let g:airline_symbols = get(g:,'airline_symbols',{})
+	let g:airline_symbols.maxlinenr = ''
 if exists('$TMUX')
 	let g:airline#extensions#tmuxline#enabled = 0
 endif
