@@ -78,10 +78,10 @@ endif
 Plugin 'junegunn/vim-easy-align'
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
+xmap gga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
+nmap gga <Plug>(EasyAlign)
 
 " this must be in vimrc file to work
 " let g:go_fmt_autosave = 0
@@ -184,8 +184,7 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-vinegar'
 Plugin 'tpope/vim-obsession'
 
-" vim-chacterize mapping conflicts with junegunn/vim-easy-align
-" Plugin 'tpope/vim-characterize'
+Plugin 'tpope/vim-characterize'
 " Plugin 'tpope/vim-commentary'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'tpope/vim-dispatch'
