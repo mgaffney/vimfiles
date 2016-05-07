@@ -78,10 +78,11 @@ endif
 Plugin 'junegunn/vim-easy-align'
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap gga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
 
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap gga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. ygaip) 
+" (think 'you go align...')
+nmap yga <Plug>(EasyAlign)
 
 " this must be in vimrc file to work
 " let g:go_fmt_autosave = 0
@@ -435,7 +436,9 @@ filetype plugin indent on	 " required
 " }
 " Key (re)Mappings {
 
-	" noremap  <F1>	<Esc>
+
+	noremap QQ :qall<CR>
+	noremap <F1> <Esc>
 	" noremap! <F1>	<Esc>
 
 	" learn to use jk instead of <esc>
