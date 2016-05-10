@@ -55,23 +55,25 @@ if exists('$TMUX')
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'tmux-plugins/vim-tmux'
 Plugin 'tmux-plugins/vim-tmux-focus-events'
-Plugin 'edkolev/tmuxline.vim'
+
+" Plugin 'edkolev/tmuxline.vim'
 	" tmux-line
-	let g:tmuxline_powerline_separators = 1
+	" let g:tmuxline_powerline_separators = 1
 
 
 		" \ 'a': ['#S', '#{session_windows}'],
 		" \ 'c': ['#{pane_height}', '#{pane_current_command}'],
 
-let g:tmuxline_preset = {
-	\ 'a': ['#S'],
-	\ 'b': '#W',
-	\ 'c': ['#{pane_current_command}'],
-	\ 'cwin': ['#I', '#W'],
-	\ 'win': ['#I', '#W'],
-	\ 'x': '#{cursor_y}: #{cursor_x}',
-	\ 'y': [ '%l:%M', '%a %b %e'],
-	\ 'z': '#h'}
+" let g:tmuxline_preset = {
+	" \ 'a': ['#S'],
+	" \ 'b': '#W',
+	" \ 'c': ['#{pane_current_command}'],
+	" \ 'cwin': ['#I', '#W'],
+	" \ 'win': ['#I', '#W'],
+	" \ 'x': '#{cursor_y}: #{cursor_x}',
+	" \ 'y': [ '%l:%M', '%a %b %e'],
+	" \ 'z': '#h'}
+
 endif
 
 " Alignment of text
