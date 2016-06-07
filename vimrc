@@ -278,7 +278,7 @@ Plugin 'ekalinin/Dockerfile.vim'
 " Other Programming Languages and Filetypes
 " Plugin 'derekwyatt/vim-scala'
 Plugin 'tpope/vim-markdown'
-Plugin 'jtratner/vim-flavored-markdown'
+" Plugin 'jtratner/vim-flavored-markdown'
 
 " Plugin 'motus/pig.vim'
 " Plugin 'vim-scripts/rfc-syntax'
@@ -733,7 +733,7 @@ augroup fileconfigs
 	autocmd!
 	" let g:xml_syntax_folding=1
 	" autocmd FileType xml setlocal foldmethod=syntax
-	autocmd BufNewFile,BufRead *.md,*.markdown,*.mdown,*.note setlocal filetype=ghmarkdown
+	" autocmd BufNewFile,BufRead *.md,*.markdown,*.mdown,*.note setlocal filetype=markdown
 " Avro files
 	autocmd BufNewFile,BufRead *.avsc setlocal filetype=json	"avro file
 	autocmd BufNewFile,BufRead *.avdl setlocal filetype=idl	"avro file
