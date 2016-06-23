@@ -112,6 +112,7 @@ Plugin 'SirVer/ultisnips'
 	" let g:UltiSnipsExpandTrigger="<CR>"
 	" If you want :UltiSnipsEdit to split your window.
 	let g:UltiSnipsEditSplit="vertical"
+	let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
 	" ges - Go Edit Snippets
 	nnoremap ges :UltiSnipsEdit<CR>
 
