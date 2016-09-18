@@ -3,6 +3,7 @@
 	" Git {
 		Plug 'tpope/vim-git'
 		Plug 'tpope/vim-fugitive'
+		Plug 'junegunn/gv.vim'
 		" Plug 'tpope/vim-rhubarb'
 		" Plug 'airblade/vim-gitgutter'
 		" Plug 'gregsexton/gitv'
@@ -38,8 +39,7 @@
 		elseif executable('ack')
 			Plug 'mileszs/ack.vim'
 		endif
-		" Fuzzy file, buffer, mru, tag, etc finder.
-		Plug 'kien/ctrlp.vim'
+		Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 	" }
 	" TextObjects {
 		" Plug 'kana/vim-textobj-user'
@@ -49,6 +49,9 @@
 		"Plug 'bling/vim-airline'
 		Plug 'vim-airline/vim-airline'
 		Plug 'vim-airline/vim-airline-themes'
+	" }
+	" Whitespace {
+		Plug 'ntpeters/vim-better-whitespace'
 	" }
 	" VimHelpers {
 		Plug 'tpope/vim-sensible'
@@ -87,7 +90,7 @@
 		Plug 'darfink/vim-plist'
 	" }
 	" Golang {
-		Plug 'fatih/vim-go'
+		Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 		" Plug 'cespare/vim-go-templates'
 	" }
 	" Docker {
@@ -175,7 +178,7 @@
 	" }
 	" All of your Plugs must be added before the following line
 	call plug#end()
-" } 
+" }
 
 " ConfigPlugins {
 	" Git {
@@ -303,7 +306,7 @@
 		" fatih/vim-hclfmt
 		let g:tf_fmt_autosave = 0
 	" }
-" } 
+" }
 
 " filetype plugin indent on	 " required
 
