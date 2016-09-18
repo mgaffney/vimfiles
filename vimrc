@@ -433,8 +433,6 @@
 	set diffopt=filler,vertical
 " }
 " Key (re)Mappings {
-
-
 	noremap QQ :qall<CR>
 	noremap <F1> <Esc>
 	" noremap! <F1>	<Esc>
