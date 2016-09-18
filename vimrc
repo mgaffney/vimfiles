@@ -1,312 +1,309 @@
-call plug#begin('~/.vim/plugged')
-
-
-
-" Vim Applications (?)
-" Plug 'itchyny/calendar.vim'
-	" let g:calendar_google_calendar = 1
-	" let g:calendar_clock_12hour=1
-	" let g:calendar_view="day"
-	" nnoremap gec :Calendar -split=vertical -position=topright -width=40<cr>
-
-" Git
-Plug 'tpope/vim-git'
-Plug 'tpope/vim-fugitive'
-" Plug 'tpope/vim-rhubarb'
-
-	" Fugitive Mappings
-	nnoremap gst :Gstatus<CR>
-	nnoremap gsl :Glog<CR>
-	nnoremap gsd :Gdiff<CR>
-	nnoremap gsb :Gblame<CR>
-	nnoremap gsw :Gwrite<CR>
-	nnoremap gsC :Gcommit<CR>
-	nnoremap gscd :Gcd<Bar>pwd<CR>
-	nnoremap gsld :Glcd<Bar>pwd<CR>
-
-" Plug 'airblade/vim-gitgutter'
-
-	" vim-gitgutter
-	" let g:gitgutter_diff_args = '-w' "Ignore whitespaces
-
-" Plug 'gregsexton/gitv'
-" let g:Gitv_OpenHorizontal = 1
-
-" Colors
-Plug 'mgaffney/vim-colors-solarized'
-" Plug 'tpope/vim-vividchalk'
-" Plug 'morhetz/gruvbox'
-" Plug 'nanotech/jellybeans.vim'
-" Plug 'tomasr/molokai'
-" Plug 'chriskempson/base16-vim'
-
-" tmux
-if exists('$TMUX')
-Plug 'christoomey/vim-tmux-navigator'
-" See https://github.com/christoomey/vim-tmux-navigator/issues/61
-" and https://github.com/neovim/neovim/issues/2048
-nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
-
-Plug 'tmux-plugins/vim-tmux'
-Plug 'tmux-plugins/vim-tmux-focus-events'
-
-" Plug 'edkolev/tmuxline.vim'
-	" tmux-line
-	" let g:tmuxline_powerline_separators = 1
-
-
-		" \ 'a': ['#S', '#{session_windows}'],
-		" \ 'c': ['#{pane_height}', '#{pane_current_command}'],
-
-" let g:tmuxline_preset = {
-	" \ 'a': ['#S'],
-	" \ 'b': '#W',
-	" \ 'c': ['#{pane_current_command}'],
-	" \ 'cwin': ['#I', '#W'],
-	" \ 'win': ['#I', '#W'],
-	" \ 'x': '#{cursor_y}: #{cursor_x}',
-	" \ 'y': [ '%l:%M', '%a %b %e'],
-	" \ 'z': '#h'}
-
-endif
-
-" Alignment of text
-Plug 'junegunn/vim-easy-align'
-
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-
-" Start interactive EasyAlign for a motion/text object (e.g. ygaip)
-" (think 'you go align...')
-nmap yga <Plug>(EasyAlign)
-
-" this must be in vimrc file to work
-" let g:go_fmt_autosave = 0
-
-" haproxy
-Plug 'zimbatm/haproxy.vim'
-
-" Completion
-" Plug 'Valloric/YouCompleteMe'
-
-Plug 'ervandew/supertab'
-	"SuperTab
-	let g:SuperTabDefaultCompletionType = "context"
-	let g:SuperTabClosePreviewOnPopupClose = 1
-	let g:SuperTabLongestHighlight = 1
-
-" Snips
-Plug 'SirVer/ultisnips'
-	" ultisnips
-	let g:UltiSnipsExpandTrigger="<tab>"
-	let g:UltiSnipsListSnippets="<c-tab>"
-	let g:UltiSnipsJumpForwardTrigger="<c-j>"
-	let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-	" let g:UltiSnipsExpandTrigger="<D-j>"
-	" let g:UltiSnipsExpandTrigger="<CR>"
-	" If you want :UltiSnipsEdit to split your window.
-	let g:UltiSnipsEditSplit="vertical"
-	let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
-	" ges - Go Edit Snippets
-	nnoremap ges :UltiSnipsEdit<CR>
-
-" Plug 'honza/vim-snippets'
-
-if executable('ag')
-	Plug 'rking/ag.vim'
-elseif executable('ack')
-	Plug 'mileszs/ack.vim'
-endif
-
-" Text-objects
-" Plug 'kana/vim-textobj-user'
-Plug 'unblevable/quick-scope'
-
-" Insert into your .vimrc after quick-scope is loaded.
-" Obviously depends on <https://github.com/unblevable/quick-scope> being installed.
-" https://gist.github.com/cszentkiralyi/dc61ee28ab81d23a67aa
-" Thanks to @VanLaser for cleaning the code up and expanding capabilities to include e.g. `df`
-
-let g:qs_enable = 0
-let g:qs_enable_char_list = [ 'f', 'F', 't', 'T' ]
-
-function! Quick_scope_selective(movement)
-	let needs_disabling = 0
-	if !g:qs_enable
-		QuickScopeToggle
-		redraw
-		let needs_disabling = 1
-	endif
-	let letter = nr2char(getchar())
-	if needs_disabling
-		QuickScopeToggle
-	endif
-	return a:movement . letter
-endfunction
-
-for i in g:qs_enable_char_list
-	execute 'noremap <expr> <silent>' . i . " Quick_scope_selective('". i . "')"
-endfor
-
-
-" Status line
-"Plug 'bling/vim-airline'
-Plug 'vim-airline/vim-airline'
-	" vim-airline
-	let g:airline_powerline_fonts=1
-	let g:airline#extensions#hunks#enabled = 0
-	let g:airline#extensions#tabline#enabled = 0
-	let g:airline#extensions#tabline#show_buffers = 0
-	" let g:airline#extensions#tabline#fnamemod = ':p:.'
-	let g:airline#extensions#tabline#fnamemod = ':p:t'
-	" let g:airline#extensions#tabline#fnamemod = ':t'
-	let g:airline#extensions#bufferline#enabled = 0
-	let g:airline#extensions#whitespace#enabled = 0
-	let g:airline#extensions#wordcount#enabled = 0
-
-	let g:airline_symbols = get(g:,'airline_symbols',{})
-	let g:airline_symbols.maxlinenr = ''
-if exists('$TMUX')
-	let g:airline#extensions#tmuxline#enabled = 0
-endif
-
-Plug 'vim-airline/vim-airline-themes'
-
-" Fuzzy file, buffer, mru, tag, etc finder.
-Plug 'kien/ctrlp.vim'
-
-" Vim Helpers
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-vinegar'
-Plug 'tpope/vim-obsession'
-
-Plug 'tpope/vim-characterize'
-" Plug 'tpope/vim-commentary'
-Plug 'tomtom/tcomment_vim'
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-projectionist'
-Plug 'tpope/vim-scriptease'
-Plug 'tpope/vim-repeat'
-" Plug 'tpope/vim-afterimage'
-" Plug 'nelstrom/vim-qargs'
-Plug 'vim-scripts/camelcasemotion'
-Plug 'scrooloose/syntastic'
-	let g:syntastic_auto_loc_list = 1
-	let g:syntastic_always_populate_loc_list = 1
-	" let g:syntastic_html_tidy_exec = 'tidy5'
-	" use jshint
-	let g:syntastic_javascript_checkers = ['jshint']
-
-" Plug 'thinca/vim-quickrun'
-" Plug 'tommcdo/vim-exchange'
-Plug 'tpope/vim-abolish'
-
-" Tags
-" Plug 'vim-scripts/taglist.vim'
-" Plug 'majutsushi/tagbar'
-
-" Unix Helpers
-Plug 'tpope/vim-eunuch'
-" Unix systemd syntax
-Plug 'Matt-Deacalion/vim-systemd-syntax'
-
-" Plist
-Plug 'darfink/vim-plist'
-
-" Go
-Plug 'fatih/vim-go'
-" let g:go_def_mapping_enabled = 0
-" geg - Go Edit Go.vim file
-nnoremap geg :tabnew $HOME/.vim/after/ftplugin/go.vim<cr>
-
-" Plug 'cespare/vim-go-templates'
-
-" Docker
-" Plug 'honza/dockerfile.vim'
-Plug 'ekalinin/Dockerfile.vim'
-
-" Ruby
-" Plug 'tpope/vim-bundler'
-" Plug 'tpope/vim-rails'
-" Plug 'tpope/vim-rake'
-" Plug 'tpope/vim-rvm'
-" Plug 'tpope/vim-endwise'
-" Plug 'nelstrom/vim-textobj-rubyblock'
-" Plug 'vim-ruby/vim-ruby'
-
-" Java
-" Plug 'tpope/vim-classpath'
-" Plug 'tfnico/vim-gradle'
-
-" Web Front End
-" JavaScript
-"" Plug 'jelera/vim-javascript-syntax'
-"" Plug 'mgaffney/vim-json'
-"Plug 'pangloss/vim-javascript'
-"" Plug 'wookiehangover/jshint.vim'
-"" Plug 'kennethzfeng/vim-raml'
-"" Plug 'tpope/vim-jdaddy'
-
-"Plug 'othree/yajs.vim'
-"Plug 'elzr/vim-json'
-
-" html5
-"Plug 'othree/html5-syntax.vim'
-"Plug 'othree/html5.vim'
-
-" css
-"Plug 'JulesWang/css.vim'
-
-" Zen coding
-" Plug 'mattn/emmet-vim'
-
-" Semantic Web
-" Plug 'seebi/semweb.vim'
-
-" Cassandra
-" Plug 'elubow/cql-vim'
-" Plug 'veegee/cql-vim'
-
-
-" Other Programming Languages and Filetypes
-" Plug 'derekwyatt/vim-scala'
-Plug 'tpope/vim-markdown'
-" Plug 'jtratner/vim-flavored-markdown'
-
-" Plug 'motus/pig.vim'
-" Plug 'vim-scripts/rfc-syntax'
-
-" Diagrams
-" Plug 'wannesm/wmgraphviz.vim'
-Plug 'aklt/plantuml-syntax'
-
-" Terraform
-" Plug 'bkad/vim-terraform'
-
-" Plugs for Hashicorp Tools
-Plug 'fatih/vim-hclfmt'
-let g:tf_fmt_autosave = 0
-
-Plug 'hashivim/vim-terraform'
-Plug 'hashivim/vim-vaultproject'
-Plug 'hashivim/vim-vagrant'
-Plug 'hashivim/vim-packer'
-Plug 'hashivim/vim-ottoproject'
-Plug 'hashivim/vim-consul'
-Plug 'hashivim/vim-nomadproject'
-
-" Python
-" Plug 'xieyu/pyclewn'
-
-" Plug 'yuratomo/w3m.vim'
-
-" Local plugins
-Plug 'file:///Users/mike/sandbox/vim-myplugins/vim-cheatsheet'
-
-" All of your Plugs must be added before the following line
-call plug#end()
+" LoadPlugins {
+	call plug#begin('~/.vim/plugged')
+	" Git {
+		Plug 'tpope/vim-git'
+		Plug 'tpope/vim-fugitive'
+		" Plug 'tpope/vim-rhubarb'
+		" Plug 'airblade/vim-gitgutter'
+		" Plug 'gregsexton/gitv'
+	" }
+	" Colors {
+		Plug 'mgaffney/vim-colors-solarized'
+	" }
+	" tmux {
+		if exists('$TMUX')
+			Plug 'christoomey/vim-tmux-navigator'
+			Plug 'tmux-plugins/vim-tmux'
+			Plug 'tmux-plugins/vim-tmux-focus-events'
+			" Plug 'edkolev/tmuxline.vim'
+		endif
+	" }
+	" TextAlignment {
+		Plug 'junegunn/vim-easy-align'
+	" }
+	" haproxy {
+		Plug 'zimbatm/haproxy.vim'
+	" }
+	" Completion {
+		" Plug 'Valloric/YouCompleteMe'
+		Plug 'ervandew/supertab'
+	" }
+	" Snips {
+		Plug 'SirVer/ultisnips'
+		" Plug 'honza/vim-snippets'
+	" }
+	" Search {
+		if executable('ag')
+			Plug 'rking/ag.vim'
+		elseif executable('ack')
+			Plug 'mileszs/ack.vim'
+		endif
+		" Fuzzy file, buffer, mru, tag, etc finder.
+		Plug 'kien/ctrlp.vim'
+	" }
+	" TextObjects {
+		" Plug 'kana/vim-textobj-user'
+		Plug 'unblevable/quick-scope'
+	" }
+	" StatusLine {
+		"Plug 'bling/vim-airline'
+		Plug 'vim-airline/vim-airline'
+		Plug 'vim-airline/vim-airline-themes'
+	" }
+	" VimHelpers {
+		Plug 'tpope/vim-sensible'
+		Plug 'tpope/vim-surround'
+		Plug 'tpope/vim-unimpaired'
+		Plug 'tpope/vim-vinegar'
+		Plug 'tpope/vim-obsession'
+		Plug 'tpope/vim-characterize'
+		" Plug 'tpope/vim-commentary'
+		Plug 'tomtom/tcomment_vim'
+		Plug 'tpope/vim-dispatch'
+		Plug 'tpope/vim-projectionist'
+		Plug 'tpope/vim-scriptease'
+		Plug 'tpope/vim-repeat'
+		" Plug 'tpope/vim-afterimage'
+		" Plug 'nelstrom/vim-qargs'
+		Plug 'vim-scripts/camelcasemotion'
+		" Plug 'thinca/vim-quickrun'
+		" Plug 'tommcdo/vim-exchange'
+		Plug 'tpope/vim-abolish'
+	" }
+	" Syntax {
+		Plug 'scrooloose/syntastic'
+	" }
+	" Tags {
+		" Plug 'vim-scripts/taglist.vim'
+		" Plug 'majutsushi/tagbar'
+	" }
+	" UnixHelpers {
+		Plug 'tpope/vim-eunuch'
+	" }
+	" systemd {
+		Plug 'Matt-Deacalion/vim-systemd-syntax'
+	" }
+	" Plist {
+		Plug 'darfink/vim-plist'
+	" }
+	" Golang {
+		Plug 'fatih/vim-go'
+		" Plug 'cespare/vim-go-templates'
+	" }
+	" Docker {
+		" Plug 'honza/dockerfile.vim'
+		Plug 'ekalinin/Dockerfile.vim'
+	" }
+	" Ruby {
+		" Plug 'tpope/vim-bundler'
+		" Plug 'tpope/vim-rails'
+		" Plug 'tpope/vim-rake'
+		" Plug 'tpope/vim-rvm'
+		" Plug 'tpope/vim-endwise'
+		" Plug 'nelstrom/vim-textobj-rubyblock'
+		" Plug 'vim-ruby/vim-ruby'
+	" }
+	" Java {
+		" Plug 'tpope/vim-classpath'
+		" Plug 'tfnico/vim-gradle'
+	" }
+	" JavaScript
+		"" Plug 'jelera/vim-javascript-syntax'
+		"" Plug 'mgaffney/vim-json'
+		"Plug 'pangloss/vim-javascript'
+		"" Plug 'wookiehangover/jshint.vim'
+		"" Plug 'kennethzfeng/vim-raml'
+		"" Plug 'tpope/vim-jdaddy'
+		"Plug 'othree/yajs.vim'
+		"Plug 'elzr/vim-json'
+	" }
+	" HTML5 {
+		"Plug 'othree/html5-syntax.vim'
+		"Plug 'othree/html5.vim'
+	" }
+	" CSS {
+		"Plug 'JulesWang/css.vim'
+	" }
+	" ZenCoding {
+		" Plug 'mattn/emmet-vim'
+	" }
+	" SemanticWeb {
+		" Plug 'seebi/semweb.vim'
+	" }
+	" Cassandra {
+		" Plug 'elubow/cql-vim'
+		" Plug 'veegee/cql-vim'
+	" }
+	" Scala {
+		" Plug 'derekwyatt/vim-scala'
+	" }
+	" Markdown {
+		Plug 'tpope/vim-markdown'
+		" Plug 'jtratner/vim-flavored-markdown'
+	" }
+	" Pig {
+		" Plug 'motus/pig.vim'
+	" }
+	" RFC {
+		" Plug 'vim-scripts/rfc-syntax'
+	" }
+	" Diagrams {
+		" Plug 'wannesm/wmgraphviz.vim'
+		Plug 'aklt/plantuml-syntax'
+	" }
+	" Terraform {
+		" Plug 'bkad/vim-terraform'
+	" }
+	" HashicorpTools {
+		Plug 'fatih/vim-hclfmt'
+		Plug 'hashivim/vim-terraform'
+		Plug 'hashivim/vim-vaultproject'
+		Plug 'hashivim/vim-vagrant'
+		Plug 'hashivim/vim-packer'
+		Plug 'hashivim/vim-ottoproject'
+		Plug 'hashivim/vim-consul'
+		Plug 'hashivim/vim-nomadproject'
+	" }
+	" Python {
+		" Plug 'xieyu/pyclewn'
+	" }
+	" WebBrowser {
+		" Plug 'yuratomo/w3m.vim'
+	" }
+	" LocalPlugins {
+		Plug 'file:///Users/mike/sandbox/vim-myplugins/vim-cheatsheet'
+	" }
+	" All of your Plugs must be added before the following line
+	call plug#end()
+" } 
+
+" ConfigPlugins {
+	" Git {
+		" tpope/vim-fugitive
+		nnoremap gst :Gstatus<CR>
+		nnoremap gsl :Glog<CR>
+		nnoremap gsd :Gdiff<CR>
+		nnoremap gsb :Gblame<CR>
+		nnoremap gsw :Gwrite<CR>
+		nnoremap gsC :Gcommit<CR>
+		nnoremap gscd :Gcd<Bar>pwd<CR>
+		nnoremap gsld :Glcd<Bar>pwd<CR>
+		" airblade/vim-gitgutter
+		" let g:gitgutter_diff_args = '-w' "Ignore whitespaces
+		" gregsexton/gitv
+		" let g:Gitv_OpenHorizontal = 1
+	" }
+	" tmux {
+		if exists('$TMUX')
+			" See https://github.com/christoomey/vim-tmux-navigator/issues/61
+			" and https://github.com/neovim/neovim/issues/2048
+			nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
+			" edkolev/tmuxline.vim
+			" let g:tmuxline_powerline_separators = 1
+				" \ 'a': ['#S', '#{session_windows}'],
+				" \ 'c': ['#{pane_height}', '#{pane_current_command}'],
+			" let g:tmuxline_preset = {
+				" \ 'a': ['#S'],
+				" \ 'b': '#W',
+				" \ 'c': ['#{pane_current_command}'],
+				" \ 'cwin': ['#I', '#W'],
+				" \ 'win': ['#I', '#W'],
+				" \ 'x': '#{cursor_y}: #{cursor_x}',
+				" \ 'y': [ '%l:%M', '%a %b %e'],
+				" \ 'z': '#h'}
+		endif
+	" }
+	" junegunn/vim-easy-align {
+		" Start interactive EasyAlign in visual mode (e.g. vipga)
+		xmap ga <Plug>(EasyAlign)
+		" Start interactive EasyAlign for a motion/text object (e.g. ygaip)
+		" (think 'you go align...')
+		nmap yga <Plug>(EasyAlign)
+	" }
+	" Completion {
+		"SuperTab
+		let g:SuperTabDefaultCompletionType = "context"
+		let g:SuperTabClosePreviewOnPopupClose = 1
+		let g:SuperTabLongestHighlight = 1
+	" }
+	" Snips {
+		" ultisnips
+		let g:UltiSnipsExpandTrigger="<tab>"
+		let g:UltiSnipsListSnippets="<c-tab>"
+		let g:UltiSnipsJumpForwardTrigger="<c-j>"
+		let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+		" let g:UltiSnipsExpandTrigger="<D-j>"
+		" let g:UltiSnipsExpandTrigger="<CR>"
+		" If you want :UltiSnipsEdit to split your window.
+		let g:UltiSnipsEditSplit="vertical"
+		let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
+		" ges - Go Edit Snippets
+		nnoremap ges :UltiSnipsEdit<CR>
+	" }
+	" TextObjects {
+		" Insert into your .vimrc after quick-scope is loaded.
+		" Obviously depends on <https://github.com/unblevable/quick-scope> being installed.
+		" https://gist.github.com/cszentkiralyi/dc61ee28ab81d23a67aa
+		" Thanks to @VanLaser for cleaning the code up and expanding capabilities to include e.g. `df`
+		let g:qs_enable = 0
+		let g:qs_enable_char_list = [ 'f', 'F', 't', 'T' ]
+		"
+		function! Quick_scope_selective(movement)
+			let needs_disabling = 0
+			if !g:qs_enable
+				QuickScopeToggle
+				redraw
+				let needs_disabling = 1
+			endif
+			let letter = nr2char(getchar())
+			if needs_disabling
+				QuickScopeToggle
+			endif
+			return a:movement . letter
+		endfunction
+		"
+		for i in g:qs_enable_char_list
+			execute 'noremap <expr> <silent>' . i . " Quick_scope_selective('". i . "')"
+		endfor
+	" }
+	" StatusLine {
+		" vim-airline
+		let g:airline_powerline_fonts=1
+		let g:airline#extensions#hunks#enabled = 0
+		let g:airline#extensions#tabline#enabled = 0
+		let g:airline#extensions#tabline#show_buffers = 0
+		" let g:airline#extensions#tabline#fnamemod = ':p:.'
+		let g:airline#extensions#tabline#fnamemod = ':p:t'
+		" let g:airline#extensions#tabline#fnamemod = ':t'
+		let g:airline#extensions#bufferline#enabled = 0
+		let g:airline#extensions#whitespace#enabled = 0
+		let g:airline#extensions#wordcount#enabled = 0
+		let g:airline_symbols = get(g:,'airline_symbols',{})
+		let g:airline_symbols.maxlinenr = ''
+		if exists('$TMUX')
+			let g:airline#extensions#tmuxline#enabled = 0
+		endif
+	" }
+	" Syntax {
+		" scrooloose/syntastic
+		let g:syntastic_auto_loc_list = 1
+		let g:syntastic_always_populate_loc_list = 1
+		" let g:syntastic_html_tidy_exec = 'tidy5'
+		" use jshint
+		let g:syntastic_javascript_checkers = ['jshint']
+	" }
+	" Golang {
+		" this must be in vimrc file to work
+		" let g:go_fmt_autosave = 0
+		" let g:go_def_mapping_enabled = 0
+		" geg - Go Edit Go.vim file
+		nnoremap geg :tabnew $HOME/.vim/after/ftplugin/go.vim<cr>
+	" }
+	" HashicorpTools {
+		" fatih/vim-hclfmt
+		let g:tf_fmt_autosave = 0
+	" }
+" } 
 
 " filetype plugin indent on	 " required
 
