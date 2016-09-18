@@ -308,17 +308,6 @@
 	" }
 " }
 
-" filetype plugin indent on	 " required
-
-		" runtime bundle/vim-pathogen/autoload/pathogen.vim
-		" call pathogen#infect()
-		" silent! call pathogen#helptags()
-		" Run :Helptags after installing or updating bundles
-
-		" set sessionoptions-=options " Make sessions Pathogen friendly
-	" }
-" }
-
 " General {
 	" syntax enable					" syntax enable keeps your current color settings. :syntax
 	set background=dark				" Assume a dark background
