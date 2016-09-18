@@ -1,28 +1,18 @@
-" Environment {
+call plug#begin('~/.vim/plugged')
 
-set nocompatible			" choose no compatibility with legacy vi must
 
-" Setup Vundle Support {
-filetype off
-
-" set the runtime path to include Vundle and initialize
-set runtimepath+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" Keep Plugin commands between vundle#begin/end.
-Plugin 'VundleVim/Vundle.vim' " let Vundle manage Vundle
 
 " Vim Applications (?)
-" Plugin 'itchyny/calendar.vim'
+" Plug 'itchyny/calendar.vim'
 	" let g:calendar_google_calendar = 1
 	" let g:calendar_clock_12hour=1
 	" let g:calendar_view="day"
 	" nnoremap gec :Calendar -split=vertical -position=topright -width=40<cr>
 
 " Git
-Plugin 'tpope/vim-git'
-Plugin 'tpope/vim-fugitive'
-" Plugin 'tpope/vim-rhubarb'
+Plug 'tpope/vim-git'
+Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-rhubarb'
 
 	" Fugitive Mappings
 	nnoremap gst :Gstatus<CR>
@@ -34,29 +24,33 @@ Plugin 'tpope/vim-fugitive'
 	nnoremap gscd :Gcd<Bar>pwd<CR>
 	nnoremap gsld :Glcd<Bar>pwd<CR>
 
-" Plugin 'airblade/vim-gitgutter'
+" Plug 'airblade/vim-gitgutter'
 
 	" vim-gitgutter
 	" let g:gitgutter_diff_args = '-w' "Ignore whitespaces
 
-" Plugin 'gregsexton/gitv'
+" Plug 'gregsexton/gitv'
 " let g:Gitv_OpenHorizontal = 1
 
 " Colors
-Plugin 'mgaffney/vim-colors-solarized'
-" Plugin 'tpope/vim-vividchalk'
-" Plugin 'morhetz/gruvbox'
-" Plugin 'nanotech/jellybeans.vim'
-" Plugin 'tomasr/molokai'
-" Plugin 'chriskempson/base16-vim'
+Plug 'mgaffney/vim-colors-solarized'
+" Plug 'tpope/vim-vividchalk'
+" Plug 'morhetz/gruvbox'
+" Plug 'nanotech/jellybeans.vim'
+" Plug 'tomasr/molokai'
+" Plug 'chriskempson/base16-vim'
 
 " tmux
 if exists('$TMUX')
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'tmux-plugins/vim-tmux'
-Plugin 'tmux-plugins/vim-tmux-focus-events'
+Plug 'christoomey/vim-tmux-navigator'
+" See https://github.com/christoomey/vim-tmux-navigator/issues/61
+" and https://github.com/neovim/neovim/issues/2048
+nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
 
-" Plugin 'edkolev/tmuxline.vim'
+Plug 'tmux-plugins/vim-tmux'
+Plug 'tmux-plugins/vim-tmux-focus-events'
+
+" Plug 'edkolev/tmuxline.vim'
 	" tmux-line
 	" let g:tmuxline_powerline_separators = 1
 
@@ -77,12 +71,12 @@ Plugin 'tmux-plugins/vim-tmux-focus-events'
 endif
 
 " Alignment of text
-Plugin 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-easy-align'
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 
-" Start interactive EasyAlign for a motion/text object (e.g. ygaip) 
+" Start interactive EasyAlign for a motion/text object (e.g. ygaip)
 " (think 'you go align...')
 nmap yga <Plug>(EasyAlign)
 
@@ -90,19 +84,19 @@ nmap yga <Plug>(EasyAlign)
 " let g:go_fmt_autosave = 0
 
 " haproxy
-Plugin 'zimbatm/haproxy.vim'
+Plug 'zimbatm/haproxy.vim'
 
 " Completion
-" Plugin 'Valloric/YouCompleteMe'
+" Plug 'Valloric/YouCompleteMe'
 
-Plugin 'ervandew/supertab'
+Plug 'ervandew/supertab'
 	"SuperTab
 	let g:SuperTabDefaultCompletionType = "context"
 	let g:SuperTabClosePreviewOnPopupClose = 1
 	let g:SuperTabLongestHighlight = 1
 
 " Snips
-Plugin 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
 	" ultisnips
 	let g:UltiSnipsExpandTrigger="<tab>"
 	let g:UltiSnipsListSnippets="<c-tab>"
@@ -116,17 +110,17 @@ Plugin 'SirVer/ultisnips'
 	" ges - Go Edit Snippets
 	nnoremap ges :UltiSnipsEdit<CR>
 
-" Plugin 'honza/vim-snippets'
+" Plug 'honza/vim-snippets'
 
 if executable('ag')
-	Plugin 'rking/ag.vim'
+	Plug 'rking/ag.vim'
 elseif executable('ack')
-	Plugin 'mileszs/ack.vim'
+	Plug 'mileszs/ack.vim'
 endif
 
 " Text-objects
-" Plugin 'kana/vim-textobj-user'
-Plugin 'unblevable/quick-scope'
+" Plug 'kana/vim-textobj-user'
+Plug 'unblevable/quick-scope'
 
 " Insert into your .vimrc after quick-scope is loaded.
 " Obviously depends on <https://github.com/unblevable/quick-scope> being installed.
@@ -156,8 +150,8 @@ endfor
 
 
 " Status line
-"Plugin 'bling/vim-airline'
-Plugin 'vim-airline/vim-airline'
+"Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
 	" vim-airline
 	let g:airline_powerline_fonts=1
 	let g:airline#extensions#hunks#enabled = 0
@@ -176,144 +170,145 @@ if exists('$TMUX')
 	let g:airline#extensions#tmuxline#enabled = 0
 endif
 
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline-themes'
 
 " Fuzzy file, buffer, mru, tag, etc finder.
-Plugin 'kien/ctrlp.vim'
+Plug 'kien/ctrlp.vim'
 
-" Vim Helpers 
-Plugin 'tpope/vim-sensible'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'tpope/vim-vinegar'
-Plugin 'tpope/vim-obsession'
+" Vim Helpers
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-obsession'
 
-Plugin 'tpope/vim-characterize'
-" Plugin 'tpope/vim-commentary'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'tpope/vim-dispatch'
-Plugin 'tpope/vim-projectionist'
-Plugin 'tpope/vim-scriptease'
-Plugin 'tpope/vim-repeat'
-" Plugin 'tpope/vim-afterimage'
-" Plugin 'nelstrom/vim-qargs'
-Plugin 'vim-scripts/camelcasemotion'
-Plugin 'scrooloose/syntastic'
+Plug 'tpope/vim-characterize'
+" Plug 'tpope/vim-commentary'
+Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-projectionist'
+Plug 'tpope/vim-scriptease'
+Plug 'tpope/vim-repeat'
+" Plug 'tpope/vim-afterimage'
+" Plug 'nelstrom/vim-qargs'
+Plug 'vim-scripts/camelcasemotion'
+Plug 'scrooloose/syntastic'
 	let g:syntastic_auto_loc_list = 1
 	let g:syntastic_always_populate_loc_list = 1
 	" let g:syntastic_html_tidy_exec = 'tidy5'
 	" use jshint
 	let g:syntastic_javascript_checkers = ['jshint']
 
-" Plugin 'thinca/vim-quickrun'
-" Plugin 'tommcdo/vim-exchange'
-Plugin 'tpope/vim-abolish'
+" Plug 'thinca/vim-quickrun'
+" Plug 'tommcdo/vim-exchange'
+Plug 'tpope/vim-abolish'
 
 " Tags
-" Plugin 'vim-scripts/taglist.vim'
-" Plugin 'majutsushi/tagbar'
+" Plug 'vim-scripts/taglist.vim'
+" Plug 'majutsushi/tagbar'
 
 " Unix Helpers
-Plugin 'tpope/vim-eunuch'
+Plug 'tpope/vim-eunuch'
 " Unix systemd syntax
-Plugin 'Matt-Deacalion/vim-systemd-syntax'
+Plug 'Matt-Deacalion/vim-systemd-syntax'
 
 " Plist
-Plugin 'darfink/vim-plist'
+Plug 'darfink/vim-plist'
 
 " Go
-Plugin 'fatih/vim-go'
+Plug 'fatih/vim-go'
 " let g:go_def_mapping_enabled = 0
 " geg - Go Edit Go.vim file
 nnoremap geg :tabnew $HOME/.vim/after/ftplugin/go.vim<cr>
 
-" Plugin 'cespare/vim-go-templates'
+" Plug 'cespare/vim-go-templates'
 
 " Docker
-" Plugin 'honza/dockerfile.vim'
-Plugin 'ekalinin/Dockerfile.vim'
+" Plug 'honza/dockerfile.vim'
+Plug 'ekalinin/Dockerfile.vim'
 
 " Ruby
-" Plugin 'tpope/vim-bundler'
-" Plugin 'tpope/vim-rails'
-" Plugin 'tpope/vim-rake'
-" Plugin 'tpope/vim-rvm'
-" Plugin 'tpope/vim-endwise'
-" Plugin 'nelstrom/vim-textobj-rubyblock'
-" Plugin 'vim-ruby/vim-ruby'
+" Plug 'tpope/vim-bundler'
+" Plug 'tpope/vim-rails'
+" Plug 'tpope/vim-rake'
+" Plug 'tpope/vim-rvm'
+" Plug 'tpope/vim-endwise'
+" Plug 'nelstrom/vim-textobj-rubyblock'
+" Plug 'vim-ruby/vim-ruby'
 
 " Java
-" Plugin 'tpope/vim-classpath'
-" Plugin 'tfnico/vim-gradle'
+" Plug 'tpope/vim-classpath'
+" Plug 'tfnico/vim-gradle'
 
 " Web Front End
-" JavaScript 
-"" Plugin 'jelera/vim-javascript-syntax'
-"" Plugin 'mgaffney/vim-json'
-"Plugin 'pangloss/vim-javascript'
-"" Plugin 'wookiehangover/jshint.vim'
-"" Plugin 'kennethzfeng/vim-raml'
-"" Plugin 'tpope/vim-jdaddy'
+" JavaScript
+"" Plug 'jelera/vim-javascript-syntax'
+"" Plug 'mgaffney/vim-json'
+"Plug 'pangloss/vim-javascript'
+"" Plug 'wookiehangover/jshint.vim'
+"" Plug 'kennethzfeng/vim-raml'
+"" Plug 'tpope/vim-jdaddy'
 
-"Plugin 'othree/yajs.vim'
-"Plugin 'elzr/vim-json'
+"Plug 'othree/yajs.vim'
+"Plug 'elzr/vim-json'
 
 " html5
-"Plugin 'othree/html5-syntax.vim'
-"Plugin 'othree/html5.vim'
+"Plug 'othree/html5-syntax.vim'
+"Plug 'othree/html5.vim'
 
 " css
-"Plugin 'JulesWang/css.vim'
+"Plug 'JulesWang/css.vim'
 
 " Zen coding
-" Plugin 'mattn/emmet-vim'
+" Plug 'mattn/emmet-vim'
 
 " Semantic Web
-" Plugin 'seebi/semweb.vim'
+" Plug 'seebi/semweb.vim'
 
 " Cassandra
-" Plugin 'elubow/cql-vim'
-" Plugin 'veegee/cql-vim'
+" Plug 'elubow/cql-vim'
+" Plug 'veegee/cql-vim'
 
 
 " Other Programming Languages and Filetypes
-" Plugin 'derekwyatt/vim-scala'
-Plugin 'tpope/vim-markdown'
-" Plugin 'jtratner/vim-flavored-markdown'
+" Plug 'derekwyatt/vim-scala'
+Plug 'tpope/vim-markdown'
+" Plug 'jtratner/vim-flavored-markdown'
 
-" Plugin 'motus/pig.vim'
-" Plugin 'vim-scripts/rfc-syntax'
+" Plug 'motus/pig.vim'
+" Plug 'vim-scripts/rfc-syntax'
 
 " Diagrams
-" Plugin 'wannesm/wmgraphviz.vim'
-Plugin 'aklt/plantuml-syntax'
+" Plug 'wannesm/wmgraphviz.vim'
+Plug 'aklt/plantuml-syntax'
 
 " Terraform
-" Plugin 'bkad/vim-terraform'
+" Plug 'bkad/vim-terraform'
 
-" Plugins for Hashicorp Tools
-Plugin 'fatih/vim-hclfmt'
+" Plugs for Hashicorp Tools
+Plug 'fatih/vim-hclfmt'
 let g:tf_fmt_autosave = 0
 
-Plugin 'hashivim/vim-terraform'
-Plugin 'hashivim/vim-vaultproject'
-Plugin 'hashivim/vim-vagrant'
-Plugin 'hashivim/vim-packer'
-Plugin 'hashivim/vim-ottoproject'
-Plugin 'hashivim/vim-consul'
-Plugin 'hashivim/vim-nomadproject'
+Plug 'hashivim/vim-terraform'
+Plug 'hashivim/vim-vaultproject'
+Plug 'hashivim/vim-vagrant'
+Plug 'hashivim/vim-packer'
+Plug 'hashivim/vim-ottoproject'
+Plug 'hashivim/vim-consul'
+Plug 'hashivim/vim-nomadproject'
 
 " Python
-" Plugin 'xieyu/pyclewn'
+" Plug 'xieyu/pyclewn'
 
-" Plugin 'yuratomo/w3m.vim'
+" Plug 'yuratomo/w3m.vim'
 
 " Local plugins
-Plugin 'file:///Users/mike/sandbox/vim-myplugins/vim-cheatsheet'
+Plug 'file:///Users/mike/sandbox/vim-myplugins/vim-cheatsheet'
 
-" All of your Plugins must be added before the following line
-call vundle#end()			 " required
-filetype plugin indent on	 " required
+" All of your Plugs must be added before the following line
+call plug#end()
+
+" filetype plugin indent on	 " required
 
 		" runtime bundle/vim-pathogen/autoload/pathogen.vim
 		" call pathogen#infect()
@@ -325,14 +320,14 @@ filetype plugin indent on	 " required
 " }
 
 " General {
-	syntax enable					" syntax enable keeps your current color settings. :syntax
+	" syntax enable					" syntax enable keeps your current color settings. :syntax
 	set background=dark				" Assume a dark background
-	filetype plugin indent on		" load file type plugins + indentation
+	" filetype plugin indent on		" load file type plugins + indentation
 	set encoding=utf-8				" The encoding displayed
 	" set fileencoding=utf-8			" The encoding written to a file
-"	scriptencoding utf-8	
+"	scriptencoding utf-8
 
-	set nojoinspaces 				" One space between sentences not two 
+	set nojoinspaces 				" One space between sentences not two
 	set shortmess+=filmnrxoOtT		" abbrev. of messages (avoids 'hit enter')
 	set virtualedit=onemore			" allow for cursor beyond last character
 "	set history=2000
@@ -408,7 +403,7 @@ filetype plugin indent on	 " required
 	"Invisible character colors
 	highlight NonText guifg=#4a4a59 guibg=bg
 	highlight SpecialKey guifg=#4a4a59 guibg=bg
-	set completeopt-=preview 
+	set completeopt-=preview
 " }
 
 " Formatting {
@@ -423,7 +418,7 @@ filetype plugin indent on	 " required
 "	set comments=sl:/*,mb:*,elx:*/ " auto format comment blocks
 	" Remove trailing whitespaces and ^M chars
 	"autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
-	
+
 	" Set the tab width
 	" let s:tabwidth=4
 	" exec 'set tabstop='	.s:tabwidth
@@ -485,7 +480,7 @@ filetype plugin indent on	 " required
 	nnoremap <leader>pl "lp
 
 	" Edit cheatsheet
-	nnoremap <leader>ec :tabnew $HOME/.vim/bundle/vim-cheatsheet/doc/cheatsheet.txt<cr>
+	nnoremap <leader>ec :tabnew $HOME/.vim/plugged/vim-cheatsheet/doc/cheatsheet.txt<cr>
 
 	" Move visual block
 	vnoremap J :m '>+1<CR>gv=gv
@@ -516,7 +511,7 @@ filetype plugin indent on	 " required
 	" Shortcut to rapidly toggle `set list`
 	" use col from unimpaired plugin
 	" nmap <leader>l :set list!<cr>
-	
+
 	"clearing highlighted search
 	nnoremap <silent> <leader>/ :nohlsearch<CR>
 	if exists(":nohls")
@@ -546,7 +541,7 @@ filetype plugin indent on	 " required
 	" Insert the current time e.g.: 1.12 PM
 	inoremap \zt <C-R>=strftime("%l.%M %p")<CR>
 	" inoremap \zt <C-R>=strftime("%r")<CR>
-	" Insert the current date and time e.g.: Friday November 22, 2013 • 1.12 PM 
+	" Insert the current date and time e.g.: Friday November 22, 2013 • 1.12 PM
 	inoremap \zs <C-R>=strftime("%A %B %e, %Y • %l.%M %p")<CR>
 
 	" Toggle background between dark and light
@@ -615,7 +610,7 @@ filetype plugin indent on	 " required
 	" noremap <Down> <Nop>
 	" noremap <Left> <Nop>
 	" noremap <Right> <Nop>
-	
+
 	" Enable [[ and ]] even when the { or } don't start in the first column
 	noremap [[ ?{<CR>w99[{…
 	noremap ][ /}<CR>b99]}…
@@ -632,7 +627,7 @@ filetype plugin indent on	 " required
 
 " }
 
-" Plugins {
+" Plug Settings {
 
 	" tagbar
 	" autocmd VimEnter * nested :call tagbar#autoopen(1)
@@ -643,7 +638,7 @@ filetype plugin indent on	 " required
 
 
 	" set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\  " highlight
-	
+
 	" DWM plugin
 	" nmap <C-Left> <Plug>DWMRotateCounterclockwise
 	" nmap <C-Right> <Plug>DWMRotateClockwise
@@ -756,7 +751,7 @@ augroup END
 	endfunc
 " }
 
-" Use - `:CopyMatches x` where x is any register to hold the result 
+" Use - `:CopyMatches x` where x is any register to hold the result
 function! CopyMatches(reg)
 	let hits = []
 	%s//\=len(add(hits, submatch(0))) ? submatch(0) : ''/ge
