@@ -773,5 +773,20 @@ augroup js_files
 	autocmd BufEnter * call UpdateJsHintConf()
 augroup END
 
+" Projectionist {
 
+	let g:projectionist_heuristics = {
+		\ '*.go': {
+		\   '*.go': {
+		\       'alternate': '{}_test.go',
+		\       'type': 'source'
+		\   },
+		\   '*_test.go': {
+		\       'alternate': '{}.go',
+		\       'type': 'test'
+		\   },
+		\ }
+	\ }
+
+" }
 " vim:tw=78:ts=4:sw=4:norl:
