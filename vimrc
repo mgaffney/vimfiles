@@ -294,6 +294,7 @@
 		" let g:syntastic_html_tidy_exec = 'tidy5'
 		" use jshint
 		let g:syntastic_javascript_checkers = ['jshint']
+		" let g:syntastic_sh_shellchecker_args = ""
 	" }
 	" Golang {
 		" this must be in vimrc file to work
@@ -428,7 +429,7 @@
 
 	" learn to use jk instead of <esc>
 	" inoremap <esc> <nop>
-	inoremap jk <esc>
+	" inoremap jk <esc>
 
 	" Visually select the text that was last edited/pasted
 	" Suggestion from http://vimcasts.org/episodes/bubbling-text/
@@ -774,7 +775,6 @@ augroup js_files
 augroup END
 
 " Projectionist {
-
 	let g:projectionist_heuristics = {
 		\ '*.go': {
 		\   '*.go': {
@@ -787,6 +787,6 @@ augroup END
 		\   },
 		\ }
 	\ }
-
 " }
+
 " vim:tw=78:ts=4:sw=4:norl:
