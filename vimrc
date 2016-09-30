@@ -294,7 +294,8 @@
 		" let g:syntastic_html_tidy_exec = 'tidy5'
 		" use jshint
 		let g:syntastic_javascript_checkers = ['jshint']
-		" let g:syntastic_sh_shellchecker_args = ""
+		let g:syntastic_sh_checkers=['shellcheck']
+		let g:syntastic_sh_shellcheck_args = '-x -s bash'
 	" }
 	" Golang {
 		" this must be in vimrc file to work
