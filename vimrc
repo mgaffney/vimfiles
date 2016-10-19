@@ -170,6 +170,9 @@
 	" Python {
 		" Plug 'xieyu/pyclewn'
 	" }
+	" Protobuf {
+		Plug 'uarun/vim-protobuf'
+	" }
 	" WebBrowser {
 		" Plug 'yuratomo/w3m.vim'
 	" }
