@@ -331,6 +331,10 @@
 	"set grepprg=ack\ --nogroup\ --column\ $*
 	"set grepformat=%f:%l:%c:%m
 
+	" Disable beep and flash (http://vim.wikia.com/wiki/Disable_beeping)
+	set noerrorbells
+	set visualbell
+	set t_vb=
 	" Setting up the directories {
 		"set undofile
 "		set undolevels=1000
@@ -385,7 +389,7 @@
 	"set wildmenu					" show list instead of just completing
 	"set wildmode=list:longest,full	" command <Tab> completion, list matches, then longest common part, then all.
 	"set wildmode=longest,list		 " tab completion like bash's
-	 set wildmode=longest,list:longest		 " tab completion like zsh's
+	set wildmode=longest,list:longest		 " tab completion like zsh's
 	" set whichwrap=b,s,h,l,<,>,[,]	" backspace and cursor keys wrap to
 "	set scrolljump=5				" lines to scroll when cursor leaves screen
 "	set scrolloff=3					" minimum lines to keep above and below cursor
@@ -520,6 +524,8 @@
 
 
 	" add easy date insertion
+	nnoremap <Leader>ds		i<C-R>=strftime("%A %B %e, %Y")<CR><ESC>
+
 	" imap <Leader>ds	  <C-R>=strftime("%A %B %d, %Y")<CR>
 	" Friday November 22, 2013
 	inoremap <Leader>ds		<C-R>=strftime("%A %B %e, %Y")<CR>
@@ -549,16 +555,16 @@
 	" nnoremap <silent> <F8> :TlistToggle<CR>
 
 	""" Code folding options
-	 nnoremap <leader>f0 :set foldlevel=0<CR>
-	 nnoremap <leader>f1 :set foldlevel=1<CR>
-	 nnoremap <leader>f2 :set foldlevel=2<CR>
-	 nnoremap <leader>f3 :set foldlevel=3<CR>
-	 nnoremap <leader>f4 :set foldlevel=4<CR>
-	 nnoremap <leader>f5 :set foldlevel=5<CR>
-	 nnoremap <leader>f6 :set foldlevel=6<CR>
-	 nnoremap <leader>f7 :set foldlevel=7<CR>
-	 nnoremap <leader>f8 :set foldlevel=8<CR>
-	 nnoremap <leader>f9 :set foldlevel=9<CR>
+	nnoremap <leader>f0 :set foldlevel=0<CR>
+	nnoremap <leader>f1 :set foldlevel=1<CR>
+	nnoremap <leader>f2 :set foldlevel=2<CR>
+	nnoremap <leader>f3 :set foldlevel=3<CR>
+	nnoremap <leader>f4 :set foldlevel=4<CR>
+	nnoremap <leader>f5 :set foldlevel=5<CR>
+	nnoremap <leader>f6 :set foldlevel=6<CR>
+	nnoremap <leader>f7 :set foldlevel=7<CR>
+	nnoremap <leader>f8 :set foldlevel=8<CR>
+	nnoremap <leader>f9 :set foldlevel=9<CR>
 
 	"insert random string
 	nnoremap <leader>r mx:r! od -vAn -N16 -tx4 < /dev/urandom<CR>ddk:s/\s//<CR>:nohlsearch<CR>"zyiwdd`x"zP
