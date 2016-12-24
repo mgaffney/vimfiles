@@ -73,6 +73,9 @@
 		" Plug 'tommcdo/vim-exchange'
 		Plug 'tpope/vim-abolish'
 	" }
+	" DisplayMarks {
+		Plug 'kshenoy/vim-signature'
+	" }
 	" Syntax {
 		Plug 'scrooloose/syntastic'
 	" }
