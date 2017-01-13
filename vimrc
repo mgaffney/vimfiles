@@ -123,6 +123,9 @@
 		"Plug 'othree/yajs.vim'
 		"Plug 'elzr/vim-json'
 	" }
+	" TypeScript {
+		Plug 'leafgarland/typescript-vim'
+	" }
 	" HTML5 {
 		"Plug 'othree/html5-syntax.vim'
 		"Plug 'othree/html5.vim'
