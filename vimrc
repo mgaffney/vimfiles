@@ -740,6 +740,7 @@ augroup fileconfigs
 	" let g:xml_syntax_folding=1
 	" autocmd FileType xml setlocal foldmethod=syntax
 	" autocmd BufNewFile,BufRead *.md,*.markdown,*.mdown,*.note setlocal filetype=markdown
+	autocmd FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 " Avro files
 	autocmd BufNewFile,BufRead *.avsc setlocal filetype=json	"avro file
 	autocmd BufNewFile,BufRead *.avdl setlocal filetype=idl	"avro file
@@ -846,4 +847,10 @@ augroup END
 
 " }
 
+" plist {
+	" Only enable this setting when creating a new plist file.
+	" If this is not set when creating a new plist file an error will occur
+	" and the new file will not be saved.
+	" let g:plist_save_format = 'xml'
+" }
 " vim:tw=78:ts=4:sw=4:norl:
