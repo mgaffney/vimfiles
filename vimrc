@@ -176,8 +176,9 @@
 	" }
 	" Python {
 		" Plug 'xieyu/pyclewn'
-		Plug 'tmhedberg/SimpylFold'
+		" Plug 'tmhedberg/SimpylFold'
 		Plug 'vim-scripts/indentpython.vim'
+		Plug 'davidhalter/jedi-vim'
 	" }
 	" Protobuf {
 		Plug 'uarun/vim-protobuf'
@@ -195,7 +196,7 @@
 " ConfigPlugins {
 "   Python {
 		" show the docstrings for folded code
-		let g:SimpylFold_docstring_preview=1
+		" let g:SimpylFold_docstring_preview=1
 "   }
 " 	Ack {
 		if executable('rg')
