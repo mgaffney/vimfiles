@@ -194,15 +194,18 @@
 " }
 
 " ConfigPlugins {
-"   Python {
+   " Python {
 		" show the docstrings for folded code
 		" let g:SimpylFold_docstring_preview=1
-"   }
-" 	Ack {
+   " }
+ 	" Ack {
 		if executable('rg')
 		  let g:ackprg = 'rg --vimgrep --no-heading'
 		endif
-" 	}
+ 	" }
+	" Markdown {
+		let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'go']
+ 	" }
 	" Git {
 		" tpope/vim-fugitive
 		nnoremap gst :Gstatus<CR>
