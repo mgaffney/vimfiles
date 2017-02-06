@@ -205,6 +205,7 @@
  	" }
 	" Markdown {
 		let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'go']
+		let g:markdown_syntax_conceal = 0
  	" }
 	" Git {
 		" tpope/vim-fugitive
@@ -296,6 +297,10 @@
 	" }
 	" StatusLine {
 		" vim-airline
+		"
+		if !exists('g:airline_symbols')
+			let g:airline_symbols = {}
+		endif
 		let g:airline_powerline_fonts=1
 		let g:airline#extensions#hunks#enabled = 0
 		let g:airline#extensions#tabline#enabled = 0
@@ -305,9 +310,24 @@
 		" let g:airline#extensions#tabline#fnamemod = ':t'
 		let g:airline#extensions#bufferline#enabled = 0
 		let g:airline#extensions#whitespace#enabled = 0
-		let g:airline#extensions#wordcount#enabled = 0
-		let g:airline_symbols = get(g:,'airline_symbols',{})
-		let g:airline_symbols.maxlinenr = ''
+		let g:airline#extensions#wordcount#enabled = 1
+		" let g:airline_symbols = get(g:,'airline_symbols',{})
+
+		" let g:airline_symbols.notexists = '∄'
+		" let g:airline_symbols.notexists = '∌'
+		" let g:airline_symbols.notexists = '෴'
+		" let g:airline_symbols.notexists = '︴'
+		" let g:airline_symbols.notexists = '☁'
+		" let g:airline_symbols.notexists = '☢'
+		" let g:airline_symbols.notexists = '☣'
+		" let g:airline_symbols.notexists = '⚠ '
+		" let g:airline_symbols.notexists = '⚡'
+		" let g:airline_symbols.notexists = '☠'
+		" let g:airline_symbols.notexists = '♿'
+		" let g:airline_symbols.notexists = '♲'
+		" let g:airline_symbols.notexists = '⚛'
+		" let g:airline_symbols.notexists = '𓂀'
+		" let g:airline_symbols.notexists = '𓀐' 𓀑
 		if exists('$TMUX')
 			let g:airline#extensions#tmuxline#enabled = 0
 		endif
@@ -711,6 +731,8 @@ augroup END
 		"set guifont=Consolas:h13
 		" set guifont=Sauce\ Code\ Powerline\ Plus\ Nerd\ File\ Types\ Mono\ Plus\ Font\ Awesome\ Plus\ Octicons\ Plus\ Pomicons:h12
 		set guifont=Source\ Code\ Pro\ for\ Powerline:h12
+		" set guifontwide=SauceCodePro\ Nerd\ Font:h12
+		set guifontwide=Menlo\ for\ Powerline:h12
 		" set guifont=Source\ Code\ Pro\ for\ Powerline:h14
 		" set guifont=Source\ Code\ Pro\ Light:h12	  " Retina Display Setting
 		set background=light
