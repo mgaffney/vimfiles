@@ -207,6 +207,11 @@
 		let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'go']
 		let g:markdown_syntax_conceal = 0
  	" }
+	" better-whitespace {
+		" Defaults
+		" let g:better_whitespace_filetypes_blacklist=['diff', 'gitcommit', 'unite', 'qf', 'help', 'markdown']
+		let g:better_whitespace_filetypes_blacklist=['diff', 'gitcommit', 'unite', 'qf', 'help']
+ 	" }
 	" Git {
 		" tpope/vim-fugitive
 		nnoremap gst :Gstatus<CR>
@@ -304,14 +309,37 @@
 		let g:airline_powerline_fonts=1
 		let g:airline#extensions#hunks#enabled = 0
 		let g:airline#extensions#tabline#enabled = 0
-		let g:airline#extensions#tabline#show_buffers = 0
+		" let g:airline#extensions#tabline#show_buffers = 0
 		" let g:airline#extensions#tabline#fnamemod = ':p:.'
-		let g:airline#extensions#tabline#fnamemod = ':p:t'
+		" let g:airline#extensions#tabline#fnamemod = ':p:t'
 		" let g:airline#extensions#tabline#fnamemod = ':t'
 		let g:airline#extensions#bufferline#enabled = 0
 		let g:airline#extensions#whitespace#enabled = 0
 		let g:airline#extensions#wordcount#enabled = 1
 		" let g:airline_symbols = get(g:,'airline_symbols',{})
+
+		" f030 
+		" let g:airline#extensions#obsession#indicator_text = ''
+		let g:airline#extensions#obsession#indicator_text = ''
+
+		" f059
+		" let g:airline_symbols.notexists = ''
+		" e205
+		" let g:airline_symbols.notexists = ''
+		" e249
+		" let g:airline_symbols.notexists = ''
+		" e238
+		" let g:airline_symbols.notexists = ' '
+		" let g:airline_symbols.notexists = ' '
+		" let g:airline_symbols.notexists = ' '
+		" let g:airline_symbols.notexists = ' '
+		" let g:airline_symbols.notexists = ' '
+		" let g:airline_symbols.notexists = ' '
+		let g:airline_symbols.notexists = ' '
+		" let g:airline_symbols.notexists = ' '
+		" let g:airline_symbols.notexists = ' '
+		" let g:airline_symbols.notexists = ' '
+		" let g:airline_symbols.notexists = ' '
 
 		" let g:airline_symbols.notexists = '∄'
 		" let g:airline_symbols.notexists = '∌'
@@ -328,6 +356,39 @@
 		" let g:airline_symbols.notexists = '⚛'
 		" let g:airline_symbols.notexists = '𓂀'
 		" let g:airline_symbols.notexists = '𓀐' 𓀑
+
+		let g:airline_left_sep = ''
+		" let g:airline_left_sep = ''
+		" let g:airline_left_sep = ''
+		" 2589 left seven eights
+		" let g:airline_left_sep = '▉'
+		" 258a
+		" let g:airline_left_sep = '▊'
+		" 2009
+		" let g:airline_left_sep = ''
+		" let g:airline_left_alt_sep = ''
+		" let g:airline_left_alt_sep = ''
+		let g:airline_right_sep = ''
+		" 2009 thin space
+		" let g:airline_right_sep = ' '
+		" 239f right parenthesis extension
+		" let g:airline_right_sep = '⎟'
+		" 2595 right one eight block
+		" let g:airline_right_sep = '▕'
+		" 23a5 right square bracket extension
+		" let g:airline_right_sep = '⎥'
+		" 258f left one eight block
+		" let g:airline_right_sep = '▏'
+		" 2589 left seven eights
+		" let g:airline_right_sep = '▉'
+		" let g:airline_left_sep = "\uE0B4"
+		" let g:airline_right_sep = "\uE0B6"
+		" let g:airline_right_sep = ''
+		let g:airline_right_alt_sep = ''
+		let g:airline_symbols.branch = ''
+		let g:airline_symbols.readonly = ''
+		let g:airline_symbols.linenr = ''
+
 		if exists('$TMUX')
 			let g:airline#extensions#tmuxline#enabled = 0
 		endif
