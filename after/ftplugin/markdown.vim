@@ -21,3 +21,9 @@ setlocal comments+=fb::
 nnoremap <buffer> yit O_<C-R>=tolower(strftime('%l:%M %p'))<CR>_<esc>j
 
 abbr td - [ ]
+abbr arch architecture
+abbr repo repository
+abbr ghi GitHub issue
+abbr gh GitHub
+abbr zf ZeroFOX
+abbr AD Architecture Decisions
