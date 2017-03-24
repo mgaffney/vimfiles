@@ -27,8 +27,8 @@
 	" }
 	" Completion {
 		" Plug 'Valloric/YouCompleteMe'
-		" Plug 'ervandew/supertab'
-		Plug 'maralla/completor.vim'
+		Plug 'ervandew/supertab'
+		" Plug 'maralla/completor.vim'
 	" }
 	" Snips {
 		Plug 'SirVer/ultisnips'
@@ -258,12 +258,12 @@
 	" }
 	" Completion {
 		"SuperTab
-		" let g:SuperTabDefaultCompletionType = "context"
-		" let g:SuperTabClosePreviewOnPopupClose = 1
-		" let g:SuperTabLongestHighlight = 1
+		let g:SuperTabDefaultCompletionType = "context"
+		let g:SuperTabClosePreviewOnPopupClose = 1
+		let g:SuperTabLongestHighlight = 1
 		" completor
-		let g:completor_gocode_binary = '/Users/mike/sandbox/go-workspace/bin/gocode'
-		let g:completor_blacklist = ['tagbar', 'qf', 'netrw', 'unite', 'vimwiki', 'markdown']
+		" let g:completor_gocode_binary = '/Users/mike/sandbox/go-workspace/bin/gocode'
+		" let g:completor_blacklist = ['tagbar', 'qf', 'netrw', 'unite', 'vimwiki', 'markdown']
 	" }
 	" Snips {
 		" ultisnips
