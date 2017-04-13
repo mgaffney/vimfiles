@@ -3,6 +3,8 @@ setlocal tabstop=4
 setlocal shiftwidth=4
 setlocal nowrap
 setlocal textwidth=80
+setlocal formatoptions+=r
+setlocal formatoptions+=o
 
 " Mappings for vim-go bundle
 
@@ -58,7 +60,7 @@ let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 let g:go_fmt_command = "goimports"
 
 " This experimental mode is superior to the current mode as it fully saves the
-" undo history, so undo/redo doesn't break. 
+" undo history, so undo/redo doesn't break.
 let g:go_fmt_experimental = 1
 
 " Enable highlighting
