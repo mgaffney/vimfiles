@@ -207,6 +207,9 @@
 	" Markdown {
 		let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'go', 'json', 'javascript']
 		let g:markdown_syntax_conceal = 0
+
+		" Turn folding on for markdown files
+		let g:markdown_folding = 1
  	" }
 	" better-whitespace {
 		" Defaults
