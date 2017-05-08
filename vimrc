@@ -197,11 +197,11 @@
 " }
 
 " ConfigPlugins {
-   " Python {
+	" Python {
 		" show the docstrings for folded code
 		" let g:SimpylFold_docstring_preview=1
-   " }
- 	" Ack {
+	" }
+	" Ack {
 		if executable('rg')
 		  let g:ackprg = 'rg --vimgrep --no-heading'
 		endif
@@ -226,7 +226,7 @@
 		" let g:better_whitespace_filetypes_blacklist=['diff', 'gitcommit', 'unite', 'qf', 'help', 'markdown']
 		let g:better_whitespace_filetypes_blacklist=['diff', 'gitcommit', 'unite', 'qf', 'help']
 		autocmd FileType markdown,xml,make,sql,sh,python,json,tf,vim autocmd BufEnter <buffer> EnableStripWhitespaceOnSave
- 	" }
+	" }
 	" Git {
 		" tpope/vim-fugitive
 		nnoremap gst :Gstatus<CR>
@@ -938,7 +938,7 @@ augroup END
 	"   \   <bang>0 ? fzf#vim#with_preview('up:60%')
 	"   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
 	"   \   <bang>0)
-    "
+	"
 	" let g:fzf_files_options =
 	"   \ '--preview "(highlight -O ansi {} || cat {}) 2> /dev/null | head -'.&lines.'"'
 	"
