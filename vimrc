@@ -149,7 +149,9 @@
 		" Plug 'derekwyatt/vim-scala'
 	" }
 	" Markdown {
-		Plug 'tpope/vim-markdown'
+		Plug 'godlygeek/tabular' " must come before 'plasticboy/vim-markdown'
+		Plug 'plasticboy/vim-markdown'
+		" Plug 'tpope/vim-markdown'
 		" Plug 'jtratner/vim-flavored-markdown'
 	" }
 	" Pig {
@@ -203,14 +205,22 @@
 		if executable('rg')
 		  let g:ackprg = 'rg --vimgrep --no-heading'
 		endif
- 	" }
-	" Markdown {
-		let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'go', 'json', 'javascript']
-		let g:markdown_syntax_conceal = 0
+	" }
+	" Markdown (tpope plugin) {
+		" let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'go', 'json', 'javascript']
+		" let g:markdown_syntax_conceal = 0
 
 		" Turn folding on for markdown files
-		let g:markdown_folding = 1
- 	" }
+		" let g:markdown_folding = 1
+	" }
+	" Markdown (plasticboy) {
+		let g:vim_markdown_fenced_languages = ['html', 'python', 'bash=sh', 'go', 'json', 'javascript']
+		let g:vim_markdown_syntax_conceal = 0
+
+		" Turn folding on for markdown files
+		" let g:vim_markdown_folding = 1
+		let g:vim_markdown_folding_style_pythonic = 1
+	" }
 	" better-whitespace {
 		" Defaults
 		" let g:better_whitespace_filetypes_blacklist=['diff', 'gitcommit', 'unite', 'qf', 'help', 'markdown']
