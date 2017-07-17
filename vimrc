@@ -149,9 +149,9 @@
 		" Plug 'derekwyatt/vim-scala'
 	" }
 	" Markdown {
-		Plug 'godlygeek/tabular' " must come before 'plasticboy/vim-markdown'
-		Plug 'plasticboy/vim-markdown'
-		" Plug 'tpope/vim-markdown'
+		" Plug 'godlygeek/tabular' " must come before 'plasticboy/vim-markdown'
+		" Plug 'plasticboy/vim-markdown'
+		Plug 'tpope/vim-markdown'
 		" Plug 'jtratner/vim-flavored-markdown'
 	" }
 	" Pig {
