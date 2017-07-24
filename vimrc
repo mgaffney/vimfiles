@@ -154,6 +154,9 @@
 		Plug 'tpope/vim-markdown'
 		" Plug 'jtratner/vim-flavored-markdown'
 	" }
+	" AsciiDoc {
+		Plug 'dahu/vim-asciidoc'
+	" }
 	" Pig {
 		" Plug 'motus/pig.vim'
 	" }
