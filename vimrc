@@ -155,7 +155,9 @@
 		" Plug 'jtratner/vim-flavored-markdown'
 	" }
 	" AsciiDoc {
-		Plug 'dahu/vim-asciidoc'
+		" Plug 'dahu/vim-asciidoc'
+		" Plug 'traycerb/asciidoc-vim'
+		Plug 'mgaffney/asciidoc-vim'
 	" }
 	" Pig {
 		" Plug 'motus/pig.vim'
