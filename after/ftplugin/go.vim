@@ -61,18 +61,18 @@ let g:go_fmt_command = "goimports"
 
 " This experimental mode is superior to the current mode as it fully saves the
 " undo history, so undo/redo doesn't break.
-let g:go_fmt_experimental = 1
+" let g:go_fmt_experimental = 1
 
 " Enable highlighting
 " let g:go_highlight_operators = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_interfaces = 1
+" let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
 let g:go_highlight_build_constraints = 1
 
-let g:go_dispatch_enabled = 1
-let g:go_auto_type_info = 1  " this doesn't seem to work so turn it off
+" let g:go_dispatch_enabled = 1
+" let g:go_auto_type_info = 1  " this doesn't seem to work so turn it off
 
 " let g:go_oracle_scope = ''
 
