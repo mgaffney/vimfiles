@@ -230,7 +230,7 @@
 		" Defaults
 		" let g:better_whitespace_filetypes_blacklist=['diff', 'gitcommit', 'unite', 'qf', 'help', 'markdown']
 		let g:better_whitespace_filetypes_blacklist=['diff', 'gitcommit', 'unite', 'qf', 'help']
-		autocmd FileType markdown,xml,make,sql,sh,python,json,tf,vim autocmd BufEnter <buffer> EnableStripWhitespaceOnSave
+		autocmd FileType markdown,xml,make,sql,sh,python,json,tf,vim,asciidoc autocmd BufEnter <buffer> EnableStripWhitespaceOnSave
 	" }
 	" Git {
 		" tpope/vim-fugitive
