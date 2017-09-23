@@ -79,7 +79,7 @@
 		Plug 'kshenoy/vim-signature'
 	" }
 	" Syntax {
-		Plug 'scrooloose/syntastic'
+		" Plug 'scrooloose/syntastic'
 	" }
 	" Tags {
 		" Plug 'vim-scripts/taglist.vim'
@@ -229,7 +229,7 @@
 	" better-whitespace {
 		" Defaults
 		" let g:better_whitespace_filetypes_blacklist=['diff', 'gitcommit', 'unite', 'qf', 'help', 'markdown']
-		let g:better_whitespace_filetypes_blacklist=['diff', 'gitcommit', 'unite', 'qf', 'help']
+		let g:better_whitespace_filetypes_blacklist=['diff', 'gitcommit', 'unite', 'qf', 'help', 'html']
 		autocmd FileType markdown,xml,make,sql,sh,python,json,tf,vim,asciidoc autocmd BufEnter <buffer> EnableStripWhitespaceOnSave
 	" }
 	" Git {
@@ -438,8 +438,10 @@
 		" let g:syntastic_html_tidy_exec = 'tidy5'
 		" use jshint
 		let g:syntastic_javascript_checkers = ['jshint']
+		let g:syntastic_shell = '/usr/local/bin/zsh'
 		let g:syntastic_sh_checkers=['shellcheck']
 		let g:syntastic_sh_shellcheck_args = '-x -s bash'
+		let g:syntastic_ignore_files = ['\m^/usr/include/', '\m\c\.html$']
 	" }
 	" Golang {
 		" this must be in vimrc file to work
