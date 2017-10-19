@@ -41,7 +41,8 @@
 			Plug 'mileszs/ack.vim'
 			Plug 'jremmen/vim-ripgrep'
 		" endif
-		Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+		" Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+		Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 	" }
 	" TextObjects {
 		" Plug 'kana/vim-textobj-user'
