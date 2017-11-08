@@ -883,6 +883,7 @@ augroup fileconfigs
 
 	autocmd BufNewFile,BufRead *.ctmpl setlocal filetype=gotexttmpl
 	autocmd BufNewFile,BufRead *.sh.tpl setlocal filetype=gotexttmpl
+	autocmd BufNewFile,BufRead *.gv setlocal filetype=dot
 	" autocmd BufNewFile,BufRead *.
 augroup END
 " }
