@@ -1,5 +1,7 @@
 # Snippets for Go
 
+priority -10
+
 snippet ipa "Get External IP address" b
 
 $0// externalIP returns the external ip address of the machine the process is
@@ -158,6 +160,13 @@ endsnippet
 # else snippet
 snippet else
 else {
+	${0:${VISUAL}}
+}
+endsnippet
+
+# if inline error
+snippet ife "If with inline erro"
+if err := ${1:condition}; err != nil {
 	${0:${VISUAL}}
 }
 endsnippet
@@ -468,6 +477,5 @@ def closing_par(snip, pos):
 		snip.rv = ""
 
 endglobal
-
 
 # vim:ft=snippets:
