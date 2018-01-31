@@ -39,10 +39,13 @@
 			" Plug 'rking/ag.vim'
 		" elseif executable('ack')
 			Plug 'mileszs/ack.vim'
-			Plug 'jremmen/vim-ripgrep'
+			" Plug 'jremmen/vim-ripgrep'
 		" endif
 		" Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
-		Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+		" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+		Plug '/usr/local/opt/fzf'
+		Plug 'junegunn/fzf.vim'
+		Plug 'mhinz/vim-grepper'
 	" }
 	" TextObjects {
 		" Plug 'kana/vim-textobj-user'
@@ -207,9 +210,20 @@
 		" show the docstrings for folded code
 		" let g:SimpylFold_docstring_preview=1
 	" }
-	" Ack {
+	" Grepper {
+		let g:grepper = {}
+		let g:grepper.tools = ['grep', 'git', 'rg']
+		" Search for the current word
+		nnoremap <Leader>* :Grepper -cword -noprompt<CR>
+		" Search for the current selection
+		nmap gs <plug>(GrepperOperator)
+		xmap gs <plug>(GrepperOperator)
+	" }
+	" Ack and ripgrep {
 		if executable('rg')
-		  let g:ackprg = 'rg --vimgrep --no-heading'
+			let g:ackprg = 'rg -S --no-heading --vimgrep'
+		elseif executable('ag')
+			let g:ackprg = 'ag --vimgrep'
 		endif
 	" }
 	" Markdown (tpope plugin) {
@@ -847,6 +861,12 @@ augroup END
 		set guioptions-=T	" remove the toolbar
 		"set lines=40		" 40 lines of text instead of 24,
 	else
+
+		hi SpellBad term=underline cterm=underline
+		hi SpellCap term=underline cterm=underline
+		hi SpellRare term=underline cterm=underline
+		hi SpellLocal term=underline cterm=underline
+
 		" set term=builtin_ansi	" Make arrow and other keys work
 		" let g:solarized_termcolors=256
 		" let g:solarized_termtrans=1
@@ -949,23 +969,25 @@ augroup END
 " }
 
 " ripgrep {
-	if executable("rg")
-		set grepprg=rg\ --vimgrep\ --no-heading
-		set grepformat=%f:%l:%c:%m,%f:%l:%m
-	endif
+	" if executable("rg")
+		" set grepprg=rg\ --vimgrep\ --no-heading
+		" set grepformat=%f:%l:%c:%m,%f:%l:%m
+		" from https://github.com/BurntSushi/ripgrep/blob/master/doc/rg.1.md
+		" set grepformat^=%f:%l:%c:%m
+	" endif
 " }
 
 " fzf {
 " Similarly, we can apply it to fzf#vim#grep. To use ripgrep instead of ag:
-	" command! -bang -nargs=* Rg
-	"   \ call fzf#vim#grep(
-	"   \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
-	"   \   <bang>0 ? fzf#vim#with_preview('up:60%')
-	"   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-	"   \   <bang>0)
-	"
-	" let g:fzf_files_options =
-	"   \ '--preview "(highlight -O ansi {} || cat {}) 2> /dev/null | head -'.&lines.'"'
+	command! -bang -nargs=* Rg
+		\ call fzf#vim#grep(
+		\   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+		\   <bang>0 ? fzf#vim#with_preview('up:60%')
+		\           : fzf#vim#with_preview('right:50%:hidden', '?'),
+		\   <bang>0)
+
+	let g:fzf_files_options =
+		\ '--preview "(highlight -O ansi {} || cat {}) 2> /dev/null | head -'.&lines.'"'
 	"
 	" --column: Show column number
 	" --line-number: Show line number
@@ -977,9 +999,9 @@ augroup END
 	" --follow: Follow symlinks
 	" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
 	" --color: Search color options
-	" command! -bang -nargs=* Find
-	" 	\ call fzf#vim#grep(
-	" 	\ 'rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color=always '.shellescape(<q-args>), 1, <bang>0)
+	command! -bang -nargs=* Find
+		\ call fzf#vim#grep(
+		\ 'rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color=always '.shellescape(<q-args>), 1, <bang>0)
 
 " }
 
