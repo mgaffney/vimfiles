@@ -59,6 +59,9 @@
 	" Whitespace {
 		Plug 'ntpeters/vim-better-whitespace'
 	" }
+	" Man pages {
+		" Plug 'lambdalisue/vim-manpager'
+	" }
 	" VimHelpers {
 		Plug 'tpope/vim-sensible'
 		Plug 'tpope/vim-surround'
