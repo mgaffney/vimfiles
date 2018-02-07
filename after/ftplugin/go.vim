@@ -63,6 +63,9 @@ let g:go_fmt_command = "goimports"
 " undo history, so undo/redo doesn't break.
 " let g:go_fmt_experimental = 1
 
+" Always use a new buffer when looking up a definition/declaration
+let g:go_def_reuse_buffer = 0
+
 " Enable highlighting
 " let g:go_highlight_operators = 1
 let g:go_highlight_functions = 1
