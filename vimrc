@@ -19,6 +19,9 @@
 			" Plug 'edkolev/tmuxline.vim'
 		endif
 	" }
+	" Distraction Free Writing {
+		Plug 'junegunn/goyo.vim'
+	" }
 	" TextAlignment {
 		Plug 'junegunn/vim-easy-align'
 	" }
