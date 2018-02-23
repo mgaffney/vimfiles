@@ -21,6 +21,7 @@
 	" }
 	" Distraction Free Writing {
 		Plug 'junegunn/goyo.vim'
+		Plug 'junegunn/limelight.vim'
 	" }
 	" TextAlignment {
 		Plug 'junegunn/vim-easy-align'
@@ -253,6 +254,10 @@
 		highlight ExtraWhitespace ctermbg=DarkBlue
 		let g:better_whitespace_filetypes_blacklist=['diff', 'gitcommit', 'unite', 'qf', 'help', 'html']
 		autocmd FileType markdown,xml,make,sql,sh,python,json,tf,vim,asciidoc autocmd BufEnter <buffer> EnableStripWhitespaceOnSave
+	" }
+	" Distraction Free Writing {
+		autocmd! User GoyoEnter Limelight
+		autocmd! User GoyoLeave Limelight!
 	" }
 	" Git {
 		" tpope/vim-fugitive
