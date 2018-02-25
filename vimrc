@@ -9,7 +9,8 @@
 		" Plug 'gregsexton/gitv'
 	" }
 	" Colors {
-		Plug 'mgaffney/vim-colors-solarized'
+		" Plug 'mgaffney/vim-colors-solarized'
+		Plug 'lifepillar/vim-solarized8'
 	" }
 	" tmux {
 		if exists('$TMUX')
@@ -213,6 +214,9 @@
 " }
 
 " ConfigPlugins {
+	" solarized {
+		let g:solarized_term_italics = 1
+	" }
 	" Python {
 		" show the docstrings for folded code
 		" let g:SimpylFold_docstring_preview=1
@@ -256,6 +260,14 @@
 		autocmd FileType markdown,xml,make,sql,sh,python,json,tf,vim,asciidoc autocmd BufEnter <buffer> EnableStripWhitespaceOnSave
 	" }
 	" Distraction Free Writing {
+
+		if &background == 'dark'
+			let g:limelight_conceal_ctermfg = 245  " Solarized Base1
+			let g:limelight_conceal_guifg = '#8a8a8a'  " Solarized Base1
+		else
+			let g:limelight_conceal_ctermfg = 245  " Solarized Base1
+			let g:limelight_conceal_guifg = '#8a8a8a'  " Solarized Base1
+		endif
 		autocmd! User GoyoEnter Limelight
 		autocmd! User GoyoLeave Limelight!
 	" }
@@ -514,8 +526,16 @@
 " }
 
 " Vim UI {
-	colorscheme solarized
+	" colorscheme solarized
+	colorscheme solarized8
 	set showmode					" display the current mode
+
+	" Enable True Color support if you have vim >=8.0 or Neovim >= 0.1.5
+	if (has("termguicolors"))
+		let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+		let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+		set termguicolors
+	endif
 
 	if has("balloon_eval") && has("unix")
 		set ballooneval
@@ -714,7 +734,7 @@
 
 	" Toggle background between dark and light
 	" map <F2> :call ToggleBg()<CR>
-	call togglebg#map("<F2>")
+	" call togglebg#map("<F2>")
 
 	" Make program
 	nnoremap <F5> :w<CR> :make<CR>
