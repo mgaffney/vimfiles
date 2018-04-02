@@ -54,7 +54,8 @@
 	" }
 	" TextObjects {
 		" Plug 'kana/vim-textobj-user'
-		Plug 'unblevable/quick-scope'
+		" Plug 'unblevable/quick-scope'
+		Plug 'bradford-smith94/quick-scope'
 	" }
 	" StatusLine {
 		"Plug 'bling/vim-airline'
@@ -262,11 +263,11 @@
 	" Distraction Free Writing {
 
 		if &background == 'dark'
-			let g:limelight_conceal_ctermfg = 245  " Solarized Base1
-			let g:limelight_conceal_guifg = '#8a8a8a'  " Solarized Base1
+			" let g:limelight_conceal_ctermfg = 245  " Solarized Base1
+			" let g:limelight_conceal_guifg = '#8a8a8a'  " Solarized Base1
 		else
-			let g:limelight_conceal_ctermfg = 245  " Solarized Base1
-			let g:limelight_conceal_guifg = '#8a8a8a'  " Solarized Base1
+			" let g:limelight_conceal_ctermfg = 245  " Solarized Base1
+			" let g:limelight_conceal_guifg = '#8a8a8a'  " Solarized Base1
 		endif
 		autocmd! User GoyoEnter Limelight
 		autocmd! User GoyoLeave Limelight!
