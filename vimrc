@@ -4,7 +4,7 @@
 		Plug 'tpope/vim-git'
 		Plug 'tpope/vim-fugitive'
 		Plug 'junegunn/gv.vim'
-		" Plug 'tpope/vim-rhubarb'
+		Plug 'tpope/vim-rhubarb'
 		" Plug 'airblade/vim-gitgutter'
 		" Plug 'gregsexton/gitv'
 	" }
