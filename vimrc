@@ -13,6 +13,9 @@
 		Plug 'lifepillar/vim-solarized8'
 	" }
 	" tmux {
+		Plug 'tpope/vim-speeddating'
+	" }
+	" tmux {
 		if exists('$TMUX')
 			Plug 'christoomey/vim-tmux-navigator'
 			Plug 'tmux-plugins/vim-tmux'
