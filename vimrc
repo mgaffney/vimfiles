@@ -194,15 +194,15 @@
 		Plug 'hashivim/vim-vaultproject'
 		Plug 'hashivim/vim-vagrant'
 		Plug 'hashivim/vim-packer'
-		Plug 'hashivim/vim-ottoproject'
+		" Plug 'hashivim/vim-ottoproject'
 		Plug 'hashivim/vim-consul'
 		Plug 'hashivim/vim-nomadproject'
 	" }
 	" Python {
 		" Plug 'xieyu/pyclewn'
 		" Plug 'tmhedberg/SimpylFold'
-		Plug 'vim-scripts/indentpython.vim'
-		Plug 'davidhalter/jedi-vim'
+		" Plug 'vim-scripts/indentpython.vim'
+		" Plug 'davidhalter/jedi-vim'
 	" }
 	" Protobuf {
 		Plug 'uarun/vim-protobuf'
