@@ -139,7 +139,7 @@
 		"" Plug 'kennethzfeng/vim-raml'
 		"" Plug 'tpope/vim-jdaddy'
 		"Plug 'othree/yajs.vim'
-		"Plug 'elzr/vim-json'
+		Plug 'elzr/vim-json'
 	" }
 	" TypeScript {
 		Plug 'leafgarland/typescript-vim'
@@ -240,6 +240,9 @@
 		elseif executable('ag')
 			let g:ackprg = 'ag --vimgrep'
 		endif
+	" }
+	" elzr/vim-json {
+		let g:vim_json_syntax_conceal = 0
 	" }
 	" Markdown (tpope plugin) {
 		" let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'go', 'json', 'javascript']
