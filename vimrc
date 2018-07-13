@@ -740,7 +740,7 @@
 	inoremap \zs <C-R>=strftime("%A %B %e, %Y • %l.%M %p")<CR>
 
 	" Toggle background between dark and light
-	" map <F2> :call ToggleBg()<CR>
+	map <F2> :call ToggleBg()<CR>
 	" call togglebg#map("<F2>")
 
 	" Make program
