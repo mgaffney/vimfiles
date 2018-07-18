@@ -227,12 +227,15 @@
 	" }
 	" Grepper {
 		let g:grepper = {}
-		let g:grepper.tools = ['grep', 'git', 'rg']
+		let g:grepper.tools = ['ag', 'git', 'grep', 'rg']
 		" Search for the current word
 		nnoremap <Leader>* :Grepper -cword -noprompt<CR>
+		" Open Grepper-prompt for a particular grep-alike tool
+		nnoremap <Leader>g :Grepper -tool ag<CR>
 		" Search for the current selection
 		nmap gs <plug>(GrepperOperator)
 		xmap gs <plug>(GrepperOperator)
+
 	" }
 	" Ack and ripgrep {
 		if executable('rg')
