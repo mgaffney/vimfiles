@@ -2,7 +2,7 @@ setlocal noexpandtab
 setlocal tabstop=4
 setlocal shiftwidth=4
 setlocal nowrap
-setlocal textwidth=80
+setlocal textwidth=75
 setlocal formatoptions+=r
 setlocal formatoptions+=o
 
