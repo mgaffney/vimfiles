@@ -111,7 +111,7 @@
 		Plug 'darfink/vim-plist'
 	" }
 	" Golang {
-		Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+		Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 		" Plug 'cespare/vim-go-templates'
 	" }
 	" Docker {
