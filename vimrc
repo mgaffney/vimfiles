@@ -190,13 +190,15 @@
 	" }
 	" HashicorpTools {
 		Plug 'fatih/vim-hclfmt'
-		Plug 'hashivim/vim-terraform'
-		Plug 'hashivim/vim-vaultproject'
-		Plug 'hashivim/vim-vagrant'
-		Plug 'hashivim/vim-packer'
+		Plug 'hashivim/vim-hashicorp-tools'
+		Plug 'b4b4r07/vim-hcl'
+		" Plug 'hashivim/vim-terraform'
+		" Plug 'hashivim/vim-vaultproject'
+		" Plug 'hashivim/vim-vagrant'
+		" Plug 'hashivim/vim-packer'
 		" Plug 'hashivim/vim-ottoproject'
-		Plug 'hashivim/vim-consul'
-		Plug 'hashivim/vim-nomadproject'
+		" Plug 'hashivim/vim-consul'
+		" Plug 'hashivim/vim-nomadproject'
 	" }
 	" Python {
 		" Plug 'xieyu/pyclewn'
