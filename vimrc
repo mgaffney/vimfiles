@@ -227,7 +227,7 @@
 	" }
 	" Grepper {
 		let g:grepper = {}
-		let g:grepper.tools = ['ag', 'git', 'grep', 'rg']
+		let g:grepper.tools = ['rg', 'git', 'grep', 'ag']
 		" Search for the current word
 		nnoremap <Leader>* :Grepper -cword -noprompt<CR>
 		" Open Grepper-prompt for a particular grep-alike tool
