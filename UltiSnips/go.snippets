@@ -1,7 +1,5 @@
 # Snippets for Go
 
-priority -10
-
 snippet ipa "Get External IP address" b
 
 $0// externalIP returns the external ip address of the machine the process is
@@ -41,6 +39,20 @@ func externalIP() (string, error) {
 		}
 	}
 	return "", errors.New("are you connected to the network?")
+}
+endsnippet
+
+snippet testChdir "Test helper for changing dir"
+func testChdir(t *testing.T, dir string) func() {
+	t.Helper()
+	old, err := os.Getwd()
+	if err != nil {
+		t.Fatalf("err: %s", err)
+	}
+	if err := os.Chdir(dir); err != nil {
+		t.Fatalf("err: %s", err)
+	}
+	return func() { os.Chdir(old) }
 }
 endsnippet
 
