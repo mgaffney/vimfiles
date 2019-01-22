@@ -27,5 +27,3 @@ iabbr <buffer> arch architecture
 iabbr <buffer> repo repository
 iabbr <buffer> ghi GitHub issue
 iabbr <buffer> gh GitHub
-iabbr <buffer> zf ZeroFOX
-iabbr <buffer> AD Architecture Decisions
