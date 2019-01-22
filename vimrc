@@ -285,7 +285,7 @@
 	" }
 	" Git {
 		" tpope/vim-fugitive
-		nnoremap gst :Gstatus<CR>
+		nnoremap gst :vertical :Gstatus<CR>
 		nnoremap gsl :Glog<CR>
 		nnoremap gsd :Gdiff<CR>
 		nnoremap gsb :Gblame<CR>
