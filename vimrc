@@ -100,6 +100,7 @@
 	" Tags {
 		" Plug 'vim-scripts/taglist.vim'
 		" Plug 'majutsushi/tagbar'
+		Plug 'ludovicchabant/vim-gutentags'
 	" }
 	" UnixHelpers {
 		Plug 'tpope/vim-eunuch'
@@ -333,6 +334,12 @@
 		" completor
 		" let g:completor_gocode_binary = '/Users/mike/sandbox/go-workspace/bin/gocode'
 		" let g:completor_blacklist = ['tagbar', 'qf', 'netrw', 'unite', 'vimwiki', 'markdown']
+	" }
+	"
+	" Gutentags {
+		let g:gutentags_ctags_tagfile=".tags"
+		let g:gutentags_ctags_exclude=['*.js', '*.html', '*.css', '*.json']
+		set tags=".tags"
 	" }
 	" Snips {
 		" ultisnips
