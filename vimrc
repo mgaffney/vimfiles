@@ -95,7 +95,7 @@
 		Plug 'kshenoy/vim-signature'
 	" }
 	" Syntax {
-		" Plug 'scrooloose/syntastic'
+		Plug 'scrooloose/syntastic'
 	" }
 	" Tags {
 		" Plug 'vim-scripts/taglist.vim'
@@ -204,7 +204,7 @@
 		" Plug 'xieyu/pyclewn'
 		" Plug 'tmhedberg/SimpylFold'
 		" Plug 'vim-scripts/indentpython.vim'
-		" Plug 'davidhalter/jedi-vim'
+		Plug 'davidhalter/jedi-vim'
 	" }
 	" Protobuf {
 		Plug 'uarun/vim-protobuf'
@@ -514,7 +514,7 @@
 	" filetype plugin indent on		" load file type plugins + indentation
 	set encoding=utf-8				" The encoding displayed
 	" set fileencoding=utf-8			" The encoding written to a file
-"	scriptencoding utf-8
+	scriptencoding utf-8
 
 	set nojoinspaces 				" One space between sentences not two
 	set shortmess+=filmnrxoOtT		" abbrev. of messages (avoids 'hit enter')
