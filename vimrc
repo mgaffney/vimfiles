@@ -506,6 +506,9 @@
 		" fatih/vim-hclfmt
 		let g:tf_fmt_autosave = 0
 	" }
+	" jedi-vim {
+		let g:jedi#use_splits_not_buffers = "right"
+	" }
 " }
 
 " General {
@@ -608,7 +611,7 @@
 " }
 
 " Formatting {
-"	set nowrap				" do not wrap long lines
+	set nowrap				" do not wrap long lines
 	set autoindent			" indent at the same level of the previous line
 "	set shiftwidth=4		" use indents of 4 spaces
 	set noexpandtab			" tabs are tabs not spaces
