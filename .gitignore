@@ -26,3 +26,5 @@ temp/
 plugged/
 *.old
 autoload/
+
+memo/
