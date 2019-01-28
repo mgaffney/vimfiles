@@ -99,7 +99,7 @@
 	" }
 	" Tags {
 		" Plug 'vim-scripts/taglist.vim'
-		" Plug 'majutsushi/tagbar'
+		Plug 'majutsushi/tagbar'
 		Plug 'ludovicchabant/vim-gutentags'
 	" }
 	" UnixHelpers {
