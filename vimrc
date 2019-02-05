@@ -695,6 +695,10 @@
 	vnoremap J :m '>+1<CR>gv=gv
 	vnoremap K :m '<-2<CR>gv=gv
 
+	" Easier visual indent
+	vnoremap < <gv
+	vnoremap > >gv
+
 	" :Reg - Display the numbered registers, press a key and paste it to the buffer.
 	function! Reg()
 		reg
