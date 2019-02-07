@@ -115,6 +115,9 @@
 		Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 		" Plug 'cespare/vim-go-templates'
 	" }
+	" Database {
+		Plug 'tpope/vim-dadbod'
+	" }
 	" Docker {
 		" Plug 'honza/dockerfile.vim'
 		Plug 'ekalinin/Dockerfile.vim'
