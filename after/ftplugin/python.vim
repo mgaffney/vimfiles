@@ -30,6 +30,8 @@ function! JediToggle()
 endfunction
 noremap <leader>c :call JediToggle()<CR>
 
+nmap gd :call jedi#goto()<CR>
+
 " snips
 let g:ultisnips_python_style = "google"
 
