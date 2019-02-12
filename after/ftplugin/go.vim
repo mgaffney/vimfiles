@@ -10,44 +10,43 @@ setlocal formatoptions+=o
 
 " Show a list of interfaces which is implemented by the type under your cursor
 " with <leader>gh (think 'go hierarchy')
-au FileType go nmap <Leader>s <Plug>(go-implements)
+nmap <Leader>s <Plug>(go-implements)
 " Open the relevant Godoc for the word under the cursor with <leader>gd
-au FileType go nmap <Leader>gd <Plug>(go-doc-vertical)
+nmap <Leader>gd <Plug>(go-doc-vertical)
 " open it vertically with <leader>gv
-" au FileType go nmap <Leader>gdv <Plug>(go-doc-vertical)
+" nmap <Leader>gdv <Plug>(go-doc-vertical)
 " open it in a new tab with <leader>gt
-au FileType go nmap <Leader>gdt <Plug>(go-doc-tab)
+nmap <Leader>gdt <Plug>(go-doc-tab)
 " open the Godoc in browser
-au FileType go nmap <Leader>gdb <Plug>(go-doc-browser)
+nmap <Leader>gdb <Plug>(go-doc-browser)
 
 " Run commands, such as go run with <leader>r for the current file or go build
 " and go test for the current package with <leader>b and <leader>t. Display a
 " beautiful annotated source code to see which functions are covered with
 " <leader>c.
-au FileType go nmap <leader>r <Plug>(go-run)
-au FileType go nmap <leader>b <Plug>(go-build)
-au FileType go nmap <leader>i <Plug>(go-install)
-au FileType go nmap <leader>t <Plug>(go-test)
-au FileType go nmap <leader>c <Plug>(go-coverage-browser)
-au FileType go nmap <leader>v <Plug>(go-vet)
-au FileType go nmap <leader>l :GoLint<CR>
-
+nmap <leader>r <Plug>(go-run)
+nmap <leader>b <Plug>(go-build)
+nmap <leader>i <Plug>(go-install)
+nmap <leader>t <Plug>(go-test)
+nmap <leader>c <Plug>(go-coverage-browser)
+nmap <leader>v <Plug>(go-vet)
+nmap <leader>l :GoLint<CR>
 
 " By default the mapping gd is enabled which opens the target identifier in
 " current buffer. You can also open the definition/declaration in a new
 " vertical, horizontal or tab for the word under your cursor:
 
-" au FileType go nmap gd <Plug>(go-def-vertical)
-au FileType go nmap <Leader>ds <Plug>(go-def-split)
-au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
-au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+" nmap gd <Plug>(go-def-vertical)
+nmap <Leader>ds <Plug>(go-def-split)
+nmap <Leader>dv <Plug>(go-def-vertical)
+nmap <Leader>dt <Plug>(go-def-tab)
 
 " Rename the identifier under the cursor to a new name
-au FileType go nmap <Leader>e <Plug>(go-rename)
+nmap <Leader>e <Plug>(go-rename)
 
 " Show type info for the word under your cursor with <leader>i (useful if you
 " have disabled auto showing type info via g:go_auto_type_info)
-au FileType go nmap <Leader>i <Plug>(go-info)
+nmap <Leader>i <Plug>(go-info)
 
 " Settings for vim-go bundle
 
