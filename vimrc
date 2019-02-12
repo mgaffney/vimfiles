@@ -274,6 +274,7 @@
 		highlight ExtraWhitespace ctermbg=DarkBlue
 		let g:better_whitespace_filetypes_blacklist=['diff', 'gitcommit', 'unite', 'qf', 'help', 'html']
 		autocmd FileType markdown,xml,make,sql,sh,python,json,tf,vim,asciidoc autocmd BufEnter <buffer> EnableStripWhitespaceOnSave
+		let g:strip_whitespace_confirm = 0
 	" }
 	" Distraction Free Writing {
 
@@ -286,6 +287,7 @@
 		endif
 		autocmd! User GoyoEnter Limelight
 		autocmd! User GoyoLeave Limelight!
+		noremap <leader>z :silent! Goyo<CR>
 	" }
 	" Git {
 		" tpope/vim-fugitive
