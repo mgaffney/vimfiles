@@ -401,18 +401,17 @@ endsnippet
 # test table snippet
 snippet tt
 var tests = []struct {
-	name string
-	expected string
-	given string
+	in  string
+	out string
 }{
-	{"${1}", "${2}", "${3}",},
+	{"${1}", "${2}",},
 }
 for _, tt := range tests {
 	tt := tt
-	t.Run(tt.name, func(t *testing.T){
-		actual := ${0:${VISUAL}}(tt.given)
-		if actual != tt.expected {
-				t.Errorf("$0(%s): expected %s, actual %s", tt.given, tt.expected, actual)
+	t.Run(tt.in, func(t *testing.T){
+		actual := ${0:${VISUAL}}(tt.in)
+		if actual != tt.out {
+				t.Errorf("got %s, want %s", actual, tt.out)
 		}
 
 	})
