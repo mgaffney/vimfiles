@@ -237,7 +237,7 @@
 		" Search for the current word
 		nnoremap <Leader>* :Grepper -cword -noprompt<CR>
 		" Open Grepper-prompt for a particular grep-alike tool
-		nnoremap <Leader>g :Grepper -tool ag<CR>
+		nnoremap <Leader>gg :Grepper -tool rg<CR>
 		" Search for the current selection
 		nmap gs <plug>(GrepperOperator)
 		xmap gs <plug>(GrepperOperator)
