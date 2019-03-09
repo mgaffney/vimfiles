@@ -5,6 +5,7 @@ setlocal nowrap
 setlocal textwidth=75
 setlocal formatoptions+=r
 setlocal formatoptions+=o
+setlocal noshowmode " must be set for g:go_echo_go_info to work correctly
 
 " Mappings for vim-go bundle
 
@@ -72,6 +73,8 @@ let g:go_def_reuse_buffer = 0
 let g:go_highlight_functions = 1
 let g:go_highlight_function_calls = 1
 let g:go_highlight_function_arguments = 1
+
+let g:go_highlight_function_parameters = 1
 " let g:go_highlight_methods = 1
 let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
@@ -80,10 +83,33 @@ let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_generate_tags = 1
 
+" let g:go_auto_sameids = 1
+
 " let g:go_dispatch_enabled = 1
-" let g:go_auto_type_info = 1  " this doesn't seem to work so turn it off
+" let g:go_auto_type_info = 1
+
+let g:go_gocode_propose_source = 1
+let g:go_gocode_unimported_packages = 1
+let g:go_highlight_array_whitespace_error = 1
+
+let g:go_highlight_chan_whitespace_error = 1
+let g:go_highlight_space_tab_error = 1
+let g:go_highlight_trailing_whitespace_error = 1
+let g:go_highlight_variable_declarations = 1
+let g:go_highlight_variable_assignments = 1
 
 " let g:go_oracle_scope = ''
+
+" run :GoBuild or :GoTestCompile based on the go file
+function! s:build_go_files()
+  let l:file = expand('%')
+  if l:file =~# '^\f\+_test\.go$'
+    call go#test#Test(0, 1)
+  elseif l:file =~# '^\f\+\.go$'
+    call go#cmd#Build(0)
+  endif
+endfunction
+nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
 
 " Tagbag settings
 let g:tagbar_type_go = {
