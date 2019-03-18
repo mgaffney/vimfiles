@@ -139,3 +139,95 @@ let g:tagbar_type_go = {
     \ 'ctagsbin'  : 'gotags',
     \ 'ctagsargs' : '-sort -silent'
 \ }
+
+" sign define godebugbreakpoint text=> texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text= texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text= texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text= texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text= texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text= texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text= texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text= texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text= texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text= texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text= texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text= texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text= texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text= texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text= texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text= texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text= texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text= texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text= texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text= texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text= texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text= texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text=● texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text=╳ texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text=⊗ texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text=Ⓢ texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text=ⓢ texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text=🛑 texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text=🚨 texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text=🚦 texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text=📍 texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text=📌 texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text=⛔ texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text=⏹ texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text=⏸ texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text=⭕ texthl=GoDebugBreakpoint
+sign define godebugbreakpoint text=🔴 texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text=⛔ texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text=⛌ texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text=⬣ texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text= texthl=GoDebugBreakpoint
+" sign define godebugbreakpoint text=🚫 texthl=GoDebugBreakpoint
+
+" sign define godebugcurline    text== texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=→ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=↠ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=⇉ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=⇒ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=⇛ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=⇝ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=⇥ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=⇨ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=⇴ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=⇶ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=⇸ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=⇻ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=⇾ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=⊳ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=⋙ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=⋗ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=☛ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=☞ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=➔ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=➙ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=➜ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=➤ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=➠ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=➡ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=➪ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=➲ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=➽ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=➾ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=⟹ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=⤃ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=► texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=▶ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=⦒ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=⦔ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=⧴ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=⮀ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=⌦ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text= texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text= texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text= texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text= texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text= texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text= texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text= texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=⥤ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+" sign define godebugcurline    text=⩥ texthl=GoDebugCurrent    linehl=GoDebugCurrent
+sign define godebugcurline    text=⫸ texthl=GoDebugCurrent    linehl=GoDebugCurrent
