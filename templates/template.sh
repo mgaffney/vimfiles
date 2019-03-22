@@ -8,7 +8,8 @@
 # print a trace of commands (-x)
 # set -o xtrace
 
-declare -r SCRIPT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+SCRIPTDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+readonly SCRIPTDIR
 
 function err() {
   echo "$@" >&2
@@ -24,9 +25,9 @@ HELP
 }
 
 function main() {
-  local readonly file="$1"
+  local -r file="$1"
 
-  if [[ ! -s "${file}" ]] ; then
+  if [[ -z "${file}" ]] ; then
     help
     return 1
   fi
