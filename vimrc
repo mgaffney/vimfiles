@@ -920,9 +920,9 @@ augroup END
 	if has('gui_running')
 		"set guifont=Consolas:h13
 		" set guifont=Sauce\ Code\ Powerline\ Plus\ Nerd\ File\ Types\ Mono\ Plus\ Font\ Awesome\ Plus\ Octicons\ Plus\ Pomicons:h12
-		set guifont=Source\ Code\ Pro\ for\ Powerline:h12
+		set guifont=Source\ Code\ Pro\ Nerd\ Complete:h12
 		" set guifontwide=SauceCodePro\ Nerd\ Font:h12
-		set guifontwide=Menlo\ for\ Powerline:h12
+		set guifontwide=Source\ Code\ Pro\ Nerd\ Complete:h12
 		" set guifont=Source\ Code\ Pro\ for\ Powerline:h14
 		" set guifont=Source\ Code\ Pro\ Light:h12	  " Retina Display Setting
 		set background=light
