@@ -119,7 +119,7 @@
 		Plug 'darfink/vim-plist'
 	" }
 	" Golang {
-		Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+		Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'tag': '*' }
 		" Plug 'cespare/vim-go-templates'
 	" }
 	" Database {
