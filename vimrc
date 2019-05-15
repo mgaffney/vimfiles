@@ -496,7 +496,7 @@
 		" let g:airline_symbols.branch = ''
 		let g:airline_symbols.readonly = ''
 		" let g:airline_symbols.readonly = '🔒' " ^VU1f512 (vim) U+1F512
-		let g:airline_symbols.linenr = ''
+		" let g:airline_symbols.linenr = ''
 
 		if exists('$TMUX')
 			let g:airline#extensions#tmuxline#enabled = 0
