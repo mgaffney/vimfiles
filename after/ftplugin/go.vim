@@ -1,10 +1,13 @@
 setlocal noexpandtab
-setlocal tabstop=4
 setlocal shiftwidth=4
+setlocal tabstop=4
+
 setlocal nowrap
 setlocal textwidth=75
-setlocal formatoptions+=r
+
 setlocal formatoptions+=o
+setlocal formatoptions+=r
+
 setlocal noshowmode " must be set for g:go_echo_go_info to work correctly
 
 " Mappings for vim-go bundle
