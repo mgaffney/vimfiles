@@ -412,90 +412,19 @@
 		let g:airline#extensions#wordcount#enabled = 1
 		" let g:airline_symbols = get(g:,'airline_symbols',{})
 
-		" f030 
-		" let g:airline#extensions#obsession#indicator_text = ''
-		" let g:airline#extensions#obsession#indicator_text = '' " U+F447 (video camera)
 		let g:airline#extensions#obsession#indicator_text = '' " U+F130 (microphone)
-		" let g:airline#extensions#obsession#indicator_text = '🎦' " U+1f3a6  Cinema
-		" let g:airline#extensions#obsession#indicator_text = '☎' " U+260e Black Telephone
-		" let g:airline#extensions#obsession#indicator_text = '☏' " U+260f White Telephone
-		" let g:airline#extensions#obsession#indicator_text = '📞' " U+1f4de Telephone Receiver
-		" let g:airline#extensions#obsession#indicator_text = '✆' " U+2706 Telephone Location Sign
-		" let g:airline#extensions#obsession#indicator_text = '🎙' " U+1f399 Studio Microphone
-		" let g:airline#extensions#obsession#indicator_text = '🎤' " U+1f3a4 Microphone
-		" let g:airline#extensions#obsession#indicator_text = '🎬' " U+1f3ac Clapper Board (Movie scene marker)
-		" let g:airline#extensions#obsession#indicator_text = '' " U+f802 Pencil (Private use area)
 
-
-		" f059
-		" let g:airline_symbols.notexists = ''
-		" e205
-		" let g:airline_symbols.notexists = ''
-		" e249
-		" let g:airline_symbols.notexists = ''
-		" e238
-		" let g:airline_symbols.notexists = ' '
-		" let g:airline_symbols.notexists = ' '
-		" let g:airline_symbols.notexists = ' '
-		" let g:airline_symbols.notexists = ' '
-		" let g:airline_symbols.notexists = ' '
-		" let g:airline_symbols.notexists = ' '
-		" let g:airline_symbols.notexists = ' ' "thinspace U+F193 (person in wheelchair)
-		let g:airline_symbols.notexists = ' ' "thinspace U+E20E (Toilet - as in 'shit is missing')
-		" let g:airline_symbols.notexists = ' ' " ^Vuf809 (vim) U+F809 (person in wheelchair)
-		" let g:airline_symbols.notexists = ' '
-		" let g:airline_symbols.notexists = ' '
-		" let g:airline_symbols.notexists = ' '
-		" let g:airline_symbols.notexists = ' '
-
-		" let g:airline_symbols.notexists = '∄'
-		" let g:airline_symbols.notexists = '∌'
-		" let g:airline_symbols.notexists = '෴'
-		" let g:airline_symbols.notexists = '︴'
-		" let g:airline_symbols.notexists = '☁'
-		" let g:airline_symbols.notexists = '☢'
-		" let g:airline_symbols.notexists = '☣'
-		" let g:airline_symbols.notexists = '⚠ '
-		" let g:airline_symbols.notexists = '⚡'
-		" let g:airline_symbols.notexists = '☠'
-		" let g:airline_symbols.notexists = '♿'
-		" let g:airline_symbols.notexists = '♲'
-		" let g:airline_symbols.notexists = '⚛'
-		" let g:airline_symbols.notexists = '𓂀'
-		" let g:airline_symbols.notexists = '𓀐' 𓀑
+		" let g:airline_symbols.notexists = ' ' "thinspace U+E20E (Toilet - as in 'shit is missing')
+		let g:airline_symbols.notexists = ' ' "thinspace U+F059 (Question mark - as in 'where is it')
+		" let g:airline_symbols.dirty = ' ' "thinspace U+F2CC (Shower head - as in 'the repo is dirty')
+		let g:airline_symbols.dirty = ' ' "thinspace + storm cloud
 
 		let g:airline_left_sep = '' " U+E0B0
-		" let g:airline_left_sep = ''
-		" let g:airline_left_sep = ''
-		" 2589 left seven eights
-		" let g:airline_left_sep = '▉'
-		" 258a
-		" let g:airline_left_sep = '▊'
-		" 2009
-		" let g:airline_left_sep = ''
-		" let g:airline_left_alt_sep = ''
-		" let g:airline_left_alt_sep = ''
 		let g:airline_right_sep = '' " U+E0B2
 		" 2009 thin space
-		" let g:airline_right_sep = ' '
-		" 239f right parenthesis extension
-		" let g:airline_right_sep = '⎟'
-		" 2595 right one eight block
-		" let g:airline_right_sep = '▕'
-		" 23a5 right square bracket extension
-		" let g:airline_right_sep = '⎥'
-		" 258f left one eight block
-		" let g:airline_right_sep = '▏'
-		" 2589 left seven eights
-		" let g:airline_right_sep = '▉'
-		" let g:airline_left_sep = "\uE0B4"
-		" let g:airline_right_sep = "\uE0B6"
-		" let g:airline_right_sep = ''
 		let g:airline_right_alt_sep = '' " U+E0B3
 		let g:airline_symbols.branch = ''
-		" let g:airline_symbols.branch = ''
 		let g:airline_symbols.readonly = ''
-		" let g:airline_symbols.readonly = '🔒' " ^VU1f512 (vim) U+1F512
 		" let g:airline_symbols.linenr = ''
 
 		if exists('$TMUX')
