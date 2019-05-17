@@ -64,8 +64,8 @@
 	" }
 	" TextObjects {
 		" Plug 'kana/vim-textobj-user'
-		" Plug 'unblevable/quick-scope'
-		Plug 'bradford-smith94/quick-scope'
+		Plug 'unblevable/quick-scope'
+		" Plug 'bradford-smith94/quick-scope'
 	" }
 	" StatusLine {
 		"Plug 'bling/vim-airline'
