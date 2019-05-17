@@ -805,8 +805,11 @@
 	" let g:dwm_map_keys=0
 
 	" netrw settings
-	"let g:netrw_browse_split=2
-	let g:netrw_liststyle=1
+	"let g:netrw_browse_split=0 " default
+	"let g:netrw_browse_split=1 " split horizontally
+	"let g:netrw_browse_split=2 " split vertically
+	"let g:netrw_browse_split=3 " open in new tab
+	" let g:netrw_liststyle=1
 	let g:netrw_list_hide="^\.git*,^\.rvmrc,\.swp"
 
 	" CommandT Window Height
