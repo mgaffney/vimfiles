@@ -18,6 +18,7 @@
 	" Colors {
 		" Plug 'mgaffney/vim-colors-solarized'
 		Plug 'lifepillar/vim-solarized8'
+		Plug 'guns/xterm-color-table.vim'
 	" }
 	" tmux {
 		Plug 'tpope/vim-speeddating'
