@@ -246,17 +246,19 @@
 		nnoremap <Leader>* :Grepper -cword -noprompt<CR>
 		" Open Grepper-prompt for a particular grep-alike tool
 		nnoremap <Leader>gg :Grepper -tool rg<CR>
+		" Open Grepper-prompt for a grepping through a vault code base
+		nnoremap <Leader>vg :Grepper -tool rg -grepprg rg -H --no-heading --vimgrep -g '!vendor' -g '!website' -g '!ui'<CR>
 		" Search for the current selection
 		nmap gs <plug>(GrepperOperator)
 		xmap gs <plug>(GrepperOperator)
 
 	" }
 	" Ack and ripgrep {
-		if executable('rg')
-			let g:ackprg = 'rg -S --no-heading --vimgrep'
-		elseif executable('ag')
-			let g:ackprg = 'ag --vimgrep'
-		endif
+		" if executable('rg')
+			" let g:ackprg = 'rg -S --no-heading --vimgrep'
+		" elseif executable('ag')
+			" let g:ackprg = 'ag --vimgrep'
+		" endif
 	" }
 	" elzr/vim-json {
 		let g:vim_json_syntax_conceal = 0
