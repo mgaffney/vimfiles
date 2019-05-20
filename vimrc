@@ -374,6 +374,33 @@
 		" Obviously depends on <https://github.com/unblevable/quick-scope> being installed.
 		" https://gist.github.com/cszentkiralyi/dc61ee28ab81d23a67aa
 		" Thanks to @VanLaser for cleaning the code up and expanding capabilities to include e.g. `df`
+
+		augroup qs_colors
+		  autocmd!
+		  " autocmd ColorScheme * highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
+		  " autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+
+		  " autocmd ColorScheme * highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
+		  " autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+		  " autocmd ColorScheme * highlight QuickScopePrimary ctermfg=17 ctermbg=1 cterm=underline
+		  " autocmd ColorScheme * highlight QuickScopeSecondary ctermfg=17 ctermbg=2 cterm=underline
+		  "#ffff00
+		  " autocmd ColorScheme * highlight QuickScopePrimary guifg='#00ff00' gui=reverse ctermfg=46 cterm=reverse
+		  " autocmd ColorScheme * highlight QuickScopeSecondary guifg='#ffff00' gui=reverse ctermfg=190 cterm=reverse
+		  " autocmd ColorScheme * highlight QuickScopePrimary guifg='#859900' gui=reverse ctermfg=33 cterm=reverse " green
+		  " autocmd ColorScheme * highlight QuickScopePrimary guifg='#657b83' gui=reverse ctermfg=33 cterm=reverse " base00
+		  "" autocmd ColorScheme * highlight QuickScopePrimary guifg='#839496' gui=reverse ctermfg=33 cterm=reverse "base0
+		  " autocmd ColorScheme * highlight QuickScopeSecondary guifg='#268bd2' gui=reverse ctermfg=136 cterm=reverse " blue
+		  "" autocmd ColorScheme * highlight QuickScopeSecondary guifg='#6c71c4' gui=reverse ctermfg=61 cterm=reverse " violet
+
+		  " autocmd ColorScheme * highlight QuickScopePrimary guifg='#dc322f' gui=underline ctermfg=33 cterm=reverse " red
+		  " autocmd ColorScheme * highlight QuickScopePrimary guifg='#cb4b16' gui=reverse ctermfg=33 cterm=reverse " orange
+		  " autocmd ColorScheme * highlight QuickScopePrimary guifg='#d33682' gui=reverse ctermfg=33 cterm=reverse " magenta
+
+		  autocmd ColorScheme * highlight QuickScopePrimary guifg='#b58900' gui=reverse ctermfg=33 cterm=reverse
+		  autocmd ColorScheme * highlight QuickScopeSecondary guifg='#6c71c4' gui=reverse ctermfg=61 cterm=reverse " violet
+		augroup END
+
 		let g:qs_enable = 0
 		let g:qs_enable_char_list = [ 'f', 'F', 't', 'T' ]
 		"
