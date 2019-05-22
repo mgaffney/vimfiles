@@ -57,6 +57,8 @@ nmap <Leader>i <Plug>(go-info)
 
 
 let g:go_def_mode = 'gopls'
+" let g:go_info_mode='gopls'
+" let g:go_echo_go_info = 1
 
 " Sometimes when using both vim-go and syntastic Vim will start lagging while
 " saving and opening files. The following fixes this:
@@ -66,7 +68,7 @@ let g:go_def_mode = 'gopls'
 " Enable goimports to automatically insert import paths instead of gofmt:
 let g:go_fmt_autosave = 1
 let g:go_fmt_command = "goimports"
-let g:go_autodetect_gopath = 1
+" let g:go_autodetect_gopath = 1
 
 " This experimental mode is superior to the current mode as it fully saves the
 " undo history, so undo/redo doesn't break.
