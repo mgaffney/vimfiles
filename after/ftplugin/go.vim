@@ -34,7 +34,7 @@ nmap <leader>i <Plug>(go-install)
 nmap <leader>tt <Plug>(go-test)
 nmap <leader>tf <Plug>(go-test-func)
 nmap <leader>c <Plug>(go-coverage-browser)
-nmap <leader>v <Plug>(go-vet)
+nmap <leader>vv <Plug>(go-vet)
 nmap <leader>l :GoLint<CR>
 
 " By default the mapping gd is enabled which opens the target identifier in
