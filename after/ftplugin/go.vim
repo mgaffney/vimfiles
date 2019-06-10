@@ -10,6 +10,9 @@ setlocal formatoptions+=r
 
 setlocal noshowmode " must be set for g:go_echo_go_info to work correctly
 
+" disable vim-go :GoDef short cut (gd)
+" this is handled by LanguageClient [LC]
+let g:go_def_mapping_enabled = 0
 " Mappings for vim-go bundle
 
 " Show a list of interfaces which is implemented by the type under your cursor
