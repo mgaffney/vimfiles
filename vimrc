@@ -45,7 +45,7 @@
 		" Plug 'Valloric/YouCompleteMe'
 		" Plug 'ervandew/supertab'
 		" Plug 'maralla/completor.vim'
-		Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+		Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
 		" Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 	" }
 	" Snips {
