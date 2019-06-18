@@ -562,6 +562,16 @@
 " }
 
 " General {
+	" termguicolors must be set before background and colorscheme
+	" https://github.com/lifepillar/vim-solarized8/issues/70#issuecomment-502484769
+
+	" Enable True Color support if you have vim >=8.0 or Neovim >= 0.1.5
+	if (has("termguicolors"))
+		let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+		let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+		set termguicolors
+	endif
+
 	" syntax enable					" syntax enable keeps your current color settings. :syntax
 	set background=dark				" Assume a dark background
 	" filetype plugin indent on		" load file type plugins + indentation
@@ -595,13 +605,6 @@
 	" colorscheme solarized
 	colorscheme solarized8
 	set showmode					" display the current mode
-
-	" Enable True Color support if you have vim >=8.0 or Neovim >= 0.1.5
-	if (has("termguicolors"))
-		let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
-		let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
-		set termguicolors
-	endif
 
 	if has("balloon_eval") && has("unix")
 		set ballooneval
