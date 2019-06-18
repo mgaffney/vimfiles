@@ -45,7 +45,11 @@
 		" Plug 'Valloric/YouCompleteMe'
 		" Plug 'ervandew/supertab'
 		" Plug 'maralla/completor.vim'
-		Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
+		Plug 'neoclide/coc.nvim', {'branch': 'release'}
+		Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
+		Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
+		Plug 'josa42/coc-sh', {'do': 'yarn install --frozen-lockfile'}
+
 		" Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 	" }
 	" Snips {
@@ -494,6 +498,7 @@
 		let g:jedi#use_splits_not_buffers = "right"
 	" }
 	" coc.nvim {
+	" Run :CocInstall coc-json coc-sh coc-snippets
 		" coc.nvim default settings
 
 		" if hidden is not set, TextEdit might fail.
