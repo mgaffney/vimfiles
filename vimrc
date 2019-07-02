@@ -537,8 +537,22 @@
 		nmap <silent> gi <Plug>(coc-implementation)
 		nmap <silent> gr <Plug>(coc-references)
 
-		" Use U to show documentation in preview window
-		nnoremap <silent> U :call <SID>show_documentation()<CR>
+		map <leader>d :<C-u>call CocActionAsync("jumpDefinition", "split")<CR>
+
+		" Use K to show documentation in preview window
+		nnoremap <silent> K :call <SID>show_documentation()<CR>
+		map <leader>i :call <SID>show_documentation()<CR>
+
+		function! s:show_documentation()
+		  if (index(['vim','help'], &filetype) >= 0)
+			execute 'h '.expand('<cword>')
+		  else
+			call CocAction('doHover')
+		  endif
+		endfunction
+
+		" Highlight symbol under cursor on CursorHold
+		autocmd CursorHold * silent call CocActionAsync('highlight')
 
 		" Remap for rename current word
 		nmap <leader>rn <Plug>(coc-rename)
@@ -546,6 +560,14 @@
 		" Remap for format selected region
 		vmap <leader>f  <Plug>(coc-format-selected)
 		nmap <leader>f  <Plug>(coc-format-selected)
+
+		augroup cocgroup
+			autocmd!
+			" Setup formatexpr specified filetype(s).
+			autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+			" Update signature help on jump placeholder
+			autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+		augroup end
 		" Show all diagnostics
 		" nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 		" Manage extensions
@@ -663,9 +685,9 @@
 	set timeoutlen=1200 " A little bit more time for macros
 	set ttimeoutlen=50	" Make Esc work faster
 
-	"set wildmenu					" show list instead of just completing
+	set wildmenu					" show list instead of just completing
 	"set wildmode=list:longest,full	" command <Tab> completion, list matches, then longest common part, then all.
-	"set wildmode=longest,list		 " tab completion like bash's
+	" set wildmode=longest,list		 " tab completion like bash's
 	set wildmode=longest,list:longest		 " tab completion like zsh's
 	" set whichwrap=b,s,h,l,<,>,[,]	" backspace and cursor keys wrap to
 "	set scrolljump=5				" lines to scroll when cursor leaves screen
@@ -725,6 +747,9 @@
 	nnoremap <C-k> <C-W><C-K>
 	nnoremap <C-l> <C-W><C-L>
 	nnoremap <C-h> <C-W><C-H>
+
+	" Open a vertical split
+	nnoremap <leader>v <C-W>v
 
 	" augroup CalendarKey
 		" autocmd!
