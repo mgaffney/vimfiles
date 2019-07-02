@@ -498,7 +498,6 @@
 		let g:jedi#use_splits_not_buffers = "right"
 	" }
 	" coc.nvim {
-	" Run :CocInstall coc-json coc-sh coc-snippets
 		" coc.nvim default settings
 
 		" if hidden is not set, TextEdit might fail.
@@ -548,21 +547,35 @@
 		vmap <leader>f  <Plug>(coc-format-selected)
 		nmap <leader>f  <Plug>(coc-format-selected)
 		" Show all diagnostics
-		nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+		" nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 		" Manage extensions
-		nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+		" nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
 		" Show commands
-		nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+		" nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
 		" Find symbol of current document
-		nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+		" nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
 		" Search workspace symbols
-		nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+		" nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
 		" Do default action for next item.
-		nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+		" nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 		" Do default action for previous item.
-		nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+		" nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 		" Resume latest coc list
-		nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+		" nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+	" }
+	" coc-snippets {
+		inoremap <silent><expr> <TAB>
+			  \ pumvisible() ? coc#_select_confirm() :
+			  \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+			  \ <SID>check_back_space() ? "\<TAB>" :
+			  \ coc#refresh()
+
+		" function! s:check_back_space() abort
+		  " let col = col('.') - 1
+		  " return !col || getline('.')[col - 1]  =~# '\s'
+		" endfunction
+
+		let g:coc_snippet_next = '<tab>'
 	" }
 " }
 
