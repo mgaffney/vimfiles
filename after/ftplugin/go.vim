@@ -58,6 +58,9 @@ nmap <Leader>i <Plug>(go-info)
 
 " Settings for vim-go bundle
 
+let g:go_term_enabled = 1
+let g:go_term_mode = "split"
+let g:go_term_height = 10
 
 let g:go_def_mode = 'gopls'
 let g:go_info_mode ='gopls'
