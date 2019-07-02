@@ -36,7 +36,7 @@ nmap <leader>b <Plug>(go-build)
 nmap <leader>i <Plug>(go-install)
 nmap <leader>tt <Plug>(go-test)
 nmap <leader>tf <Plug>(go-test-func)
-nmap <leader>c <Plug>(go-coverage-browser)
+nmap <leader>tc <Plug>(go-coverage-browser)
 nmap <leader>vv <Plug>(go-vet)
 nmap <leader>l :GoLint<CR>
 
