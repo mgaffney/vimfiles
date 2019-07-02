@@ -9,7 +9,7 @@ setlocal softtabstop=4
 setlocal foldcolumn=2	" give some visual context even when it's not folded
 
 " Prevent vim from automatically inserting line breaks in newly entered text
-setlocal textwidth=72
+setlocal textwidth=80
 setlocal formatoptions+=t
 
 " Need to use tab character for formatting code blocks
