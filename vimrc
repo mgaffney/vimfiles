@@ -477,8 +477,8 @@
 		" use jshint
 		let g:syntastic_javascript_checkers = ['jshint']
 		let g:syntastic_shell = '/usr/local/bin/zsh'
-		let g:syntastic_sh_checkers=['shellcheck']
-		let g:syntastic_sh_shellcheck_args = '-x -s bash'
+		" let g:syntastic_sh_checkers=['shellcheck']
+		" let g:syntastic_sh_shellcheck_args = '-x -s bash'
 		let g:syntastic_ignore_files = ['\m^/usr/include/', '\m\c\.html$']
 	" }
 	" Golang {
