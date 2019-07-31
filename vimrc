@@ -41,20 +41,21 @@
 	" haproxy {
 		Plug 'zimbatm/haproxy.vim'
 	" }
+	" Snips {
+		Plug 'SirVer/ultisnips'
+		" Plug 'honza/vim-snippets'
+	" }
 	" Completion {
 		" Plug 'Valloric/YouCompleteMe'
 		" Plug 'ervandew/supertab'
 		" Plug 'maralla/completor.vim'
 		Plug 'neoclide/coc.nvim', {'branch': 'release'}
 		Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
-		Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
-		Plug 'josa42/coc-sh', {'do': 'yarn install --frozen-lockfile'}
+		Plug 'neoclide/coc-sources', {'do': 'yarn install --frozen-lockfile'}
+		" Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
+		" Plug 'josa42/coc-sh', {'do': 'yarn install --frozen-lockfile'}
 
 		" Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-	" }
-	" Snips {
-		" Plug 'SirVer/ultisnips'
-		" Plug 'honza/vim-snippets'
 	" }
 	" Search {
 		" if executable('ag')
@@ -351,9 +352,9 @@
 	" }
 	" Completion {
 		"SuperTab
-		let g:SuperTabDefaultCompletionType = "context"
-		let g:SuperTabClosePreviewOnPopupClose = 1
-		let g:SuperTabLongestHighlight = 1
+		" let g:SuperTabDefaultCompletionType = "context"
+		" let g:SuperTabClosePreviewOnPopupClose = 1
+		" let g:SuperTabLongestHighlight = 1
 		" completor
 		" let g:completor_gocode_binary = '/Users/mike/sandbox/go-workspace/bin/gocode'
 		" let g:completor_blacklist = ['tagbar', 'qf', 'netrw', 'unite', 'vimwiki', 'markdown']
@@ -368,6 +369,10 @@
 		" ultisnips
 		" let g:UltiSnipsExpandTrigger="<tab>"
 		" let g:UltiSnipsListSnippets="<c-tab>"
+
+		" Let coc.nvim and coc-ultisnips trigger ultisnips
+		" https://github.com/SirVer/ultisnips/issues/1052#issuecomment-504719268
+		let g:UltiSnipsExpandTrigger = "<nop>"
 		let g:UltiSnipsListSnippets="<F9>"
 		let g:UltiSnipsJumpForwardTrigger="<c-j>"
 		let g:UltiSnipsJumpBackwardTrigger="<c-k>"
@@ -501,6 +506,7 @@
 	" coc.nvim {
 		" coc.nvim default settings
 
+		let g:coc_global_extensions = ['coc-ultisnips']
 		" if hidden is not set, TextEdit might fail.
 		set hidden
 		" Better display for messages
@@ -587,18 +593,18 @@
 		" nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 	" }
 	" coc-snippets {
-		inoremap <silent><expr> <TAB>
-			  \ pumvisible() ? coc#_select_confirm() :
-			  \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-			  \ <SID>check_back_space() ? "\<TAB>" :
-			  \ coc#refresh()
+		" inoremap <silent><expr> <TAB>
+			  " \ pumvisible() ? coc#_select_confirm() :
+			  " \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+			  " \ <SID>check_back_space() ? "\<TAB>" :
+			  " \ coc#refresh()
 
 		" function! s:check_back_space() abort
 		  " let col = col('.') - 1
 		  " return !col || getline('.')[col - 1]  =~# '\s'
 		" endfunction
 
-		let g:coc_snippet_next = '<tab>'
+		" let g:coc_snippet_next = '<tab>'
 	" }
 " }
 
@@ -1129,6 +1135,86 @@ augroup END
 " }
 
 " fzf {
+	" From https://jesseleite.com/posts/2/its-dangerous-to-vim-alone-take-fzf
+	" {
+		" File Finder
+		nmap <Leader>f :GFiles<CR>
+		nmap <Leader>F :Files<CR>
+
+		" Buffer Finder
+		" Here I've mapped <Leader>b to search for open buffers, and <Leader>h to
+		" search buffer history.
+		nmap <Leader>B :Buffers<CR>
+		nmap <Leader>h :History<CR>
+		" These two make it easy to switch between buffers, and order their results by
+		" most recent so you can easily switch between your two most recent files
+		" without being required to enter a search query.
+
+		" Tag Finder
+		" Here I've mapped <Leader>t to search for tags in current buffer, and
+		" <Leader>T to search for tags across project
+		nmap <Leader>t :BTags<CR>
+		nmap <Leader>T :Tags<CR>
+		" The former doesn't require a tags file, and is a great alternative to
+		" packages like tagbar because it's often quicker to fuzzy search for a method
+		" name, than it is to navigate your way through a second window. The latter is
+		" extremely powerful in combination with a package like gutentags, where
+		" searching for indexpostcon will jump you to the index method of your
+		" PostController.
+
+		" Line Finder
+		" Here I've mapped <Leader>l to search for lines in current buffer, <Leader>L
+		" to search for lines in loaded buffers, and <Leader>' to search for marked
+		" lines.
+		nmap <Leader>l :BLines<CR>
+		nmap <Leader>L :Lines<CR>
+		nmap <Leader>' :Marks<CR>
+		" Honestly, you will get more power out of / and ag, but they require more
+		" thought because they aren't fuzzy searches. Being able to fuzzy search
+		" through both marked and unmarked lines is fast and forgiving. These can also
+		" prove useful when tags aren't available (eg. in .vue components or plain
+		" .txt files).
+
+		" Project Finder
+		nmap <Leader>a :Ag<Space>
+		" When you need project searching power, most people look to search wrappers
+		" like ack.vim. However, these wrappers generally expect you to specify your
+		" searchable path before seeing the results.
+
+		" Fzf's :Ag allows you to focus on your search query first, then narrow down
+		" results in realtime using the same extended search mode syntax available to
+		" all of fzf's fuzzy finders. Hitting Enter on a single result will open that
+		" file, skipping the quickfix window altogether. If you are doing a larger
+		" refactor, you can Tab to select multiple results, ALT-A to select all
+		" results, then Enter to populate the quickfix window.
+
+		" It's an incredibly powerful workflow, and my only beef is that it doesn't
+		" allow you to pass command line options to ag out-of-the-box ...but it's
+		" okay, because I wrote a plugin for that 🚜 If you are interested in learning
+		" more about my project searching workflow, I wrote about it here!
+
+		" Help Finder
+		nmap <Leader>H :Helptags!<CR>
+		" Sometimes navigating Vim's :help documentation can be painful. Finding the
+		" right article can be difficult. Fzf's :Helptags improves this experience,
+		" especially when you run it with a bang ! to view results in fullscreen
+		" (which by the way, also works on fzf's other commands).
+
+		" Fuzzy search defined commands, whether they be user defined, plugin defined,
+		" or native commands:
+		nmap <Leader>C :Commands<CR>
+
+		" Fuzzy search through :command and /search history:
+		nmap <Leader>: :History:<CR>
+		nmap <Leader>/ :History/<CR>
+
+		" Fuzzy search key mappings, which is great for checking against current mappings before defining a new one:
+		nmap <Leader>M :Maps<CR>
+
+		" Fuzzy search filetype syntaxes, and hit Enter on a result to set that syntax on the current buffer:
+		nmap <Leader>s :Filetypes<CR>
+	" }
+
 " Similarly, we can apply it to fzf#vim#grep. To use ripgrep instead of ag:
 	command! -bang -nargs=* Rg
 		\ call fzf#vim#grep(
