@@ -19,7 +19,7 @@ let g:go_def_mapping_enabled = 0
 " with <leader>gh (think 'go hierarchy')
 nmap <Leader>s <Plug>(go-implements)
 " Open the relevant Godoc for the word under the cursor with <leader>gd
-nmap <Leader>gd <Plug>(go-doc-vertical)
+nmap <Leader>gdv <Plug>(go-doc-vertical)
 " open it vertically with <leader>gv
 " nmap <Leader>gdv <Plug>(go-doc-vertical)
 " open it in a new tab with <leader>gt
