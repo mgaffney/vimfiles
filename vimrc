@@ -193,7 +193,7 @@
 	" AsciiDoc {
 		" Plug 'dahu/vim-asciidoc'
 		" Plug 'traycerb/asciidoc-vim'
-		Plug 'mgaffney/asciidoc-vim'
+		" Plug 'mgaffney/asciidoc-vim'
 	" }
 	" Pig {
 		" Plug 'motus/pig.vim'
@@ -231,9 +231,6 @@
 	" }
 	" WebBrowser {
 		" Plug 'yuratomo/w3m.vim'
-	" }
-	" LocalPlugins {
-		Plug 'file:///Users/mike/sandbox/vim-myplugins/vim-cheatsheet'
 	" }
 	" All of your Plugs must be added before the following line
 	call plug#end()
