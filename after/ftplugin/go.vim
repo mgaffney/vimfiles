@@ -17,7 +17,8 @@ let g:go_def_mapping_enabled = 0
 
 " Show a list of interfaces which is implemented by the type under your cursor
 " with <leader>gh (think 'go hierarchy')
-nmap <Leader>s <Plug>(go-implements)
+nmap <Leader>gh <Plug>(go-implements)
+
 " Open the relevant Godoc for the word under the cursor with <leader>gd
 nmap <Leader>gdv <Plug>(go-doc-vertical)
 " open it vertically with <leader>gv
@@ -31,14 +32,14 @@ nmap <Leader>gdb <Plug>(go-doc-browser)
 " and go test for the current package with <leader>b and <leader>t. Display a
 " beautiful annotated source code to see which functions are covered with
 " <leader>c.
-nmap <leader>r <Plug>(go-run)
-nmap <leader>b <Plug>(go-build)
-nmap <leader>i <Plug>(go-install)
-nmap <leader>tt <Plug>(go-test)
-nmap <leader>tf <Plug>(go-test-func)
-nmap <leader>tc <Plug>(go-coverage-browser)
-nmap <leader>vv <Plug>(go-vet)
-nmap <leader>l :GoLint<CR>
+nmap <leader>gr <Plug>(go-run)
+" nmap <leader>gb <Plug>(go-build)  " gb (go-build) is mapped below
+nmap <leader>gi <Plug>(go-install)
+nmap <leader>gtt <Plug>(go-test)
+nmap <leader>gtf <Plug>(go-test-func)
+nmap <leader>gtc <Plug>(go-coverage-browser)
+nmap <leader>gv <Plug>(go-vet)
+nmap <leader>gl :GoLint<CR>
 
 " By default the mapping gd is enabled which opens the target identifier in
 " current buffer. You can also open the definition/declaration in a new
@@ -50,11 +51,11 @@ nmap <Leader>dv <Plug>(go-def-vertical)
 nmap <Leader>dt <Plug>(go-def-tab)
 
 " Rename the identifier under the cursor to a new name
-nmap <Leader>e <Plug>(go-rename)
+nmap <Leader>rn <Plug>(go-rename)
 
 " Show type info for the word under your cursor with <leader>i (useful if you
 " have disabled auto showing type info via g:go_auto_type_info)
-nmap <Leader>i <Plug>(go-info)
+" nmap <Leader>i <Plug>(go-info)
 
 " Settings for vim-go bundle
 
@@ -124,7 +125,7 @@ function! s:build_go_files()
     call go#cmd#Build(0)
   endif
 endfunction
-nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
+nmap <leader>gb :<C-u>call <SID>build_go_files()<CR>
 
 " Tagbag settings
 let g:tagbar_type_go = {

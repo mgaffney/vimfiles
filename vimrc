@@ -250,7 +250,7 @@
 		" Search for the current word
 		nnoremap <Leader>* :Grepper -cword -noprompt<CR>
 		" Open Grepper-prompt for a particular grep-alike tool
-		nnoremap <Leader>gg :Grepper -tool rg<CR>
+		nnoremap <Leader>rg :Grepper -tool rg<CR>
 		" Open Grepper-prompt for a grepping through a vault code base
 		nnoremap <Leader>vg :Grepper -tool rg -grepprg rg -H --no-heading --vimgrep -g '!vendor' -g '!website' -g '!ui'<CR>
 		" Search for the current selection
@@ -531,6 +531,12 @@
 		" Use <c-space> to trigger completion.
 		inoremap <silent><expr> <c-space> coc#refresh()
 
+		" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+		" Coc only does snippet and additional edit on confirm.
+		inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+		" Or use `complete_info` if your vim support it, like:
+		" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+
 		" Use `[c` and `]c` to navigate diagnostics
 		" nmap <silent> [c <Plug>(coc-diagnostic-prev)
 		" nmap <silent> ]c <Plug>(coc-diagnostic-next)
@@ -541,11 +547,11 @@
 		nmap <silent> gi <Plug>(coc-implementation)
 		nmap <silent> gr <Plug>(coc-references)
 
-		map <leader>d :<C-u>call CocActionAsync("jumpDefinition", "split")<CR>
+		" map <leader>d :<C-u>call CocActionAsync("jumpDefinition", "split")<CR>
 
 		" Use K to show documentation in preview window
 		nnoremap <silent> K :call <SID>show_documentation()<CR>
-		map <leader>i :call <SID>show_documentation()<CR>
+		" map <leader>i :call <SID>show_documentation()<CR>
 
 		function! s:show_documentation()
 		  if (index(['vim','help'], &filetype) >= 0)
@@ -559,11 +565,11 @@
 		autocmd CursorHold * silent call CocActionAsync('highlight')
 
 		" Remap for rename current word
-		nmap <leader>rn <Plug>(coc-rename)
+		" nmap <leader>rn <Plug>(coc-rename)
 
 		" Remap for format selected region
-		vmap <leader>f  <Plug>(coc-format-selected)
-		nmap <leader>f  <Plug>(coc-format-selected)
+		" vmap <leader>f  <Plug>(coc-format-selected)
+		" nmap <leader>f  <Plug>(coc-format-selected)
 
 		augroup cocgroup
 			autocmd!
@@ -1109,14 +1115,14 @@ augroup END
 	" From https://jesseleite.com/posts/2/its-dangerous-to-vim-alone-take-fzf
 	" {
 		" File Finder
-		nmap <Leader>f :GFiles<CR>
-		nmap <Leader>F :Files<CR>
+		nmap <Leader>ff :GFiles<CR>
+		nmap <Leader>fF :Files<CR>
 
 		" Buffer Finder
 		" Here I've mapped <Leader>b to search for open buffers, and <Leader>h to
 		" search buffer history.
-		nmap <Leader>B :Buffers<CR>
-		nmap <Leader>h :History<CR>
+		nmap <Leader>fB :Buffers<CR>
+		nmap <Leader>fH :History<CR>
 		" These two make it easy to switch between buffers, and order their results by
 		" most recent so you can easily switch between your two most recent files
 		" without being required to enter a search query.
@@ -1124,8 +1130,8 @@ augroup END
 		" Tag Finder
 		" Here I've mapped <Leader>t to search for tags in current buffer, and
 		" <Leader>T to search for tags across project
-		nmap <Leader>t :BTags<CR>
-		nmap <Leader>T :Tags<CR>
+		nmap <Leader>ft :BTags<CR>
+		nmap <Leader>fT :Tags<CR>
 		" The former doesn't require a tags file, and is a great alternative to
 		" packages like tagbar because it's often quicker to fuzzy search for a method
 		" name, than it is to navigate your way through a second window. The latter is
@@ -1137,9 +1143,9 @@ augroup END
 		" Here I've mapped <Leader>l to search for lines in current buffer, <Leader>L
 		" to search for lines in loaded buffers, and <Leader>' to search for marked
 		" lines.
-		nmap <Leader>l :BLines<CR>
-		nmap <Leader>L :Lines<CR>
-		nmap <Leader>' :Marks<CR>
+		nmap <Leader>fl :BLines<CR>
+		nmap <Leader>fL :Lines<CR>
+		nmap <Leader>f' :Marks<CR>
 		" Honestly, you will get more power out of / and ag, but they require more
 		" thought because they aren't fuzzy searches. Being able to fuzzy search
 		" through both marked and unmarked lines is fast and forgiving. These can also
@@ -1147,7 +1153,7 @@ augroup END
 		" .txt files).
 
 		" Project Finder
-		nmap <Leader>a :Ag<Space>
+		nmap <Leader>fa :Ag<Space>
 		" When you need project searching power, most people look to search wrappers
 		" like ack.vim. However, these wrappers generally expect you to specify your
 		" searchable path before seeing the results.
@@ -1165,7 +1171,7 @@ augroup END
 		" more about my project searching workflow, I wrote about it here!
 
 		" Help Finder
-		nmap <Leader>H :Helptags!<CR>
+		nmap <Leader>fh :Helptags!<CR>
 		" Sometimes navigating Vim's :help documentation can be painful. Finding the
 		" right article can be difficult. Fzf's :Helptags improves this experience,
 		" especially when you run it with a bang ! to view results in fullscreen
@@ -1173,17 +1179,17 @@ augroup END
 
 		" Fuzzy search defined commands, whether they be user defined, plugin defined,
 		" or native commands:
-		nmap <Leader>C :Commands<CR>
+		nmap <Leader>fc :Commands<CR>
 
 		" Fuzzy search through :command and /search history:
-		nmap <Leader>: :History:<CR>
-		nmap <Leader>/ :History/<CR>
+		nmap <Leader>f: :History:<CR>
+		nmap <Leader>f/ :History/<CR>
 
 		" Fuzzy search key mappings, which is great for checking against current mappings before defining a new one:
-		nmap <Leader>M :Maps<CR>
+		nmap <Leader>fm :Maps<CR>
 
 		" Fuzzy search filetype syntaxes, and hit Enter on a result to set that syntax on the current buffer:
-		nmap <Leader>s :Filetypes<CR>
+		nmap <Leader>fs :Filetypes<CR>
 	" }
 
 " Similarly, we can apply it to fzf#vim#grep. To use ripgrep instead of ag:
