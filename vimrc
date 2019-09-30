@@ -254,8 +254,8 @@
 		" Open Grepper-prompt for a grepping through a vault code base
 		nnoremap <Leader>vg :Grepper -tool rg -grepprg rg -H --no-heading --vimgrep -g '!vendor' -g '!website' -g '!ui'<CR>
 		" Search for the current selection
-		nmap gs <plug>(GrepperOperator)
-		xmap gs <plug>(GrepperOperator)
+		" nmap gs <plug>(GrepperOperator)
+		" xmap gs <plug>(GrepperOperator)
 
 	" }
 	" Ack and ripgrep {
@@ -308,13 +308,13 @@
 	" Git {
 		" tpope/vim-fugitive
 		nnoremap gst :vertical :Gstatus<CR>
-		nnoremap gsl :Glog<CR>
-		nnoremap gsd :Gdiff<CR>
+		" nnoremap gsl :Glog<CR>
+		" nnoremap gsd :Gdiff<CR>
 		nnoremap gsb :Gblame<CR>
-		nnoremap gsw :Gwrite<CR>
-		nnoremap gsC :Gcommit<CR>
-		nnoremap gscd :Gcd<Bar>pwd<CR>
-		nnoremap gsld :Glcd<Bar>pwd<CR>
+		" nnoremap gsw :Gwrite<CR>
+		" nnoremap gsC :Gcommit<CR>
+		" nnoremap gscd :Gcd<Bar>pwd<CR>
+		" nnoremap gsld :Glcd<Bar>pwd<CR>
 		" airblade/vim-gitgutter
 		" let g:gitgutter_diff_args = '-w' "Ignore whitespaces
 		" gregsexton/gitv
@@ -775,14 +775,11 @@
 	" Use the l register as an append only log
 	"
 	" delete log
-	nnoremap <leader>dl qlq
+	" nnoremap <leader>dl qlq
 	" yank line to log
-	nnoremap <leader>yl "Lyy
+	" nnoremap <leader>yl "Lyy
 	" paste log
-	nnoremap <leader>pl "lp
-
-	" Edit cheatsheet
-	nnoremap <leader>ec :tabnew $HOME/.vim/plugged/vim-cheatsheet/doc/cheatsheet.txt<cr>
+	" nnoremap <leader>pl "lp
 
 	" Move visual block
 	vnoremap J :m '>+1<CR>gv=gv
@@ -854,7 +851,7 @@
 	nnoremap <leader>f9 :set foldlevel=9<CR>
 
 	"insert random string
-	nnoremap <leader>r mx:r! od -vAn -N16 -tx4 < /dev/urandom<CR>ddk:s/\s//<CR>:nohlsearch<CR>"zyiwdd`x"zP
+	" nnoremap <leader>r mx:r! od -vAn -N16 -tx4 < /dev/urandom<CR>ddk:s/\s//<CR>:nohlsearch<CR>"zyiwdd`x"zP
 
 	" Shortcuts
 	" Change Working Directory to that of the current file
