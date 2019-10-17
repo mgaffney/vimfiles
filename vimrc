@@ -319,6 +319,8 @@
 		" let g:gitgutter_diff_args = '-w' "Ignore whitespaces
 		" gregsexton/gitv
 		" let g:Gitv_OpenHorizontal = 1
+		xmap <leader>ggy :Gbrowse!<CR>
+		xmap <leader>ggp S]`>a()<ESC>hp
 	" }
 	" tmux {
 		if exists('$TMUX')
