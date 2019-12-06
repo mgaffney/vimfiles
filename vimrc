@@ -379,9 +379,14 @@
 		" let g:UltiSnipsExpandTrigger="<CR>"
 		" If you want :UltiSnipsEdit to split your window.
 		let g:UltiSnipsEditSplit="vertical"
-		let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
+
+		" let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
+		" let g:UltiSnipsSnippetDirectories=["~/.vim/UltiSnips"]
+   		" let g:UltiSnipsSnippetDirectories=["UltiSnips"]
+		" let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
+
 		" ges - Go Edit Snippets
-		nnoremap ges :UltiSnipsEdit<CR>
+		nnoremap ges :UltiSnipsEdit!<CR>
 	" }
 	" TextObjects {
 		" Insert into your .vimrc after quick-scope is loaded.
