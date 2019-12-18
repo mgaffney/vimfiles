@@ -164,6 +164,9 @@
 	" TypeScript {
 		Plug 'leafgarland/typescript-vim'
 	" }
+	" PostgreSQL {
+		Plug 'lifepillar/pgsql.vim'
+	" }
 	" HTML5 {
 		"Plug 'othree/html5-syntax.vim'
 		"Plug 'othree/html5.vim'
