@@ -114,8 +114,8 @@
 	" }
 	" Tags {
 		" Plug 'vim-scripts/taglist.vim'
-		Plug 'majutsushi/tagbar'
-		Plug 'ludovicchabant/vim-gutentags'
+		" Plug 'majutsushi/tagbar'
+		" Plug 'ludovicchabant/vim-gutentags'
 	" }
 	" UnixHelpers {
 		Plug 'tpope/vim-eunuch'
