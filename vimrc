@@ -307,6 +307,7 @@
 		autocmd! User GoyoEnter Limelight
 		autocmd! User GoyoLeave Limelight!
 		noremap <leader>z :silent! Goyo<CR>
+		let g:goyo_width = 90
 	" }
 	" Git {
 		" tpope/vim-fugitive
