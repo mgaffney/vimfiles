@@ -115,7 +115,7 @@
 	" Tags {
 		" Plug 'vim-scripts/taglist.vim'
 		" Plug 'majutsushi/tagbar'
-		" Plug 'ludovicchabant/vim-gutentags'
+		Plug 'ludovicchabant/vim-gutentags'
 	" }
 	" UnixHelpers {
 		Plug 'tpope/vim-eunuch'
@@ -235,6 +235,10 @@
 	" WebBrowser {
 		" Plug 'yuratomo/w3m.vim'
 	" }
+	" vimwiki
+		Plug 'mattn/calendar-vim'
+		Plug 'vimwiki/vimwiki'
+	" }
 	" All of your Plugs must be added before the following line
 	call plug#end()
 " }
@@ -242,6 +246,8 @@
 " ConfigPlugins {
 	" solarized {
 		let g:solarized_term_italics = 1
+		" let g:solarized_visibility = 'high'
+		" let g:solarized_extra_hi_groups = 1
 	" }
 	" Python {
 		" show the docstrings for folded code
@@ -267,6 +273,46 @@
 		" elseif executable('ag')
 			" let g:ackprg = 'ag --vimgrep'
 		" endif
+	" }
+	" vimwiki
+		let wiki_1 = {}
+		let wiki_1.path = '~/vimwiki/'
+		let wiki_1.path_html = '~/vimwiki_html/'
+		let wiki_1.list_margin = 0
+		let wiki_1.auto_tags = 1
+		let wiki_1.auto_diary_index = 1
+		let wiki_1.nested_syntaxes = {'python': 'python', 'sh': 'sh',
+					\ 'c': 'c', 'c++': 'cpp', 'go': 'go', 'bash': 'bash', 'zsh': 'zsh'}
+		" let wiki_1.ext = '.md'
+		" let wiki_1.folding = 'syntax'
+		" let wiki_1.syntax = 'markdown'
+		let g:vimwiki_list = [wiki_1]
+		let g:vimwiki_global_ext = 0
+		" let g:vimwiki_hl_headers = 1
+		" let g:vimwiki_hl_cb_checked = 1
+		" let g:vimwiki_listsyms = ' ○◐●✓'
+		let g:vimwiki_listsyms = ' ◔◑◕✓'
+		" let g:vimwiki_listsym_rejected = '✗'
+		let g:vimwiki_listsym_rejected = '✘'
+		let g:vimwiki_dir_link = 'index'
+		" let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+		" let g:vimwiki_global_ext = 0 " make sure vimwiki doesn't own all .md files
+
+		function! ToggleCalendar()
+		  execute ":Calendar"
+		  if exists("g:calendar_open")
+			if g:calendar_open == 1
+			  execute "q"
+			  unlet g:calendar_open
+			else
+			  g:calendar_open = 1
+			end
+		  else
+			let g:calendar_open = 1
+		  end
+		endfunction
+		autocmd FileType vimwiki map <leader>cc :call ToggleCalendar()<CR>
+
 	" }
 	" elzr/vim-json {
 		let g:vim_json_syntax_conceal = 0
