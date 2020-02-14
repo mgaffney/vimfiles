@@ -49,13 +49,6 @@
 		" Plug 'Valloric/YouCompleteMe'
 		" Plug 'ervandew/supertab'
 		" Plug 'maralla/completor.vim'
-		Plug 'neoclide/coc.nvim', {'branch': 'release'}
-		Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
-		Plug 'neoclide/coc-sources', {'do': 'yarn install --frozen-lockfile'}
-		" Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
-		" Plug 'josa42/coc-sh', {'do': 'yarn install --frozen-lockfile'}
-
-		" Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 	" }
 	" Search {
 		" if executable('ag')
@@ -125,11 +118,6 @@
 	" }
 	" Plist {
 		Plug 'darfink/vim-plist'
-	" }
-	" Golang {
-		" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'tag': '*' }
-		Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-		" Plug 'cespare/vim-go-templates'
 	" }
 	" Database {
 		Plug 'tpope/vim-dadbod'
@@ -238,6 +226,22 @@
 	" vimwiki
 		Plug 'mattn/calendar-vim'
 		Plug 'vimwiki/vimwiki'
+	" }
+	" Golang {
+		Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+	" }
+	" coc.nvim {
+	"
+	" 	coc works best if it is the last plugin loaded. This prevents other
+	" 	plugins from overwritting coc's settings.
+	"
+		Plug 'neoclide/coc.nvim', {'branch': 'release'}
+		Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
+		Plug 'neoclide/coc-sources', {'do': 'yarn install --frozen-lockfile'}
+		" Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
+		" Plug 'josa42/coc-sh', {'do': 'yarn install --frozen-lockfile'}
+
+		" Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 	" }
 	" All of your Plugs must be added before the following line
 	call plug#end()
@@ -563,12 +567,20 @@
 		let g:coc_global_extensions = ['coc-ultisnips']
 		" if hidden is not set, TextEdit might fail.
 		set hidden
+
+		" Some servers have issues with backup files, see #649
+		set nobackup
+		set nowritebackup
+
 		" Better display for messages
 		" set cmdheight=2
+
 		" Smaller updatetime for CursorHold & CursorHoldI
 		set updatetime=300
+
 		" don't give |ins-completion-menu| messages.
 		set shortmess+=c
+
 		" always show signcolumns
 		set signcolumn=yes
 
@@ -590,9 +602,9 @@
 
 		" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 		" Coc only does snippet and additional edit on confirm.
-		inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+	"	inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 		" Or use `complete_info` if your vim support it, like:
-		" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+		inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 
 		" Use `[c` and `]c` to navigate diagnostics
 		" nmap <silent> [c <Plug>(coc-diagnostic-prev)
