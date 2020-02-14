@@ -901,6 +901,20 @@
 	" Toggle TagList window
 	" nnoremap <silent> <F8> :TlistToggle<CR>
 
+	" Folding
+	set foldlevelstart=0
+
+	" Space to toggle folds.
+	nnoremap <Space> za
+	vnoremap <Space> za
+
+	" "Refocus" folds
+	" nnoremap ,z zMzvzz
+
+	" Make zO recursively open whatever top level fold we're in, no matter where the
+	" cursor happens to be.
+	nnoremap zO zczO
+
 	""" Code folding options
 	nnoremap <leader>f0 :set foldlevel=0<CR>
 	nnoremap <leader>f1 :set foldlevel=1<CR>

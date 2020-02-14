@@ -5,6 +5,7 @@ setlocal tabstop=4
 setlocal nowrap
 setlocal textwidth=75
 
+setlocal foldmethod=syntax
 setlocal formatoptions+=o
 setlocal formatoptions+=r
 
@@ -58,6 +59,8 @@ nmap <Leader>rn <Plug>(go-rename)
 " nmap <Leader>i <Plug>(go-info)
 
 " Settings for vim-go bundle
+
+let g:go_fold_enable = ['block', 'import', 'varconst', 'package_comment']
 
 let g:go_term_enabled = 1
 let g:go_term_mode = "split"
