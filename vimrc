@@ -874,9 +874,9 @@
 
 	" Edit .vimrc file quickly
 	" gev - Go Edit Vimrc
-	nnoremap gev :tabnew $MYVIMRC<cr>
+	nnoremap gev :tabnew $HOME/.vim/vimrc<cr>
 	" gsv - Go Source Vimrc
-	nnoremap gsv :source $MYVIMRC<cr>
+	nnoremap gsv :source $HOME/.vim/vimrc<cr>
 	" map <Leader>v  :so $MYVIMRC<CR>
 
 	" Yank CVE
