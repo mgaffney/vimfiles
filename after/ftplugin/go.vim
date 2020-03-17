@@ -68,6 +68,8 @@ let g:go_term_height = 10
 
 let g:go_def_mode = 'gopls'
 let g:go_info_mode ='gopls'
+let g:go_rename_command = 'gopls'
+
 " let g:go_echo_go_info = 1
 
 " Sometimes when using both vim-go and syntastic Vim will start lagging while
