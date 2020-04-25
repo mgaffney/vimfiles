@@ -286,7 +286,8 @@
 		let wiki_1.auto_tags = 1
 		let wiki_1.auto_diary_index = 1
 		let wiki_1.nested_syntaxes = {'python': 'python', 'sh': 'sh',
-					\ 'c': 'c', 'c++': 'cpp', 'go': 'go', 'bash': 'bash', 'zsh': 'zsh'}
+					\ 'c': 'c', 'c++': 'cpp', 'go': 'go', 'bash': 'bash',
+					\ 'zsh': 'zsh', 'sql': 'sql', 'hcl': 'hcl'}
 		" let wiki_1.ext = '.md'
 		" let wiki_1.folding = 'syntax'
 		" let wiki_1.syntax = 'markdown'
