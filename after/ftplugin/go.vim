@@ -74,7 +74,7 @@ let g:go_rename_command = 'gopls'
 
 " Sometimes when using both vim-go and syntastic Vim will start lagging while
 " saving and opening files. The following fixes this:
-" let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+" let g:syntastic_go_checkers = ['golint', 'govet']
 " let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 " Enable goimports to automatically insert import paths instead of gofmt:
@@ -93,16 +93,14 @@ let g:go_def_reuse_buffer = 0
 " let g:go_highlight_operators = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_function_calls = 1
-let g:go_highlight_function_arguments = 1
 
 let g:go_highlight_function_parameters = 1
-" let g:go_highlight_methods = 1
 let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_build_constraints = 1
+let g:go_highlight_generate_tags = 1
 
 let g:go_highlight_extra_types = 1
-let g:go_highlight_generate_tags = 1
 
 " let g:go_auto_sameids = 1
 
