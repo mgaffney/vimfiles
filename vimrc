@@ -323,19 +323,20 @@
 		let g:vim_json_syntax_conceal = 0
 	" }
 	" Markdown (tpope plugin) {
-		" let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'go', 'json', 'javascript']
-		" let g:markdown_syntax_conceal = 0
+		let g:markdown_fenced_languages = ['html', 'python',
+			\ 'bash=sh', 'go', 'json', 'javascript', 'sql', 'zsh', 'vim']
+		let g:markdown_syntax_conceal = 0
 
 		" Turn folding on for markdown files
 		" let g:markdown_folding = 1
 	" }
 	" Markdown (plasticboy) {
-		let g:vim_markdown_fenced_languages = ['html', 'python', 'bash=sh', 'go', 'json', 'javascript']
-		let g:vim_markdown_syntax_conceal = 0
+		" let g:vim_markdown_fenced_languages = ['html', 'python', 'bash=sh', 'go', 'json', 'javascript']
+		" let g:vim_markdown_syntax_conceal = 0
 
 		" Turn folding on for markdown files
 		" let g:vim_markdown_folding = 1
-		let g:vim_markdown_folding_style_pythonic = 1
+		" let g:vim_markdown_folding_style_pythonic = 1
 	" }
 	" better-whitespace {
 		" Defaults
@@ -529,6 +530,7 @@
 		let g:airline_symbols.readonly = ''
 		" let g:airline_symbols.linenr = ''
 
+		let g:airline#extensions#coc#enabled = 1
 		if exists('$TMUX')
 			let g:airline#extensions#tmuxline#enabled = 0
 		endif
@@ -642,11 +644,11 @@
 		autocmd CursorHold * silent call CocActionAsync('highlight')
 
 		" Remap for rename current word
-		" nmap <leader>rn <Plug>(coc-rename)
+		nmap <leader>rn <Plug>(coc-rename)
 
 		" Remap for format selected region
-		" vmap <leader>f  <Plug>(coc-format-selected)
-		" nmap <leader>f  <Plug>(coc-format-selected)
+		vmap <leader>q  <Plug>(coc-format-selected)
+		nmap <leader>q  <Plug>(coc-format-selected)
 
 		augroup cocgroup
 			autocmd!
