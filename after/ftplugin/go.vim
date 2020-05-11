@@ -52,7 +52,7 @@ nmap <Leader>dv <Plug>(go-def-vertical)
 nmap <Leader>dt <Plug>(go-def-tab)
 
 " Rename the identifier under the cursor to a new name
-nmap <Leader>rn <Plug>(go-rename)
+" nmap <Leader>rn <Plug>(go-rename)
 
 " Show type info for the word under your cursor with <leader>i (useful if you
 " have disabled auto showing type info via g:go_auto_type_info)
@@ -68,7 +68,7 @@ let g:go_term_height = 10
 
 let g:go_def_mode = 'gopls'
 let g:go_info_mode ='gopls'
-let g:go_rename_command = 'gopls'
+" let g:go_rename_command = 'gopls'
 
 " let g:go_echo_go_info = 1
 
@@ -105,10 +105,10 @@ let g:go_highlight_extra_types = 1
 " let g:go_auto_sameids = 1
 
 " let g:go_dispatch_enabled = 1
-" let g:go_auto_type_info = 1
+let g:go_auto_type_info = 1
 
-let g:go_gocode_propose_source = 1
-let g:go_gocode_unimported_packages = 1
+" let g:go_gocode_propose_source = 1
+" let g:go_gocode_unimported_packages = 1
 let g:go_highlight_array_whitespace_error = 1
 
 let g:go_highlight_chan_whitespace_error = 1
