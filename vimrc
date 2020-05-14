@@ -1233,6 +1233,14 @@ augroup END
 		\       'alternate': '{}.go',
 		\       'type': 'test'
 		\   },
+		\   '*.up.sql': {
+		\       'alternate': '{}.down.sql',
+		\       'type': 'source'
+		\   },
+		\   '*.down.sql': {
+		\       'alternate': '{}.up.sql',
+		\       'type': 'source'
+		\   },
 		\ }
 	\ }
 " }
