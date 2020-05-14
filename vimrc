@@ -656,6 +656,8 @@
 			autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
 			" Update signature help on jump placeholder
 			autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+			" coc.nvim uses jsonc as configuration file format
+			autocmd FileType json syntax match Comment +\/\/.\+$+
 		augroup end
 
 
