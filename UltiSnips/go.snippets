@@ -55,3 +55,11 @@ func testChdir(t *testing.T, dir string) func() {
 	return func() { os.Chdir(old) }
 }
 endsnippet
+
+# reverse for loop
+snippet rfor "for N-1..0 { ... }"
+for ${1:i} := len(${2:N}) - 1 ; $1 >= 0; $1-- {
+	${0:${VISUAL}}
+}
+endsnippet
+
