@@ -51,6 +51,10 @@ nmap <Leader>ds <Plug>(go-def-split)
 nmap <Leader>dv <Plug>(go-def-vertical)
 nmap <Leader>dt <Plug>(go-def-tab)
 
+iabbr <buffer> todo // TODO(mgaffney):
+iabbr <buffer> note // NOTE(mgaffney):
+iabbr <buffer> bug // BUG(mgaffney):
+
 " Rename the identifier under the cursor to a new name
 " nmap <Leader>rn <Plug>(go-rename)
 
