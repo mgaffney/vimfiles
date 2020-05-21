@@ -37,13 +37,13 @@ inoremap <Leader>ds		<C-R>=strftime("%A %B %e, %Y")<CR>
 inoremap <Leader>ymd	<C-R>=strftime("%Y-%m-%d")<CR>
 inoremap <Leader>mdy	<C-R>=strftime("%m/%d/%y")<CR>
 inoremap <Leader>Mdy	<C-R>=strftime("%b %d, %Y")<CR>
-inoremap <Leader>hms	<C-R>=strftime("%T")<CR>
+inoremap <Leader>ts  	<C-R>=strftime("%T")<CR>
 
 " Insert the current date e.g.: Friday November 22, 2013
-inoremap \zd <C-R>=strftime("%A %B %e, %Y")<CR>
+inoremap <Leader>zd <C-R>=strftime("%A %B %e, %Y")<CR>
 " Insert the current time e.g.: 1.12 PM
-inoremap \zt <C-R>=strftime("%l.%M %p")<CR>
+inoremap <Leader>zt <C-R>=strftime("%l.%M %p")<CR>
 " inoremap \zt <C-R>=strftime("%r")<CR>
 " Insert the current date and time e.g.: Friday November 22, 2013 • 1.12 PM
-inoremap \zs <C-R>=strftime("%A %B %e, %Y • %l.%M %p")<CR>
+inoremap <Leader>zs <C-R>=strftime("%A %B %e, %Y • %l.%M %p")<CR>
 
