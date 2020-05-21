@@ -863,6 +863,14 @@
 
 	set diffopt=filler,vertical
 " }
+" Neovim {
+	if has('nvim')
+" 	Terminal {
+		" exit terminal mode with <esc>
+		tnoremap <Esc> <C-\><C-n>
+" 	}
+	endif
+" }
 " Key (re)Mappings {
 	" noremap QQ :qall<CR>
 	noremap <F1> <Esc>
