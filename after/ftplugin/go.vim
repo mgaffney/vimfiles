@@ -80,7 +80,7 @@ let g:go_info_mode ='gopls'
 
 " Enable goimports to automatically insert import paths instead of gofmt:
 let g:go_fmt_autosave = 1
-" let g:go_fmt_command = "gopls"
+let g:go_fmt_command = "gopls"
 let g:go_autodetect_gopath = 1
 
 " This experimental mode is superior to the current mode as it fully saves the
