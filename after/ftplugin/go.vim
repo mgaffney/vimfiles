@@ -35,7 +35,7 @@ nmap <Leader>gdb <Plug>(go-doc-browser)
 " <leader>c.
 nmap <leader>gr <Plug>(go-run)
 " nmap <leader>gb <Plug>(go-build)  " gb (go-build) is mapped below
-nmap <leader>gi <Plug>(go-install)
+" nmap <leader>gi <Plug>(go-install)
 nmap <leader>gtt <Plug>(go-test)
 nmap <leader>gtf <Plug>(go-test-func)
 nmap <leader>gtc <Plug>(go-coverage-browser)
