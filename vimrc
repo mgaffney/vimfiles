@@ -342,7 +342,7 @@
 		" Defaults
 		" let g:better_whitespace_filetypes_blacklist=['diff', 'gitcommit', 'unite', 'qf', 'help', 'markdown']
 		highlight ExtraWhitespace ctermbg=DarkBlue
-		let g:better_whitespace_filetypes_blacklist=['diff', 'gitcommit', 'unite', 'qf', 'help', 'html', 'proto']
+		let g:better_whitespace_filetypes_blacklist=['diff', 'gitcommit', 'unite', 'qf', 'help', 'html', 'proto', 'sql']
 		autocmd FileType markdown,xml,make,sql,sh,python,json,tf,vim,asciidoc,vimwiki autocmd BufEnter <buffer> EnableStripWhitespaceOnSave
 		let g:strip_whitespace_confirm = 0
 		let g:strip_only_modified_lines = 1
