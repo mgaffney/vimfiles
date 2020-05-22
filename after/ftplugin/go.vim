@@ -51,9 +51,13 @@ nmap <Leader>ds <Plug>(go-def-split)
 nmap <Leader>dv <Plug>(go-def-vertical)
 nmap <Leader>dt <Plug>(go-def-tab)
 
+inoremap <Leader>ds <C-R>=strftime("%m/%Y")<CR>
+
 iabbr <buffer> todo // TODO(mgaffney):
 iabbr <buffer> note // NOTE(mgaffney):
 iabbr <buffer> bug // BUG(mgaffney):
+
+iabbr <buffer> jim jimlambrt
 
 " Rename the identifier under the cursor to a new name
 " nmap <Leader>rn <Plug>(go-rename)
@@ -117,8 +121,8 @@ let g:go_auto_type_info = 1
 let g:go_highlight_array_whitespace_error = 1
 
 let g:go_highlight_chan_whitespace_error = 1
-let g:go_highlight_space_tab_error = 1
-let g:go_highlight_trailing_whitespace_error = 1
+let g:go_highlight_space_tab_error = 0
+let g:go_highlight_trailing_whitespace_error = 0
 let g:go_highlight_variable_declarations = 1
 let g:go_highlight_variable_assignments = 1
 
