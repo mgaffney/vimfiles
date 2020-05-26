@@ -867,7 +867,7 @@
 	if has('nvim')
 " 	Terminal {
 		" exit terminal mode with <esc>
-		tnoremap <Esc> <C-\><C-n>
+		" tnoremap <Esc> <C-\><C-n>
 " 	}
 	endif
 " }
