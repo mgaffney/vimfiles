@@ -74,7 +74,7 @@ let g:go_term_enabled = 1
 let g:go_term_mode = "split"
 let g:go_term_height = 10
 
-let g:go_gopls_options = ['-remote=auto']
+" let g:go_gopls_options = ['-remote=auto']
 let g:go_def_mode = 'gopls'
 let g:go_info_mode ='gopls'
 " let g:go_rename_command = 'gopls'
