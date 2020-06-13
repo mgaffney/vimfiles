@@ -51,9 +51,7 @@ nmap <Leader>ds <Plug>(go-def-split)
 nmap <Leader>dv <Plug>(go-def-vertical)
 nmap <Leader>dt <Plug>(go-def-tab)
 
-inoremap <Leader>ds <C-R>=strftime("%m/%Y")<CR>
-
-iabbr <buffer> todo // TODO(mgaffney):
+iabbr <buffer> todo // TODO(mgaffney) <c-r>=strftime("%m/%Y")<cr>:
 iabbr <buffer> note // NOTE(mgaffney):
 iabbr <buffer> bug // BUG(mgaffney):
 
