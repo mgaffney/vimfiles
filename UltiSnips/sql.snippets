@@ -1,0 +1,43 @@
+snippet wutime "Watchtower update_time triggers" b
+create trigger
+	update_time_column
+before
+update on ${1:table}
+	for each row execute procedure update_time_column();
+endsnippet
+
+snippet wctime "Watchtower create_time triggers" b
+create trigger
+	immutable_create_time
+before
+update on ${1:table}
+	for each row execute procedure immutable_create_time_func();
+
+create trigger
+	default_create_time_column
+before
+insert on $1
+	for each row execute procedure default_create_time();
+endsnippet
+
+snippet wtime "Watchtower time column triggers" b
+create trigger
+	update_time_column
+before
+update on ${1:table}
+	for each row execute procedure update_time_column();
+
+create trigger
+	immutable_create_time
+before
+update on $1
+	for each row execute procedure immutable_create_time_func();
+
+create trigger
+	default_create_time_column
+before
+insert on $1
+	for each row execute procedure default_create_time();
+endsnippet
+
+# vim:ft=snippets:
