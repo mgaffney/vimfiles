@@ -63,3 +63,734 @@ for ${1:i} := len(${2:N}) - 1 ; $1 >= 0; $1-- {
 }
 endsnippet
 
+snippet wt-new-resource "NewResource"
+// A $1 contains ${0}. It is owned by a ${2:Scope}.
+type ${1:Resource} struct {
+	*store.$1
+	tableName string `gorm:"-"`
+}
+
+// New$1 creates a new in memory $1 assigned to $3.
+// Name and description are the only valid options. All other options are
+// ignored.
+func New$1(${3:scopeId} string, opt ...Option) (*$1, error) {
+	if $3 == "" {
+		return nil, fmt.Errorf("new: ${6:package} ${7:resource}: no $3: %w", db.ErrInvalidParameter)
+	}
+
+	opts := getOpts(opt...)
+	${4:resource_var} := &$1{
+		$1: &store.$1{
+			$2Id:        $3,
+			Name:        opts.withName,
+			Description: opts.withDescription,
+		},
+	}
+	return $4, nil
+}
+
+func ($4 *$1) clone() *$1 {
+	cp := proto.Clone($4.$1)
+	return &$1{
+		$1: cp.(*store.$1),
+	}
+}
+
+// TableName returns the table name.
+func ($4 *$1) TableName() string {
+	if $4.tableName != "" {
+		return $4.tableName
+	}
+	return "${5:table_name}"
+}
+
+// SetTableName sets the table name.
+func ($4 *$1) SetTableName(n string) {
+	if n != "" {
+		$4.tableName = n
+	}
+}
+endsnippet
+
+snippet tt "Table driven test"
+type args struct {
+	${1:input} string
+}
+var tests = []struct {
+	name    string
+	args    args
+	want    *${2:OutputType}
+	wantErr bool
+}{
+	{
+		name: "blank-$1",
+		args: args{
+			$1: "",
+		},
+		want:    nil,
+		wantErr: true,
+	},
+}
+for _, tt := range tests {
+	tt := tt
+	t.Run(tt.name, func(t *testing.T) {
+		assert, require := assert.New(t), require.New(t)
+		got, err := ${3:FuncUnderTest}(tt.args.$1)
+		if tt.wantErr {
+			assert.Error(err)
+			require.Nil(got)
+			return
+		}
+		require.NoError(err)
+		require.NotNil(got)
+	})
+}
+endsnippet
+
+snippet wt-test-new-resource "NewResource Test"
+func Test${1:resource}_New(t *testing.T) {
+	cleanup, conn, _ := db.TestSetup(t, "postgres")
+	t.Cleanup(func() {
+		err := cleanup()
+		assert.NoError(t, err)
+		err = conn.Close()
+		assert.NoError(t, err)
+	})
+
+	w := db.New(conn)
+	_, ${2:prj} := iam.TestScopes(t, conn)
+
+	type args struct {
+		scopeId string
+		opts    []Option
+	}
+
+	var tests = []struct {
+		name    string
+		args    args
+		want    *$1
+		wantErr bool
+	}{
+		{
+			name: "blank-scopeId",
+			args: args{
+				scopeId: "",
+			},
+			want:    nil,
+			wantErr: true,
+		},
+		{
+			name: "valid-no-options",
+			args: args{
+				scopeId: $2.GetPublicId(),
+			},
+			want: &$1{
+				$1: &store.$1{
+					ScopeId: $2.GetPublicId(),
+				},
+			},
+		},
+		{
+			name: "valid-with-name",
+			args: args{
+				scopeId: $2.GetPublicId(),
+				opts: []Option{
+					WithName("test-name"),
+				},
+			},
+			want: &$1{
+				$1: &store.$1{
+					ScopeId: $2.GetPublicId(),
+					Name:    "test-name",
+				},
+			},
+		},
+		{
+			name: "valid-with-description",
+			args: args{
+				scopeId: $2.GetPublicId(),
+				opts: []Option{
+					WithDescription("test-description"),
+				},
+			},
+			want: &$1{
+				$1: &store.$1{
+					ScopeId:     $2.GetPublicId(),
+					Description: "test-description",
+				},
+			},
+		},
+	}
+
+	for _, tt := range tests {
+		tt := tt
+		t.Run(tt.name, func(t *testing.T) {
+			assert, require := assert.New(t), require.New(t)
+			got, err := New$1(tt.args.scopeId, tt.args.opts...)
+			if tt.wantErr {
+				assert.Error(err)
+				require.Nil(got)
+				return
+			}
+			require.NoError(err)
+			require.NotNil(got)
+
+			assert.Emptyf(got.PublicId, "PublicId set")
+			assert.Equal(tt.want, got)
+
+			id, err := new$1Id()
+			assert.NoError(err)
+
+			tt.want.PublicId = id
+			got.PublicId = id
+
+			err2 := w.Create(context.Background(), got)
+			assert.NoError(err2)
+		})
+	}
+}
+endsnippet
+
+snippet wt-create "repo CreateResource"
+// Create${1:Resource} inserts ${4:resource_var} into the repository and returns a new
+// $1 containing the $2's PublicId. $4 is not changed. $4 must
+// contain a valid ${5:ScopeId}. $4 must not contain a PublicId. The PublicId is
+// generated and assigned by this method. opt is ignored.
+//
+// Both $4.Name and $4.Description are optional. If $4.Name is set, it must be
+// unique within $4.$5.
+//
+// Both $4.CreateTime and $4.UpdateTime are ignored.
+func (r *Repository) Create$1(ctx context.Context, $4 *$1, opt ...Option) (*$1, error) {
+	if $4 == nil {
+		return nil, fmt.Errorf("create: ${3:package} ${2:friendlyName}: %w", db.ErrNilParameter)
+	}
+	if $4.$1 == nil {
+		return nil, fmt.Errorf("create: $4 $2: embedded $1: %w", db.ErrNilParameter)
+	}
+	if $4.$5 == "" {
+		return nil, fmt.Errorf("create: $4 $2: no ${6:scope} id: %w", db.ErrInvalidParameter)
+	}
+	if $4.PublicId != "" {
+		return nil, fmt.Errorf("create: $4 $2: public id not empty: %w", db.ErrInvalidParameter)
+	}
+	$4 = $4.clone()
+
+	id, err := new$1Id()
+	if err != nil {
+		return nil, fmt.Errorf("create: $4 $2: %w", err)
+	}
+	$4.PublicId = id
+
+	metadata := new$1Metadata($4, oplog.OpType_OP_TYPE_CREATE)
+
+	var new$1 *$1
+	_, err = r.writer.DoTx(ctx, db.StdRetryCnt, db.ExpBackoff{},
+		func(w db.Writer) error {
+			new$1 = $4.clone()
+			return w.Create(ctx, new$1, db.WithOplog(r.wrapper, metadata))
+		},
+	)
+
+	if err != nil {
+		if db.IsUniqueError(err) {
+			return nil, fmt.Errorf("create: $4 $2: in $6: %s: name %s already exists: %w",
+				$4.$5, $4.Name, db.ErrNotUnique)
+		}
+		return nil, fmt.Errorf("create: $4 $2: in $6: %s: %w", $4.$5, err)
+	}
+	return new$1, nil
+}
+
+func alloc$1() *$1 {
+	fresh := &$1{
+		$1: &store.$1{},
+	}
+	return fresh
+}
+
+func new$1Metadata($4 *$1, op oplog.OpType) oplog.Metadata {
+	metadata := oplog.Metadata{
+		"resource-public-id": []string{$4.GetPublicId()},
+		"resource-type":      []string{"$4 $2"},
+		"op-type":            []string{op.String()},
+	}
+	if $4.$5 != "" {
+		metadata["$6-id"] = []string{$4.$5}
+	}
+	return metadata
+}
+endsnippet
+
+snippet wt-test-create "repo CreateResource test"
+func TestRepository_Create${1:resource}(t *testing.T) {
+	cleanup, conn, _ := db.TestSetup(t, "postgres")
+	t.Cleanup(func() {
+		err := cleanup()
+		assert.NoError(t, err)
+		err = conn.Close()
+		assert.NoError(t, err)
+	})
+	rw := db.New(conn)
+	wrapper := db.TestWrapper(t)
+
+	_, prj := iam.TestScopes(t, conn)
+
+	var tests = []struct {
+		name      string
+		in        *$1
+		opts      []Option
+		want      *$1
+		wantIsErr error
+	}{
+		{
+			name:      "nil-$1",
+			wantIsErr: db.ErrNilParameter,
+		},
+		{
+			name:      "nil-embedded-$1",
+			in:        &$1{},
+			wantIsErr: db.ErrNilParameter,
+		},
+		{
+			name: "invalid-no-scope-id",
+			in: &$1{
+				$1: &store.$1{},
+			},
+			wantIsErr: db.ErrInvalidParameter,
+		},
+		{
+			name: "invalid-public-id-set",
+			in: &$1{
+				$1: &store.$1{
+					ScopeId:  prj.PublicId,
+					PublicId: "sthc_OOOOOOOOOO",
+				},
+			},
+			wantIsErr: db.ErrInvalidParameter,
+		},
+		{
+			name: "valid-no-options",
+			in: &$1{
+				$1: &store.$1{
+					ScopeId: prj.PublicId,
+				},
+			},
+			want: &$1{
+				$1: &store.$1{
+					ScopeId: prj.PublicId,
+				},
+			},
+		},
+		{
+			name: "valid-with-name",
+			in: &$1{
+				$1: &store.$1{
+					ScopeId: prj.PublicId,
+					Name:    "test-name-repo",
+				},
+			},
+			want: &$1{
+				$1: &store.$1{
+					ScopeId: prj.PublicId,
+					Name:    "test-name-repo",
+				},
+			},
+		},
+		{
+			name: "valid-with-description",
+			in: &$1{
+				$1: &store.$1{
+					ScopeId:     prj.PublicId,
+					Description: ("test-description-repo"),
+				},
+			},
+			want: &$1{
+				$1: &store.$1{
+					ScopeId:     prj.PublicId,
+					Description: ("test-description-repo"),
+				},
+			},
+		},
+	}
+
+	for _, tt := range tests {
+		tt := tt
+		t.Run(tt.name, func(t *testing.T) {
+			assert, require := assert.New(t), require.New(t)
+			repo, err := NewRepository(rw, rw, wrapper)
+			require.NoError(err)
+			require.NotNil(repo)
+			got, err := repo.Create$1(context.Background(), tt.in, tt.opts...)
+			if tt.wantIsErr != nil {
+				assert.Truef(errors.Is(err, tt.wantIsErr), "want err: %q got: %q", tt.wantIsErr, err)
+				assert.Nil(got)
+				return
+			}
+			require.NoError(err)
+			assert.Empty(tt.in.PublicId)
+			require.NotNil(got)
+			assertPublicId(t, $1Prefix, got.PublicId)
+			assert.NotSame(tt.in, got)
+			assert.Equal(tt.want.Name, got.Name)
+			assert.Equal(tt.want.Description, got.Description)
+			assert.Equal(got.CreateTime, got.UpdateTime)
+		})
+	}
+
+	t.Run("invalid-duplicate-names", func(t *testing.T) {
+		assert, require := assert.New(t), require.New(t)
+		repo, err := NewRepository(rw, rw, wrapper)
+		require.NoError(err)
+		require.NotNil(repo)
+
+		_, prj := iam.TestScopes(t, conn)
+		in := &$1{
+			$1: &store.$1{
+				ScopeId: prj.GetPublicId(),
+				Name:    "test-name-repo",
+			},
+		}
+
+		got, err := repo.Create$1(context.Background(), in)
+		require.NoError(err)
+		require.NotNil(got)
+		assertPublicId(t, $1Prefix, got.PublicId)
+		assert.NotSame(in, got)
+		assert.Equal(in.Name, got.Name)
+		assert.Equal(in.Description, got.Description)
+		assert.Equal(got.CreateTime, got.UpdateTime)
+
+		got2, err := repo.Create$1(context.Background(), in)
+		assert.Truef(errors.Is(err, db.ErrNotUnique), "want err: %v got: %v", db.ErrNotUnique, err)
+		assert.Nil(got2)
+	})
+
+	t.Run("valid-duplicate-names-diff-scopes", func(t *testing.T) {
+		assert, require := assert.New(t), require.New(t)
+		repo, err := NewRepository(rw, rw, wrapper)
+		require.NoError(err)
+		require.NotNil(repo)
+
+		org, prj := iam.TestScopes(t, conn)
+		in := &$1{
+			$1: &store.$1{
+				Name: "test-name-repo",
+			},
+		}
+		in2 := in.clone()
+
+		in.ScopeId = prj.GetPublicId()
+		got, err := repo.Create$1(context.Background(), in)
+		require.NoError(err)
+		require.NotNil(got)
+		assertPublicId(t, $1Prefix, got.PublicId)
+		assert.NotSame(in, got)
+		assert.Equal(in.Name, got.Name)
+		assert.Equal(in.Description, got.Description)
+		assert.Equal(got.CreateTime, got.UpdateTime)
+
+		in2.ScopeId = org.GetPublicId()
+		got2, err := repo.Create$1(context.Background(), in2)
+		require.NoError(err)
+		require.NotNil(got2)
+		assertPublicId(t, $1Prefix, got2.PublicId)
+		assert.NotSame(in2, got2)
+		assert.Equal(in2.Name, got2.Name)
+		assert.Equal(in2.Description, got2.Description)
+		assert.Equal(got2.CreateTime, got2.UpdateTime)
+	})
+}
+endsnippet
+
+snippet wt-test-child-create "repo child resource Create test"
+func TestRepository_Create${1:resource}(t *testing.T) {
+	cleanup, conn, _ := db.TestSetup(t, "postgres")
+	t.Cleanup(func() {
+		err := cleanup()
+		assert.NoError(t, err)
+		err = conn.Close()
+		assert.NoError(t, err)
+	})
+	rw := db.New(conn)
+	wrapper := db.TestWrapper(t)
+
+	${3:pp} := ${4:testParents}(t, conn, 1)
+	${5:p} := $3[0]
+
+	var tests = []struct {
+		name      string
+		in        *$1
+		opts      []Option
+		want      *$1
+		wantIsErr error
+	}{
+		{
+			name:      "nil-$1",
+			wantIsErr: db.ErrNilParameter,
+		},
+		{
+			name:      "nil-embedded-$1",
+			in:        &$1{},
+			wantIsErr: db.ErrNilParameter,
+		},
+		{
+			name: "invalid-no-parent-id",
+			in: &$1{
+				$1: &store.$1{},
+			},
+			wantIsErr: db.ErrInvalidParameter,
+		},
+		{
+			name: "invalid-public-id-set",
+			in: &$1{
+				$1: &store.$1{
+					${6:ParentId}:  $5.PublicId,
+					PublicId: "sthc_OOOOOOOOOO",
+				},
+			},
+			wantIsErr: db.ErrInvalidParameter,
+		},
+		{
+			name: "valid-no-options",
+			in: &$1{
+				$1: &store.$1{
+					$6: $5.PublicId,
+				},
+			},
+			want: &$1{
+				$1: &store.$1{
+					$6: $5.PublicId,
+				},
+			},
+		},
+		{
+			name: "valid-with-name",
+			in: &$1{
+				$1: &store.$1{
+					$6: $5.PublicId,
+					Name:    "test-name-repo",
+				},
+			},
+			want: &$1{
+				$1: &store.$1{
+					$6: $5.PublicId,
+					Name:    "test-name-repo",
+				},
+			},
+		},
+		{
+			name: "valid-with-description",
+			in: &$1{
+				$1: &store.$1{
+					$6:     $5.PublicId,
+					Description: ("test-description-repo"),
+				},
+			},
+			want: &$1{
+				$1: &store.$1{
+					$6:     $5.PublicId,
+					Description: ("test-description-repo"),
+				},
+			},
+		},
+	}
+
+	for _, tt := range tests {
+		tt := tt
+		t.Run(tt.name, func(t *testing.T) {
+			assert, require := assert.New(t), require.New(t)
+			repo, err := NewRepository(rw, rw, wrapper)
+			require.NoError(err)
+			require.NotNil(repo)
+			got, err := repo.Create$1(context.Background(), tt.in, tt.opts...)
+			if tt.wantIsErr != nil {
+				assert.Truef(errors.Is(err, tt.wantIsErr), "want err: %q got: %q", tt.wantIsErr, err)
+				assert.Nil(got)
+				return
+			}
+			require.NoError(err)
+			assert.Empty(tt.in.PublicId)
+			require.NotNil(got)
+			assertPublicId(t, $1Prefix, got.PublicId)
+			assert.NotSame(tt.in, got)
+			assert.Equal(tt.want.Name, got.Name)
+			assert.Equal(tt.want.Description, got.Description)
+			assert.Equal(got.CreateTime, got.UpdateTime)
+		})
+	}
+
+	t.Run("invalid-duplicate-names", func(t *testing.T) {
+		assert, require := assert.New(t), require.New(t)
+		repo, err := NewRepository(rw, rw, wrapper)
+		require.NoError(err)
+		require.NotNil(repo)
+
+		$4 := $4(t, conn, 1)
+		$5 := $4[0]
+
+		in := &$1{
+			$1: &store.$1{
+				$6: $5.GetPublicId(),
+				Name:    "test-name-repo",
+			},
+		}
+
+		got, err := repo.Create$1(context.Background(), in)
+		require.NoError(err)
+		require.NotNil(got)
+		assertPublicId(t, $1Prefix, got.PublicId)
+		assert.NotSame(in, got)
+		assert.Equal(in.Name, got.Name)
+		assert.Equal(in.Description, got.Description)
+		assert.Equal(got.CreateTime, got.UpdateTime)
+
+		got2, err := repo.Create$1(context.Background(), in)
+		assert.Truef(errors.Is(err, db.ErrNotUnique), "want err: %v got: %v", db.ErrNotUnique, err)
+		assert.Nil(got2)
+	})
+
+	t.Run("valid-duplicate-names-diff-parents", func(t *testing.T) {
+		assert, require := assert.New(t), require.New(t)
+		repo, err := NewRepository(rw, rw, wrapper)
+		require.NoError(err)
+		require.NotNil(repo)
+
+		$4 := $4(t, conn, 2)
+		$5One, $5Two  := $4[0], $4[1]
+		in := &$1{
+			$1: &store.$1{
+				Name: "test-name-repo",
+			},
+		}
+		in2 := in.clone()
+
+		in.$6 = $5One.GetPublicId()
+		got, err := repo.Create$1(context.Background(), in)
+		require.NoError(err)
+		require.NotNil(got)
+		assertPublicId(t, $1Prefix, got.PublicId)
+		assert.NotSame(in, got)
+		assert.Equal(in.Name, got.Name)
+		assert.Equal(in.Description, got.Description)
+		assert.Equal(got.CreateTime, got.UpdateTime)
+
+		in2.$6 = $5Two.GetPublicId()
+		got2, err := repo.Create$1(context.Background(), in2)
+		require.NoError(err)
+		require.NotNil(got2)
+		assertPublicId(t, $1Prefix, got2.PublicId)
+		assert.NotSame(in2, got2)
+		assert.Equal(in2.Name, got2.Name)
+		assert.Equal(in2.Description, got2.Description)
+		assert.Equal(got2.CreateTime, got2.UpdateTime)
+	})
+}
+endsnippet
+
+snippet wt-test-new-child-resource "child NewResource Test"
+func Test${1:resource}_New(t *testing.T) {
+	cleanup, conn, _ := db.TestSetup(t, "postgres")
+	t.Cleanup(func() {
+		err := cleanup()
+		assert.NoError(t, err)
+		err = conn.Close()
+		assert.NoError(t, err)
+	})
+
+	w := db.New(conn)
+
+	${3:pp} := ${4:testParents}(t, conn, 1)
+	${5:p} := $3[0]
+
+	type args struct {
+		parentId string
+		opts    []Option
+	}
+
+	var tests = []struct {
+		name    string
+		args    args
+		want    *$1
+		wantErr bool
+	}{
+		{
+			name: "blank-parent-id",
+			args: args{
+				parentId: "",
+			},
+			want:    nil,
+			wantErr: true,
+		},
+		{
+			name: "valid-no-options",
+			args: args{
+				parentId: $5.GetPublicId(),
+			},
+			want: &$1{
+				$1: &store.$1{
+					${6:ParentId}:  $5.GetPublicId(),
+				},
+			},
+		},
+		{
+			name: "valid-with-name",
+			args: args{
+				parentId: $5.GetPublicId(),
+				opts: []Option{
+					WithName("test-name"),
+				},
+			},
+			want: &$1{
+				$1: &store.$1{
+					$6:  $5.GetPublicId(),
+					Name: "test-name",
+				},
+			},
+		},
+		{
+			name: "valid-with-description",
+			args: args{
+				parentId: $5.GetPublicId(),
+				opts: []Option{
+					WithDescription("test-description"),
+				},
+			},
+			want: &$1{
+				$1: &store.$1{
+					$6:  $5.GetPublicId(),
+					Description: "test-description",
+				},
+			},
+		},
+	}
+
+	for _, tt := range tests {
+		tt := tt
+		t.Run(tt.name, func(t *testing.T) {
+			assert, require := assert.New(t), require.New(t)
+			got, err := New$1(tt.args.parentId, tt.args.opts...)
+			if tt.wantErr {
+				assert.Error(err)
+				require.Nil(got)
+				return
+			}
+			require.NoError(err)
+			require.NotNil(got)
+
+			assert.Emptyf(got.PublicId, "PublicId set")
+			assert.Equal(tt.want, got)
+
+			id, err := new$1Id()
+			assert.NoError(err)
+
+			tt.want.PublicId = id
+			got.PublicId = id
+
+			err2 := w.Create(context.Background(), got)
+			assert.NoError(err2)
+		})
+	}
+}
+endsnippet
+

@@ -40,4 +40,21 @@ insert on $1
 	for each row execute procedure default_create_time();
 endsnippet
 
+snippet wbase "Watchtower base table" b
+create table ${1:table} (
+	$1_id wt_public_id primary key
+);
+
+create or replace function
+	insert_$1_subtype()
+	returns trigger
+as $$
+begin
+	insert into $1 ($1_id)
+	values
+		(new.$1_id);
+	return new;
+end;
+$$ language plpgsql;
+endsnippet
 # vim:ft=snippets:
