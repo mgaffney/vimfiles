@@ -634,6 +634,9 @@
 		nmap <silent> gi <Plug>(coc-implementation)
 		nmap <silent> gr <Plug>(coc-references)
 
+		nmap <silent> gv :vsp<CR><Plug>(coc-definition)
+		" nmap <silent> gt :vsp<CR><Plug>(coc-definition)<C-W>T
+
 		" map <leader>d :<C-u>call CocActionAsync("jumpDefinition", "split")<CR>
 
 		" Use K to show documentation in preview window.
