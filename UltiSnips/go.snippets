@@ -794,3 +794,18 @@ func Test${1:resource}_New(t *testing.T) {
 }
 endsnippet
 
+snippet enc-struct "encrypt/decrypt stuct"
+func (${2:resource_var} *${1:Resource}) encrypt(ctx context.Context, cipher wrapping.Wrapper) error {
+	if err := structwrapping.WrapStruct(ctx, cipher, $2.$1, nil); err != nil {
+		return fmt.Errorf("error encrypting ${3:resource}: %w", err)
+	}
+	return nil
+}
+
+func ($2 *$1) decrypt(ctx context.Context, cipher wrapping.Wrapper) error {
+	if err := structwrapping.UnwrapStruct(ctx, cipher, $2.$1, nil); err != nil {
+		return fmt.Errorf("error decrypting $3: %w", err)
+	}
+	return nil
+}
+endsnippet
