@@ -149,14 +149,7 @@ endsnippet
 
 snippet wt-test-new-resource "NewResource Test"
 func Test${1:resource}_New(t *testing.T) {
-	cleanup, conn, _ := db.TestSetup(t, "postgres")
-	t.Cleanup(func() {
-		err := cleanup()
-		assert.NoError(t, err)
-		err = conn.Close()
-		assert.NoError(t, err)
-	})
-
+	conn, _ := db.TestSetup(t, "postgres")
 	w := db.New(conn)
 	_, ${2:prj} := iam.TestScopes(t, conn)
 
@@ -259,8 +252,6 @@ snippet wt-create "repo CreateResource"
 //
 // Both $4.Name and $4.Description are optional. If $4.Name is set, it must be
 // unique within $4.$5.
-//
-// Both $4.CreateTime and $4.UpdateTime are ignored.
 func (r *Repository) Create$1(ctx context.Context, $4 *$1, opt ...Option) (*$1, error) {
 	if $4 == nil {
 		return nil, fmt.Errorf("create: ${3:package} ${2:friendlyName}: %w", db.ErrNilParameter)
@@ -324,13 +315,7 @@ endsnippet
 
 snippet wt-test-create "repo CreateResource test"
 func TestRepository_Create${1:resource}(t *testing.T) {
-	cleanup, conn, _ := db.TestSetup(t, "postgres")
-	t.Cleanup(func() {
-		err := cleanup()
-		assert.NoError(t, err)
-		err = conn.Close()
-		assert.NoError(t, err)
-	})
+	conn, _ := db.TestSetup(t, "postgres")
 	rw := db.New(conn)
 	wrapper := db.TestWrapper(t)
 
@@ -364,7 +349,7 @@ func TestRepository_Create${1:resource}(t *testing.T) {
 			in: &$1{
 				$1: &store.$1{
 					ScopeId:  prj.PublicId,
-					PublicId: "sthc_OOOOOOOOOO",
+					PublicId: "abcd_OOOOOOOOOO",
 				},
 			},
 			wantIsErr: db.ErrInvalidParameter,
@@ -435,6 +420,7 @@ func TestRepository_Create${1:resource}(t *testing.T) {
 			assert.Equal(tt.want.Name, got.Name)
 			assert.Equal(tt.want.Description, got.Description)
 			assert.Equal(got.CreateTime, got.UpdateTime)
+			assert.NoError(db.TestVerifyOplog(t, rw, got.PublicId, db.WithOperation(oplog.OpType_OP_TYPE_CREATE), db.WithCreateNotBefore(10*time.Second)))
 		})
 	}
 
@@ -505,13 +491,7 @@ endsnippet
 
 snippet wt-test-child-create "repo child resource Create test"
 func TestRepository_Create${1:resource}(t *testing.T) {
-	cleanup, conn, _ := db.TestSetup(t, "postgres")
-	t.Cleanup(func() {
-		err := cleanup()
-		assert.NoError(t, err)
-		err = conn.Close()
-		assert.NoError(t, err)
-	})
+	conn, _ := db.TestSetup(t, "postgres")
 	rw := db.New(conn)
 	wrapper := db.TestWrapper(t)
 
@@ -546,7 +526,7 @@ func TestRepository_Create${1:resource}(t *testing.T) {
 			in: &$1{
 				$1: &store.$1{
 					${6:ParentId}:  $5.PublicId,
-					PublicId: "sthc_OOOOOOOOOO",
+					PublicId: "abcd_OOOOOOOOOO",
 				},
 			},
 			wantIsErr: db.ErrInvalidParameter,
@@ -617,6 +597,7 @@ func TestRepository_Create${1:resource}(t *testing.T) {
 			assert.Equal(tt.want.Name, got.Name)
 			assert.Equal(tt.want.Description, got.Description)
 			assert.Equal(got.CreateTime, got.UpdateTime)
+			assert.NoError(db.TestVerifyOplog(t, rw, got.PublicId, db.WithOperation(oplog.OpType_OP_TYPE_CREATE), db.WithCreateNotBefore(10*time.Second)))
 		})
 	}
 
@@ -690,14 +671,7 @@ endsnippet
 
 snippet wt-test-new-child-resource "child NewResource Test"
 func Test${1:resource}_New(t *testing.T) {
-	cleanup, conn, _ := db.TestSetup(t, "postgres")
-	t.Cleanup(func() {
-		err := cleanup()
-		assert.NoError(t, err)
-		err = conn.Close()
-		assert.NoError(t, err)
-	})
-
+	conn, _ := db.TestSetup(t, "postgres")
 	w := db.New(conn)
 
 	${3:pp} := ${4:testParents}(t, conn, 1)
