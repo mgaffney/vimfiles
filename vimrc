@@ -113,6 +113,9 @@
 	" UnixHelpers {
 		Plug 'tpope/vim-eunuch'
 	" }
+	" TODO Lists {
+		" Plug 'Dimercel/todo-vim'
+	" }
 	" systemd {
 		Plug 'Matt-Deacalion/vim-systemd-syntax'
 	" }
@@ -990,6 +993,18 @@
 	" Toggle background between dark and light
 	map <F2> :call ToggleBg()<CR>
 	" call togglebg#map("<F2>")
+
+	" Toggle todo list window
+	" nnoremap <F4> :TODOToggle<CR>
+	" command Todo noautocmd vimgrep /TODO\|FIXME/j ** | cw
+	" command Todo execute 'silent Ggrep! TODO\|FIXME'
+	command Todo Ggrep 'mgaffney' | copen
+	nnoremap <F4> :Todo<CR>
+	" command Todo execute 'silent Ggrep!' 'TODO\|FIXME'
+
+" command -nargs=+ Ggr execute 'silent Ggrep!' <q-args> | cw | redraw!
+
+	" nnoremap <leader>g :silent Ggrep! <cword><CR>
 
 	" Make program
 	nnoremap <F5> :w<CR> :make<CR>
