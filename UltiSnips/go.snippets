@@ -810,21 +810,26 @@ func (r *Repository) Update$1(ctx context.Context, $2 *$1, fieldMask []string, o
 		return nil, db.NoRowsAffected, fmt.Errorf("update: $3 $4: %w", db.ErrEmptyFieldMask)
 	}
 
-	var dbMask, nullFields []string
 	for _, f := range fieldMask {
 		switch {
-		case strings.EqualFold("name", f) && $2.Name == "":
-			nullFields = append(nullFields, "name")
-		case strings.EqualFold("name", f) && $2.Name != "":
-			dbMask = append(dbMask, "name")
-		case strings.EqualFold("description", f) && $2.Description == "":
-			nullFields = append(nullFields, "description")
-		case strings.EqualFold("description", f) && $2.Description != "":
-			dbMask = append(dbMask, "description")
+		case strings.EqualFold("Name", f):
+		case strings.EqualFold("Description", f):
 		default:
 			return nil, db.NoRowsAffected, fmt.Errorf("update: $3 $4: field: %s: %w", f, db.ErrInvalidFieldMask)
 		}
 	}
+	var dbMask, nullFields []string
+	dbMask, nullFields = dbcommon.BuildUpdatePaths(
+		map[string]interface{}{
+			"Name":        $2.Name,
+			"Description": $2.Description,
+		},
+		fieldMask,
+	)
+	if len(dbMask) == 0 && len(nullFields) == 0 {
+		return nil, db.NoRowsAffected, fmt.Errorf("update: $3 $4: %w", db.ErrEmptyFieldMask)
+	}
+
 	$2 = $2.clone()
 
 	metadata := $2.oplog(oplog.OpType_OP_TYPE_UPDATE)
@@ -1549,6 +1554,9 @@ func TestRepository_Update${1:Resource}(t *testing.T) {
 				return
 			}
 			assert.Equal(tt.want.Description, got.Description)
+			if tt.wantCount > 0 {
+				assert.NoError(db.TestVerifyOplog(t, rw, got.PublicId, db.WithOperation(oplog.OpType_OP_TYPE_UPDATE), db.WithCreateNotBefore(10*time.Second)))
+			}
 		})
 	}
 
@@ -1572,12 +1580,16 @@ func TestRepository_Update${1:Resource}(t *testing.T) {
 		require.NotNil(got1)
 		assert.Equal(name, got1.Name)
 		assert.Equal(1, gotCount1, "row count")
+		assert.NoError(db.TestVerifyOplog(t, rw, $2a.PublicId, db.WithOperation(oplog.OpType_OP_TYPE_UPDATE), db.WithCreateNotBefore(10*time.Second)))
 
 		$2b.Name = name
 		got2, gotCount2, err := repo.Update$1(context.Background(), $2b, []string{"name"})
 		assert.Truef(errors.Is(err, db.ErrNotUnique), "want err: %v got: %v", db.ErrNotUnique, err)
 		assert.Nil(got2)
 		assert.Equal(db.NoRowsAffected, gotCount2, "row count")
+		err = db.TestVerifyOplog(t, rw, $2b.PublicId, db.WithOperation(oplog.OpType_OP_TYPE_UPDATE), db.WithCreateNotBefore(10*time.Second))
+		assert.Error(err)
+		assert.True(errors.Is(db.ErrRecordNotFound, err))
 	})
 
 	t.Run("valid-duplicate-names-diff-$4s", func(t *testing.T) {
@@ -1621,6 +1633,7 @@ func TestRepository_Update${1:Resource}(t *testing.T) {
 		assert.Equal(got.Name, got3.Name)
 		assert.Equal(got2.Description, got3.Description)
 		assert.Equal(1, gotCount3, "row count")
+		assert.NoError(db.TestVerifyOplog(t, rw, got2.PublicId, db.WithOperation(oplog.OpType_OP_TYPE_UPDATE), db.WithCreateNotBefore(10*time.Second)))
 	})
 
 	t.Run("change-scope-id", func(t *testing.T) {
@@ -1650,6 +1663,7 @@ func TestRepository_Update${1:Resource}(t *testing.T) {
 		require.NotNil(got1)
 		assert.Equal(orig.$6, got1.$6)
 		assert.Equal(1, gotCount1, "row count")
+		assert.NoError(db.TestVerifyOplog(t, rw, $2a.PublicId, db.WithOperation(oplog.OpType_OP_TYPE_UPDATE), db.WithCreateNotBefore(10*time.Second)))
 	})
 }
 endsnippet
