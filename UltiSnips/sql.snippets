@@ -1,52 +1,33 @@
 snippet wutime "Watchtower update_time triggers" b
-create trigger
-	update_time_column
-before
-update on ${1:table}
+create trigger update_time_column before update on ${1:table}
 	for each row execute procedure update_time_column();
 endsnippet
 
 snippet wctime "Watchtower create_time triggers" b
-create trigger
-	immutable_create_time
-before
-update on ${1:table}
+create trigger immutable_create_time before update on ${1:table}
 	for each row execute procedure immutable_create_time_func();
 
-create trigger
-	default_create_time_column
-before
-insert on $1
+create trigger default_create_time_column before insert on $1
 	for each row execute procedure default_create_time();
 endsnippet
 
 snippet wtime "Watchtower time column triggers" b
-create trigger
-	update_time_column
-before
-update on ${1:table}
+create trigger update_time_column before update on ${1:table}
 	for each row execute procedure update_time_column();
 
-create trigger
-	immutable_create_time
-before
-update on $1
+create trigger immutable_create_time before update on $1
 	for each row execute procedure immutable_create_time_func();
 
-create trigger
-	default_create_time_column
-before
-insert on $1
+create trigger default_create_time_column before insert on $1
 	for each row execute procedure default_create_time();
 endsnippet
 
-snippet wbase "Watchtower base table" b
+snippet old-wbase "Watchtower base table" b
 create table ${1:table} (
 	$1_id wt_public_id primary key
 );
 
-create or replace function
-	insert_$1_subtype()
+create or replace function insert_$1_subtype()
 	returns trigger
 as $$
 begin
@@ -56,5 +37,54 @@ begin
 	return new;
 end;
 $$ language plpgsql;
+endsnippet
+
+snippet wt-base "Watchtower base table" b
+-- $1
+create table ${1:table} (
+	${2:public_id} ${3:wt_public_id} primary key,
+	${4:scope_id} ${5:wt_scope_id} not null
+		references ${6:iam_scope} (${7:public_id})
+		on delete cascade
+		on update cascade,
+	unique($4, $2)
+);
+
+create trigger immutable_columns before update on $1
+	for each row execute procedure immutable_columns('$2', '$4');
+
+-- insert_$1_subtype() is a before insert trigger
+-- function for subtypes of $1
+create or replace function insert_$1_subtype()
+	returns trigger
+as $$
+begin
+	insert into $1
+		($2, $4)
+	values
+		(new.$2, new.$4);
+	return new;
+end;
+$$ language plpgsql;
+
+-- delete_$1_subtype() is an after delete trigger
+-- function for subtypes of $1
+create or replace function delete_$1_subtype()
+	returns trigger
+as $$
+begin
+	delete from $1
+	where $2 = old.$2;
+	return null; -- result is ignored since this is an after trigger
+end;
+$$ language plpgsql;
+endsnippet
+
+snippet wt-subtype "Watchtower subtype table" b
+create trigger insert_${1:base_table}_subtype before insert on ${2:package}_$1
+	for each row execute procedure insert_$1_subtype();
+
+create trigger delete_$1_subtype after delete on $2_$1
+	for each row execute procedure delete_$1_subtype();
 endsnippet
 # vim:ft=snippets:
