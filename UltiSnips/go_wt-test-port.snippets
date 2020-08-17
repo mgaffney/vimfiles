@@ -345,8 +345,7 @@ func TestRepository_Update${1:Resource}(t *testing.T) {
 		$21, $22 := iam.TestScopes(t, conn)
 		${32:`!p snip.rv = t[31] + 's'`} := Test$11s(t, conn, $23.PublicId, 2)
 
-		$31A := $32[0]
-		$31B := $32[1]
+		$31A, $31B := $32[0], $32[1]
 
 		in := &$1{
 			$1: &store.$1{
@@ -389,8 +388,7 @@ func TestRepository_Update${1:Resource}(t *testing.T) {
 		$21, $22 := iam.TestScopes(t, conn)
 		$32 := Test$11s(t, conn, $23.PublicId, 2)
 
-		$31A := $32[0]
-		$31B := $32[1]
+		$31A, $31B := $32[0], $32[1]
 
 		$2A := Test$1s(t, conn, $31A.PublicId, 1)[0]
 		$2B := Test$1s(t, conn, $31B.PublicId, 1)[0]
@@ -438,7 +436,7 @@ func TestRepository_Create${1:Resource}(t *testing.T) {
 			wantIsErr: db.ErrNilParameter,
 		},
 		{
-			name: "invalid-no-parent-id",
+			name: "invalid-no-${14:`!p snip.rv = t[11].lower()[0] + t[11][1:]`}-id",
 			in: &$1{
 				$1: &store.$1{},
 			},
@@ -535,7 +533,7 @@ func TestRepository_Create${1:Resource}(t *testing.T) {
 
 		in := &$1{
 			$1: &store.$1{
-				$12: $31.GetPublicId(),
+				$12: $31.PublicId,
 				Name:    "test-name-repo",
 			},
 		}
@@ -554,17 +552,17 @@ func TestRepository_Create${1:Resource}(t *testing.T) {
 		assert.Nil(got2)
 	})
 
-	t.Run("valid-duplicate-names-diff-parents", func(t *testing.T) {
+	t.Run("valid-duplicate-names-diff-$14s", func(t *testing.T) {
 		assert, require := assert.New(t), require.New(t)
 		repo, err := NewRepository(rw, rw, wrapper)
 		require.NoError(err)
 		require.NotNil(repo)
 
 		$21, $22 := iam.TestScopes(t, conn)
-		$31 := Test$11s(t, conn, $23.PublicId, 1)[0]
-		${25:`!p snip.rv = t[2] + 's'`} := Test$1s(t, conn, $31.PublicId, 2)
+		${32:`!p snip.rv = t[31] + 's'`} := Test$11s(t, conn, $23.PublicId, 2)
 
-		$31One, $31Two  := $25[0], $25[1]
+		$31A, $31B := $32[0], $32[1]
+
 		in := &$1{
 			$1: &store.$1{
 				Name: "test-name-repo",
@@ -572,7 +570,7 @@ func TestRepository_Create${1:Resource}(t *testing.T) {
 		}
 		in2 := in.clone()
 
-		in.$12 = $31One.GetPublicId()
+		in.$12 = $31A.PublicId
 		got, err := repo.Create$1(context.Background(), in)
 		require.NoError(err)
 		require.NotNil(got)
@@ -582,7 +580,7 @@ func TestRepository_Create${1:Resource}(t *testing.T) {
 		assert.Equal(in.Description, got.Description)
 		assert.Equal(got.CreateTime, got.UpdateTime)
 
-		in2.$12 = $31Two.GetPublicId()
+		in2.$12 = $31B.PublicId
 		got2, err := repo.Create$1(context.Background(), in2)
 		require.NoError(err)
 		require.NotNil(got2)

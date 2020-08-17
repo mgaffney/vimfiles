@@ -170,7 +170,10 @@ func new$1Metadata($4 *$1, op oplog.OpType) oplog.Metadata {
 }
 endsnippet
 
-snippet wt-update "repo UpdateResource"
+# 3 -> 99
+# 4 -> 3
+# 99 -> 41
+snippet old-wt-update "repo UpdateResource"
 // Update${1:Resource} updates the repository entry for ${2:resource_var}.PublicId with the
 // values in $2 for the fields listed in fieldMask. It returns a new
 // $1 containing the updated values and a count of the number of
@@ -246,7 +249,7 @@ func (r *Repository) Update$1(ctx context.Context, $2 *$1, fieldMask []string, o
 }
 endsnippet
 
-snippet wt-enc-struct "encrypt/decrypt stuct"
+snippet old-wt-enc-struct "encrypt/decrypt stuct"
 func (${2:resource_var} *${1:Resource}) encrypt(ctx context.Context, cipher wrapping.Wrapper) error {
 	if err := structwrapping.WrapStruct(ctx, cipher, $2.$1, nil); err != nil {
 		return fmt.Errorf("error encrypting ${3:resource}: %w", err)

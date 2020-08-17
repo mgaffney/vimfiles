@@ -16,9 +16,10 @@
 #       ${13:`!p snip.rv = t[11].lower()[0] + t[11][1:] + 'Id'`}
 #  $14 - parent friendly name (lower case, not a variable)
 # 	${14:`!p snip.rv = t[11].lower()[0] + t[11][1:]`}
-#       ${14:${11/([a-z]*)([A-Z]+)/(?1:$1 )\L$2\E/g}}
 #  $15 - parent id (friendly string) (not a variable)
 #       ${15:${12/([a-z]*)([A-Z]+)/(?1:$1 )\L$2\E/g}}
+#  $16 - catalog-parent-id (friendly string) (not a variable)
+#       ${16:${12/([a-z]*)([A-Z]+)/(?1:$1-)\L$2\E/g}}
 
 #  $21 - org
 # 	${21:org}
@@ -172,7 +173,7 @@ func (r *Repository) Create$1(ctx context.Context, $2 *$1, opt ...Option) (*$1, 
 
 	var new$1 *$1
 	_, err = r.writer.DoTx(ctx, db.StdRetryCnt, db.ExpBackoff{},
-		func(w db.Writer) error {
+		func(_ db.Reader, w db.Writer) error {
 			new$1 = $2.clone()
 			return w.Create(ctx, new$1, db.WithOplog(r.wrapper, $2.oplog(oplog.OpType_OP_TYPE_CREATE)))
 		},
@@ -189,15 +190,94 @@ func (r *Repository) Create$1(ctx context.Context, $2 *$1, opt ...Option) (*$1, 
 }
 endsnippet
 
-snippet sn-test "test snippet"
-${1:Resource}
-["${1/([a-z]*)([A-Z]+)/(?1:$1 )\L$2\E/g}"]
-"${2:${1/([a-z]*)([A-Z]+)/(?1:$1 )\L$2\E/g}}"
+snippet wt-update "UpdateResource"
+// Update${1:Resource} updates the repository entry for ${2:`!p snip.rv = t[1].lower()[0]`}.PublicId with the
+// values in $2 for the fields listed in fieldMask.
+// It returns a new $1 containing the updated values and a count of the number of records updated.
+// $2 is not changed.
+//
+// $2 must contain a valid PublicId.
+// Only $2.Name and $2.Description can be updated.
+// If $2.Name is set to a non-empty string, it must be unique within $2.ScopeId.
+//
+// An attribute of $2 will be set to NULL in the database if the attribute
+// in $2 is the zero value and it is included in fieldMask.
+func (r *Repository) Update$1(ctx context.Context, $2 *$1, fieldMask []string, opt ...Option) (*$1, int, error) {
+	if $2 == nil {
+		return nil, db.NoRowsAffected, fmt.Errorf("update: ${41:`!v expand('%:p:h:t')`} ${3:${1/([a-z]*)([A-Z]+)/(?1:$1 )\L$2\E/g}}: %w", db.ErrNilParameter)
+	}
+	if $2.$1 == nil {
+		return nil, db.NoRowsAffected, fmt.Errorf("update: $41 $3: embedded $1: %w", db.ErrNilParameter)
+	}
+	if $2.PublicId == "" {
+		return nil, db.NoRowsAffected, fmt.Errorf("update: $41 $3: missing public id: %w", db.ErrInvalidParameter)
+	}
+	if len(fieldMask) == 0 {
+		return nil, db.NoRowsAffected, fmt.Errorf("update: $41 $3: %w", db.ErrEmptyFieldMask)
+	}
 
-$2
+	for _, f := range fieldMask {
+		switch {
+		case strings.EqualFold("Name", f):
+		case strings.EqualFold("Description", f):
+		default:
+			return nil, db.NoRowsAffected, fmt.Errorf("update: $41 $3: field: %s: %w", f, db.ErrInvalidFieldMask)
+		}
+	}
+	var dbMask, nullFields []string
+	dbMask, nullFields = dbcommon.BuildUpdatePaths(
+		map[string]interface{}{
+			"Name":        $2.Name,
+			"Description": $2.Description,
+		},
+		fieldMask,
+	)
+	if len(dbMask) == 0 && len(nullFields) == 0 {
+		return nil, db.NoRowsAffected, fmt.Errorf("update: $41 $3: %w", db.ErrEmptyFieldMask)
+	}
 
+	$2 = $2.clone()
 
-package ${41:`!v expand('%:p:h:t')`}
-tableName "${51:$41_${1/([a-z]*)([A-Z]+)/(?1:$1_)\L$2\E/g}}"
+	metadata := $2.oplog(oplog.OpType_OP_TYPE_UPDATE)
+
+	var rowsUpdated int
+	var returned$1 *$1
+	_, err := r.writer.DoTx(ctx, db.StdRetryCnt, db.ExpBackoff{},
+		func(_ db.Reader, w db.Writer) error {
+			returned$1 = $2.clone()
+			var err error
+			rowsUpdated, err = w.Update(ctx, returned$1, dbMask, nullFields, db.WithOplog(r.wrapper, metadata))
+			if err == nil && rowsUpdated > 1 {
+				return db.ErrMultipleRecords
+			}
+			return err
+		},
+	)
+
+	if err != nil {
+		if db.IsUniqueError(err) {
+			return nil, db.NoRowsAffected, fmt.Errorf("update: $41 $3: %s: name %s already exists: %w",
+				$2.PublicId, $2.Name, db.ErrNotUnique)
+		}
+		return nil, db.NoRowsAffected, fmt.Errorf("update: $41 $3: %s: %w", $2.PublicId, err)
+	}
+
+	return returned$1, rowsUpdated, nil
+}
 endsnippet
 
+snippet wt-enc-struct "encrypt/decrypt stuct"
+func (${2:`!p snip.rv = t[1].lower()[0]`} *${1:Resource}) encrypt(ctx context.Context, cipher wrapping.Wrapper) error {
+	if err := structwrapping.WrapStruct(ctx, cipher, $2.$1, nil); err != nil {
+		return fmt.Errorf("error encrypting ${3:${1/([a-z]*)([A-Z]+)/(?1:$1 )\L$2\E/g}}: %w", err)
+	}
+	return nil
+}
+
+func ($2 *$1) decrypt(ctx context.Context, cipher wrapping.Wrapper) error {
+	if err := structwrapping.UnwrapStruct(ctx, cipher, $2.$1, nil); err != nil {
+		return fmt.Errorf("error decrypting $3: %w", err)
+	}
+	return nil
+}
+endsnippet
