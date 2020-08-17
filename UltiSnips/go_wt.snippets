@@ -1,4 +1,34 @@
-snippet wt-resource "resource skeleton"
+#########
+# Snippet variables
+#  $1 - Resource
+# $2 resource_var
+#  $7 - resource (lower case) - with !p
+#  	$3 resource_slice_var
+#  $4 - resource_var - with !p
+#  $2 - Parent
+#  $3 - parentId - with !p
+#  $6 - package name - with !p
+#  $5 - table_name
+#
+#  $4 - testParents
+#  $3 - testParents_var
+#  $5 - testParent_var
+#  $6 - ParentId
+#  $7 resource_slice_var
+#  $8 parent_slice_var
+#  --- Missing
+#  prefix for database id
+#  test scopes - org, prj
+#  ---
+# New
+# 1,5 resource
+# 6,10 parent
+# 11,15 package
+# 16,20 database
+# 21,25 test
+#########
+
+snippet old-wt-resource "resource skeleton"
 // A $1 contains ${0}. It is owned by a ${2:Parent}.
 type ${1:Resource} struct {
 	*store.$1
@@ -63,7 +93,15 @@ func ($4 *$1) oplog(op oplog.OpType) oplog.Metadata {
 }
 endsnippet
 
-snippet wt-create "repo CreateResource"
+# 3 -> 99
+# 2 -> 3
+# 4 -> 2
+# 99 -> 41
+# 5 -> 12
+#
+# 2 is auth method
+
+snippet old-wt-create "repo CreateResource"
 // Create${1:Resource} inserts ${4:resource_var} into the repository and returns a new
 // $1 containing the $2's PublicId. $4 is not changed. $4 must
 // contain a valid ${5:ScopeId}. $4 must not contain a PublicId. The PublicId is

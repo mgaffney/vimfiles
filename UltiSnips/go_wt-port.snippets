@@ -1,0 +1,203 @@
+#########
+# Snippet variables - remap
+
+#  $1 - Resource
+# 	${1:Resource}
+#  $2 - resource_var - with !p
+# 	${2:`!p snip.rv = t[1].lower()[0]`}
+#  $3 - resource (friendly name lower case with spaces like 'auth method') - with !p
+#       ${3:${1/([a-z]*)([A-Z]+)/(?1:$1 )\L$2\E/g}}
+
+#  $11 - Parent
+# 	${11:Parent}
+#  $12 - ParentId - with !p
+# 	${12:`!p snip.rv = t[11] + 'Id'`}
+#  $13 - parentId - with !p
+#       ${13:`!p snip.rv = t[11].lower()[0] + t[11][1:] + 'Id'`}
+#  $14 - parent friendly name (lower case, not a variable)
+# 	${14:`!p snip.rv = t[11].lower()[0] + t[11][1:]`}
+#       ${14:${11/([a-z]*)([A-Z]+)/(?1:$1 )\L$2\E/g}}
+#  $15 - parent id (friendly string) (not a variable)
+#       ${15:${12/([a-z]*)([A-Z]+)/(?1:$1 )\L$2\E/g}}
+
+#  $21 - org
+# 	${21:org}
+#  $22 - prj
+# 	${21:org}, ${22:prj} := iam.TestScopes(t, conn)
+#  $23 - org or prj with !p
+# 	${23:`!p snip.rv=t[21] if t[21] != '_' else t[22]`}
+#  $25 - resource_slice_var - with !p (test)
+# 	${25:`!p snip.rv = t[2] + 's'`}
+
+#  $31 - parent (test parent var)
+# 	${31:`!p snip.rv = t[11].lower()[0] + t[11][1:]`}
+#  $32 - parents (test parent_slice_var) with !p
+# 	${32:`!p snip.rv = t[31] + 's'`}
+
+#  $41 - package name - with !p
+# 	${41:`!v expand('%:p:h:t')`}
+#  $51 - table_name
+#       ${51:$41_${1/([a-z]*)([A-Z]+)/(?1:$1_)\L$2\E/g}}
+
+###### old
+#  $4 - testParents
+#  $3 - testParents_var
+#  $5 - testParent_var
+#  $6 - ParentId
+#  $7 resource_slice_var
+#  $8 parent_slice_var
+#  --- Missing
+#  prefix for database id
+#  test scopes - org, prj
+#  ---
+# New
+#
+# 1,9 resource
+# 11,19 parent
+#
+# 21,29 test resource
+# 31,39 test parent
+#
+# 41,49 package
+# 51,59 database
+
+# 1,5 resource
+# 6,10 parent
+# 11,15 package
+# 16,20 database
+# 21,25 test resource
+# 26,30 test parent
+
+# ${4:`!p snip.rv = t[1].lower()[0]`}
+#
+#########
+
+snippet wt-resource "resource skeleton"
+// A $1 contains ${0}. It is owned by a ${11:Parent}.
+type ${1:Resource} struct {
+	*store.$1
+	tableName string \`gorm:"-"\`
+}
+
+// New$1 creates a new in memory $1 assigned to $13.
+// Name and description are the only valid options.
+// All other options are ignored.
+func New$1(${13:`!p snip.rv = t[11].lower()[0] + t[11][1:] + 'Id'`} string, opt ...Option) (*$1, error) {
+	if $13 == "" {
+		return nil, fmt.Errorf("new: ${41:`!v expand('%:p:h:t')`} ${3:`!p snip.rv = t[1].lower()[0] + t[1][1:]`}: no $13: %w", db.ErrInvalidParameter)
+	}
+
+	opts := getOpts(opt...)
+	${2:`!p snip.rv = t[1].lower()[0]`} := &$1{
+		$1: &store.$1{
+			$11Id:        $13,
+			Name:        opts.withName,
+			Description: opts.withDescription,
+		},
+	}
+	return $2, nil
+}
+
+func alloc$1() $1 {
+	return $1{
+		$1: &store.$1{},
+	}
+}
+
+func ($2 *$1) clone() *$1 {
+	cp := proto.Clone($2.$1)
+	return &$1{
+		$1: cp.(*store.$1),
+	}
+}
+
+// TableName returns the table name.
+func ($2 *$1) TableName() string {
+	if $2.tableName != "" {
+		return $2.tableName
+	}
+	return "${51:`!p snip.rv = t[41].lower() + '_' + t[1].lower()`}"
+}
+
+// SetTableName sets the table name.
+func ($2 *$1) SetTableName(n string) {
+	$2.tableName = n
+}
+
+func ($2 *$1) oplog(op oplog.OpType) oplog.Metadata {
+	metadata := oplog.Metadata{
+		"resource-public-id": []string{$2.PublicId},
+		"resource-type":      []string{"$41-$3"},
+		"op-type":            []string{op.String()},
+	}
+	if $2.$11Id != "" {
+		metadata["`!p snip.rv=t[11].lower()`-id"] = []string{$2.$11Id}
+	}
+	return metadata
+}
+endsnippet
+
+snippet wt-create "CreateResource"
+// Create${1:Resource} inserts ${2:`!p snip.rv = t[1].lower()[0]`}
+// into the repository and returns a new
+// $1 containing the ${3:${1/([a-z]*)([A-Z]+)/(?1:$1 )\L$2\E/g}}'s PublicId.
+// $2 is not changed.
+// $2 must contain a valid ${11:Parent}Id.
+// $2 must not contain a PublicId.
+// The PublicId is generated and assigned by this method.
+// opt is ignored.
+//
+// Both $2.Name and $2.Description are optional.
+// If $2.Name is set, it must be unique within $2.${12:`!p snip.rv = t[11] + 'Id'`}.
+func (r *Repository) Create$1(ctx context.Context, $2 *$1, opt ...Option) (*$1, error) {
+	if $2 == nil {
+		return nil, fmt.Errorf("create: ${41:`!v expand('%:p:h:t')`} $3: %w", db.ErrNilParameter)
+	}
+	if $2.$1 == nil {
+		return nil, fmt.Errorf("create: $41 $3: embedded $1: %w", db.ErrNilParameter)
+	}
+	if $2.$12 == "" {
+		return nil, fmt.Errorf("create: $41 $3: no ${15:${12/([a-z]*)([A-Z]+)/(?1:$1 )\L$2\E/g}}: %w", db.ErrInvalidParameter)
+	}
+	if $2.PublicId != "" {
+		return nil, fmt.Errorf("create: $41 $3: public id not empty: %w", db.ErrInvalidParameter)
+	}
+	$2 = $2.clone()
+
+	id, err := new$1Id()
+	if err != nil {
+		return nil, fmt.Errorf("create: $41 $3: %w", err)
+	}
+	$2.PublicId = id
+
+	var new$1 *$1
+	_, err = r.writer.DoTx(ctx, db.StdRetryCnt, db.ExpBackoff{},
+		func(w db.Writer) error {
+			new$1 = $2.clone()
+			return w.Create(ctx, new$1, db.WithOplog(r.wrapper, $2.oplog(oplog.OpType_OP_TYPE_CREATE)))
+		},
+	)
+
+	if err != nil {
+		if db.IsUniqueError(err) {
+			return nil, fmt.Errorf("create: $41 $3: in ${14:${11/([a-z]*)([A-Z]+)/(?1:$1 )\L$2\E/g}}: %s: name %s already exists: %w",
+				$2.$12, $2.Name, db.ErrNotUnique)
+		}
+		return nil, fmt.Errorf("create: $41 $3: in $14: %s: %w", $2.$12, err)
+	}
+	return new$1, nil
+}
+endsnippet
+
+snippet sn-test "test snippet"
+${1:Resource}
+["${1/([a-z]*)([A-Z]+)/(?1:$1 )\L$2\E/g}"]
+"${2:${1/([a-z]*)([A-Z]+)/(?1:$1 )\L$2\E/g}}"
+
+$2
+
+
+package ${41:`!v expand('%:p:h:t')`}
+tableName "${51:$41_${1/([a-z]*)([A-Z]+)/(?1:$1_)\L$2\E/g}}"
+endsnippet
+
