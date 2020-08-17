@@ -260,6 +260,10 @@
 		" show the docstrings for folded code
 		" let g:SimpylFold_docstring_preview=1
 	" }
+	"
+	" PostgreSQL {
+		let g:sql_type_default = 'pgsql'
+	" }
 	" Grepper {
 		let g:grepper = {}
 		let g:grepper.tools = ['rg', 'git', 'grep', 'ag']
