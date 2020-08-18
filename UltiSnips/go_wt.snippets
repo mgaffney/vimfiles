@@ -192,17 +192,17 @@ endsnippet
 
 snippet wt-update "UpdateResource"
 // Update${1:Resource} updates the repository entry for ${2:`!p snip.rv = t[1].lower()[0]`}.PublicId with the
-// values in $2 for the fields listed in fieldMask.
+// values in $2 for the fields listed in fieldMaskPaths.
 // It returns a new $1 containing the updated values and a count of the number of records updated.
 // $2 is not changed.
 //
 // $2 must contain a valid PublicId.
 // Only $2.Name and $2.Description can be updated.
-// If $2.Name is set to a non-empty string, it must be unique within $2.ScopeId.
+// If $2.Name is set to a non-empty string, it must be unique within $2.${11:Parent}Id.
 //
 // An attribute of $2 will be set to NULL in the database if the attribute
-// in $2 is the zero value and it is included in fieldMask.
-func (r *Repository) Update$1(ctx context.Context, $2 *$1, fieldMask []string, opt ...Option) (*$1, int, error) {
+// in $2 is the zero value and it is included in fieldMaskPaths.
+func (r *Repository) Update$1(ctx context.Context, $2 *$1, version uint32, fieldMaskPaths []string, opt ...Option) (*$1, int, error) {
 	if $2 == nil {
 		return nil, db.NoRowsAffected, fmt.Errorf("update: ${41:`!v expand('%:p:h:t')`} ${3:${1/([a-z]*)([A-Z]+)/(?1:$1 )\L$2\E/g}}: %w", db.ErrNilParameter)
 	}
@@ -212,11 +212,11 @@ func (r *Repository) Update$1(ctx context.Context, $2 *$1, fieldMask []string, o
 	if $2.PublicId == "" {
 		return nil, db.NoRowsAffected, fmt.Errorf("update: $41 $3: missing public id: %w", db.ErrInvalidParameter)
 	}
-	if len(fieldMask) == 0 {
-		return nil, db.NoRowsAffected, fmt.Errorf("update: $41 $3: %w", db.ErrEmptyFieldMask)
+	if version == 0 {
+		return nil, db.NoRowsAffected, fmt.Errorf("update: $41 $3: no version supplied: %w", db.ErrInvalidParameter)
 	}
 
-	for _, f := range fieldMask {
+	for _, f := range fieldMaskPaths {
 		switch {
 		case strings.EqualFold("Name", f):
 		case strings.EqualFold("Description", f):
@@ -230,7 +230,7 @@ func (r *Repository) Update$1(ctx context.Context, $2 *$1, fieldMask []string, o
 			"Name":        $2.Name,
 			"Description": $2.Description,
 		},
-		fieldMask,
+		fieldMaskPaths,
 	)
 	if len(dbMask) == 0 && len(nullFields) == 0 {
 		return nil, db.NoRowsAffected, fmt.Errorf("update: $41 $3: %w", db.ErrEmptyFieldMask)
@@ -238,15 +238,15 @@ func (r *Repository) Update$1(ctx context.Context, $2 *$1, fieldMask []string, o
 
 	$2 = $2.clone()
 
-	metadata := $2.oplog(oplog.OpType_OP_TYPE_UPDATE)
-
 	var rowsUpdated int
 	var returned$1 *$1
 	_, err := r.writer.DoTx(ctx, db.StdRetryCnt, db.ExpBackoff{},
 		func(_ db.Reader, w db.Writer) error {
 			returned$1 = $2.clone()
 			var err error
-			rowsUpdated, err = w.Update(ctx, returned$1, dbMask, nullFields, db.WithOplog(r.wrapper, metadata))
+			rowsUpdated, err = w.Update(ctx, returned$1, dbMask, nullFields,
+				db.WithOplog(r.wrapper, $2.oplog(oplog.OpType_OP_TYPE_UPDATE)),
+				db.WithVersion(&version))
 			if err == nil && rowsUpdated > 1 {
 				return db.ErrMultipleRecords
 			}
