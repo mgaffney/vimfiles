@@ -1,25 +1,35 @@
 #########
 # Snippet variables - remap
 
-#  $1 - Resource
-# 	${1:Resource}
-#  $2 - resource_var - with !p
+#  $1 - ResourceExample
+# 	${1:ResourceExample}
+#  $2 - r - with !p
 # 	${2:`!p snip.rv = t[1].lower()[0]`}
-#  $3 - resource (friendly name lower case with spaces like 'auth method') - with !p
+#  $3 - resource example (friendly name lower case with spaces like 'auth method') - with !p
 #       ${3:${1/([a-z]*)([A-Z]+)/(?1:$1 )\L$2\E/g}}
+#  $4 - resourceExampleId - with !p
+#       ${4:`!p snip.rv = t[1].lower()[0] + t[1][1:] + 'Id'`}
+#  $5 - resource-example (friendly string) (not a variable)
+#       ${5:${1/([a-z]*)([A-Z]+)/(?1:$1-)\L$2\E/g}}
+#  $6 - resourceExamples (slice variable)
+#       ${6:`!p snip.rv = t[1].lower()[0] + t[1][1:] + 's'`}
 
-#  $11 - Parent
-# 	${11:Parent}
-#  $12 - ParentId - with !p
+#  $11 - ParentExample
+# 	${11:ParentExample}
+#  $12 - ParentExampleId - with !p
 # 	${12:`!p snip.rv = t[11] + 'Id'`}
-#  $13 - parentId - with !p
+#  $13 - parentExampleId - with !p
 #       ${13:`!p snip.rv = t[11].lower()[0] + t[11][1:] + 'Id'`}
-#  $14 - parent friendly name (lower case, not a variable)
+#  $14 - parent example friendly name (lower case, not a variable)
 # 	${14:`!p snip.rv = t[11].lower()[0] + t[11][1:]`}
-#  $15 - parent id (friendly string) (not a variable)
+#  $15 - parent example id (friendly string) (not a variable)
 #       ${15:${12/([a-z]*)([A-Z]+)/(?1:$1 )\L$2\E/g}}
-#  $16 - catalog-parent-id (friendly string) (not a variable)
+#  $16 - parent-example-id (friendly string) (not a variable)
 #       ${16:${12/([a-z]*)([A-Z]+)/(?1:$1-)\L$2\E/g}}
+#  $17 - parent_example_id (database column)
+#       ${17:${13/([a-z]*)([A-Z]+)/(?1:$1_)\L$2\E/g}}
+#  $18 - parent-example (friendly string) (not a variable)
+#       ${18:${11/([a-z]*)([A-Z]+)/(?1:$1-)\L$2\E/g}}
 
 #  $21 - org
 # 	${21:org}
@@ -27,13 +37,18 @@
 # 	${21:org}, ${22:prj} := iam.TestScopes(t, conn)
 #  $23 - org or prj with !p
 # 	${23:`!p snip.rv=t[21] if t[21] != '_' else t[22]`}
-#  $25 - resource_slice_var - with !p (test)
+#  $24 - resourceExample (test resource var)
+#       ${24:`!p snip.rv = t[1].lower()[0] + t[1][1:]`}
+#  $25 - rs - with !p (test)
 # 	${25:`!p snip.rv = t[2] + 's'`}
+#  $26 - resource-examples (test name 'auth-methods')
+#       ${26:${6/([a-z]*)([A-Z]+)/(?1:$1-)\L$2\E/g}}
 
 #  $31 - parent (test parent var)
 # 	${31:`!p snip.rv = t[11].lower()[0] + t[11][1:]`}
 #  $32 - parents (test parent_slice_var) with !p
 # 	${32:`!p snip.rv = t[31] + 's'`}
+# 	${32:`!p snip.rv = t[11].lower()[0] + t[11][1:] + 's'`}
 
 #  $41 - package name - with !p
 # 	${41:`!v expand('%:p:h:t')`}
@@ -263,6 +278,50 @@ func (r *Repository) Update$1(ctx context.Context, $2 *$1, version uint32, field
 	}
 
 	return returned$1, rowsUpdated, nil
+}
+endsnippet
+
+snippet wt-lookup "LookupResource"
+// Lookup${1:Resource}
+// will look up a ${3:${1/([a-z]*)([A-Z]+)/(?1:$1 )\L$2\E/g}}
+// in the repository.
+// If the $3 is not found, it will return nil, nil.
+// All options are ignored.
+func (r *Repository) Lookup$1(ctx context.Context, publicId string, opt ...Option) (*$1, error) {
+	if publicId == "" {
+		return nil, fmt.Errorf("lookup: ${41:`!v expand('%:p:h:t')`} $3: missing public id %w", db.ErrInvalidParameter)
+	}
+	${2:`!p snip.rv = t[1].lower()[0]`} := alloc$1()
+	$2.PublicId = publicId
+	if err := r.reader.LookupByPublicId(ctx, $2); err != nil {
+		if errors.Is(err, db.ErrRecordNotFound) {
+			return nil, nil
+		}
+		return nil, fmt.Errorf("lookup: $41 $3: failed %w for %s", err, publicId)
+	}
+	return $2, nil
+}
+endsnippet
+
+snippet wt-list "ListResources"
+// List${1:ResourceExample}s returns a slice of $1s for the ${13:parentExampleId}.
+// WithLimit is the only option supported.
+func (r *Repository) List$1s(ctx context.Context, $13 string, opt ...Option) ([]*$1, error) {
+	if $13 == "" {
+		return nil, fmt.Errorf("list: ${41:`!v expand('%:p:h:t')`} ${3:${1/([a-z]*)([A-Z]+)/(?1:$1 )\L$2\E/g}}: missing ${15:${13/([a-z]*)([A-Z]+)/(?1:$1 )\L$2\E/g}}: %w", db.ErrInvalidParameter)
+	}
+	opts := getOpts(opt...)
+	limit := r.defaultLimit
+	if opts.withLimit != 0 {
+		// non-zero signals an override of the default limit for the repo.
+		limit = opts.withLimit
+	}
+	var ${6:`!p snip.rv = t[1].lower()[0] + t[1][1:] + 's'`} []*$1
+	err := r.reader.SearchWhere(ctx, &$6, "${17:${13/([a-z]*)([A-Z]+)/(?1:$1_)\L$2\E/g}} = ?", []interface{}{$13}, db.WithLimit(limit))
+	if err != nil {
+		return nil, fmt.Errorf("list: $41 $3: %w", err)
+	}
+	return $6, nil
 }
 endsnippet
 
