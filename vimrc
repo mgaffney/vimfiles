@@ -1316,13 +1316,13 @@ augroup END
 	" From https://jesseleite.com/posts/2/its-dangerous-to-vim-alone-take-fzf
 	" {
 		" File Finder
-		nmap <Leader>ff :GFiles<CR>
-		nmap <Leader>fF :Files<CR>
+		nmap <Leader>fF :GFiles<CR>
+		nmap <Leader>ff :Files<CR>
 
 		" Buffer Finder
 		" Here I've mapped <Leader>b to search for open buffers, and <Leader>h to
 		" search buffer history.
-		nmap <Leader>fB :Buffers<CR>
+		nmap <Leader>fb :Buffers<CR>
 		nmap <Leader>fH :History<CR>
 		" These two make it easy to switch between buffers, and order their results by
 		" most recent so you can easily switch between your two most recent files
