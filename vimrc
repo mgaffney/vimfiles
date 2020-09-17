@@ -45,6 +45,9 @@
 		Plug 'SirVer/ultisnips'
 		" Plug 'honza/vim-snippets'
 	" }
+	" Diff {
+		Plug 'AndrewRadev/linediff.vim'
+	" }
 	" Completion {
 		" Plug 'Valloric/YouCompleteMe'
 		" Plug 'ervandew/supertab'
