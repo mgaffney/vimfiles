@@ -1291,6 +1291,8 @@ augroup END
 		\       'alternate': '{}.go',
 		\       'type': 'test'
 		\   },
+		\ },
+		\ '*.sql': {
 		\   '*.up.sql': {
 		\       'alternate': '{}.down.sql',
 		\       'type': 'source'
