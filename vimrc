@@ -1275,6 +1275,10 @@ augroup fileconfigs
 	autocmd BufNewFile,BufRead *.sh.tpl setlocal filetype=gotexttmpl
 	autocmd BufNewFile,BufRead *.gv setlocal filetype=dot
 	autocmd BufNewFile,BufRead *.mod setlocal filetype=gomod
+	autocmd BufNewFile,BufRead *.bdy setlocal filetype=sql
+	autocmd BufNewFile,BufRead *.fnc setlocal filetype=sql
+	autocmd BufNewFile,BufRead *.prc setlocal filetype=sql
+	autocmd BufNewFile,BufRead *.spc setlocal filetype=sql
 	autocmd BufNewFile,BufRead *.trg setlocal filetype=sql
 	" autocmd BufNewFile,BufRead *.
 augroup END
