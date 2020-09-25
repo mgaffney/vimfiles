@@ -944,6 +944,9 @@
 		" exit terminal mode with <esc>
 		" tnoremap <Esc> <C-\><C-n>
 " 	}
+" 	Mouse {
+		set mouse=a
+" 	}
 	endif
 " }
 " Key (re)Mappings {
