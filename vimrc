@@ -1144,6 +1144,10 @@
 
 	" Highlight word under cursor but do not jump to the next one
 	" nnoremap * *``
+
+	" Keep cursor in place when joining lines
+	" https://sanctum.geek.nz/arabesque/vim-annoyances/
+	nnoremap J mzJ`z
 " }
 
 " Filetype settings {
