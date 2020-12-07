@@ -1208,10 +1208,17 @@
 
 " Zip Files {
 	" Additional file extensions that vim can open as zip files see :h zip
-augroup zips
-	autocmd!
-	autocmd BufReadCmd *.jar,*.xpi,*.sar,*.war,*.ear,*.mar,*.aar,*.ipa,*.epub call zip#Browse(expand("<amatch>"))
-augroup END
+	augroup zips
+		autocmd!
+		autocmd BufReadCmd *.jar,*.xpi,*.sar,*.war,*.ear,*.mar,*.aar,*.ipa,*.epub call zip#Browse(expand("<amatch>"))
+	augroup END
+" }
+
+" Plist Files {
+	augroup plists
+		autocmd!
+		autocmd BufReadCmd *.cat call plist#Read(1) | call plist#ReadPost()
+	augroup end
 " }
 
 " man pages {
