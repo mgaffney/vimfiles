@@ -999,8 +999,8 @@
 	" nnoremap <leader>pl "lp
 
 	" Move visual block
-	vnoremap J :m '>+1<CR>gv=gv
-	vnoremap K :m '<-2<CR>gv=gv
+	" vnoremap J :m '>+1<CR>gv=gv
+	" vnoremap K :m '<-2<CR>gv=gv
 
 	" :Reg - Display the numbered registers, press a key and paste it to the buffer.
 	function! Reg()
@@ -1147,7 +1147,7 @@
 
 	" Keep cursor in place when joining lines
 	" https://sanctum.geek.nz/arabesque/vim-annoyances/
-	nnoremap J mzJ`z
+	" nnoremap J mzJ`z
 " }
 
 " Filetype settings {
