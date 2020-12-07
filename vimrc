@@ -205,6 +205,9 @@
 	" Terraform {
 		" Plug 'bkad/vim-terraform'
 	" }
+	" TOML {
+		Plug 'cespare/vim-toml'
+	" }
 	" HashicorpTools {
 		Plug 'fatih/vim-hclfmt'
 		Plug 'hashivim/vim-hashicorp-tools'
