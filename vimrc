@@ -259,8 +259,10 @@
 " ConfigPlugins {
 	" solarized {
 		let g:solarized_term_italics = 1
+		let g:solarized_italics = 1
 		" let g:solarized_visibility = 'high'
 		" let g:solarized_extra_hi_groups = 1
+		" let g:solarized_enable_extra_hi_groups = 0
 	" }
 	" Python {
 		" show the docstrings for folded code
@@ -828,6 +830,7 @@
 
 	" syntax enable					" syntax enable keeps your current color settings. :syntax
 	set background=dark				" Assume a dark background
+	colorscheme solarized8
 	" filetype plugin indent on		" load file type plugins + indentation
 	set encoding=utf-8				" The encoding displayed
 	" set fileencoding=utf-8			" The encoding written to a file
@@ -867,7 +870,6 @@
 
 " Vim UI {
 	" colorscheme solarized
-	colorscheme solarized8
 	set showmode					" display the current mode
 
 	if has("balloon_eval") && has("unix")
@@ -1503,4 +1505,14 @@ augroup END
 	" and the new file will not be saved.
 	" let g:plist_save_format = 'xml'
 " }
+
+" Colors for headings {
+	highlight Heading1 guifg=#ffffb2
+	highlight Heading2 guifg=#fed976
+	highlight Heading3 guifg=#feb24c
+	highlight Heading4 guifg=#fd8d3c
+	highlight Heading5 guifg=#f03b20
+	highlight Heading6 guifg=#bd0026
+" }
+
 " vim:tw=78:ts=4:sw=4:norl:
