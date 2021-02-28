@@ -371,9 +371,9 @@
 			" let g:limelight_conceal_ctermfg = 245  " Solarized Base1
 			" let g:limelight_conceal_guifg = '#8a8a8a'  " Solarized Base1
 		endif
-		autocmd! User GoyoEnter Limelight
-		autocmd! User GoyoLeave Limelight!
-		noremap <leader>z :silent! Goyo<CR>
+		" autocmd! User GoyoEnter Limelight
+		" autocmd! User GoyoLeave Limelight!
+		noremap <leader>z :silent! :Goyo<CR>
 		let g:goyo_width = 90
 	" }
 	" Git {
