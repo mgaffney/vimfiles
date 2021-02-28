@@ -1034,7 +1034,8 @@
 	" gev - Go Edit Vimrc
 	nnoremap gev :tabnew $HOME/.vim/vimrc<cr>
 	" gsv - Go Source Vimrc
-	nnoremap gsv :source $HOME/.vim/vimrc<cr>
+	" nnoremap gsv :source $HOME/.vim/vimrc<cr>
+	nnoremap <leader>sv :source $MYVIMRC<CR>
 	" map <Leader>v  :so $MYVIMRC<CR>
 
 	" Yank CVE
