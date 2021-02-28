@@ -1508,12 +1508,23 @@ augroup END
 " }
 
 " Colors for headings {
-	highlight Heading1 guifg=#ffffb2
-	highlight Heading2 guifg=#fed976
-	highlight Heading3 guifg=#feb24c
-	highlight Heading4 guifg=#fd8d3c
-	highlight Heading5 guifg=#f03b20
-	highlight Heading6 guifg=#bd0026
+
+	" if &background ==# 'dark'
+	" 	highlight Heading1 guifg=#ffffb2 guibg=#002b36
+	" 	highlight Heading2 guifg=#fed976 guibg=#002b36
+	" 	highlight Heading3 guifg=#feb24c guibg=#002b36
+	" 	highlight Heading4 guifg=#fd8d3c guibg=#002b36
+	" 	highlight Heading5 guifg=#f03b20 guibg=#002b36
+	" 	highlight Heading6 guifg=#bd0026 guibg=#002b36
+	" else
+	" 	highlight Heading1 guifg=#ffffb2 guibg=#fdf6e3
+	" 	highlight Heading2 guifg=#fed976 guibg=#fdf6e3
+	" 	highlight Heading3 guifg=#feb24c guibg=#fdf6e3
+	" 	highlight Heading4 guifg=#fd8d3c guibg=#fdf6e3
+	" 	highlight Heading5 guifg=#f03b20 guibg=#fdf6e3
+	" 	highlight Heading6 guifg=#bd0026 guibg=#fdf6e3
+	" endif
+
 " }
 
 " vim:tw=78:ts=4:sw=4:norl:
