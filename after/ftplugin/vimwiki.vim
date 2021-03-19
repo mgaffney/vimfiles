@@ -24,3 +24,6 @@ xmap <Leader>a <Plug>VimwikiIncrementListItem
 " Decrease the 'done' status of a checkbox
 nmap <Leader>x <Plug>VimwikiDecrementListItem
 xmap <Leader>x <Plug>VimwikiDecrementListItem
+
+" Todo
+iabbr <buffer> td - [ ]
