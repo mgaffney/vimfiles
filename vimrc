@@ -1,8 +1,8 @@
 " Install vim-plug {
 	if empty(glob('~/.vim/autoload/plug.vim'))
-	  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-	      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+		silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+			\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+		autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 	endif
 " }
 " LoadPlugins {
@@ -319,17 +319,17 @@
 		" let g:vimwiki_global_ext = 0 " make sure vimwiki doesn't own all .md files
 
 		function! ToggleCalendar()
-		  execute ":Calendar"
-		  if exists("g:calendar_open")
-			if g:calendar_open == 1
-			  execute "q"
-			  unlet g:calendar_open
+			execute ":Calendar"
+			if exists("g:calendar_open")
+				if g:calendar_open == 1
+					execute "q"
+					unlet g:calendar_open
+				else
+					g:calendar_open = 1
+				end
 			else
-			  g:calendar_open = 1
+				let g:calendar_open = 1
 			end
-		  else
-			let g:calendar_open = 1
-		  end
 		endfunction
 		autocmd FileType vimwiki map <leader>cc :call ToggleCalendar()<CR>
 
@@ -383,41 +383,41 @@
 		command! DiffHistory call s:view_git_history()
 
 		function! s:view_git_history() abort
-		  Git difftool --name-only ! !^@
-		  call s:diff_current_quickfix_entry()
-		  " Bind <CR> for current quickfix window to properly set up diff split layout after selecting an item
-		  " There's probably a better way to map this without changing the window
-		  copen
-		  nnoremap <buffer> <CR> <CR><BAR>:call <sid>diff_current_quickfix_entry()<CR>
-		  wincmd p
+			Git difftool --name-only ! !^@
+			call s:diff_current_quickfix_entry()
+			" Bind <CR> for current quickfix window to properly set up diff split layout after selecting an item
+			" There's probably a better way to map this without changing the window
+			copen
+			nnoremap <buffer> <CR> <CR><BAR>:call <sid>diff_current_quickfix_entry()<CR>
+			wincmd p
 		endfunction
 
 		function s:diff_current_quickfix_entry() abort
-		  " Cleanup windows
-		  for window in getwininfo()
-			if window.winnr !=? winnr() && bufname(window.bufnr) =~? '^fugitive:'
-			  exe 'bdelete' window.bufnr
-			endif
-		  endfor
-		  cc
-		  call s:add_mappings()
-		  let qf = getqflist({'context': 0, 'idx': 0})
-		  if get(qf, 'idx') && type(get(qf, 'context')) == type({}) && type(get(qf.context, 'items')) == type([])
-			let diff = get(qf.context.items[qf.idx - 1], 'diff', [])
-			echom string(reverse(range(len(diff))))
-			for i in reverse(range(len(diff)))
-			  exe (i ? 'leftabove' : 'rightbelow') 'vert diffsplit' fnameescape(diff[i].filename)
-			  call s:add_mappings()
+			" Cleanup windows
+			for window in getwininfo()
+				if window.winnr !=? winnr() && bufname(window.bufnr) =~? '^fugitive:'
+					exe 'bdelete' window.bufnr
+				endif
 			endfor
-		  endif
+			cc
+			call s:add_mappings()
+			let qf = getqflist({'context': 0, 'idx': 0})
+			if get(qf, 'idx') && type(get(qf, 'context')) == type({}) && type(get(qf.context, 'items')) == type([])
+				let diff = get(qf.context.items[qf.idx - 1], 'diff', [])
+				echom string(reverse(range(len(diff))))
+				for i in reverse(range(len(diff)))
+					exe (i ? 'leftabove' : 'rightbelow') 'vert diffsplit' fnameescape(diff[i].filename)
+					call s:add_mappings()
+				endfor
+			endif
 		endfunction
 
 		function! s:add_mappings() abort
-		  nnoremap <buffer>]q :cnext <BAR> :call <sid>diff_current_quickfix_entry()<CR>
-		  nnoremap <buffer>[q :cprevious <BAR> :call <sid>diff_current_quickfix_entry()<CR>
-		  " Reset quickfix height. Sometimes it messes up after selecting another item
-		  11copen
-		  wincmd p
+			nnoremap <buffer>]q :cnext <BAR> :call <sid>diff_current_quickfix_entry()<CR>
+			nnoremap <buffer>[q :cprevious <BAR> :call <sid>diff_current_quickfix_entry()<CR>
+			" Reset quickfix height. Sometimes it messes up after selecting another item
+			11copen
+			wincmd p
 		endfunction
 
 		nnoremap gst :vertical :Gstatus<CR>
@@ -495,7 +495,7 @@
 
 		" let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
 		" let g:UltiSnipsSnippetDirectories=["~/.vim/UltiSnips"]
-   		" let g:UltiSnipsSnippetDirectories=["UltiSnips"]
+		" let g:UltiSnipsSnippetDirectories=["UltiSnips"]
 		" let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
 
 		" ges - Go Edit Snippets
@@ -508,29 +508,29 @@
 		" Thanks to @VanLaser for cleaning the code up and expanding capabilities to include e.g. `df`
 
 		augroup qs_colors
-		  autocmd!
-		  " autocmd ColorScheme * highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
-		  " autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+			autocmd!
+			" autocmd ColorScheme * highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
+			" autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
 
-		  " autocmd ColorScheme * highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
-		  " autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
-		  " autocmd ColorScheme * highlight QuickScopePrimary ctermfg=17 ctermbg=1 cterm=underline
-		  " autocmd ColorScheme * highlight QuickScopeSecondary ctermfg=17 ctermbg=2 cterm=underline
-		  "#ffff00
-		  " autocmd ColorScheme * highlight QuickScopePrimary guifg='#00ff00' gui=reverse ctermfg=46 cterm=reverse
-		  " autocmd ColorScheme * highlight QuickScopeSecondary guifg='#ffff00' gui=reverse ctermfg=190 cterm=reverse
-		  " autocmd ColorScheme * highlight QuickScopePrimary guifg='#859900' gui=reverse ctermfg=33 cterm=reverse " green
-		  " autocmd ColorScheme * highlight QuickScopePrimary guifg='#657b83' gui=reverse ctermfg=33 cterm=reverse " base00
-		  "" autocmd ColorScheme * highlight QuickScopePrimary guifg='#839496' gui=reverse ctermfg=33 cterm=reverse "base0
-		  " autocmd ColorScheme * highlight QuickScopeSecondary guifg='#268bd2' gui=reverse ctermfg=136 cterm=reverse " blue
-		  "" autocmd ColorScheme * highlight QuickScopeSecondary guifg='#6c71c4' gui=reverse ctermfg=61 cterm=reverse " violet
+			" autocmd ColorScheme * highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
+			" autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+			" autocmd ColorScheme * highlight QuickScopePrimary ctermfg=17 ctermbg=1 cterm=underline
+			" autocmd ColorScheme * highlight QuickScopeSecondary ctermfg=17 ctermbg=2 cterm=underline
+			"#ffff00
+			" autocmd ColorScheme * highlight QuickScopePrimary guifg='#00ff00' gui=reverse ctermfg=46 cterm=reverse
+			" autocmd ColorScheme * highlight QuickScopeSecondary guifg='#ffff00' gui=reverse ctermfg=190 cterm=reverse
+			" autocmd ColorScheme * highlight QuickScopePrimary guifg='#859900' gui=reverse ctermfg=33 cterm=reverse " green
+			" autocmd ColorScheme * highlight QuickScopePrimary guifg='#657b83' gui=reverse ctermfg=33 cterm=reverse " base00
+			"" autocmd ColorScheme * highlight QuickScopePrimary guifg='#839496' gui=reverse ctermfg=33 cterm=reverse "base0
+			" autocmd ColorScheme * highlight QuickScopeSecondary guifg='#268bd2' gui=reverse ctermfg=136 cterm=reverse " blue
+			"" autocmd ColorScheme * highlight QuickScopeSecondary guifg='#6c71c4' gui=reverse ctermfg=61 cterm=reverse " violet
 
-		  " autocmd ColorScheme * highlight QuickScopePrimary guifg='#dc322f' gui=underline ctermfg=33 cterm=reverse " red
-		  " autocmd ColorScheme * highlight QuickScopePrimary guifg='#cb4b16' gui=reverse ctermfg=33 cterm=reverse " orange
-		  " autocmd ColorScheme * highlight QuickScopePrimary guifg='#d33682' gui=reverse ctermfg=33 cterm=reverse " magenta
+			" autocmd ColorScheme * highlight QuickScopePrimary guifg='#dc322f' gui=underline ctermfg=33 cterm=reverse " red
+			" autocmd ColorScheme * highlight QuickScopePrimary guifg='#cb4b16' gui=reverse ctermfg=33 cterm=reverse " orange
+			" autocmd ColorScheme * highlight QuickScopePrimary guifg='#d33682' gui=reverse ctermfg=33 cterm=reverse " magenta
 
-		  autocmd ColorScheme * highlight QuickScopePrimary guifg='#b58900' gui=reverse ctermfg=33 cterm=reverse
-		  autocmd ColorScheme * highlight QuickScopeSecondary guifg='#6c71c4' gui=reverse ctermfg=61 cterm=reverse " violet
+			autocmd ColorScheme * highlight QuickScopePrimary guifg='#b58900' gui=reverse ctermfg=33 cterm=reverse
+			autocmd ColorScheme * highlight QuickScopeSecondary guifg='#6c71c4' gui=reverse ctermfg=61 cterm=reverse " violet
 		augroup END
 
 		let g:qs_enable = 0
@@ -623,9 +623,13 @@
 	" }
 	" coc.nvim {
 		" coc.nvim default settings
-		" Synced with coc.nvim README.md  9700b3c8035cfa7bd72cef54cd2e77931c7adfa6
+		" Synced with coc.nvim README.md  67fb4d138f34c12c6b44d87be66ede26d51b95c2
 
 		let g:coc_global_extensions = ['coc-ultisnips']
+
+		" Set internal encoding of vim, not needed on neovim, since coc.nvim using some
+		" unicode characters in the file autoload/float.vim
+		set encoding=utf-8
 
 		" TextEdit might fail if hidden is not set.
 		set hidden
@@ -635,7 +639,7 @@
 		set nowritebackup
 
 		" Give more space for displaying messages.
-		" set cmdheight=2
+		set cmdheight=2
 
 		" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 		" delays and poor user experience.
@@ -669,15 +673,15 @@
 
 		" Use <c-space> to trigger completion.
 		if has('nvim')
-		  inoremap <silent><expr> <c-space> coc#refresh()
+			inoremap <silent><expr> <c-space> coc#refresh()
 		else
-		  inoremap <silent><expr> <c-@> coc#refresh()
+			inoremap <silent><expr> <c-@> coc#refresh()
 		endif
 
 		" Make <CR> auto-select the first completion item and notify coc.nvim to
 		" format on enter, <cr> could be remapped by other vim plugin
 		inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-									  \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+										\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 		" Use `[g` and `]g` to navigate diagnostics
 		" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
@@ -700,13 +704,13 @@
 		nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 		function! s:show_documentation()
-		  if (index(['vim','help'], &filetype) >= 0)
-			execute 'h '.expand('<cword>')
-		  elseif (coc#rpc#ready())
-			call CocActionAsync('doHover')
-		  else
-			execute '!' . &keywordprg . " " . expand('<cword>')
-		  endif
+			if (index(['vim','help'], &filetype) >= 0)
+				execute 'h '.expand('<cword>')
+			elseif (coc#rpc#ready())
+				call CocActionAsync('doHover')
+			else
+				execute '!' . &keywordprg . " " . expand('<cword>')
+			endif
 		endfunction
 
 		" Highlight the symbol and its references when holding the cursor.
@@ -755,12 +759,12 @@
 
 		" Remap <C-f> and <C-b> for scroll float windows/popups.
 		if has('nvim-0.4.0') || has('patch-8.2.0750')
-		  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-		  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-		  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-		  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-		  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-		  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+			nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+			nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+			inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+			inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+			vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+			vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 		endif
 
 		" Use CTRL-S for selections ranges.
@@ -803,14 +807,14 @@
 	" }
 	" coc-snippets {
 		" inoremap <silent><expr> <TAB>
-			  " \ pumvisible() ? coc#_select_confirm() :
-			  " \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-			  " \ <SID>check_back_space() ? "\<TAB>" :
-			  " \ coc#refresh()
+				" \ pumvisible() ? coc#_select_confirm() :
+				" \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+				" \ <SID>check_back_space() ? "\<TAB>" :
+				" \ coc#refresh()
 
 		" function! s:check_back_space() abort
-		  " let col = col('.') - 1
-		  " return !col || getline('.')[col - 1]  =~# '\s'
+			" let col = col('.') - 1
+			" return !col || getline('.')[col - 1]  =~# '\s'
 		" endfunction
 
 		" let g:coc_snippet_next = '<tab>'
