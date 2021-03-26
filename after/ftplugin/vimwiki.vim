@@ -27,3 +27,7 @@ xmap <Leader>x <Plug>VimwikiDecrementListItem
 
 " Todo
 iabbr <buffer> td - [ ]
+
+nnoremap <silent><buffer> <LocalLeader>gls :VimwikiSplitLink<CR>
+nnoremap <silent><buffer> <LocalLeader>glv :VimwikiVSplitLink<CR>
+nnoremap <silent><buffer> <LocalLeader>glt :VimwikiTabnewLink<CR>
