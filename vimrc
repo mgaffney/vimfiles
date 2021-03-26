@@ -432,7 +432,7 @@
 		" let g:gitgutter_diff_args = '-w' "Ignore whitespaces
 		" gregsexton/gitv
 		" let g:Gitv_OpenHorizontal = 1
-		xmap <leader>ggy :Gbrowse!<CR>
+		xmap <leader>ggy :GBrowse!<CR>
 		xmap <leader>ggp S]`>a()<ESC>hp
 	" }
 	" tmux {
@@ -689,19 +689,19 @@
 		" nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 		" GoTo code navigation.
-		nmap <silent> gd <Plug>(coc-definition)
-		nmap <silent> gy <Plug>(coc-type-definition)
-		nmap <silent> gi <Plug>(coc-implementation)
-		nmap <silent> gr <Plug>(coc-references)
+		nmap <Leader>gcd <Plug>(coc-definition)
+		nmap <Leader>gcy <Plug>(coc-type-definition)
+		nmap <Leader>gci <Plug>(coc-implementation)
+		nmap <Leader>gcr <Plug>(coc-references)
 
-		nmap <silent> gv :vsp<CR><Plug>(coc-definition)
-		nmap <silent> gD :vsp<CR><Plug>(coc-definition)
+		" nmap <Leader>gcv :vsp<CR><Plug>(coc-definition)
+		" nmap <Leader>gcD :vsp<CR><Plug>(coc-definition)
 		" nmap <silent> gt :vsp<CR><Plug>(coc-definition)<C-W>T
 
 		" map <leader>d :<C-u>call CocActionAsync("jumpDefinition", "split")<CR>
 
 		" Use K to show documentation in preview window.
-		nnoremap <silent> K :call <SID>show_documentation()<CR>
+		nnoremap <silent>K :call <SID>show_documentation()<CR>
 
 		function! s:show_documentation()
 			if (index(['vim','help'], &filetype) >= 0)
@@ -990,7 +990,7 @@
 	nnoremap <C-h> <C-W><C-H>
 
 	" Open a vertical split
-	nnoremap <leader>v <C-W>v
+	" nnoremap <leader>v <C-W>v
 
 	" augroup CalendarKey
 		" autocmd!
