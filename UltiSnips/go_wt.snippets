@@ -384,16 +384,28 @@ endsnippet
 
 snippet wt-enc-struct "encrypt/decrypt stuct"
 func (${2:`!p snip.rv = t[1].lower()[0]`} *${1:Resource}) encrypt(ctx context.Context, cipher wrapping.Wrapper) error {
+	const op = "${41:`!v expand('%:p:h:t')`}.($1).encrypt"
 	if err := structwrapping.WrapStruct(ctx, cipher, $2.$1, nil); err != nil {
-		return fmt.Errorf("error encrypting ${3:${1/([a-z]*)([A-Z]+)/(?1:$1 )\L$2\E/g}}: %w", err)
+		return errors.Wrap(err, op, errors.WithCode(errors.Encrypt))
 	}
+	$2.KeyId = cipher.KeyID()
 	return nil
 }
 
 func ($2 *$1) decrypt(ctx context.Context, cipher wrapping.Wrapper) error {
+	const op = "$41.($1).decrypt"
 	if err := structwrapping.UnwrapStruct(ctx, cipher, $2.$1, nil); err != nil {
-		return fmt.Errorf("error decrypting $3: %w", err)
+		return errors.Wrap(err, op, errors.WithCode(errors.Decrypt))
 	}
 	return nil
+}
+endsnippet
+
+snippet wt-option "WithOption"
+// With$1 provides an optional $2.
+func With${1:Option}(${2:`!p snip.rv = t[1].lower()`} ${3:string}) Option {
+	return func(o *options) {
+		o.with$1 = $2
+	}
 }
 endsnippet

@@ -785,9 +785,10 @@ endsnippet
 snippet wt-test-new-resource "TestResource_New"
 func Test${1:Resource}_New(t *testing.T) {
 	conn, _ := db.TestSetup(t, "postgres")
+	wrapper := db.TestWrapper(t)
 	rw := db.New(conn)
 
-	${21:org}, ${22:prj} := iam.TestScopes(t, iamRepo)
+	${21:org}, ${22:prj} := iam.TestScopes(t, iam.TestRepo(t, conn, wrapper))
 	${31:`!p snip.rv = t[11].lower()[0] + t[11][1:]`} := test${11:Parent}s(t, conn, ${23:`!p snip.rv=t[21] if t[21] != '_' else t[22]`}.PublicId, 1)[0]
 
 	type args struct {
