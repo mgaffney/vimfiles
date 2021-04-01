@@ -84,11 +84,21 @@ let g:go_info_mode ='gopls'
 " let g:syntastic_go_checkers = ['golint', 'govet']
 " let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
+let g:go_diagnostics_level = 2
+
 " Enable goimports to automatically insert import paths instead of gofmt:
-let g:go_fmt_autosave = 0
-" let g:go_fmt_command = "gopls"
+" let g:go_fmt_autosave = 0
+let g:go_fmt_command = "gopls"
 let g:go_autodetect_gopath = 1
 " let g:go_gopls_gofumpt = 1
+let g:go_gopls_gofumpt = v:true
+
+let g:go_imports_autosave = 1
+
+  " let g:go_fmt_options = {
+    " \ 'gofmt': '-s',
+    " \ 'goimports': '-local mycompany.com',
+    " \ }
 
 " This experimental mode is superior to the current mode as it fully saves the
 " undo history, so undo/redo doesn't break.
