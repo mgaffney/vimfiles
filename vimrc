@@ -7,6 +7,15 @@
 " }
 " LoadPlugins {
 	call plug#begin('~/.vim/plugged')
+	" LSP {
+		if has('nvim-0.5')
+			Plug 'neovim/nvim-lspconfig'
+			Plug 'nvim-lua/completion-nvim'
+			Plug 'tjdevries/nlua.nvim'
+			Plug 'dense-analysis/ale'
+			Plug 'nathunsmitty/nvim-ale-diagnostic'
+		end
+	" }
 	" Git {
 		Plug 'tpope/vim-git'
 		Plug 'tpope/vim-fugitive'
@@ -145,7 +154,7 @@
 		" Plug 'tpope/vim-classpath'
 		" Plug 'tfnico/vim-gradle'
 	" }
-	" JavaScript
+	" JavaScript {
 		"" Plug 'jelera/vim-javascript-syntax'
 		"" Plug 'mgaffney/vim-json'
 		"Plug 'pangloss/vim-javascript'
@@ -232,7 +241,7 @@
 	" WebBrowser {
 		" Plug 'yuratomo/w3m.vim'
 	" }
-	" vimwiki
+	" vimwiki {
 		Plug 'mattn/calendar-vim'
 		Plug 'vimwiki/vimwiki'
 	" }
@@ -254,6 +263,11 @@
 	" " }
 	" All of your Plugs must be added before the following line
 	call plug#end()
+" }
+
+" python for vim {
+	let g:python_host_prog = '/usr/local/bin/python3'
+	let g:python3_host_prog = '/usr/local/bin/python3'
 " }
 
 " ConfigPlugins {
@@ -293,7 +307,7 @@
 			" let g:ackprg = 'ag --vimgrep'
 		" endif
 	" }
-	" vimwiki
+	" vimwiki {
 		let wiki_1 = {}
 		let wiki_1.path = '~/vimwiki/'
 		let wiki_1.path_html = '~/vimwiki_html/'
@@ -492,6 +506,7 @@
 		" let g:UltiSnipsExpandTrigger="<CR>"
 		" If you want :UltiSnipsEdit to split your window.
 		let g:UltiSnipsEditSplit="vertical"
+		let g:UltiSnipsUsePythonVersion = 3
 
 		" let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
 		" let g:UltiSnipsSnippetDirectories=["~/.vim/UltiSnips"]
@@ -959,17 +974,6 @@
 
 	set diffopt=filler,vertical
 " }
-" Neovim {
-	if has('nvim')
-" 	Terminal {
-		" exit terminal mode with <esc>
-		" tnoremap <Esc> <C-\><C-n>
-" 	}
-" 	Mouse {
-		set mouse=a
-" 	}
-	endif
-" }
 " Key (re)Mappings {
 	" noremap QQ :qall<CR>
 	noremap <F1> <Esc>
@@ -1041,9 +1045,6 @@
 	" nnoremap gsv :source $HOME/.vim/vimrc<cr>
 	nnoremap <leader>sv :source $MYVIMRC<CR>
 	" map <Leader>v  :so $MYVIMRC<CR>
-
-	" Yank CVE
-	" nnoremap yc "V3yap3}n
 
 	" Shortcut to rapidly toggle `set list`
 	" use col from unimpaired plugin
@@ -1281,40 +1282,39 @@
 " File Templates {
 	" autocmd BufNewFile *.sh 0r $HOME/.vim/templates/template.sh
 	" autocmd BufNewFile *.html 0r $HOME/.vim/templates/template.html
-" }
-"
-augroup templates
-	autocmd!
-	" read in template files
-	autocmd BufNewFile *.* silent! execute '0r $HOME/.vim/templates/template.'.expand("<afile>:e")
+	augroup templates
+		autocmd!
+		" read in template files
+		autocmd BufNewFile *.* silent! execute '0r $HOME/.vim/templates/template.'.expand("<afile>:e")
 
-	" parse special text in the templates after the read
-	autocmd BufNewFile * %substitute#\[:VIM_EVAL:\]\(.\{-\}\)\[:END_EVAL:\]#\=eval(submatch(1))#ge
-augroup END
+		" parse special text in the templates after the read
+		autocmd BufNewFile * %substitute#\[:VIM_EVAL:\]\(.\{-\}\)\[:END_EVAL:\]#\=eval(submatch(1))#ge
+	augroup END
+" }
 
 " FileType Overrides {
-augroup fileconfigs
-	autocmd!
-	" let g:xml_syntax_folding=1
-	" autocmd FileType xml setlocal foldmethod=syntax
-	" autocmd BufNewFile,BufRead *.md,*.markdown,*.mdown,*.note setlocal filetype=markdown
-	autocmd FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
-" Avro files
-" 	autocmd BufNewFile,BufRead *.avsc setlocal filetype=json	"avro file
-" 	autocmd BufNewFile,BufRead *.avdl setlocal filetype=idl	"avro file
-" "	autocmd BufNewFile,BufRead *.json set filetype=json
-"
-" 	autocmd BufNewFile,BufRead *.ctmpl setlocal filetype=gotexttmpl
-" 	autocmd BufNewFile,BufRead *.sh.tpl setlocal filetype=gotexttmpl
-" 	autocmd BufNewFile,BufRead *.gv setlocal filetype=dot
-" 	autocmd BufNewFile,BufRead *.mod setlocal filetype=gomod
-" 	autocmd BufNewFile,BufRead *.bdy setlocal filetype=sql
-" 	autocmd BufNewFile,BufRead *.fnc setlocal filetype=sql
-" 	autocmd BufNewFile,BufRead *.prc setlocal filetype=sql
-" 	autocmd BufNewFile,BufRead *.spc setlocal filetype=sql
-" 	autocmd BufNewFile,BufRead *.trg setlocal filetype=sql
-" 	" autocmd BufNewFile,BufRead *.
-augroup END
+	augroup fileconfigs
+		autocmd!
+		" let g:xml_syntax_folding=1
+		" autocmd FileType xml setlocal foldmethod=syntax
+		" autocmd BufNewFile,BufRead *.md,*.markdown,*.mdown,*.note setlocal filetype=markdown
+		autocmd FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
+	" Avro files
+	" 	autocmd BufNewFile,BufRead *.avsc setlocal filetype=json	"avro file
+	" 	autocmd BufNewFile,BufRead *.avdl setlocal filetype=idl	"avro file
+	" "	autocmd BufNewFile,BufRead *.json set filetype=json
+	"
+	" 	autocmd BufNewFile,BufRead *.ctmpl setlocal filetype=gotexttmpl
+	" 	autocmd BufNewFile,BufRead *.sh.tpl setlocal filetype=gotexttmpl
+	" 	autocmd BufNewFile,BufRead *.gv setlocal filetype=dot
+	" 	autocmd BufNewFile,BufRead *.mod setlocal filetype=gomod
+	" 	autocmd BufNewFile,BufRead *.bdy setlocal filetype=sql
+	" 	autocmd BufNewFile,BufRead *.fnc setlocal filetype=sql
+	" 	autocmd BufNewFile,BufRead *.prc setlocal filetype=sql
+	" 	autocmd BufNewFile,BufRead *.spc setlocal filetype=sql
+	" 	autocmd BufNewFile,BufRead *.trg setlocal filetype=sql
+	" 	" autocmd BufNewFile,BufRead *.
+	augroup END
 " }
 
 " Functions {
@@ -1325,42 +1325,42 @@ augroup END
 			set bg=dark
 		endif
 	endfunc
+
+	" Use - `:CopyMatches x` where x is any register to hold the result
+	function! CopyMatches(reg)
+		let hits = []
+		%s//\=len(add(hits, submatch(0))) ? submatch(0) : ''/ge
+		let reg = empty(a:reg) ? '+' : a:reg
+		execute 'let @'.reg.' = join(hits, "\n") . "\n"'
+	endfunction
+	command! -register CopyMatches call CopyMatches(<q-reg>)
+
+	" Custom syntastic settings:
+	function! s:find_jshintrc(dir)
+		let l:found = globpath(a:dir, '.jshintrc')
+		if filereadable(l:found)
+			return l:found
+		endif
+
+		let l:parent = fnamemodify(a:dir, ':h')
+		if l:parent != a:dir
+			return s:find_jshintrc(l:parent)
+		endif
+
+		return "~/.jshintrc"
+	endfunction
+
+	function! UpdateJsHintConf()
+		let l:dir = expand('%:p:h')
+		let l:jshintrc = s:find_jshintrc(l:dir)
+		let g:syntastic_javascript_jshint_args = l:jshintrc
+	endfunction
+
+	augroup js_files
+		autocmd!
+		autocmd BufEnter * call UpdateJsHintConf()
+	augroup END
 " }
-
-" Use - `:CopyMatches x` where x is any register to hold the result
-function! CopyMatches(reg)
-	let hits = []
-	%s//\=len(add(hits, submatch(0))) ? submatch(0) : ''/ge
-	let reg = empty(a:reg) ? '+' : a:reg
-	execute 'let @'.reg.' = join(hits, "\n") . "\n"'
-endfunction
-command! -register CopyMatches call CopyMatches(<q-reg>)
-
-" Custom syntastic settings:
-function! s:find_jshintrc(dir)
-	let l:found = globpath(a:dir, '.jshintrc')
-	if filereadable(l:found)
-		return l:found
-	endif
-
-	let l:parent = fnamemodify(a:dir, ':h')
-	if l:parent != a:dir
-		return s:find_jshintrc(l:parent)
-	endif
-
-	return "~/.jshintrc"
-endfunction
-
-function! UpdateJsHintConf()
-	let l:dir = expand('%:p:h')
-	let l:jshintrc = s:find_jshintrc(l:dir)
-	let g:syntastic_javascript_jshint_args = l:jshintrc
-endfunction
-
-augroup js_files
-	autocmd!
-	autocmd BufEnter * call UpdateJsHintConf()
-augroup END
 
 " Projectionist {
 	let g:projectionist_heuristics = {
@@ -1477,7 +1477,7 @@ augroup END
 		nmap <Leader>fs :Filetypes<CR>
 	" }
 
-" Similarly, we can apply it to fzf#vim#grep. To use ripgrep instead of ag:
+	" Similarly, we can apply it to fzf#vim#grep. To use ripgrep instead of ag:
 	command! -bang -nargs=* Rg
 		\ call fzf#vim#grep(
 		\   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
@@ -1529,6 +1529,108 @@ augroup END
 	" 	highlight Heading6 guifg=#bd0026 guibg=#fdf6e3
 	" endif
 
+" }
+
+" Neovim {
+	if has('nvim')
+
+		" Reset the cursor on exit
+		" See https://github.com/neovim/neovim/issues/4867#issuecomment-291249173
+		" and https://github.com/neovim/neovim/wiki/FAQ#cursor-style-isnt-restored-after-exiting-nvim
+		" set guicursor=a:blinkon100
+		" augroup cursor
+		" 	autocmd!
+		" 	autocmd VimLeave,VimSuspend * set guicursor=a:ver25-blinkon1
+		" augroup END
+
+		" exit terminal mode with <esc>
+		" tnoremap <Esc> <C-\><C-n>
+		if has('mouse')
+			set mouse=a
+		endif
+
+		" Add current directory to path (for `gf`)
+		" set path+=.,,
+
+		" ALE
+		" Since we use Neovim's builtin LSP
+		let g:ale_disable_lsp = 1
+		let g:ale_fix_on_save = 1
+		let g:ale_fixers = {
+		\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+		\}
+		let g:ale_javascript_eslint_suppress_missing_config = 1
+
+		nmap <silent> [W <Plug>(ale_first)
+		nmap <silent> [w <Plug>(ale_previous)
+		nmap <silent> ]w <Plug>(ale_next)
+		nmap <silent> ]W <Plug>(ale_last)
+
+		" Faster file switching with alternates
+		" Also integrates with vim-test
+		lua require("projectionist")
+
+	endif
+	" Beta features {
+		if has('nvim-0.5')
+			" source $HOME/.config/nvim/config/lsp.vim
+			" source $HOME/.config/nvim/config/treesitter.vim
+			set omnifunc=v:lua.vim.lsp.omnifunc
+
+			command! LspHover lua vim.lsp.buf.hover()<CR>
+			command! LspDisable lua vim.lsp.stop_client(vim.lsp.get_active_clients())<CR>
+
+			" packadd nvim-lspconfig
+			" packadd nvim-ale-diagnostic
+			" packadd nlua.nvim
+			" LSP config, in lua
+			lua require("lsp")
+
+			" Show errors after 1 second
+			set updatetime=1000
+
+			let g:diagnostic_insert_delay =1
+			let g:diagnostic_enable_ale = 1
+
+lua <<EOF
+  -- …
+
+  function goimports(timeoutms)
+    local context = { source = { organizeImports = true } }
+    vim.validate { context = { context, "t", true } }
+
+    local params = vim.lsp.util.make_range_params()
+    params.context = context
+
+    -- See the implementation of the textDocument/codeAction callback
+    -- (lua/vim/lsp/handler.lua) for how to do this properly.
+    local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, timeout_ms)
+    if not result or next(result) == nil then return end
+    local actions = result[1].result
+    if not actions then return end
+    local action = actions[1]
+
+    -- textDocument/codeAction can return either Command[] or CodeAction[]. If it
+    -- is a CodeAction, it can have either an edit, a command or both. Edits
+    -- should be executed first.
+    if action.edit or type(action.command) == "table" then
+      if action.edit then
+        vim.lsp.util.apply_workspace_edit(action.edit)
+      end
+      if type(action.command) == "table" then
+        vim.lsp.buf.execute_command(action.command)
+      end
+    else
+      vim.lsp.buf.execute_command(action)
+    end
+  end
+EOF
+
+autocmd BufWritePre *.go lua goimports(1000)
+
+
+		end
+	" }
 " }
 
 " vim:tw=78:ts=4:sw=4:norl:
