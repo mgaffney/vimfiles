@@ -256,6 +256,11 @@
 	call plug#end()
 " }
 
+" python for vim {
+	let g:python_host_prog = '/usr/local/bin/python3'
+	let g:python3_host_prog = '/usr/local/bin/python3'
+" }
+
 " ConfigPlugins {
 	" solarized {
 		let g:solarized_term_italics = 1
