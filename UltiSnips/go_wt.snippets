@@ -168,49 +168,55 @@ snippet wt-create "CreateResource"
 //
 // Both $2.Name and $2.Description are optional.
 // If $2.Name is set, it must be unique within $2.${12:`!p snip.rv = t[11] + 'Id'`}.
+//
+// Both $2.CreateTime and $2.UpdateTime are ignored.
 func (r *Repository) Create$1(ctx context.Context, scopeId string, $2 *$1, opt ...Option) (*$1, error) {
+	const op = "${41:`!v expand('%:p:h:t')`}.(Repository).Create$1"
 	if $2 == nil {
-		return nil, fmt.Errorf("create: ${41:`!v expand('%:p:h:t')`} $3: %w", db.ErrNilParameter)
+		return nil, errors.New(errors.InvalidParameter, op, "nil $1")
 	}
 	if $2.$1 == nil {
-		return nil, fmt.Errorf("create: $41 $3: embedded $1: %w", db.ErrNilParameter)
+		return nil, errors.New(errors.InvalidParameter, op, "nil embedded $2")
 	}
 	if $2.$12 == "" {
-		return nil, fmt.Errorf("create: $41 $3: no ${15:${12/([a-z]*)([A-Z]+)/(?1:$1 )\L$2\E/g}}: %w", db.ErrInvalidParameter)
+		return nil, errors.New(errors.InvalidParameter, op, "no ${15:${12/([a-z]*)([A-Z]+)/(?1:$1 )\L$2\E/g}}")
 	}
 	if $2.PublicId != "" {
-		return nil, fmt.Errorf("create: $41 $3: public id not empty: %w", db.ErrInvalidParameter)
+		return nil, errors.New(errors.InvalidParameter, op, "public id not empty")
 	}
 	if scopeId == "" {
-		return nil, fmt.Errorf("create: $41 $3: no scopeId: %w", db.ErrNilParameter)
+		return nil, errors.New(errors.InvalidParameter, op, "no scope id")
 	}
 	$2 = $2.clone()
 
 	id, err := new$1Id()
 	if err != nil {
-		return nil, fmt.Errorf("create: $41 $3: %w", err)
+		return nil, errors.Wrap(err, op)
 	}
 	$2.PublicId = id
 
 	oplogWrapper, err := r.kms.GetWrapper(ctx, scopeId, kms.KeyPurposeOplog)
 	if err != nil {
-		return nil, fmt.Errorf("create: $41 $3: unable to get oplog wrapper: %w", err)
+		return nil, errors.Wrap(err, op, errors.WithMsg("unable to get oplog wrapper"))
 	}
 
 	var new$1 *$1
 	_, err = r.writer.DoTx(ctx, db.StdRetryCnt, db.ExpBackoff{},
 		func(_ db.Reader, w db.Writer) error {
 			new$1 = $2.clone()
-			return w.Create(ctx, new$1, db.WithOplog(oplogWrapper, $2.oplog(oplog.OpType_OP_TYPE_CREATE)))
+			err := w.Create(ctx, new$1, db.WithOplog(oplogWrapper, $2.oplog(oplog.OpType_OP_TYPE_CREATE)))
+			if err != nil {
+				return errors.Wrap(err, op)
+			}
+			return nil
 		},
 	)
 
 	if err != nil {
-		if db.IsUniqueError(err) {
-			return nil, fmt.Errorf("create: $41 $3: in ${14:${11/([a-z]*)([A-Z]+)/(?1:$1 )\L$2\E/g}}: %s: name %s already exists: %w",
-				$2.$12, $2.Name, db.ErrNotUnique)
+		if errors.IsUniqueError(err) {
+			return nil, errors.Wrap(err, op, errors.WithMsg(fmt.Sprintf("in ${14:${11/([a-z]*)([A-Z]+)/(?1:$1 )\L$2\E/g}}: %s: name %s already exists", $2.$12, $2.Name)))
 		}
-		return nil, fmt.Errorf("create: $41 $3: in $14: %s: %w", $2.$12, err)
+		return nil, errors.Wrap(err, op, errors.WithMsg(fmt.Sprintf("in $14: %s", $2.$12)))
 	}
 	return new$1, nil
 }
