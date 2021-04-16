@@ -305,22 +305,20 @@ func (r *Repository) Update$1(ctx context.Context, scopeId string, $2 *$1, versi
 endsnippet
 
 snippet wt-lookup "LookupResource"
-// Lookup${1:Resource}
-// will look up a ${3:${1/([a-z]*)([A-Z]+)/(?1:$1 )\L$2\E/g}}
-// in the repository.
-// If the $3 is not found, it will return nil, nil.
-// All options are ignored.
-func (r *Repository) Lookup$1(ctx context.Context, publicId string, opt ...Option) (*$1, error) {
+// Lookup${1:Resource} returns the $1 for publicId.
+// Returns nil, nil if no $1 is found for publicId.
+func (r *Repository) Lookup$1(ctx context.Context, publicId string, _ ...Option) (*$1, error) {
+	const op = "${41:`!v expand('%:p:h:t')`}.Lookup$1"
 	if publicId == "" {
-		return nil, fmt.Errorf("lookup: ${41:`!v expand('%:p:h:t')`} $3: missing public id %w", db.ErrInvalidParameter)
+		return nil, errors.New(errors.InvalidParameter, op, "no public id")
 	}
 	${2:`!p snip.rv = t[1].lower()[0]`} := alloc$1()
 	$2.PublicId = publicId
 	if err := r.reader.LookupByPublicId(ctx, $2); err != nil {
-		if errors.Is(err, db.ErrRecordNotFound) {
+		if errors.IsNotFoundError(err) {
 			return nil, nil
 		}
-		return nil, fmt.Errorf("lookup: $41 $3: failed %w for %s", err, publicId)
+		return nil, errors.Wrap(err, op, errors.WithMsg(fmt.Sprintf("failed for: %s", publicId)))
 	}
 	return $2, nil
 }

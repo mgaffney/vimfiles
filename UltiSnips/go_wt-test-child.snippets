@@ -91,10 +91,11 @@ func TestRepository_Create${1:Resource}(t *testing.T) {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			assert, require := assert.New(t), require.New(t)
+			ctx := context.Background()
 			repo, err := NewRepository(rw, rw, kms)
 			require.NoError(err)
 			require.NotNil(repo)
-			got, err := repo.Create$1(context.Background(), $23.GetPublicId(), tt.in, tt.opts...)
+			got, err := repo.Create$1(ctx, $23.GetPublicId(), tt.in, tt.opts...)
 			if tt.wantIsErr != nil {
 				assert.Truef(errors.Is(err, tt.wantIsErr), "want err: %q got: %q", tt.wantIsErr, err)
 				assert.Nil(got)
@@ -114,6 +115,7 @@ func TestRepository_Create${1:Resource}(t *testing.T) {
 
 	t.Run("invalid-duplicate-names", func(t *testing.T) {
 		assert, require := assert.New(t), require.New(t)
+		ctx := context.Background()
 		repo, err := NewRepository(rw, rw, kms)
 		require.NoError(err)
 		require.NotNil(repo)
@@ -128,7 +130,7 @@ func TestRepository_Create${1:Resource}(t *testing.T) {
 			},
 		}
 
-		got, err := repo.Create$1(context.Background(), $23.GetPublicId(), in)
+		got, err := repo.Create$1(ctx, $23.GetPublicId(), in)
 		require.NoError(err)
 		require.NotNil(got)
 		assertPublicId(t, $1Prefix, got.PublicId)
@@ -137,13 +139,14 @@ func TestRepository_Create${1:Resource}(t *testing.T) {
 		assert.Equal(in.Description, got.Description)
 		assert.Equal(got.CreateTime, got.UpdateTime)
 
-		got2, err := repo.Create$1(context.Background(), $23.GetPublicId(), in)
+		got2, err := repo.Create$1(ctx, $23.GetPublicId(), in)
 		assert.Truef(errors.Is(err, db.ErrNotUnique), "want err: %v got: %v", db.ErrNotUnique, err)
 		assert.Nil(got2)
 	})
 
 	t.Run("valid-duplicate-names-diff-$14s", func(t *testing.T) {
 		assert, require := assert.New(t), require.New(t)
+		ctx := context.Background()
 		repo, err := NewRepository(rw, rw, kms)
 		require.NoError(err)
 		require.NotNil(repo)
@@ -161,7 +164,7 @@ func TestRepository_Create${1:Resource}(t *testing.T) {
 		in2 := in.clone()
 
 		in.$12 = $31A.PublicId
-		got, err := repo.Create$1(context.Background(), $23.GetPublicId(), in)
+		got, err := repo.Create$1(ctx, $23.GetPublicId(), in)
 		require.NoError(err)
 		require.NotNil(got)
 		assertPublicId(t, $1Prefix, got.PublicId)
@@ -171,7 +174,7 @@ func TestRepository_Create${1:Resource}(t *testing.T) {
 		assert.Equal(got.CreateTime, got.UpdateTime)
 
 		in2.$12 = $31B.PublicId
-		got2, err := repo.Create$1(context.Background(), $23.GetPublicId(), in2)
+		got2, err := repo.Create$1(ctx, $23.GetPublicId(), in2)
 		require.NoError(err)
 		require.NotNil(got2)
 		assertPublicId(t, $1Prefix, got2.PublicId)
@@ -445,6 +448,7 @@ func TestRepository_Update${1:Resource}(t *testing.T) {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			assert, require := assert.New(t), require.New(t)
+			ctx := context.Background()
 			repo, err := NewRepository(rw, rw, kms)
 			assert.NoError(err)
 			require.NotNil(repo)
@@ -453,14 +457,14 @@ func TestRepository_Update${1:Resource}(t *testing.T) {
 			${31:`!p snip.rv = t[11].lower()[0] + t[11][1:]`} := Test${11:Parent}s(t, conn, ${23:`!p snip.rv=t[21] if t[21] != '_' else t[22]`}.PublicId, 1)[0]
 
 			tt.orig.${12:`!p snip.rv = t[11] + 'Id'`} = $31.PublicId
-			orig, err := repo.Create$1(context.Background(), $23.GetPublicId(), tt.orig)
+			orig, err := repo.Create$1(ctx, $23.GetPublicId(), tt.orig)
 			assert.NoError(err)
 			require.NotNil(orig)
 
 			if tt.chgFn != nil {
 				orig = tt.chgFn(orig)
 			}
-			got, gotCount, err := repo.Update$1(context.Background(), $23.GetPublicId(), orig, 1, tt.masks)
+			got, gotCount, err := repo.Update$1(ctx, $23.GetPublicId(), orig, 1, tt.masks)
 			if tt.wantIsErr != nil {
 				assert.Truef(errors.Is(err, tt.wantIsErr), "want err: %q got: %q", tt.wantIsErr, err)
 				assert.Equal(tt.wantCount, gotCount, "row count")
@@ -493,6 +497,7 @@ func TestRepository_Update${1:Resource}(t *testing.T) {
 
 	t.Run("invalid-duplicate-names", func(t *testing.T) {
 		assert, require := assert.New(t), require.New(t)
+		ctx := context.Background()
 		repo, err := NewRepository(rw, rw, kms)
 		assert.NoError(err)
 		require.NotNil(repo)
@@ -505,7 +510,7 @@ func TestRepository_Update${1:Resource}(t *testing.T) {
 		$2A, $2B := $25[0], $25[1]
 
 		$2A.Name = name
-		got1, gotCount1, err := repo.Update$1(context.Background(), $23.GetPublicId(), $2A, 1, []string{"name"})
+		got1, gotCount1, err := repo.Update$1(ctx, $23.GetPublicId(), $2A, 1, []string{"name"})
 		assert.NoError(err)
 		require.NotNil(got1)
 		assert.Equal(name, got1.Name)
@@ -513,7 +518,7 @@ func TestRepository_Update${1:Resource}(t *testing.T) {
 		assert.NoError(db.TestVerifyOplog(t, rw, $2A.PublicId, db.WithOperation(oplog.OpType_OP_TYPE_UPDATE), db.WithCreateNotBefore(10*time.Second)))
 
 		$2B.Name = name
-		got2, gotCount2, err := repo.Update$1(context.Background(), $23.GetPublicId(), $2B, 1, []string{"name"})
+		got2, gotCount2, err := repo.Update$1(ctx, $23.GetPublicId(), $2B, 1, []string{"name"})
 		assert.Truef(errors.Is(err, db.ErrNotUnique), "want err: %v got: %v", db.ErrNotUnique, err)
 		assert.Nil(got2)
 		assert.Equal(db.NoRowsAffected, gotCount2, "row count")
@@ -524,6 +529,7 @@ func TestRepository_Update${1:Resource}(t *testing.T) {
 
 	t.Run("valid-duplicate-names-diff-$11s", func(t *testing.T) {
 		assert, require := assert.New(t), require.New(t)
+		ctx := context.Background()
 		repo, err := NewRepository(rw, rw, kms)
 		assert.NoError(err)
 		require.NotNil(repo)
@@ -541,7 +547,7 @@ func TestRepository_Update${1:Resource}(t *testing.T) {
 		in2 := in.clone()
 
 		in.$12 = $31A.PublicId
-		got, err := repo.Create$1(context.Background(), $23.GetPublicId(), in)
+		got, err := repo.Create$1(ctx, $23.GetPublicId(), in)
 		assert.NoError(err)
 		require.NotNil(got)
 		assertPublicId(t, $1Prefix, got.PublicId)
@@ -551,11 +557,11 @@ func TestRepository_Update${1:Resource}(t *testing.T) {
 
 		in2.$12 = $31B.PublicId
 		in2.Name = "first-name"
-		got2, err := repo.Create$1(context.Background(), $23.GetPublicId(), in2)
+		got2, err := repo.Create$1(ctx, $23.GetPublicId(), in2)
 		assert.NoError(err)
 		require.NotNil(got2)
 		got2.Name = got.Name
-		got3, gotCount3, err := repo.Update$1(context.Background(), $23.GetPublicId(), got2, 1, []string{"name"})
+		got3, gotCount3, err := repo.Update$1(ctx, $23.GetPublicId(), got2, 1, []string{"name"})
 		assert.NoError(err)
 		require.NotNil(got3)
 		assert.NotSame(got2, got3)
@@ -567,6 +573,7 @@ func TestRepository_Update${1:Resource}(t *testing.T) {
 
 	t.Run("change-scope-id", func(t *testing.T) {
 		assert, require := assert.New(t), require.New(t)
+		ctx := context.Background()
 		repo, err := NewRepository(rw, rw, kms)
 		assert.NoError(err)
 		require.NotNil(repo)
@@ -585,7 +592,7 @@ func TestRepository_Update${1:Resource}(t *testing.T) {
 		$2A.$12 = $2B.$12
 		assert.Equal($2A.$12, $2B.$12)
 
-		got1, gotCount1, err := repo.Update$1(context.Background(), $23.GetPublicId(), $2A, 1, []string{"name"})
+		got1, gotCount1, err := repo.Update$1(ctx, $23.GetPublicId(), $2A, 1, []string{"name"})
 
 		assert.NoError(err)
 		require.NotNil(got1)
@@ -635,10 +642,11 @@ func TestRepository_Lookup${1:Resource}(t *testing.T) {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			assert, require := assert.New(t), require.New(t)
+			ctx := context.Background()
 			repo, err := NewRepository(rw, rw, kms)
 			assert.NoError(err)
 			require.NotNil(repo)
-			got, err := repo.Lookup$1(context.Background(), tt.in)
+			got, err := repo.Lookup$1(ctx, tt.in)
 			if tt.wantIsErr != nil {
 				assert.Truef(errors.Is(err, tt.wantIsErr), "want err: %q got: %q", tt.wantIsErr, err)
 				assert.Nil(got)
@@ -692,10 +700,11 @@ func TestRepository_List${1:ResourceExample}s(t *testing.T) {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			assert, require := assert.New(t), require.New(t)
+			ctx := context.Background()
 			repo, err := NewRepository(rw, rw, kms)
 			assert.NoError(err)
 			require.NotNil(repo)
-			got, err := repo.List$1s(context.Background(), tt.in, tt.opts...)
+			got, err := repo.List$1s(ctx, tt.in, tt.opts...)
 			if tt.wantIsErr != nil {
 				assert.Truef(errors.Is(err, tt.wantIsErr), "want err: %q got: %q", tt.wantIsErr, err)
 				assert.Nil(got)
@@ -771,10 +780,11 @@ func TestRepository_List$1s_Limits(t *testing.T) {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			assert, require := assert.New(t), require.New(t)
+			ctx := context.Background()
 			repo, err := NewRepository(rw, rw, kms, tt.repoOpts...)
 			assert.NoError(err)
 			require.NotNil(repo)
-			got, err := repo.List$1s(context.Background(), $6[0].${12:`!p snip.rv = t[11] + 'Id'`}, tt.listOpts...)
+			got, err := repo.List$1s(ctx, $6[0].${12:`!p snip.rv = t[11] + 'Id'`}, tt.listOpts...)
 			require.NoError(err)
 			assert.Len(got, tt.wantLen)
 		})
