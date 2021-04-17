@@ -143,20 +143,21 @@ snippet wt-update "UpdateResource"
 // An attribute of $2 will be set to NULL in the database if the attribute
 // in $2 is the zero value and it is included in fieldMaskPaths.
 func (r *Repository) Update$1(ctx context.Context, scopeId string, $2 *$1, version uint32, fieldMaskPaths []string, opt ...Option) (*$1, int, error) {
+	const op = "${41:`!v expand('%:p:h:t')`}.(Repository).Update$1"
 	if $2 == nil {
-		return nil, db.NoRowsAffected, fmt.Errorf("update: ${41:`!v expand('%:p:h:t')`} ${3:${1/([a-z]*)([A-Z]+)/(?1:$1 )\L$2\E/g}}: %w", db.ErrNilParameter)
+		return nil, db.NoRowsAffected, errors.New(errors.InvalidParameter, op, "missing $1")
 	}
 	if $2.$1 == nil {
-		return nil, db.NoRowsAffected, fmt.Errorf("update: $41 $3: embedded $1: %w", db.ErrNilParameter)
+		return nil, db.NoRowsAffected, errors.New(errors.InvalidParameter, op, "missing embedded $1")
 	}
 	if $2.PublicId == "" {
-		return nil, db.NoRowsAffected, fmt.Errorf("update: $41 $3: missing public id: %w", db.ErrInvalidParameter)
+		return nil, db.NoRowsAffected, errors.New(errors.InvalidPublicId, op, "missing public id")
 	}
 	if version == 0 {
-		return nil, db.NoRowsAffected, fmt.Errorf("update: $41 $3: no version supplied: %w", db.ErrInvalidParameter)
+		return nil, db.NoRowsAffected, errors.New(errors.InvalidParameter, op, "missing version")
 	}
 	if scopeId == "" {
-		return nil, db.NoRowsAffected, fmt.Errorf("update: $41 $3: no scopeId: %w", db.ErrNilParameter)
+		return nil, db.NoRowsAffected, errors.New(errors.InvalidParameter, op, "missing scope id")
 	}
 
 	for _, f := range fieldMaskPaths {
@@ -164,7 +165,7 @@ func (r *Repository) Update$1(ctx context.Context, scopeId string, $2 *$1, versi
 		case strings.EqualFold("Name", f):
 		case strings.EqualFold("Description", f):
 		default:
-			return nil, db.NoRowsAffected, fmt.Errorf("update: $41 $3: field: %s: %w", f, db.ErrInvalidFieldMask)
+			return nil, db.NoRowsAffected, errors.New(errors.InvalidFieldMask, op, f)
 		}
 	}
 	var dbMask, nullFields []string
@@ -174,14 +175,16 @@ func (r *Repository) Update$1(ctx context.Context, scopeId string, $2 *$1, versi
 			"Description": $2.Description,
 		},
 		fieldMaskPaths,
+		nil,
 	)
 	if len(dbMask) == 0 && len(nullFields) == 0 {
-		return nil, db.NoRowsAffected, fmt.Errorf("update: $41 $3: %w", db.ErrEmptyFieldMask)
+		return nil, db.NoRowsAffected, errors.New(errors.EmptyFieldMask, op, "missing field mask")
 	}
 
 	oplogWrapper, err := r.kms.GetWrapper(ctx, scopeId, kms.KeyPurposeOplog)
 	if err != nil {
-		return nil, db.NoRowsAffected, fmt.Errorf("update: $41 $3: unable to get oplog wrapper: %w", err)
+		return nil, db.NoRowsAffected, errors.Wrap(err, op, errors.WithCode(errors.Encrypt),
+			errors.WithMsg(("unable to get oplog wrapper")))
 	}
 
 	var rowsUpdated int
@@ -194,18 +197,18 @@ func (r *Repository) Update$1(ctx context.Context, scopeId string, $2 *$1, versi
 				db.WithOplog(oplogWrapper, $2.oplog(oplog.OpType_OP_TYPE_UPDATE)),
 				db.WithVersion(&version))
 			if err == nil && rowsUpdated > 1 {
-				return db.ErrMultipleRecords
+				return errors.New(errors.MultipleRecords, op, "more than 1 resource would have been updated")
 			}
 			return err
 		},
 	)
 
 	if err != nil {
-		if db.IsUniqueError(err) {
-			return nil, db.NoRowsAffected, fmt.Errorf("update: $41 $3: %s: name %s already exists: %w",
-				$2.PublicId, $2.Name, db.ErrNotUnique)
+		if errors.IsUniqueError(err) {
+			return nil, db.NoRowsAffected, errors.New(errors.NotUnique, op,
+				fmt.Sprintf("name %s already exists: %s", $2.Name, $2.PublicId))
 		}
-		return nil, db.NoRowsAffected, fmt.Errorf("update: $41 $3: %s: %w", $2.PublicId, err)
+		return nil, db.NoRowsAffected, errors.Wrap(err, op, errors.WithMsg($2.PublicId))
 	}
 
 	return returned$1, rowsUpdated, nil
