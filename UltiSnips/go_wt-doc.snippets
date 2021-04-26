@@ -34,7 +34,7 @@
 #  $21 - org
 # 	${21:org}
 #  $22 - prj
-# 	${21:org}, ${22:prj} := iam.TestScopes(t, conn)
+#	${21:org}, ${22:prj} := iam.TestScopes(t, iam.TestRepo(t, conn, wrapper))
 #  $23 - org or prj with !p
 # 	${23:`!p snip.rv=t[21] if t[21] != '_' else t[22]`}
 #  $24 - resourceExample (test resource var)

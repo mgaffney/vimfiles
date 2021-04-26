@@ -3,55 +3,53 @@ func TestRepository_Create${1:Resource}(t *testing.T) {
 	conn, _ := db.TestSetup(t, "postgres")
 	rw := db.New(conn)
 	wrapper := db.TestWrapper(t)
-	kms := kms.TestKms(t, conn, wrapper)
-	iamRepo := iam.TestRepo(t, conn, wrapper)
 
-	${21:org}, ${22:prj} := iam.TestScopes(t, iamRepo)
-	${31:`!p snip.rv = t[11].lower()[0] + t[11][1:]`} := Test${11:Parent}s(t, conn, ${23:`!p snip.rv=t[21] if t[21] != '_' else t[22]`}.PublicId, 1)[0]
+	${21:org}, ${22:prj} := iam.TestScopes(t, iam.TestRepo(t, conn, wrapper))
+	${31:`!p snip.rv = t[11].lower()[0] + t[11][1:]`} := Test${11:Parent}s(t, conn, ${80:wrapper,} ${23:`!p snip.rv=t[21] if t[21] != '_' else t[22]`}.GetPublicId(), 1)[0]
 
 	var tests = []struct {
 		name      string
 		in        *$1
 		opts      []Option
 		want      *$1
-		wantIsErr error
+		wantErr errors.Code
 	}{
 		{
 			name:      "nil-$1",
-			wantIsErr: db.ErrNilParameter,
+			wantErr: errors.InvalidParameter,
 		},
 		{
 			name:      "nil-embedded-$1",
 			in:        &$1{},
-			wantIsErr: db.ErrNilParameter,
+			wantErr: errors.InvalidParameter,
 		},
 		{
 			name: "invalid-no-${14:`!p snip.rv = t[11].lower()[0] + t[11][1:]`}-id",
 			in: &$1{
 				$1: &store.$1{},
 			},
-			wantIsErr: db.ErrInvalidParameter,
+			wantErr: errors.InvalidParameter,
 		},
 		{
 			name: "invalid-public-id-set",
 			in: &$1{
 				$1: &store.$1{
-					${12:`!p snip.rv = t[11] + 'Id'`}:  $31.PublicId,
+					${12:`!p snip.rv = t[11] + 'Id'`}:  $31.GetPublicId(),
 					PublicId: "abcd_OOOOOOOOOO",
 				},
 			},
-			wantIsErr: db.ErrInvalidParameter,
+			wantErr: errors.InvalidParameter,
 		},
 		{
 			name: "valid-no-options",
 			in: &$1{
 				$1: &store.$1{
-					$12: $31.PublicId,
+					$12: $31.GetPublicId(),
 				},
 			},
 			want: &$1{
 				$1: &store.$1{
-					$12: $31.PublicId,
+					$12: $31.GetPublicId(),
 				},
 			},
 		},
@@ -59,13 +57,13 @@ func TestRepository_Create${1:Resource}(t *testing.T) {
 			name: "valid-with-name",
 			in: &$1{
 				$1: &store.$1{
-					$12: $31.PublicId,
+					$12: $31.GetPublicId(),
 					Name:    "test-name-repo",
 				},
 			},
 			want: &$1{
 				$1: &store.$1{
-					$12: $31.PublicId,
+					$12: $31.GetPublicId(),
 					Name:    "test-name-repo",
 				},
 			},
@@ -74,13 +72,13 @@ func TestRepository_Create${1:Resource}(t *testing.T) {
 			name: "valid-with-description",
 			in: &$1{
 				$1: &store.$1{
-					$12:     $31.PublicId,
+					$12:     $31.GetPublicId(),
 					Description: ("test-description-repo"),
 				},
 			},
 			want: &$1{
 				$1: &store.$1{
-					$12:     $31.PublicId,
+					$12:     $31.GetPublicId(),
 					Description: ("test-description-repo"),
 				},
 			},
@@ -92,40 +90,40 @@ func TestRepository_Create${1:Resource}(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			assert, require := assert.New(t), require.New(t)
 			ctx := context.Background()
+			kms := kms.TestKms(t, conn, wrapper)
 			repo, err := NewRepository(rw, rw, kms)
 			require.NoError(err)
 			require.NotNil(repo)
 			got, err := repo.Create$1(ctx, $23.GetPublicId(), tt.in, tt.opts...)
-			if tt.wantIsErr != nil {
-				assert.Truef(errors.Is(err, tt.wantIsErr), "want err: %q got: %q", tt.wantIsErr, err)
+			if tt.wantErr != 0 {
+				assert.Truef(errors.Match(errors.T(tt.wantErr), err), "want err: %q got: %q", tt.wantErr, err)
 				assert.Nil(got)
 				return
 			}
 			require.NoError(err)
 			assert.Empty(tt.in.PublicId)
 			require.NotNil(got)
-			assertPublicId(t, $1Prefix, got.PublicId)
+			assertPublicId(t, $1Prefix, got.GetPublicId())
 			assert.NotSame(tt.in, got)
 			assert.Equal(tt.want.Name, got.Name)
 			assert.Equal(tt.want.Description, got.Description)
 			assert.Equal(got.CreateTime, got.UpdateTime)
-			assert.NoError(db.TestVerifyOplog(t, rw, got.PublicId, db.WithOperation(oplog.OpType_OP_TYPE_CREATE), db.WithCreateNotBefore(10*time.Second)))
+			assert.NoError(db.TestVerifyOplog(t, rw, got.GetPublicId(), db.WithOperation(oplog.OpType_OP_TYPE_CREATE), db.WithCreateNotBefore(10*time.Second)))
 		})
 	}
 
 	t.Run("invalid-duplicate-names", func(t *testing.T) {
 		assert, require := assert.New(t), require.New(t)
 		ctx := context.Background()
+		kms := kms.TestKms(t, conn, wrapper)
 		repo, err := NewRepository(rw, rw, kms)
 		require.NoError(err)
 		require.NotNil(repo)
-
-		$21, $22 := iam.TestScopes(t, iamRepo)
-		$31 := test$11s(t, conn, $23.PublicId, 1)[0]
-
+		$21, $22 := iam.TestScopes(t, iam.TestRepo(t, conn, wrapper))
+		$31 := Test$11s(t, conn, $80 $23.GetPublicId(), 1)[0]
 		in := &$1{
 			$1: &store.$1{
-				$12: $31.PublicId,
+				$12: $31.GetPublicId(),
 				Name:    "test-name-repo",
 			},
 		}
@@ -133,26 +131,27 @@ func TestRepository_Create${1:Resource}(t *testing.T) {
 		got, err := repo.Create$1(ctx, $23.GetPublicId(), in)
 		require.NoError(err)
 		require.NotNil(got)
-		assertPublicId(t, $1Prefix, got.PublicId)
+		assertPublicId(t, $1Prefix, got.GetPublicId())
 		assert.NotSame(in, got)
 		assert.Equal(in.Name, got.Name)
 		assert.Equal(in.Description, got.Description)
 		assert.Equal(got.CreateTime, got.UpdateTime)
 
 		got2, err := repo.Create$1(ctx, $23.GetPublicId(), in)
-		assert.Truef(errors.Is(err, db.ErrNotUnique), "want err: %v got: %v", db.ErrNotUnique, err)
+		assert.Truef(errors.Match(errors.T(errors.NotUnique), err), "want err: %q got: %q", errors.NotUnique, err)
 		assert.Nil(got2)
 	})
 
 	t.Run("valid-duplicate-names-diff-$14s", func(t *testing.T) {
 		assert, require := assert.New(t), require.New(t)
 		ctx := context.Background()
+		kms := kms.TestKms(t, conn, wrapper)
 		repo, err := NewRepository(rw, rw, kms)
 		require.NoError(err)
 		require.NotNil(repo)
 
-		$21, $22 := iam.TestScopes(t, iamRepo)
-		${32:`!p snip.rv = t[31] + 's'`} := test$11s(t, conn, $23.PublicId, 2)
+		$21, $22 := iam.TestScopes(t, iam.TestRepo(t, conn, wrapper))
+		${32:`!p snip.rv = t[31] + 's'`} := Test$11s(t, conn, $80 $23.GetPublicId(), 2)
 
 		$31A, $31B := $32[0], $32[1]
 
@@ -163,21 +162,21 @@ func TestRepository_Create${1:Resource}(t *testing.T) {
 		}
 		in2 := in.clone()
 
-		in.$12 = $31A.PublicId
+		in.$12 = $31A.GetPublicId()
 		got, err := repo.Create$1(ctx, $23.GetPublicId(), in)
 		require.NoError(err)
 		require.NotNil(got)
-		assertPublicId(t, $1Prefix, got.PublicId)
+		assertPublicId(t, $1Prefix, got.GetPublicId())
 		assert.NotSame(in, got)
 		assert.Equal(in.Name, got.Name)
 		assert.Equal(in.Description, got.Description)
 		assert.Equal(got.CreateTime, got.UpdateTime)
 
-		in2.$12 = $31B.PublicId
+		in2.$12 = $31B.GetPublicId()
 		got2, err := repo.Create$1(ctx, $23.GetPublicId(), in2)
 		require.NoError(err)
 		require.NotNil(got2)
-		assertPublicId(t, $1Prefix, got2.PublicId)
+		assertPublicId(t, $1Prefix, got2.GetPublicId())
 		assert.NotSame(in2, got2)
 		assert.Equal(in2.Name, got2.Name)
 		assert.Equal(in2.Description, got2.Description)
@@ -250,7 +249,7 @@ func TestRepository_Update${1:Resource}(t *testing.T) {
 		masks     []string
 		want      *$1
 		wantCount int
-		wantIsErr error
+		wantErr error
 	}{
 		{
 			name: "nil-${3:`!p snip.rv = t[1].lower()[0] + t[1][1:]`}",
@@ -259,7 +258,7 @@ func TestRepository_Update${1:Resource}(t *testing.T) {
 			},
 			chgFn:     makeNil(),
 			masks:     []string{"Name", "Description"},
-			wantIsErr: db.ErrNilParameter,
+			wantErr: errors.InvalidParameter,
 		},
 		{
 			name: "nil-embedded-$3",
@@ -268,7 +267,7 @@ func TestRepository_Update${1:Resource}(t *testing.T) {
 			},
 			chgFn:     makeEmbeddedNil(),
 			masks:     []string{"Name", "Description"},
-			wantIsErr: db.ErrNilParameter,
+			wantErr: errors.InvalidParameter,
 		},
 		{
 			name: "no-public-id",
@@ -277,7 +276,7 @@ func TestRepository_Update${1:Resource}(t *testing.T) {
 			},
 			chgFn:     deletePublicId(),
 			masks:     []string{"Name", "Description"},
-			wantIsErr: db.ErrInvalidParameter,
+			wantErr: errors.InvalidParameter,
 		},
 		{
 			name: "updating-non-existent-$3",
@@ -288,7 +287,7 @@ func TestRepository_Update${1:Resource}(t *testing.T) {
 			},
 			chgFn:     combine(nonExistentPublicId(), changeName("test-update-name-repo")),
 			masks:     []string{"Name"},
-			wantIsErr: db.ErrRecordNotFound,
+			wantErr: errors.RecordNotFound,
 		},
 		{
 			name: "empty-field-mask",
@@ -298,7 +297,7 @@ func TestRepository_Update${1:Resource}(t *testing.T) {
 				},
 			},
 			chgFn:     changeName("test-update-name-repo"),
-			wantIsErr: db.ErrEmptyFieldMask,
+			wantErr: errors.EmptyFieldMask,
 		},
 		{
 			name: "read-only-fields-in-field-mask",
@@ -309,7 +308,7 @@ func TestRepository_Update${1:Resource}(t *testing.T) {
 			},
 			chgFn:     changeName("test-update-name-repo"),
 			masks:     []string{"PublicId", "CreateTime", "UpdateTime", "$12"},
-			wantIsErr: db.ErrInvalidFieldMask,
+			wantErr: errors.InvalidFieldMask,
 		},
 		{
 			name: "unknown-field-in-field-mask",
@@ -320,7 +319,7 @@ func TestRepository_Update${1:Resource}(t *testing.T) {
 			},
 			chgFn:     changeName("test-update-name-repo"),
 			masks:     []string{"Bilbo"},
-			wantIsErr: db.ErrInvalidFieldMask,
+			wantErr: errors.InvalidFieldMask,
 		},
 		{
 			name: "change-name",
@@ -454,9 +453,9 @@ func TestRepository_Update${1:Resource}(t *testing.T) {
 			require.NotNil(repo)
 
 			${21:org}, ${22:prj} := iam.TestScopes(t, iamRepo)
-			${31:`!p snip.rv = t[11].lower()[0] + t[11][1:]`} := Test${11:Parent}s(t, conn, ${23:`!p snip.rv=t[21] if t[21] != '_' else t[22]`}.PublicId, 1)[0]
+			${31:`!p snip.rv = t[11].lower()[0] + t[11][1:]`} := Test${11:Parent}s(t, conn, ${23:`!p snip.rv=t[21] if t[21] != '_' else t[22]`}.GetPublicId(), 1)[0]
 
-			tt.orig.${12:`!p snip.rv = t[11] + 'Id'`} = $31.PublicId
+			tt.orig.${12:`!p snip.rv = t[11] + 'Id'`} = $31.GetPublicId()
 			orig, err := repo.Create$1(ctx, $23.GetPublicId(), tt.orig)
 			assert.NoError(err)
 			require.NotNil(orig)
@@ -465,8 +464,8 @@ func TestRepository_Update${1:Resource}(t *testing.T) {
 				orig = tt.chgFn(orig)
 			}
 			got, gotCount, err := repo.Update$1(ctx, $23.GetPublicId(), orig, 1, tt.masks)
-			if tt.wantIsErr != nil {
-				assert.Truef(errors.Is(err, tt.wantIsErr), "want err: %q got: %q", tt.wantIsErr, err)
+			if tt.wantErr != 0 {
+				assert.Truef(errors.Match(errors.T(tt.wantErr), err), "want err: %q got: %q", tt.wantErr, err)
 				assert.Equal(tt.wantCount, gotCount, "row count")
 				assert.Nil(got)
 				return
@@ -474,7 +473,7 @@ func TestRepository_Update${1:Resource}(t *testing.T) {
 			assert.NoError(err)
 			assert.Empty(tt.orig.PublicId)
 			require.NotNil(got)
-			assertPublicId(t, $1Prefix, got.PublicId)
+			assertPublicId(t, $1Prefix, got.GetPublicId())
 			assert.Equal(tt.wantCount, gotCount, "row count")
 			assert.NotSame(tt.orig, got)
 			assert.Equal(tt.orig.$12, got.$12)
@@ -490,7 +489,7 @@ func TestRepository_Update${1:Resource}(t *testing.T) {
 			}
 			assert.Equal(tt.want.Description, got.Description)
 			if tt.wantCount > 0 {
-				assert.NoError(db.TestVerifyOplog(t, rw, got.PublicId, db.WithOperation(oplog.OpType_OP_TYPE_UPDATE), db.WithCreateNotBefore(10*time.Second)))
+				assert.NoError(db.TestVerifyOplog(t, rw, got.GetPublicId(), db.WithOperation(oplog.OpType_OP_TYPE_UPDATE), db.WithCreateNotBefore(10*time.Second)))
 			}
 		})
 	}
@@ -504,8 +503,8 @@ func TestRepository_Update${1:Resource}(t *testing.T) {
 
 		name := "test-dup-name"
 		$21, $22 := iam.TestScopes(t, iamRepo)
-		$31 := test$11s(t, conn, $23.PublicId, 1)[0]
-		${25:`!p snip.rv = t[2] + 's'`} := test$1s(t, conn, $31.PublicId, 2)
+		$31 := test$11s(t, conn, $23.GetPublicId(), 1)[0]
+		${25:`!p snip.rv = t[2] + 's'`} := test$1s(t, conn, $31.GetPublicId(), 2)
 
 		$2A, $2B := $25[0], $25[1]
 
@@ -515,16 +514,16 @@ func TestRepository_Update${1:Resource}(t *testing.T) {
 		require.NotNil(got1)
 		assert.Equal(name, got1.Name)
 		assert.Equal(1, gotCount1, "row count")
-		assert.NoError(db.TestVerifyOplog(t, rw, $2A.PublicId, db.WithOperation(oplog.OpType_OP_TYPE_UPDATE), db.WithCreateNotBefore(10*time.Second)))
+		assert.NoError(db.TestVerifyOplog(t, rw, $2A.GetPublicId(), db.WithOperation(oplog.OpType_OP_TYPE_UPDATE), db.WithCreateNotBefore(10*time.Second)))
 
 		$2B.Name = name
 		got2, gotCount2, err := repo.Update$1(ctx, $23.GetPublicId(), $2B, 1, []string{"name"})
-		assert.Truef(errors.Is(err, db.ErrNotUnique), "want err: %v got: %v", db.ErrNotUnique, err)
+		assert.Truef(errors.Match(errors.T(tt.wantErr), err), "want err: %q got: %q", tt.wantErr, err)
 		assert.Nil(got2)
 		assert.Equal(db.NoRowsAffected, gotCount2, "row count")
-		err = db.TestVerifyOplog(t, rw, $2B.PublicId, db.WithOperation(oplog.OpType_OP_TYPE_UPDATE), db.WithCreateNotBefore(10*time.Second))
+		err = db.TestVerifyOplog(t, rw, $2B.GetPublicId(), db.WithOperation(oplog.OpType_OP_TYPE_UPDATE), db.WithCreateNotBefore(10*time.Second))
 		assert.Error(err)
-		assert.True(errors.Is(db.ErrRecordNotFound, err))
+		assert.Truef(errors.Match(errors.T(errors.NotUnique), err), "want err code: %v got err: %v", errors.NotUnique, err)
 	})
 
 	t.Run("valid-duplicate-names-diff-$11s", func(t *testing.T) {
@@ -535,7 +534,7 @@ func TestRepository_Update${1:Resource}(t *testing.T) {
 		require.NotNil(repo)
 
 		$21, $22 := iam.TestScopes(t, iamRepo)
-		${32:`!p snip.rv = t[31] + 's'`} := test$11s(t, conn, $23.PublicId, 2)
+		${32:`!p snip.rv = t[31] + 's'`} := test$11s(t, conn, $23.GetPublicId(), 2)
 
 		$31A, $31B := $32[0], $32[1]
 
@@ -546,16 +545,16 @@ func TestRepository_Update${1:Resource}(t *testing.T) {
 		}
 		in2 := in.clone()
 
-		in.$12 = $31A.PublicId
+		in.$12 = $31A.GetPublicId()
 		got, err := repo.Create$1(ctx, $23.GetPublicId(), in)
 		assert.NoError(err)
 		require.NotNil(got)
-		assertPublicId(t, $1Prefix, got.PublicId)
+		assertPublicId(t, $1Prefix, got.GetPublicId())
 		assert.NotSame(in, got)
 		assert.Equal(in.Name, got.Name)
 		assert.Equal(in.Description, got.Description)
 
-		in2.$12 = $31B.PublicId
+		in2.$12 = $31B.GetPublicId()
 		in2.Name = "first-name"
 		got2, err := repo.Create$1(ctx, $23.GetPublicId(), in2)
 		assert.NoError(err)
@@ -568,7 +567,7 @@ func TestRepository_Update${1:Resource}(t *testing.T) {
 		assert.Equal(got.Name, got3.Name)
 		assert.Equal(got2.Description, got3.Description)
 		assert.Equal(1, gotCount3, "row count")
-		assert.NoError(db.TestVerifyOplog(t, rw, got2.PublicId, db.WithOperation(oplog.OpType_OP_TYPE_UPDATE), db.WithCreateNotBefore(10*time.Second)))
+		assert.NoError(db.TestVerifyOplog(t, rw, got2.GetPublicId(), db.WithOperation(oplog.OpType_OP_TYPE_UPDATE), db.WithCreateNotBefore(10*time.Second)))
 	})
 
 	t.Run("change-scope-id", func(t *testing.T) {
@@ -579,12 +578,12 @@ func TestRepository_Update${1:Resource}(t *testing.T) {
 		require.NotNil(repo)
 
 		$21, $22 := iam.TestScopes(t, iamRepo)
-		$32 := test$11s(t, conn, $23.PublicId, 2)
+		$32 := test$11s(t, conn, $23.GetPublicId(), 2)
 
 		$31A, $31B := $32[0], $32[1]
 
-		$2A := test$1s(t, conn, $31A.PublicId, 1)[0]
-		$2B := test$1s(t, conn, $31B.PublicId, 1)[0]
+		$2A := test$1s(t, conn, $31A.GetPublicId(), 1)[0]
+		$2B := test$1s(t, conn, $31B.GetPublicId(), 1)[0]
 
 		assert.NotEqual($2A.$12, $2B.$12)
 		orig := $2A.clone()
@@ -598,7 +597,7 @@ func TestRepository_Update${1:Resource}(t *testing.T) {
 		require.NotNil(got1)
 		assert.Equal(orig.$12, got1.$12)
 		assert.Equal(1, gotCount1, "row count")
-		assert.NoError(db.TestVerifyOplog(t, rw, $2A.PublicId, db.WithOperation(oplog.OpType_OP_TYPE_UPDATE), db.WithCreateNotBefore(10*time.Second)))
+		assert.NoError(db.TestVerifyOplog(t, rw, $2A.GetPublicId(), db.WithOperation(oplog.OpType_OP_TYPE_UPDATE), db.WithCreateNotBefore(10*time.Second)))
 	})
 }
 endsnippet
@@ -612,8 +611,8 @@ func TestRepository_Lookup${1:Resource}(t *testing.T) {
 	iamRepo := iam.TestRepo(t, conn, wrapper)
 
 	${21:org}, ${22:prj} := iam.TestScopes(t, iamRepo)
-	${31:`!p snip.rv = t[11].lower()[0] + t[11][1:]`} := Test${11:Parent}s(t, conn, ${23:`!p snip.rv=t[21] if t[21] != '_' else t[22]`}.PublicId, 1)[0]
-	${24:`!p snip.rv = t[1].lower()[0] + t[1][1:]`} := test$1s(t, conn, $31.PublicId, 1)[0]
+	${31:`!p snip.rv = t[11].lower()[0] + t[11][1:]`} := Test${11:Parent}s(t, conn, ${23:`!p snip.rv=t[21] if t[21] != '_' else t[22]`}.GetPublicId(), 1)[0]
+	${24:`!p snip.rv = t[1].lower()[0] + t[1][1:]`} := test$1s(t, conn, $31.GetPublicId(), 1)[0]
 
 	${4:`!p snip.rv = t[1].lower()[0] + t[1][1:] + 'Id'`}, err := new$1Id()
 	require.NoError(t, err)
@@ -621,11 +620,11 @@ func TestRepository_Lookup${1:Resource}(t *testing.T) {
 		name      string
 		in        string
 		want      *$1
-		wantIsErr error
+		wantErr error
 	}{
 		{
 			name:      "with-no-public-id",
-			wantIsErr: db.ErrInvalidParameter,
+			wantErr: errors.InvalidParameter,
 		},
 		{
 			name: "with-non-existing-${5:${1/([a-z]*)([A-Z]+)/(?1:$1-)\L$2\E/g}}-id",
@@ -633,7 +632,7 @@ func TestRepository_Lookup${1:Resource}(t *testing.T) {
 		},
 		{
 			name: "with-existing-$5-id",
-			in:   $24.PublicId,
+			in:   $24.GetPublicId(),
 			want: $24,
 		},
 	}
@@ -647,8 +646,8 @@ func TestRepository_Lookup${1:Resource}(t *testing.T) {
 			assert.NoError(err)
 			require.NotNil(repo)
 			got, err := repo.Lookup$1(ctx, tt.in)
-			if tt.wantIsErr != nil {
-				assert.Truef(errors.Is(err, tt.wantIsErr), "want err: %q got: %q", tt.wantIsErr, err)
+			if tt.wantErr != 0 {
+				assert.Truef(errors.Match(errors.T(tt.wantErr), err), "want err: %q got: %q", tt.wantErr, err)
 				assert.Nil(got)
 				return
 			}
@@ -668,30 +667,30 @@ func TestRepository_List${1:ResourceExample}s(t *testing.T) {
 	iamRepo := iam.TestRepo(t, conn, wrapper)
 
 	${21:org}, ${22:prj} := iam.TestScopes(t, iamRepo)
-	${32:`!p snip.rv = t[11].lower()[0] + t[11][1:] + 's'`} := Test${11:Parent}s(t, conn, ${23:`!p snip.rv=t[21] if t[21] != '_' else t[22]`}.PublicId, 2)
+	${32:`!p snip.rv = t[11].lower()[0] + t[11][1:] + 's'`} := Test${11:Parent}s(t, conn, ${23:`!p snip.rv=t[21] if t[21] != '_' else t[22]`}.GetPublicId(), 2)
 	${31:`!p snip.rv = t[11].lower()[0] + t[11][1:]`}A, $31B := $32[0], $32[1]
 
-	${6:`!p snip.rv = t[1].lower()[0] + t[1][1:] + 's'`} := test$1s(t, conn, $31A.PublicId, 3)
+	${6:`!p snip.rv = t[1].lower()[0] + t[1][1:] + 's'`} := test$1s(t, conn, $31A.GetPublicId(), 3)
 
 	var tests = []struct {
 		name      string
 		in        string
 		opts      []Option
 		want      []*$1
-		wantIsErr error
+		wantErr error
 	}{
 		{
 			name:      "with-no-${18:${11/([a-z]*)([A-Z]+)/(?1:$1-)\L$2\E/g}}-id",
-			wantIsErr: db.ErrInvalidParameter,
+			wantErr: errors.InvalidParameter,
 		},
 		{
 			name: "$11-with-no-${26:${6/([a-z]*)([A-Z]+)/(?1:$1-)\L$2\E/g}}",
-			in:   $31B.PublicId,
+			in:   $31B.GetPublicId(),
 			want: []*$1{},
 		},
 		{
 			name: "$11-with-$26",
-			in:   $31A.PublicId,
+			in:   $31A.GetPublicId(),
 			want: $6,
 		},
 	}
@@ -705,8 +704,8 @@ func TestRepository_List${1:ResourceExample}s(t *testing.T) {
 			assert.NoError(err)
 			require.NotNil(repo)
 			got, err := repo.List$1s(ctx, tt.in, tt.opts...)
-			if tt.wantIsErr != nil {
-				assert.Truef(errors.Is(err, tt.wantIsErr), "want err: %q got: %q", tt.wantIsErr, err)
+			if tt.wantErr != 0 {
+				assert.Truef(errors.Match(errors.T(tt.wantErr), err), "want err: %q got: %q", tt.wantErr, err)
 				assert.Nil(got)
 				return
 			}
@@ -728,9 +727,9 @@ func TestRepository_List$1s_Limits(t *testing.T) {
 	iamRepo := iam.TestRepo(t, conn, wrapper)
 
 	$21, $22 := iam.TestScopes(t, iamRepo)
-	$31 := test$11s(t, conn, $23.PublicId, 1)[0]
+	$31 := test$11s(t, conn, $23.GetPublicId(), 1)[0]
 	count := 10
-	$6 := test$1s(t, conn, $31.PublicId, count)
+	$6 := test$1s(t, conn, $31.GetPublicId(), count)
 
 	var tests = []struct {
 		name     string
@@ -799,7 +798,7 @@ func Test${1:Resource}_New(t *testing.T) {
 	rw := db.New(conn)
 
 	${21:org}, ${22:prj} := iam.TestScopes(t, iam.TestRepo(t, conn, wrapper))
-	${31:`!p snip.rv = t[11].lower()[0] + t[11][1:]`} := Test${11:Parent}s(t, conn, ${80:wrapper,} ${23:`!p snip.rv=t[21] if t[21] != '_' else t[22]`}.PublicId, 1)[0]
+	${31:`!p snip.rv = t[11].lower()[0] + t[11][1:]`} := Test${11:Parent}s(t, conn, ${80:wrapper,} ${23:`!p snip.rv=t[21] if t[21] != '_' else t[22]`}.GetPublicId(), 1)[0]
 
 	type args struct {
 		${13:`!p snip.rv = t[11].lower()[0] + t[11][1:] + 'Id'`} string
@@ -823,25 +822,25 @@ func Test${1:Resource}_New(t *testing.T) {
 		{
 			name: "valid-no-options",
 			args: args{
-				$13: $31.PublicId,
+				$13: $31.GetPublicId(),
 			},
 			want: &$1{
 				$1: &store.$1{
-					${12:`!p snip.rv = t[11] + 'Id'`}:  $31.PublicId,
+					${12:`!p snip.rv = t[11] + 'Id'`}:  $31.GetPublicId(),
 				},
 			},
 		},
 		{
 			name: "valid-with-name",
 			args: args{
-				$13: $31.PublicId,
+				$13: $31.GetPublicId(),
 				opts: []Option{
 					WithName("test-name"),
 				},
 			},
 			want: &$1{
 				$1: &store.$1{
-					$12:  $31.PublicId,
+					$12:  $31.GetPublicId(),
 					Name: "test-name",
 				},
 			},
@@ -849,14 +848,14 @@ func Test${1:Resource}_New(t *testing.T) {
 		{
 			name: "valid-with-description",
 			args: args{
-				$13: $31.PublicId,
+				$13: $31.GetPublicId(),
 				opts: []Option{
 					WithDescription("test-description"),
 				},
 			},
 			want: &$1{
 				$1: &store.$1{
-					$12:  $31.PublicId,
+					$12:  $31.GetPublicId(),
 					Description: "test-description",
 				},
 			},
@@ -901,7 +900,7 @@ func Test${1:Resource}_New(t *testing.T) {
 	kkms := kms.TestKms(t, conn, wrapper)
 
 	${21:org}, ${22:prj} := iam.TestScopes(t, iam.TestRepo(t, conn, wrapper))
-	${31:`!p snip.rv = t[11].lower()[0] + t[11][1:]`} := Test${11:Parent}s(t, conn, ${80:wrapper,} ${23:`!p snip.rv=t[21] if t[21] != '_' else t[22]`}.PublicId, 1)[0]
+	${31:`!p snip.rv = t[11].lower()[0] + t[11][1:]`} := Test${11:Parent}s(t, conn, ${80:wrapper,} ${23:`!p snip.rv=t[21] if t[21] != '_' else t[22]`}.GetPublicId(), 1)[0]
 
 	type args struct {
 		${13:`!p snip.rv = t[11].lower()[0] + t[11][1:] + 'Id'`} string
@@ -925,25 +924,25 @@ func Test${1:Resource}_New(t *testing.T) {
 		{
 			name: "valid-no-options",
 			args: args{
-				$13: $31.PublicId,
+				$13: $31.GetPublicId(),
 			},
 			want: &$1{
 				$1: &store.$1{
-					${12:`!p snip.rv = t[11] + 'Id'`}:  $31.PublicId,
+					${12:`!p snip.rv = t[11] + 'Id'`}:  $31.GetPublicId(),
 				},
 			},
 		},
 		{
 			name: "valid-with-name",
 			args: args{
-				$13: $31.PublicId,
+				$13: $31.GetPublicId(),
 				opts: []Option{
 					WithName("test-name"),
 				},
 			},
 			want: &$1{
 				$1: &store.$1{
-					$12:  $31.PublicId,
+					$12:  $31.GetPublicId(),
 					Name: "test-name",
 				},
 			},
@@ -951,14 +950,14 @@ func Test${1:Resource}_New(t *testing.T) {
 		{
 			name: "valid-with-description",
 			args: args{
-				$13: $31.PublicId,
+				$13: $31.GetPublicId(),
 				opts: []Option{
 					WithDescription("test-description"),
 				},
 			},
 			want: &$1{
 				$1: &store.$1{
-					$12:  $31.PublicId,
+					$12:  $31.GetPublicId(),
 					Description: "test-description",
 				},
 			},
@@ -971,7 +970,7 @@ func Test${1:Resource}_New(t *testing.T) {
 			assert, require := assert.New(t), require.New(t)
 			ctx := context.Background()
 
-			databaseWrapper, err := kkms.GetWrapper(ctx, prj.PublicId, kms.KeyPurposeDatabase)
+			databaseWrapper, err := kkms.GetWrapper(ctx, prj.GetPublicId(), kms.KeyPurposeDatabase)
 			require.NoError(err)
 			require.NotNil(databaseWrapper)
 

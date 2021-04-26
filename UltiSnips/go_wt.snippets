@@ -219,7 +219,7 @@ snippet wt-lookup "LookupResource"
 // Lookup${1:Resource} returns the $1 for publicId.
 // Returns nil, nil if no $1 is found for publicId.
 func (r *Repository) Lookup$1(ctx context.Context, publicId string, _ ...Option) (*$1, error) {
-	const op = "${41:`!v expand('%:p:h:t')`}.Lookup$1"
+	const op = "${41:`!v expand('%:p:h:t')`}.(Repository).Lookup$1"
 	if publicId == "" {
 		return nil, errors.New(errors.InvalidParameter, op, "no public id")
 	}
@@ -235,12 +235,36 @@ func (r *Repository) Lookup$1(ctx context.Context, publicId string, _ ...Option)
 }
 endsnippet
 
-snippet wt-list "ListResources"
-// List${1:ResourceExample}s returns a slice of $1s for the ${13:parentExampleId}.
+snippet wt-list-in-scopes "ListResources in scopes"
+// List${1:ResourceExample}s returns a slice of $1s for the ${13:scopeIds}.
+// WithLimit is the only option supported.
+func (r *Repository) List$1s(ctx context.Context, $13 []string, opt ...Option) ([]*$1, error) {
+	const op = "${41:`!v expand('%:p:h:t')`}.(Repository).List$1s"
+	if len($13) == 0 {
+		return nil, errors.New(errors.InvalidParameter, op, "no $13")
+	}
+	opts := getOpts(opt...)
+	limit := r.defaultLimit
+	if opts.withLimit != 0 {
+		// non-zero signals an override of the default limit for the repo.
+		limit = opts.withLimit
+	}
+	var ${6:`!p snip.rv = t[1].lower()[0] + t[1][1:] + 's'`} []*$1
+	err := r.reader.SearchWhere(ctx, &$6, "${17:scope_id} in (?)", []interface{}{$13}, db.WithLimit(limit))
+	if err != nil {
+		return nil, errors.Wrap(err, op)
+	}
+	return $6, nil
+}
+endsnippet
+
+snippet wt-list-in-child "ListResources in single parent"
+// List${1:ResourceExample}s returns a slice of $1s for the ${13:parentId}.
 // WithLimit is the only option supported.
 func (r *Repository) List$1s(ctx context.Context, $13 string, opt ...Option) ([]*$1, error) {
+	const op = "${41:`!v expand('%:p:h:t')`}.(Repository).List$1s"
 	if $13 == "" {
-		return nil, fmt.Errorf("list: ${41:`!v expand('%:p:h:t')`} ${3:${1/([a-z]*)([A-Z]+)/(?1:$1 )\L$2\E/g}}: missing ${15:${13/([a-z]*)([A-Z]+)/(?1:$1 )\L$2\E/g}}: %w", db.ErrInvalidParameter)
+		return nil, errors.New(errors.InvalidParameter, op, "no $13")
 	}
 	opts := getOpts(opt...)
 	limit := r.defaultLimit
@@ -251,31 +275,37 @@ func (r *Repository) List$1s(ctx context.Context, $13 string, opt ...Option) ([]
 	var ${6:`!p snip.rv = t[1].lower()[0] + t[1][1:] + 's'`} []*$1
 	err := r.reader.SearchWhere(ctx, &$6, "${17:${13/([a-z]*)([A-Z]+)/(?1:$1_)\L$2\E/g}} = ?", []interface{}{$13}, db.WithLimit(limit))
 	if err != nil {
-		return nil, fmt.Errorf("list: $41 $3: %w", err)
+		return nil, errors.Wrap(err, op)
 	}
 	return $6, nil
 }
 endsnippet
 
+
 snippet wt-delete "DeleteResource"
-// Delete${1:ResourceExample} deletes
-// the ${3:${1/([a-z]*)([A-Z]+)/(?1:$1 )\L$2\E/g}}
-// for the provided id from the
-// repository returning a count of the number of records deleted.
+// Delete${1:ResourceExample} deletes publicId from the repository and returns the number of records deleted.
 // All options are ignored.
-func (r *Repository) Delete$1(ctx context.Context, scopeId string, publicId string, opt ...Option) (int, error) {
+func (r *Repository) Delete$1(ctx context.Context, publicId string, _ ...Option) (int, error) {
+	const op = "${41:`!v expand('%:p:h:t')`}.(Repository).Delete$1"
 	if publicId == "" {
-		return db.NoRowsAffected, fmt.Errorf("delete: ${41:`!v expand('%:p:h:t')`} $3: missing public id: %w", db.ErrInvalidParameter)
+		return db.NoRowsAffected, errors.New(errors.InvalidParameter, op, "no public id")
 	}
-	if scopeId == "" {
-		return db.NoRowsAffected, fmt.Errorf("delete: $41 $3: no scopeId: %w", db.ErrNilParameter)
-	}
+
 	${2:`!p snip.rv = t[1].lower()[0]`} := alloc$1()
 	$2.PublicId = publicId
+	if err := r.reader.LookupByPublicId(ctx, $2); err != nil {
+		if errors.IsNotFoundError(err) {
+			return db.NoRowsAffected, nil
+		}
+		return db.NoRowsAffected, errors.Wrap(err, op, errors.WithMsg(fmt.Sprintf("failed for %s", publicId)))
+	}
+	if $2.ScopeId == "" {
+		return db.NoRowsAffected, errors.New(errors.InvalidParameter, op, "no scope id")
+	}
 
-	oplogWrapper, err := r.kms.GetWrapper(ctx, scopeId, kms.KeyPurposeOplog)
+	oplogWrapper, err := r.kms.GetWrapper(ctx, $2.ScopeId, kms.KeyPurposeOplog)
 	if err != nil {
-		return db.NoRowsAffected, fmt.Errorf("delete: $41 $3: unable to get oplog wrapper: %w", err)
+		return db.NoRowsAffected, errors.Wrap(err, op, errors.WithMsg("unable to get oplog wrapper"))
 	}
 
 	var rowsDeleted int
@@ -285,14 +315,14 @@ func (r *Repository) Delete$1(ctx context.Context, scopeId string, publicId stri
 			d$2 := $2.clone()
 			rowsDeleted, err = w.Delete(ctx, d$2, db.WithOplog(oplogWrapper, $2.oplog(oplog.OpType_OP_TYPE_DELETE)))
 			if err == nil && rowsDeleted > 1 {
-				return db.ErrMultipleRecords
+				return errors.New(errors.MultipleRecords, op, "more than 1 $1 would have been deleted")
 			}
 			return err
 		},
 	)
 
 	if err != nil {
-		return db.NoRowsAffected, fmt.Errorf("delete: $41 $3: %s: %w", publicId, err)
+		return db.NoRowsAffected, errors.Wrap(err, op, errors.WithMsg(fmt.Sprintf("delete failed for %s", $2.PublicId)))
 	}
 
 	return rowsDeleted, nil
