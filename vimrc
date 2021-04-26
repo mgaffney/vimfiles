@@ -425,7 +425,7 @@
 			wincmd p
 		endfunction
 
-		nnoremap gst :vertical :Gstatus<CR>
+		nnoremap gst :vertical :G<CR>
 		" nnoremap gsl :Glog<CR>
 		" nnoremap gsd :Gdiff<CR>
 		nnoremap gsb :Gblame<CR>
