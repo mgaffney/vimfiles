@@ -184,7 +184,7 @@ func (r *Repository) Update$1(ctx context.Context, scopeId string, $2 *$1, versi
 	oplogWrapper, err := r.kms.GetWrapper(ctx, scopeId, kms.KeyPurposeOplog)
 	if err != nil {
 		return nil, db.NoRowsAffected, errors.Wrap(err, op, errors.WithCode(errors.Encrypt),
-			errors.WithMsg(("unable to get oplog wrapper")))
+			errors.WithMsg("unable to get oplog wrapper"))
 	}
 
 	var rowsUpdated int
@@ -281,10 +281,8 @@ func (r *Repository) List$1s(ctx context.Context, $13 string, opt ...Option) ([]
 }
 endsnippet
 
-
 snippet wt-delete "DeleteResource"
-// Delete${1:ResourceExample} deletes publicId from the repository and returns the number of records deleted.
-// All options are ignored.
+// Delete${1:Resource} deletes publicId from the repository and returns the number of records deleted.
 func (r *Repository) Delete$1(ctx context.Context, publicId string, _ ...Option) (int, error) {
 	const op = "${41:`!v expand('%:p:h:t')`}.(Repository).Delete$1"
 	if publicId == "" {
