@@ -942,7 +942,8 @@
 	set nowrap				" do not wrap long lines
 	set autoindent			" indent at the same level of the previous line
 "	set shiftwidth=4		" use indents of 4 spaces
-	set noexpandtab			" tabs are tabs not spaces
+	set shiftround			" round indents to multiple of shiftwidth
+"	set noexpandtab			" tabs are tabs not spaces
 "	set tabstop=4			" an indentation every four columns
 "	set softtabstop=4		" let backspace delete indent
 "	set matchpairs+=<:>		" match, to be used with %
