@@ -490,7 +490,9 @@
 		" Let coc.nvim and coc-ultisnips trigger ultisnips
 		" https://github.com/SirVer/ultisnips/issues/1052#issuecomment-504719268
 		let g:UltiSnipsExpandTrigger = "<nop>"
-		let g:UltiSnipsListSnippets="<F9>"
+		" let g:UltiSnipsExpandTrigger = "<tab>"
+		" let g:UltiSnipsListSnippets="<F9>"
+		let g:UltiSnipsListSnippets="<c-l>"
 		let g:UltiSnipsJumpForwardTrigger="<c-j>"
 		let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 		" let g:UltiSnipsExpandTrigger="<D-j>"

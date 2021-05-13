@@ -63,7 +63,12 @@ for ${1:i} := len(${2:N}) - 1 ; $1 >= 0; $1-- {
 }
 endsnippet
 
-snippet tt "Table driven test"
+snippet wtt "Table driven test"
+t.Parallel()
+conn, _ := db.TestSetup(t, "postgres")
+rw := db.New(conn)
+wrapper := db.TestWrapper(t)
+
 type args struct {
 	${1:input} string
 }
@@ -71,15 +76,15 @@ var tests = []struct {
 	name    string
 	args    args
 	want    *${2:OutputType}
-	wantErr bool
+	wantErr errors.Code
 }{
 	{
-		name: "blank-$1",
+		name: "empty-$1",
 		args: args{
 			$1: "",
 		},
 		want:    nil,
-		wantErr: true,
+		wantErr: errors.InvalidParameter,
 	},
 }
 for _, tt := range tests {
@@ -87,9 +92,9 @@ for _, tt := range tests {
 	t.Run(tt.name, func(t *testing.T) {
 		assert, require := assert.New(t), require.New(t)
 		got, err := ${3:FuncUnderTest}(tt.args.$1)
-		if tt.wantErr {
-			assert.Error(err)
-			require.Nil(got)
+		if tt.wantErr != 0 {
+			assert.Truef(errors.Match(errors.T(tt.wantErr), err), "want err: %q got: %q", tt.wantErr, err)
+			assert.Nil(got)
 			return
 		}
 		require.NoError(err)
