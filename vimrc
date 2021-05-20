@@ -27,7 +27,6 @@
 		if exists('$TMUX')
 			Plug 'christoomey/vim-tmux-navigator'
 			Plug 'tmux-plugins/vim-tmux'
-			Plug 'tmux-plugins/vim-tmux-focus-events'
 			" Plug 'edkolev/tmuxline.vim'
 		endif
 	" }
