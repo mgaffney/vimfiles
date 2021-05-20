@@ -1410,8 +1410,8 @@ augroup END
 	" From https://jesseleite.com/posts/2/its-dangerous-to-vim-alone-take-fzf
 	" {
 		" File Finder
-		nmap <Leader>fF :GFiles<CR>
-		nmap <Leader>ff :Files<CR>
+		nmap <Leader>ff :GFiles<CR>
+		nmap <Leader>fF :Files<CR>
 
 		" Buffer Finder
 		" Here I've mapped <Leader>b to search for open buffers, and <Leader>h to
