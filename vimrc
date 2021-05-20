@@ -290,6 +290,8 @@
 		" nmap gs <plug>(GrepperOperator)
 		" xmap gs <plug>(GrepperOperator)
 
+		" use by default vimgrep -- helps with the Abolish plugin
+		set grepprg=internal
 	" }
 	" Ack and ripgrep {
 		" if executable('rg')
