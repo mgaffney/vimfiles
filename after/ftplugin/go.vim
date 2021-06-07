@@ -70,12 +70,15 @@ let g:go_fold_enable = ['block', 'import', 'varconst', 'package_comment']
 
 let g:go_term_enabled = 1
 let g:go_term_mode = "split"
-let g:go_term_height = 10
+let g:go_term_height = 20
+let g:go_term_reuse = 1
 
 " let g:go_gopls_options = ['-remote=auto']
 let g:go_def_mode = 'gopls'
 let g:go_info_mode ='gopls'
 " let g:go_rename_command = 'gopls'
+
+let g:go_test_timeout= '7m'
 
 " let g:go_echo_go_info = 1
 
