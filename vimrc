@@ -631,7 +631,8 @@
 	" }
 	" coc.nvim {
 		" coc.nvim default settings
-		" Synced with coc.nvim README.md  67fb4d138f34c12c6b44d87be66ede26d51b95c2
+		" Synced with coc.nvim README.md  2042265d2c6ca508ee74eb076916a301c4409c78
+		" https://github.com/neoclide/coc.nvim/blob/release/Readme.md
 
 		let g:coc_global_extensions = ['coc-ultisnips']
 
@@ -658,7 +659,7 @@
 
 		" Always show the signcolumn, otherwise it would shift the text each time
 		" diagnostics appear/become resolved.
-		if has("patch-8.1.1564")
+		if has("nvim-0.5.0") || has("patch-8.1.1564")
 			" Recently vim can merge signcolumn and number column into one
 			set signcolumn=number
 		else
