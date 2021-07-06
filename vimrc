@@ -973,10 +973,12 @@
 " }
 " Neovim {
 	if has('nvim')
-" 	Terminal {
+	" Terminal {
 		" exit terminal mode with <esc>
-		" tnoremap <Esc> <C-\><C-n>
-" 	}
+		tnoremap <Esc> <C-\><C-n>
+		" Send Escape key to terminal (mnemonic: Verbatim escape)
+		tnoremap <C-v><Esc> <Esc>
+	" }
 " 	Mouse {
 		set mouse=a
 " 	}
