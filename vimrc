@@ -63,7 +63,8 @@
 		" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 		Plug '/usr/local/opt/fzf'
 		Plug 'junegunn/fzf.vim'
-		Plug 'mhinz/vim-grepper'
+		" Plug 'mhinz/vim-grepper'
+		Plug 'trsdln/vim-grepper'
 	" }
 	" TextObjects {
 		" Plug 'kana/vim-textobj-user'
