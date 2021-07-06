@@ -70,7 +70,7 @@ let g:go_fold_enable = ['block', 'import', 'varconst', 'package_comment']
 
 let g:go_term_enabled = 1
 let g:go_term_mode = "split"
-let g:go_term_height = 20
+let g:go_term_height = 5
 let g:go_term_reuse = 1
 
 " let g:go_gopls_options = ['-remote=auto']
