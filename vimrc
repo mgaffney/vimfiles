@@ -209,10 +209,10 @@
 		Plug 'cespare/vim-toml'
 	" }
 	" HashicorpTools {
-		Plug 'fatih/vim-hclfmt'
-		Plug 'hashivim/vim-hashicorp-tools'
-		Plug 'b4b4r07/vim-hcl'
-		" Plug 'hashivim/vim-terraform'
+		" Plug 'fatih/vim-hclfmt'
+		" Plug 'hashivim/vim-hashicorp-tools'
+		" Plug 'b4b4r07/vim-hcl'
+		Plug 'hashivim/vim-terraform'
 		" Plug 'hashivim/vim-vaultproject'
 		" Plug 'hashivim/vim-vagrant'
 		" Plug 'hashivim/vim-packer'
@@ -624,8 +624,8 @@
 		" fatih/vim-hclfmt
 		let g:hcl_fmt_autosave = 0
 		let g:tf_fmt_autosave = 0
-		let g:nomad_fmt_autosave = 1
-		let g:terraform_fmt_on_save=1
+		let g:nomad_fmt_autosave = 0
+		let g:terraform_fmt_on_save=0
 	" }
 	" jedi-vim {
 		let g:jedi#use_splits_not_buffers = "right"
