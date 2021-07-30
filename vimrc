@@ -283,9 +283,9 @@
 		" Search for the current word
 		nnoremap <Leader>* :Grepper -cword -noprompt<CR>
 		" Open Grepper-prompt for a particular grep-alike tool
-		nnoremap <Leader>rg :Grepper -tool rg<CR>
+		nnoremap <Leader>rg :Grepper -tool rg -grepprg rg -H --no-heading --vimgrep --sort path<CR>
 		" Open Grepper-prompt for a grepping through a vault code base
-		nnoremap <Leader>vg :Grepper -tool rg -grepprg rg -H --no-heading --vimgrep -g '!vendor' -g '!website' -g '!ui'<CR>
+		nnoremap <Leader>vg :Grepper -tool rg -grepprg rg -H --no-heading --vimgrep --sort path -g '!vendor' -g '!website' -g '!ui'<CR>
 		" Search for the current selection
 		" nmap gs <plug>(GrepperOperator)
 		" xmap gs <plug>(GrepperOperator)
