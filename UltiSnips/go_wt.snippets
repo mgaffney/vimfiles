@@ -8,12 +8,8 @@ type ${1:Resource} struct {
 // New$1 creates a new in memory $1 assigned to $13.
 // Name and description are the only valid options.
 // All other options are ignored.
-func New$1(${13:`!p snip.rv = t[11].lower()[0] + t[11][1:] + 'Id'`} string, opt ...Option) (*$1, error) {
+func New$1(ctx context.Context, ${13:`!p snip.rv = t[11].lower()[0] + t[11][1:] + 'Id'`} string, opt ...Option) (*$1, error) {
 	const op = "${41:`!v expand('%:p:h:t')`}.New$1"
-	if $13 == "" {
-		return nil, errors.New(errors.InvalidParameter, op, "no ${15:${12/([a-z]*)([A-Z]+)/(?1:$1 )\L$2\E/g}}")
-	}
-
 	opts := getOpts(opt...)
 	${2:`!p snip.rv = t[1].lower()[0]`} := &$1{
 		$1: &store.$1{
@@ -97,7 +93,7 @@ func (r *Repository) Create$1(ctx context.Context, scopeId string, $2 *$1, opt .
 	}
 	$2 = $2.clone()
 
-	id, err := new$1Id()
+	id, err := new$1Id(ctx)
 	if err != nil {
 		return nil, errors.Wrap(err, op)
 	}
