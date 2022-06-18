@@ -430,7 +430,7 @@
 		nnoremap gst :vertical :G<CR>
 		" nnoremap gsl :Glog<CR>
 		" nnoremap gsd :Gdiff<CR>
-		nnoremap gsb :Gblame<CR>
+		nnoremap gsb :G blame<CR>
 		" nnoremap gsw :Gwrite<CR>
 		" nnoremap gsC :Gcommit<CR>
 		" nnoremap gscd :Gcd<Bar>pwd<CR>
