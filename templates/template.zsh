@@ -25,7 +25,8 @@ HELP
 }
 
 function main() {
-  local -r file="$1"
+  local file="$1"
+  readonly file
 
   if [[ -z "${file}" ]] ; then
     help
