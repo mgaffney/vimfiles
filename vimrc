@@ -13,6 +13,7 @@
 		Plug 'junegunn/gv.vim'
 		Plug 'tpope/vim-rhubarb'
 		Plug 'airblade/vim-gitgutter'
+		Plug 'idanarye/vim-merginal'
 		" Plug 'gregsexton/gitv'
 	" }
 	" Colors {
@@ -442,6 +443,9 @@
 		xmap <leader>ggy :GBrowse!<CR>
 		xmap <leader>ggp S]`>a()<ESC>hp
 	" }
+	" vim-merginal {
+		map <leader>gB :MerginalToggle<CR>
+	" }
 	" tmux {
 		if exists('$TMUX')
 			" See https://github.com/christoomey/vim-tmux-navigator/issues/61
@@ -713,7 +717,7 @@
 		" map <leader>d :<C-u>call CocActionAsync("jumpDefinition", "split")<CR>
 
 		" Use K to show documentation in preview window.
-		nnoremap <silent>K :call <SID>show_documentation()<CR>
+		" nnoremap <silent>K :call <SID>show_documentation()<CR>
 
 		function! s:show_documentation()
 			if (index(['vim','help'], &filetype) >= 0)
