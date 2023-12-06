@@ -269,9 +269,9 @@
 	" 	coc works best if it is the last plugin loaded. This prevents other
 	" 	plugins from overwritting coc's settings.
 	"
-		Plug 'neoclide/coc.nvim', {'branch': 'release'}
-		Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
-		Plug 'neoclide/coc-sources', {'do': 'yarn install --frozen-lockfile'}
+		" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+		" Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
+		" Plug 'neoclide/coc-sources', {'do': 'yarn install --frozen-lockfile'}
 		" Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
 		" Plug 'josa42/coc-sh', {'do': 'yarn install --frozen-lockfile'}
 
@@ -638,7 +638,7 @@
 		let g:airline_symbols.readonly = ''
 		" let g:airline_symbols.linenr = ''
 
-		let g:airline#extensions#coc#enabled = 1
+		" let g:airline#extensions#coc#enabled = 1
 		if exists('$TMUX')
 			let g:airline#extensions#tmuxline#enabled = 0
 		endif
@@ -678,7 +678,7 @@
 		" Synced with coc.nvim README.md  2042265d2c6ca508ee74eb076916a301c4409c78
 		" https://github.com/neoclide/coc.nvim/blob/release/Readme.md
 
-		let g:coc_global_extensions = ['coc-ultisnips']
+		" let g:coc_global_extensions = ['coc-ultisnips']
 
 		" Set internal encoding of vim, not needed on neovim, since coc.nvim using some
 		" unicode characters in the file autoload/float.vim
@@ -738,8 +738,8 @@
 		" inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
 										" \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-		inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm()
-										\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+		" inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm()
+		" 								\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 		" Use `[g` and `]g` to navigate diagnostics
 		" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
 		" nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -760,37 +760,37 @@
 		" Use K to show documentation in preview window.
 		" nnoremap <silent>K :call <SID>show_documentation()<CR>
 
-		function! s:show_documentation()
-			if (index(['vim','help'], &filetype) >= 0)
-				execute 'h '.expand('<cword>')
-			elseif (coc#rpc#ready())
-				call CocActionAsync('doHover')
-			else
-				execute '!' . &keywordprg . " " . expand('<cword>')
-			endif
-		endfunction
+		" function! s:show_documentation()
+		" 	if (index(['vim','help'], &filetype) >= 0)
+		" 		execute 'h '.expand('<cword>')
+		" 	elseif (coc#rpc#ready())
+		" 		call CocActionAsync('doHover')
+		" 	else
+		" 		execute '!' . &keywordprg . " " . expand('<cword>')
+		" 	endif
+		" endfunction
 
 		" Highlight the symbol and its references when holding the cursor.
-		autocmd CursorHold * silent call CocActionAsync('highlight')
+		" autocmd CursorHold * silent call CocActionAsync('highlight')
 
 		" Symbol renaming.
-		nmap <leader>rn <Plug>(coc-rename)
+		" nmap <leader>rn <Plug>(coc-rename)
 
 		" Formatting selected code.
-		xmap <leader>q  <Plug>(coc-format-selected)
-		nmap <leader>q  <Plug>(coc-format-selected)
+		" xmap <leader>q  <Plug>(coc-format-selected)
+		" nmap <leader>q  <Plug>(coc-format-selected)
 
-		augroup cocgroup
-			autocmd!
-			" Setup formatexpr specified filetype(s).
-			autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-			" Update signature help on jump placeholder.
-			autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-			" Organize imports for go files
-			autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
-			" coc.nvim uses jsonc as configuration file format
-			autocmd FileType json syntax match Comment +\/\/.\+$+
-		augroup end
+		" augroup cocgroup
+		" 	autocmd!
+		" 	" Setup formatexpr specified filetype(s).
+		" 	autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+		" 	" Update signature help on jump placeholder.
+		" 	autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+		" 	" Organize imports for go files
+		" 	autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
+		" 	" coc.nvim uses jsonc as configuration file format
+		" 	autocmd FileType json syntax match Comment +\/\/.\+$+
+		" augroup end
 
 
 		" Applying codeAction to the selected region.
@@ -815,19 +815,19 @@
 		" omap ac <Plug>(coc-classobj-a)
 
 		" Remap <C-f> and <C-b> for scroll float windows/popups.
-		if has('nvim-0.4.0') || has('patch-8.2.0750')
-			nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-			nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-			inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-			inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-			vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-			vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-		endif
+		" if has('nvim-0.4.0') || has('patch-8.2.0750')
+		" 	nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+		" 	nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+		" 	inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+		" 	inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+		" 	vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+		" 	vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+		" endif
 
 		" Use CTRL-S for selections ranges.
 		" Requires 'textDocument/selectionRange' support of language server.
-		nmap <silent> <C-s> <Plug>(coc-range-select)
-		xmap <silent> <C-s> <Plug>(coc-range-select)
+		" nmap <silent> <C-s> <Plug>(coc-range-select)
+		" xmap <silent> <C-s> <Plug>(coc-range-select)
 
 		" Add `:Format` command to format current buffer.
 		" command! -nargs=0 Format :call CocActionAsync('format')
@@ -836,7 +836,7 @@
 		" command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 		" Add `:OR` command for organize imports of the current buffer.
-		command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
+		" command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
 
 		" Add (Neo)Vim's native statusline support.
 		" NOTE: Please see `:h coc-status` for integrations with external plugins that
