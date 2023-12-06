@@ -18,7 +18,7 @@
 	" }
 	" Colors {
 		" Plug 'mgaffney/vim-colors-solarized'
-		Plug 'lifepillar/vim-solarized8'
+		Plug 'lifepillar/vim-solarized8', { 'branch': 'neovim' }
 		Plug 'guns/xterm-color-table.vim'
 	" }
 	" tmux {
@@ -30,6 +30,16 @@
 			Plug 'tmux-plugins/vim-tmux'
 			" Plug 'edkolev/tmuxline.vim'
 		endif
+	" }
+	" LSP {
+		Plug 'neovim/nvim-lspconfig'
+		" Plug 'nvim-lua/completion-nvim'
+	" }
+	" Telescope {
+		Plug 'nvim-lua/plenary.nvim'
+		" Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.5' }
+		" or
+		" Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
 	" }
 	" Distraction Free Writing {
 		Plug 'junegunn/goyo.vim'
@@ -46,7 +56,16 @@
 		" Plug 'honza/vim-snippets'
 	" }
 	" Diff {
-		Plug 'AndrewRadev/linediff.vim'
+		" Plug 'AndrewRadev/linediff.vim'
+		" Plug 'nvim-lua/plenary.nvim'
+		Plug 'sindrets/diffview.nvim'
+		Plug 'nvim-tree/nvim-web-devicons' " optional dependency for diffview.nvim
+	" }
+	" NerdTree {
+		Plug 'preservim/nerdtree'
+	" }
+	" CSV {
+		Plug 'chrisbra/csv.vim'
 	" }
 	" Completion {
 		" Plug 'Valloric/YouCompleteMe'
@@ -62,7 +81,8 @@
 		" endif
 		" Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 		" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-		Plug '/usr/local/opt/fzf'
+		" Plug '/usr/local/opt/fzf'
+		Plug '/opt/homebrew/opt/fzf'
 		Plug 'junegunn/fzf.vim'
 		Plug 'mhinz/vim-grepper'
 		" Plug 'trsdln/vim-grepper'
@@ -79,6 +99,9 @@
 	" }
 	" Whitespace {
 		Plug 'ntpeters/vim-better-whitespace'
+	" }
+	" Folds {
+		Plug 'jrudess/vim-foldtext'
 	" }
 	" Man pages {
 		" Plug 'lambdalisue/vim-manpager'
@@ -102,16 +125,17 @@
 		" Plug 'thinca/vim-quickrun'
 		" Plug 'tommcdo/vim-exchange'
 		Plug 'tpope/vim-abolish'
+		Plug 'embear/vim-localvimrc'
 	" }
 	" DisplayMarks {
 		Plug 'kshenoy/vim-signature'
 	" }
 	" Syntax {
-		Plug 'scrooloose/syntastic'
+		" Plug 'scrooloose/syntastic'
 	" }
 	" Tags {
 		" Plug 'vim-scripts/taglist.vim'
-		" Plug 'majutsushi/tagbar'
+		Plug 'majutsushi/tagbar'
 		" Plug 'ludovicchabant/vim-gutentags'
 	" }
 	" UnixHelpers {
@@ -121,7 +145,7 @@
 		" Plug 'Dimercel/todo-vim'
 	" }
 	" systemd {
-		Plug 'Matt-Deacalion/vim-systemd-syntax'
+		" Plug 'Matt-Deacalion/vim-systemd-syntax'
 	" }
 	" Plist {
 		Plug 'darfink/vim-plist'
@@ -258,14 +282,14 @@
 " }
 
 " python for vim {
-	let g:python_host_prog = '/usr/local/bin/python3'
-	let g:python3_host_prog = '/usr/local/bin/python3'
+	" let g:python_host_prog = '/usr/local/bin/python3'
+	let g:python3_host_prog = '/opt/homebrew/bin/python3'
 " }
 
 " ConfigPlugins {
 	" solarized {
-		let g:solarized_term_italics = 1
-		let g:solarized_italics = 1
+		let g:solarized_term_italics = 0
+		let g:solarized_italics = 0
 		" let g:solarized_visibility = 'high'
 		" let g:solarized_extra_hi_groups = 1
 		" let g:solarized_enable_extra_hi_groups = 0
@@ -365,10 +389,13 @@
 		" Defaults
 		" let g:better_whitespace_filetypes_blacklist=['diff', 'gitcommit', 'unite', 'qf', 'help', 'markdown']
 		highlight ExtraWhitespace ctermbg=DarkBlue
-		let g:better_whitespace_filetypes_blacklist=['diff', 'gitcommit', 'unite', 'qf', 'help', 'html', 'proto', 'sql', 'markdown']
-		autocmd FileType markdown,xml,make,sql,sh,python,json,tf,vim,asciidoc,vimwiki autocmd BufEnter <buffer> EnableStripWhitespaceOnSave
+		" let g:better_whitespace_filetypes_blacklist=['diff', 'gitcommit', 'unite', 'qf', 'help', 'html', 'proto', 'markdown', 'sql']
+		let g:better_whitespace_filetypes_blacklist=['diff', 'git', 'gitcommit', 'unite', 'qf', 'help', 'proto', 'markdown', 'fugitive', 'html']
+		" autocmd FileType markdown,xml,make,sql,sh,python,json,tf,vim,asciidoc,vimwiki autocmd BufEnter <buffer> EnableStripWhitespaceOnSave
 		let g:strip_whitespace_confirm = 0
 		let g:strip_only_modified_lines = 1
+		let g:strip_whitespace_on_save = 1
+		" let g:diff_binary='/usr/bin/diff --color=never'
 	" }
 	" Distraction Free Writing {
 
@@ -429,9 +456,16 @@
 		endfunction
 
 		nnoremap gst :vertical :G<CR>
-		" nnoremap gsl :Glog<CR>
+		nnoremap <leader>gll :vertical :G log<CR>
+		nnoremap <leader>glf :vertical :G log --name-only<CR>
+		nnoremap <leader>glm :vertical :G log --name-only --author="Michael Gaffney"<CR>
+
+		" command! -nargs=+ Gca :r!git log -n100 --pretty=format:"\%an <\%ae>" | grep '-i' '<args>' | head -1 | xargs echo "Co- authored-by:"
+
+  		" exe s:Map('n', 'cf', ':<C-U>Git commit --fixup=<C-R>=<SID>SquashArgument()<CR>', '', ft)
+
 		" nnoremap gsd :Gdiff<CR>
-		nnoremap gsb :G blame<CR>
+		" nnoremap gb :G blame<CR>
 		" nnoremap gsw :Gwrite<CR>
 		" nnoremap gsC :Gcommit<CR>
 		" nnoremap gscd :Gcd<Bar>pwd<CR>
@@ -514,7 +548,7 @@
 		" ges - Go Edit Snippets
 		nnoremap ges :UltiSnipsEdit!<CR>
 	" }
-	" TextObjects {
+	" QuickScope TextObjects {
 		" Insert into your .vimrc after quick-scope is loaded.
 		" Obviously depends on <https://github.com/unblevable/quick-scope> being installed.
 		" https://gist.github.com/cszentkiralyi/dc61ee28ab81d23a67aa
@@ -546,26 +580,30 @@
 			autocmd ColorScheme * highlight QuickScopeSecondary guifg='#6c71c4' gui=reverse ctermfg=61 cterm=reverse " violet
 		augroup END
 
-		let g:qs_enable = 0
-		let g:qs_enable_char_list = [ 'f', 'F', 't', 'T' ]
+		" let g:qs_enable = 0
+		let g:qs_second_highlight = 0
+		let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
+		" let g:qs_enable_char_list = [ 'f', 'F', 't', 'T' ]
 		"
-		function! Quick_scope_selective(movement)
-			let needs_disabling = 0
-			if !g:qs_enable
-				QuickScopeToggle
-				redraw
-				let needs_disabling = 1
-			endif
-			let letter = nr2char(getchar())
-			if needs_disabling
-				QuickScopeToggle
-			endif
-			return a:movement . letter
-		endfunction
-		"
-		for i in g:qs_enable_char_list
-			execute 'noremap <expr> <silent>' . i . " Quick_scope_selective('". i . "')"
-		endfor
+
+		" function! Quick_scope_selective(movement)
+		" 	let needs_disabling = 0
+		" 	if !g:qs_enable
+		" 		QuickScopeToggle
+		" 		redraw
+		" 		let needs_disabling = 1
+		" 	endif
+		" 	let letter = nr2char(getchar())
+		" 	if needs_disabling
+		" 		QuickScopeToggle
+		" 	endif
+		" 	return a:movement . letter
+		" endfunction
+        "
+		" for i in g:qs_enable_char_list
+		" 	execute 'noremap <expr> <silent>' . i . " Quick_scope_selective('". i . "')"
+		" endfor
 	" }
 	" StatusLine {
 		" vim-airline
@@ -612,7 +650,8 @@
 		" let g:syntastic_html_tidy_exec = 'tidy5'
 		" use jshint
 		let g:syntastic_javascript_checkers = ['jshint']
-		let g:syntastic_shell = '/usr/local/bin/zsh'
+		" let g:syntastic_shell = '/usr/local/bin/zsh'
+		let g:syntastic_shell = '/opt/homebrew/bin/zsh'
 		" let g:syntastic_sh_checkers=['shellcheck']
 		" let g:syntastic_sh_shellcheck_args = '-x -s bash'
 		let g:syntastic_ignore_files = ['\m^/usr/include/', '\m\c\.html$']
@@ -676,39 +715,41 @@
 		" Use tab for trigger completion with characters ahead and navigate.
 		" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 		" other plugin before putting this into your config.
-		inoremap <silent><expr> <TAB>
-			\ pumvisible() ? "\<C-n>" :
-			\ <SID>check_back_space() ? "\<TAB>" :
-			\ coc#refresh()
-		inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-		function! s:check_back_space() abort
-			let col = col('.') - 1
-			return !col || getline('.')[col - 1]  =~# '\s'
-		endfunction
-
-		" Use <c-space> to trigger completion.
-		if has('nvim')
-			inoremap <silent><expr> <c-space> coc#refresh()
-		else
-			inoremap <silent><expr> <c-@> coc#refresh()
-		endif
+		" inoremap <silent><expr> <TAB>
+		" 	\ coc#pum#visible() ? coc#pum#next(1):
+		" 	\ <SID>check_back_space() ? "\<Tab>" :
+		" 	\ coc#refresh()
+		" inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+        "
+		" function! s:check_back_space() abort
+		" 	let col = col('.') - 1
+		" 	return !col || getline('.')[col - 1]  =~# '\s'
+		" endfunction
+        "
+		" " Use <c-space> to trigger completion.
+		" if has('nvim')
+		" 	inoremap <silent><expr> <c-space> coc#refresh()
+		" else
+		" 	inoremap <silent><expr> <c-@> coc#refresh()
+		" endif
 
 		" Make <CR> auto-select the first completion item and notify coc.nvim to
 		" format on enter, <cr> could be remapped by other vim plugin
-		inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-										\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+		" inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+										" \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
+		inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm()
+										\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 		" Use `[g` and `]g` to navigate diagnostics
 		" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
 		" nmap <silent> [g <Plug>(coc-diagnostic-prev)
 		" nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 		" GoTo code navigation.
-		nmap <Leader>gcd <Plug>(coc-definition)
-		nmap <Leader>gcy <Plug>(coc-type-definition)
-		nmap <Leader>gci <Plug>(coc-implementation)
-		nmap <Leader>gcr <Plug>(coc-references)
+		" nmap <Leader>gcd <Plug>(coc-definition)
+		" nmap <Leader>gcy <Plug>(coc-type-definition)
+		" nmap <Leader>gci <Plug>(coc-implementation)
+		" nmap <Leader>gcr <Plug>(coc-references)
 
 		" nmap <Leader>gcv :vsp<CR><Plug>(coc-definition)
 		" nmap <Leader>gcD :vsp<CR><Plug>(coc-definition)
@@ -843,14 +884,32 @@
 
 	" Enable True Color support if you have vim >=8.0 or Neovim >= 0.1.5
 	if (has("termguicolors"))
-		let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
-		let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+		if !has("nvim")
+			let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+			let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+		endif
 		set termguicolors
 	endif
+
+	augroup solarized8_override
+		autocmd!
+		" I like green statements
+		" autocmd ColorScheme solarized8 highlight Statement guifg=#5FD75F ctermfg=green
+		" I like transparent background for terminals
+		" autocmd ColorScheme solarized8 highlight Normal ctermb=NONE
+		" I like italic comments
+		" The solarized8 default value for Comment is:
+		" highlight Comment ctermfg=242 ctermbg=NONE cterm=italic
+		" autocmd ColorScheme solarized8 highlight Comment ctermfg=246 guifg=#949494
+		" autocmd ColorScheme solarized8 highlight Comment ctermfg=236 guifg=236
+		" etc ...
+	augroup END
 
 	" syntax enable					" syntax enable keeps your current color settings. :syntax
 	set background=dark				" Assume a dark background
 	colorscheme solarized8
+	" autocmd vimenter * ++nested colorscheme solarized8
+
 	" filetype plugin indent on		" load file type plugins + indentation
 	set encoding=utf-8				" The encoding displayed
 	" set fileencoding=utf-8			" The encoding written to a file
@@ -859,7 +918,7 @@
 	set nojoinspaces 				" One space between sentences not two
 	set shortmess+=filmnrxoOtT		" abbrev. of messages (avoids 'hit enter')
 	set virtualedit=onemore			" allow for cursor beyond last character
-"	set history=2000
+	set history=10000
 	set clipboard+=unnamed			" Yanks go on clipboard instead.
 	set autowrite					" Writes on make/shell commands
 	set cursorline					" Highlight the line the cursor is on
@@ -920,13 +979,16 @@
 
 "	set backspace=indent,eol,start	" backspace for dummys
 	" set linespace=0					" No extra spaces between rows
-	set number						" Line numbers on
+	set number						" Make relative line 0 show the Line numbers on
+	set relativenumber				" Relative Line numbers on
 "	set showmatch					" show matching brackets/parenthesis
+
 	set incsearch					" find as you type search
 	set hlsearch					" highlight search terms
-	set winminheight=0				" windows can be 0 line high
 	set ignorecase					" case insensitive search
 	set smartcase					" case sensitive when uc present
+
+	set winminheight=0				" windows can be 0 line high
 	set smarttab		" sw at the start of the line, sts everywhere else
 	set timeoutlen=1200 " A little bit more time for macros
 	set ttimeoutlen=50	" Make Esc work faster
@@ -946,6 +1008,23 @@
 	"Invisible character colors
 	highlight NonText guifg=#4a4a59 guibg=bg
 	highlight SpecialKey guifg=#4a4a59 guibg=bg
+	" don't use bold for folds
+	" highlight Folded cterm=none ctermfg=246 ctermbg=236 gui=none guifg=#839496 guibg=#073642 guisp=#002b36
+	highlight Folded cterm=none gui=none
+
+	" Override the float border
+	highlight FloatBorder guifg=#073642 guibg=#073642
+
+	" Override the highlight for goSameId
+	highlight goSameId gui=reverse guifg=#268bd2
+
+    " function MyFoldText()
+    "   let line = getline(v:foldstart)
+    "   let sub = substitute(line, '/\*\|\*/\|{{{\d\=', '', 'g')
+    "   return v:folddashes .. sub
+    " endfunction
+    " set foldtext=MyFoldText()
+
 	set completeopt-=preview
 " }
 
@@ -1008,6 +1087,13 @@
 	nnoremap <C-l> <C-W><C-L>
 	nnoremap <C-h> <C-W><C-H>
 
+	" File navigation - use vertical splits
+	" nnoremap <C-W>f :vsplit<CR>gf
+	" nnoremap <C-W>F :vsplit<CR>gF
+
+	" Remap gf to open the file under cursor in a newvertical split
+	nnoremap gf :vsp <cfile><CR>
+
 	" Open a vertical split
 	" nnoremap <leader>v <C-W>v
 
@@ -1055,10 +1141,10 @@
 
 	" Edit .vimrc file quickly
 	" gev - Go Edit Vimrc
-	nnoremap gev :tabnew $HOME/.vim/vimrc<cr>
+	" nnoremap gev :tabnew $HOME/.vim/vimrc<cr>
 	" gsv - Go Source Vimrc
 	" nnoremap gsv :source $HOME/.vim/vimrc<cr>
-	nnoremap <leader>sv :source $MYVIMRC<CR>
+	" nnoremap <leader>sv :source $MYVIMRC<CR>
 	" map <Leader>v  :so $MYVIMRC<CR>
 
 	" Yank CVE
@@ -1082,17 +1168,20 @@
 	" Yank from the cursor to the end of the line, to be consistent with C and D.
 	nnoremap Y y$
 
+	" https://stackoverflow.com/a/17096082/204110
+	"
+	" relative path (src/foo.txt)
+	nnoremap <leader>cfr :let @+=expand("%")<CR>
 
-	" Toggle background between dark and light
-	map <F2> :call ToggleBg()<CR>
-	" call togglebg#map("<F2>")
+	" absolute path (/something/src/foo.txt)
+	nnoremap <leader>cfa :let @+=expand("%:p")<CR>
 
-	" Toggle todo list window
-	" nnoremap <F4> :TODOToggle<CR>
-	" command Todo noautocmd vimgrep /TODO\|FIXME/j ** | cw
-	" command Todo execute 'silent Ggrep! TODO\|FIXME'
-	command Todo Ggrep 'mgaffney' | copen
-	nnoremap <F4> :Todo<CR>
+	" filename (foo.txt)
+	nnoremap <leader>cff :let @+=expand("%:t")<CR>
+
+	" directory name (/something/src)
+	nnoremap <leader>cfd :let @+=expand("%:p:h")<CR>
+
 	" command Todo execute 'silent Ggrep!' 'TODO\|FIXME'
 
 " command -nargs=+ Ggr execute 'silent Ggrep!' <q-args> | cw | redraw!
@@ -1100,9 +1189,9 @@
 	" nnoremap <leader>g :silent Ggrep! <cword><CR>
 
 	" Make program
-	nnoremap <F5> :w<CR> :make<CR>
+	" nnoremap <F5> :w<CR> :make<CR>
 	" Move current line to end of file but keep cursor in current location
-	nnoremap <F3> :.m$<CR> `.
+	" nnoremap <F3> :.m$<CR> `.
 	" nnoremap <F5> :silent make<CR>
 	" Toggle TagList window
 	" nnoremap <silent> <F8> :TlistToggle<CR>
@@ -1141,10 +1230,16 @@
 	cnoremap cwd lcd %:p:h
 	cnoremap cd. lcd %:p:h
 
+	" Change Working Directory to the parent directory of the current file
+	cnoremap cpwd lcd %:p:h/..
+	cnoremap cpd. lcd %:p:h/..
+
 	" On command-line mode %% automatically expands to the path of the active
 	" buffer example:
 	" :edit %%Pr<Tab>
 	cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
+
+	nnoremap <leader>ycl :let @*=expand("%").":".line(".")<CR>
 
 	" visual shifting (does not exit Visual mode)
 	vnoremap < <gv
@@ -1161,14 +1256,14 @@
 	cnoremap w!! w !sudo tee % >/dev/null
 
 	" Toggle Tagbar
-	nnoremap <F8> :TagbarToggle<CR>
+	" nnoremap <F8> :TagbarToggle<CR>
 
 	" Shortcut to toggle `set syntax` - helpful when writing VIM help
-	noremap <F6> :if exists("g:syntax_on") <Bar>
-	\	syntax off <Bar>
-	\ else <Bar>
-	\	syntax enable <Bar>
-	\ endif <CR>
+	" noremap <F6> :if exists("g:syntax_on") <Bar>
+	" \	syntax off <Bar>
+	" \ else <Bar>
+	" \	syntax enable <Bar>
+	" \ endif <CR>
 
 	" Disable the arrow keys (good for learning vim)
 	" noremap <Up> <Nop>
@@ -1284,10 +1379,12 @@
 		"set lines=40		" 40 lines of text instead of 24,
 	else
 
-		hi SpellBad term=underline cterm=underline
-		hi SpellCap term=underline cterm=underline
-		hi SpellRare term=underline cterm=underline
-		hi SpellLocal term=underline cterm=underline
+		highlight SpellBad term=underline cterm=underline
+		highlight SpellCap term=underline cterm=underline
+		highlight SpellRare term=underline cterm=underline
+		highlight SpellLocal term=underline cterm=underline
+
+		" highlight SpecialKey ctermfg=66 ctermbg=236 cterm=bold
 
 		" set term=builtin_ansi	" Make arrow and other keys work
 		" let g:solarized_termcolors=256
@@ -1296,6 +1393,10 @@
 	endif
 " }
 
+" NerdTree {
+	let g:NERDTreeQuitOnOpen=1
+	nmap <F12> :NERDTreeToggle <CR>
+" }
 
 " File Templates {
 	" autocmd BufNewFile *.sh 0r $HOME/.vim/templates/template.sh
@@ -1318,6 +1419,7 @@ augroup fileconfigs
 	" autocmd FileType xml setlocal foldmethod=syntax
 	" autocmd BufNewFile,BufRead *.md,*.markdown,*.mdown,*.note setlocal filetype=markdown
 	autocmd FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
+	autocmd BufNewFile,BufRead *.rfc setlocal filetype=markdown
 " Avro files
 " 	autocmd BufNewFile,BufRead *.avsc setlocal filetype=json	"avro file
 " 	autocmd BufNewFile,BufRead *.avdl setlocal filetype=idl	"avro file
@@ -1344,6 +1446,90 @@ augroup END
 			set bg=dark
 		endif
 	endfunc
+
+	" Fun with numbers
+	function! ToggleNumbers()
+		if(&relativenumber == 1)
+			" set number
+			set norelativenumber
+		else
+			" set nonumber
+			set relativenumber
+		endif
+	endfunc
+
+	" Capture ex command output
+	" From https://vim.fandom.com/wiki/Capture_ex_command_output
+	"
+	" Example usage
+	" 	:TabMessage highlight
+	function! TabMessage(cmd)
+		redir => message
+		silent execute a:cmd
+		redir END
+		if empty(message)
+			echoerr "no output"
+		else
+			" use "new" or "vnew" instead of "tabnew" below if you prefer split windows instead of tabs
+			" tabnew
+			vnew
+			setlocal buftype=nofile bufhidden=wipe noswapfile nobuflisted nomodified
+			silent put=message
+		endif
+	endfunction
+	command! -nargs=+ -complete=command TabMessage call TabMessage(<q-args>)
+
+
+	function! s:DecoratedYank()
+    	redir @n | silent! :'<,'>number | redir END
+    	let filename=expand("%")
+    	let decoration=repeat('-', len(filename)+1)
+    	let @*=decoration . "\n" . filename . ':' . "\n" . decoration . "\n" . @n
+	endfunction
+	vnoremap <C-y> :call <SID>DecoratedYank()<CR>
+
+	" Toggle todo list window
+	" nnoremap <F4> :TODOToggle<CR>
+	" command Todo noautocmd vimgrep /TODO\|FIXME/j ** | cw
+	" command Todo execute 'silent Ggrep! TODO\|FIXME'
+	command Todo Ggrep 'mgaffney' | copen
+
+	" Toggle background between dark and light
+	nnoremap <F2> :call ToggleBg()<cr>
+	nnoremap <F3> :call ToggleNumbers()<cr>
+	nnoremap <F4> :ToggleWhitespace<cr>
+	nnoremap <F5> :Todo<cr>
+	" F6 is defined in after/ftplugin/go.vim
+	" F7 is defined in after/ftplugin/go.vim
+
+
+	" command! -complete=shellcmd -nargs=+ Shell call s:TmpShellOutput(<q-args>)
+	" function! s:TmpShellOutput(cmdline) abort
+	" 	if bufexists('tmplog')
+	" 		call deletebufline('tmplog', 1, '$')
+	" 	else
+	" 		call bufadd('tmplog')
+	" 		call setbufvar('tmplog', "buftype", "nofile")
+	" 		call setbufvar('tmplog', "filetype", "")
+	" 	endif
+	" 	" let logjob = job_start(execute("!bash " . a:cmdline),
+	" 	if has("nvim")
+	" 		let logjob = jobstart(["/bin/bash", "-c", a:cmdline],
+	" 					\ {'out_io': 'buffer', 'out_name': 'tmplog', 'out_msg': ''})
+	" 	else
+	" 		let logjob = job_start(["/bin/bash", "-c", a:cmdline],
+	" 					\ {'out_io': 'buffer', 'err_io': 'buffer', 'out_name': 'tmplog', 'err_name': 'tmplog', 'out_msg': ''})
+	" 	endif
+	" 	let winnr = win_getid()
+	" 	vert sbuffer tmplog
+	" 	setlocal wrap
+	" 	wincmd L
+	" 	60 wincmd |
+	" 	if win_getid() != winnr
+	" 		call win_gotoid(winnr)
+	" 	endif
+	" endfunction
+    "
 " }
 
 " Use - `:CopyMatches x` where x is any register to hold the result
@@ -1489,11 +1675,27 @@ augroup END
 		nmap <Leader>f: :History:<CR>
 		nmap <Leader>f/ :History/<CR>
 
-		" Fuzzy search key mappings, which is great for checking against current mappings before defining a new one:
+		" Fuzzy search key mappings, which is great for checking against
+		" current mappings before defining a new one:
 		nmap <Leader>fm :Maps<CR>
 
-		" Fuzzy search filetype syntaxes, and hit Enter on a result to set that syntax on the current buffer:
+		" Fuzzy search filetype syntaxes, and hit Enter on a result to set
+		" that syntax on the current buffer:
 		nmap <Leader>fs :Filetypes<CR>
+
+		" Git Commit Finder
+		" Fuzzy search Git commits
+		nmap <Leader>fgc :Commits<CR>
+		" Fuzzy search Git commits for the current buffer; visual-select lines
+		" to track changes in the range
+		nmap <Leader>fgC :BCommits<CR>
+
+		" Fuzzy search Go declarations in the current package.
+		" Defined in after/ftplugin/go.vim but referencing to prevent a
+		" duplicate mapping from being defined.
+		" Think 'find declarations'
+		" nmap <Leader>fd :GoDeclsDir<CR>
+
 	" }
 
 " Similarly, we can apply it to fzf#vim#grep. To use ripgrep instead of ag:
@@ -1549,5 +1751,9 @@ augroup END
 	" endif
 
 " }
-
+" Add Lua configuration
+"
+if has('nvim')
+	source $HOME/.vim/init.lua.vim
+endif
 " vim:tw=78:ts=4:sw=4:norl:

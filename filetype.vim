@@ -14,6 +14,8 @@ augroup filetypedetect
 	autocmd! BufNewFile,BufRead *.spc setfiletype sql
 	autocmd! BufNewFile,BufRead *.trg setfiletype sql
 	autocmd! BufNewFile,BufRead *.mdx setfiletype markdown
+	autocmd! BufNewFile,BufRead *.zsh-theme setfiletype zsh
+	autocmd! BufNewFile,BufRead *.gs setfiletype javascript
 augroup END
 
 " vim:tw=78:ts=4:sw=4:norl:

@@ -5,3 +5,6 @@ setlocal expandtab
 setlocal formatoptions+=o
 setlocal formatoptions+=r
 setlocal formatoptions-=t
+
+setlocal spelloptions=camel
+

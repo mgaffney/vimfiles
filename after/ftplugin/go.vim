@@ -2,6 +2,8 @@ setlocal noexpandtab
 setlocal shiftwidth=4
 setlocal tabstop=4
 
+setlocal spelloptions=camel
+
 setlocal nowrap
 setlocal textwidth=75
 
@@ -10,6 +12,14 @@ setlocal formatoptions+=o
 setlocal formatoptions+=r
 
 setlocal noshowmode " must be set for g:go_echo_go_info to work correctly
+
+nnoremap <F6> :GoSameIdsAutoToggle<cr>
+nnoremap <F7> :GoSameIdsToggle<cr>
+
+" Fuzzy search declarations.
+" Uses the fzf pluggin so the mapping follows the fzf mappings pattern.
+" Think 'find declarations'
+nmap <Leader>fd :GoDeclsDir<CR>
 
 " disable vim-go :GoDef short cut (gd)
 " this is handled by LanguageClient [LC]
@@ -21,15 +31,15 @@ setlocal noshowmode " must be set for g:go_echo_go_info to work correctly
 nmap <Leader>gh <Plug>(go-implements)
 
 " Open the relevant Godoc for the word under the cursor with <leader>gd
-nmap <Leader>gdv <Plug>(go-doc-vertical)
+" nmap <Leader>gdv <Plug>(go-doc-vertical)
 " open it vertically with <leader>gv
 " nmap <Leader>gdv <Plug>(go-doc-vertical)
 " open it in a new tab with <leader>gt
-nmap <Leader>gdt <Plug>(go-doc-tab)
+" nmap <Leader>gdt <Plug>(go-doc-tab)
 " open the Godoc in browser
-nmap <Leader>gdb <Plug>(go-doc-browser)
+" nmap <Leader>gdb <Plug>(go-doc-browser)
 
-" Run commands, such as go run with <leader>r for the current file or go build
+" Run commands, such as go run with <leader>gr for the current file or go build
 " and go test for the current package with <leader>b and <leader>t. Display a
 " beautiful annotated source code to see which functions are covered with
 " <leader>c.
@@ -40,22 +50,25 @@ nmap <leader>gtt <Plug>(go-test)
 nmap <leader>gtf <Plug>(go-test-func)
 nmap <leader>gtc <Plug>(go-coverage-browser)
 nmap <leader>gv <Plug>(go-vet)
-nmap <leader>gl :GoLint<CR>
+" nmap <leader>gl :GoLint<CR>
 
 " By default the mapping gd is enabled which opens the target identifier in
 " current buffer. You can also open the definition/declaration in a new
 " vertical, horizontal or tab for the word under your cursor:
-
 " nmap gd <Plug>(go-def-vertical)
-nmap <Leader>ds <Plug>(go-def-split)
-nmap <Leader>dv <Plug>(go-def-vertical)
-nmap <Leader>dt <Plug>(go-def-tab)
+nmap <Leader>vd <Plug>(go-def-vertical)
+nmap <Leader>vD <Plug>(go-def-type-vertical)
+nmap <Leader>td <Plug>(go-def-tab)
+nmap <Leader>tD <Plug>(go-def-type-tab)
+
+" nmap <Leader>ds <Plug>(go-def-split)
+" nmap <Leader>dv <Plug>(go-def-vertical)
 
 iabbr <buffer> todo // TODO(mgaffney) <c-r>=strftime("%m/%Y")<cr>:
 iabbr <buffer> note // NOTE(mgaffney):
 iabbr <buffer> bug // BUG(mgaffney):
 
-iabbr <buffer> jim jimlambrt
+" iabbr <buffer> jim jimlambrt
 
 " Rename the identifier under the cursor to a new name
 " nmap <Leader>rn <Plug>(go-rename)
@@ -65,6 +78,9 @@ iabbr <buffer> jim jimlambrt
 " nmap <Leader>i <Plug>(go-info)
 
 " Settings for vim-go bundle
+let g:go_doc_balloon = 0
+let g:go_doc_popup_window = 1
+let g:go_doc_max_height = 40
 
 let g:go_fold_enable = ['block', 'import', 'varconst', 'package_comment']
 
@@ -86,7 +102,8 @@ let g:go_test_timeout= '7m'
 " saving and opening files. The following fixes this:
 " let g:syntastic_go_checkers = ['golint', 'govet']
 " let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-
+"
+let g:go_metalinter_command = "golangci-lint"
 let g:go_diagnostics_level = 2
 
 " Enable goimports to automatically insert import paths instead of gofmt:
@@ -111,32 +128,34 @@ let g:go_imports_autosave = 1
 let g:go_def_reuse_buffer = 0
 
 " Enable highlighting
-" let g:go_highlight_operators = 1
+let g:go_highlight_operators = 0
 let g:go_highlight_functions = 1
 let g:go_highlight_function_calls = 1
-
 let g:go_highlight_function_parameters = 1
+
 let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_generate_tags = 1
+let g:go_highlight_string_spellcheck = 1
+let g:go_highlight_format_strings = 1
 
 let g:go_highlight_extra_types = 1
 
+let g:go_updatetime = 400
 " let g:go_auto_sameids = 1
 
-" let g:go_dispatch_enabled = 1
 let g:go_auto_type_info = 1
 
-" let g:go_gocode_propose_source = 1
-" let g:go_gocode_unimported_packages = 1
 let g:go_highlight_array_whitespace_error = 1
-
 let g:go_highlight_chan_whitespace_error = 1
 let g:go_highlight_space_tab_error = 0
 let g:go_highlight_trailing_whitespace_error = 0
 let g:go_highlight_variable_declarations = 1
 let g:go_highlight_variable_assignments = 1
+
+let g:go_highlight_diagnostic_errors = 1
+let g:go_highlight_diagnostic_warnings = 1
 
 " let g:go_oracle_scope = ''
 
