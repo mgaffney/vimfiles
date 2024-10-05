@@ -11,6 +11,9 @@
 SCRIPTDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 readonly SCRIPTDIR
 
+SCRIPTNAME=${0:t}
+readonly SCRIPTNAME
+
 function err() {
   echo "$@" >&2
 }
@@ -18,7 +21,7 @@ function err() {
 function help() {
   cat >&2 <<HELP
   Usage:
-    $0 file
+    ${SCRIPTNAME} file
 
     file       the file to ....
 HELP
