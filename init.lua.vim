@@ -14,6 +14,7 @@ local rt = require("rust-tools")
       },
     })
 
+require'lspconfig'.clangd.setup{}
 
 -- lspconfig.rust_analyzer.setup {
 --   -- Server-specific settings. See `:help lspconfig-setup`
@@ -75,6 +76,8 @@ Reference
     -- end, opts)
   end,
 })
+
+-- vim.lsp.set_log_level("debug")
 
 EOF
 

@@ -16,12 +16,35 @@
 		Plug 'idanarye/vim-merginal'
 		" Plug 'gregsexton/gitv'
 	" }
+	" Symlinks {
+		Plug 'aymericbeaumet/vim-symlink'
+		Plug 'moll/vim-bbye' " optional dependency
+	" }
+	" undo {
+		Plug 'mbbill/undotree'
+	" }
+	" GitHub Copilot {
+		Plug 'github/copilot.vim'
+	" }
 	" Colors {
 		" Plug 'mgaffney/vim-colors-solarized'
-		Plug 'lifepillar/vim-solarized8', { 'branch': 'neovim' }
+
+		if has('nvim')
+			Plug 'lifepillar/vim-solarized8', { 'dir': '~/.vim/plugged/vim-solarized8-neovim', 'branch': 'neovim' }
+		else
+			Plug 'lifepillar/vim-solarized8'
+		endif
+
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
 		Plug 'guns/xterm-color-table.vim'
+		if has('nvim')
+			" Plug 'calind/selenized.nvim'
+		endif
+		" Plug '~/sandbox/solarized/selenized/editors/vim/colors'
+		" Plug 'lifepillar/vim-colortemplate'
 	" }
-	" tmux {
+	" speeddating {
 		Plug 'tpope/vim-speeddating'
 	" }
 	" tmux {
@@ -102,7 +125,7 @@
 		Plug 'ntpeters/vim-better-whitespace'
 	" }
 	" Folds {
-		Plug 'jrudess/vim-foldtext'
+		" Plug 'jrudess/vim-foldtext'
 	" }
 	" Man pages {
 		" Plug 'lambdalisue/vim-manpager'
@@ -137,6 +160,8 @@
 	" Tags {
 		" Plug 'vim-scripts/taglist.vim'
 		Plug 'majutsushi/tagbar'
+		Plug 'zackhsi/fzf-tags'
+		Plug 'yegappan/taglist'
 		" Plug 'ludovicchabant/vim-gutentags'
 	" }
 	" UnixHelpers {
@@ -186,6 +211,7 @@
 	" }
 	" PostgreSQL {
 		Plug 'lifepillar/pgsql.vim'
+		Plug 'tomswartz07/vim-pg-explain-syntax'
 	" }
 	" HTML5 {
 		"Plug 'othree/html5-syntax.vim'
@@ -284,7 +310,7 @@
 
 " python for vim {
 	" let g:python_host_prog = '/usr/local/bin/python3'
-	let g:python3_host_prog = '/opt/homebrew/bin/python3'
+	" let g:python3_host_prog = '/opt/homebrew/bin/python3'
 " }
 
 " ConfigPlugins {
@@ -410,7 +436,7 @@
 		" autocmd! User GoyoEnter Limelight
 		" autocmd! User GoyoLeave Limelight!
 		noremap <leader>z :silent! :Goyo<CR>
-		let g:goyo_width = 90
+		let g:goyo_width = 100
 	" }
 	" Git {
 		" tpope/vim-fugitive
@@ -459,7 +485,8 @@
 		nnoremap gst :vertical :G<CR>
 		nnoremap <leader>gll :vertical :G log<CR>
 		nnoremap <leader>glf :vertical :G log --name-only<CR>
-		nnoremap <leader>glm :vertical :G log --name-only --author="Michael Gaffney"<CR>
+		nnoremap <leader>glm :vertical :G log --author="Michael Gaffney"<CR>
+		nnoremap <leader>glt :vertical :G log --author="Messier"<CR>
 
 		" command! -nargs=+ Gca :r!git log -n100 --pretty=format:"\%an <\%ae>" | grep '-i' '<args>' | head -1 | xargs echo "Co- authored-by:"
 
@@ -488,17 +515,26 @@
 			nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
 			" edkolev/tmuxline.vim
 			" let g:tmuxline_powerline_separators = 1
+
 				" \ 'a': ['#S', '#{session_windows}'],
 				" \ 'c': ['#{pane_height}', '#{pane_current_command}'],
-			" let g:tmuxline_preset = {
-				" \ 'a': ['#S'],
-				" \ 'b': '#W',
-				" \ 'c': ['#{pane_current_command}'],
-				" \ 'cwin': ['#I', '#W'],
-				" \ 'win': ['#I', '#W'],
-				" \ 'x': '#{cursor_y}: #{cursor_x}',
-				" \ 'y': [ '%l:%M', '%a %b %e'],
-				" \ 'z': '#h'}
+
+			let g:tmuxline_separators = {
+				\ 'left' : '',
+				\ 'left_alt': '',
+				\ 'right' : '',
+				\ 'right_alt' : '',
+				\ 'space' : ' '}
+
+			let g:tmuxline_preset = {
+				\ 'a': ['#S'],
+				\ 'b': '#W',
+				\ 'c': ['#{pane_current_command}'],
+				\ 'cwin': ['#I', '#W'],
+				\ 'win': ['#I', '#W'],
+				\ 'x': '#{cursor_y}: #{cursor_x}',
+				\ 'y': [ '%l:%M', '%a %b %e'],
+				\ 'z': '#h'}
 		endif
 	" }
 	" junegunn/vim-easy-align {
@@ -519,9 +555,9 @@
 	" }
 	"
 	" Gutentags {
-		let g:gutentags_ctags_tagfile=".tags"
-		let g:gutentags_ctags_exclude=['*.js', '*.html', '*.css', '*.json']
-		set tags=".tags"
+		" let g:gutentags_ctags_tagfile=".tags"
+		" let g:gutentags_ctags_exclude=['*.js', '*.html', '*.css', '*.json']
+		" set tags=".tags"
 	" }
 	" Snips {
 		" ultisnips
@@ -638,7 +674,7 @@
 		let g:airline_symbols.branch = ''
 		let g:airline_symbols.readonly = ''
 		" let g:airline_symbols.linenr = ''
-
+		let g:airline_selenized_normal_green = 0
 		" let g:airline#extensions#coc#enabled = 1
 		if exists('$TMUX')
 			let g:airline#extensions#tmuxline#enabled = 0
@@ -908,7 +944,11 @@
 
 	" syntax enable					" syntax enable keeps your current color settings. :syntax
 	set background=dark				" Assume a dark background
-	colorscheme solarized8
+	" if has('nvim')
+		colorscheme selenized
+	" else
+		" colorscheme solarized8
+	" endif
 	" autocmd vimenter * ++nested colorscheme solarized8
 
 	" filetype plugin indent on		" load file type plugins + indentation
@@ -1212,16 +1252,16 @@
 	nnoremap zO zczO
 
 	""" Code folding options
-	nnoremap <leader>f0 :set foldlevel=0<CR>
-	nnoremap <leader>f1 :set foldlevel=1<CR>
-	nnoremap <leader>f2 :set foldlevel=2<CR>
-	nnoremap <leader>f3 :set foldlevel=3<CR>
-	nnoremap <leader>f4 :set foldlevel=4<CR>
-	nnoremap <leader>f5 :set foldlevel=5<CR>
-	nnoremap <leader>f6 :set foldlevel=6<CR>
-	nnoremap <leader>f7 :set foldlevel=7<CR>
-	nnoremap <leader>f8 :set foldlevel=8<CR>
-	nnoremap <leader>f9 :set foldlevel=9<CR>
+	" nnoremap <leader>f0 :set foldlevel=0<CR>
+	" nnoremap <leader>f1 :set foldlevel=1<CR>
+	" nnoremap <leader>f2 :set foldlevel=2<CR>
+	" nnoremap <leader>f3 :set foldlevel=3<CR>
+	" nnoremap <leader>f4 :set foldlevel=4<CR>
+	" nnoremap <leader>f5 :set foldlevel=5<CR>
+	" nnoremap <leader>f6 :set foldlevel=6<CR>
+	" nnoremap <leader>f7 :set foldlevel=7<CR>
+	" nnoremap <leader>f8 :set foldlevel=8<CR>
+	" nnoremap <leader>f9 :set foldlevel=9<CR>
 
 	"insert random string
 	" nnoremap <leader>r mx:r! od -vAn -N16 -tx4 < /dev/urandom<CR>ddk:s/\s//<CR>:nohlsearch<CR>"zyiwdd`x"zP
@@ -1257,7 +1297,7 @@
 	cnoremap w!! w !sudo tee % >/dev/null
 
 	" Toggle Tagbar
-	" nnoremap <F8> :TagbarToggle<CR>
+	nnoremap <F8> :TagbarToggle<CR>
 
 	" Shortcut to toggle `set syntax` - helpful when writing VIM help
 	" noremap <F6> :if exists("g:syntax_on") <Bar>
@@ -1397,6 +1437,7 @@
 " NerdTree {
 	let g:NERDTreeQuitOnOpen=1
 	nmap <F12> :NERDTreeToggle <CR>
+	noremap <leader>n :NERDTreeFind<CR>
 " }
 
 " File Templates {
@@ -1438,6 +1479,9 @@ augroup fileconfigs
 " 	" autocmd BufNewFile,BufRead *.
 augroup END
 " }
+
+" Open files from quickfix into tabs
+" set switchbuf+=usetab,newtab
 
 " Functions {
 	function! ToggleBg()
@@ -1697,6 +1741,8 @@ augroup END
 		" Think 'find declarations'
 		" nmap <Leader>fd :GoDeclsDir<CR>
 
+		nmap <C-]> <Plug>(fzf_tags)
+		noreabbrev <expr> ts getcmdtype() == ":" && getcmdline() == 'ts' ? 'FZFTselect' : 'ts'
 	" }
 
 " Similarly, we can apply it to fzf#vim#grep. To use ripgrep instead of ag:
@@ -1707,8 +1753,8 @@ augroup END
 		\           : fzf#vim#with_preview('right:50%:hidden', '?'),
 		\   <bang>0)
 
-	let g:fzf_files_options =
-		\ '--preview "(highlight -O ansi {} || cat {}) 2> /dev/null | head -'.&lines.'"'
+	" let g:fzf_files_options =
+		" \ '--preview "(highlight -O ansi {} || cat {}) 2> /dev/null | head -'.&lines.'"'
 	"
 	" --column: Show column number
 	" --line-number: Show line number
@@ -1720,10 +1766,16 @@ augroup END
 	" --follow: Follow symlinks
 	" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
 	" --color: Search color options
-	command! -bang -nargs=* Find
-		\ call fzf#vim#grep(
-		\ 'rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color=always '.shellescape(<q-args>), 1, <bang>0)
+	" command! -bang -nargs=* Find
+		" \ call fzf#vim#grep(
+		" \ 'rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color=always '.shellescape(<q-args>), 1, <bang>0)
 
+" }
+
+" Create parent directories {
+	" :h ++p
+	" Auto-create parent directories (except for URIs "://").
+	au BufWritePre,FileWritePre * if @% !~# '\(://\)' | call mkdir(expand('<afile>:p:h'), 'p') | endif
 " }
 
 " plist {
@@ -1754,7 +1806,12 @@ augroup END
 " }
 " Add Lua configuration
 "
+
+set redrawtime=0
+
 if has('nvim')
-	source $HOME/.vim/init.lua.vim
+	" source $HOME/.vim/init.lua.vim
 endif
+
+	" nnoremap <C-k> <C-W><C-K>
 " vim:tw=78:ts=4:sw=4:norl:
