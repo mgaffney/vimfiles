@@ -7,6 +7,8 @@ setlocal spelloptions=camel
 setlocal nowrap
 setlocal textwidth=75
 
+setlocal comments=s:/*,m:\ ,e:*/,://
+
 setlocal foldmethod=syntax
 setlocal formatoptions+=o
 setlocal formatoptions+=r
@@ -76,10 +78,13 @@ iabbr <buffer> bug // BUG(mgaffney):
 " Show type info for the word under your cursor with <leader>i (useful if you
 " have disabled auto showing type info via g:go_auto_type_info)
 " nmap <Leader>i <Plug>(go-info)
+"
+
+" let g:go_debug = ['lsp']
 
 " Settings for vim-go bundle
 let g:go_doc_balloon = 0
-let g:go_doc_popup_window = 1
+let g:go_doc_popup_window = 0
 let g:go_doc_max_height = 40
 
 let g:go_fold_enable = ['block', 'import', 'varconst', 'package_comment']
