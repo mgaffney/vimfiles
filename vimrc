@@ -535,3 +535,9 @@ command! -bang -nargs=* Rg
 au BufWritePre,FileWritePre * if @% !~# '\(://\)' | call mkdir(expand('<afile>:p:h'), 'p') | endif
 
 set redrawtime=0
+
+if has('nvim')
+	" source $HOME/.vim/init.lua.vim
+endif
+
+" vim:tw=78:ts=4:sw=4:norl:
