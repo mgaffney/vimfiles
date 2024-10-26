@@ -110,7 +110,7 @@ if &background ==# 'dark'
   hi! link Tag Special
   hi Error guifg=#fa5750 guibg=NONE gui=bold cterm=bold
   hi Todo guifg=#f275be guibg=NONE gui=bold cterm=bold
-  hi Underlined guifg=#af88eb guibg=NONE gui=underline cterm=underline
+  hi Underlined guifg=#58a3ff guibg=NONE gui=underline cterm=underline
   hi Ignore guifg=#2d5b69 guibg=NONE gui=NONE cterm=NONE
   hi VimCommand guifg=#dbb32d guibg=NONE gui=NONE cterm=NONE
   hi RubyDefine guifg=#cad8d9 guibg=NONE gui=bold cterm=bold
@@ -351,7 +351,7 @@ if s:t_Co >= 256
     hi! link Tag Special
     hi Error ctermfg=203 ctermbg=NONE cterm=bold
     hi Todo ctermfg=205 ctermbg=NONE cterm=bold
-    hi Underlined ctermfg=141 ctermbg=NONE cterm=underline
+    hi Underlined ctermfg=39 ctermbg=NONE cterm=underline
     hi Ignore ctermfg=240 ctermbg=NONE cterm=NONE
     hi VimCommand ctermfg=178 ctermbg=NONE cterm=NONE
     hi RubyDefine ctermfg=252 ctermbg=NONE cterm=bold
