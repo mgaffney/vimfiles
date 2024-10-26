@@ -85,13 +85,14 @@ call plug#end()
 let g:solarized_term_italics = 0
 let g:solarized_italics = 0
 let g:sql_type_default = 'pgsql'
+
 let g:grepper = {}
 let g:grepper.tools = ['rg', 'git', 'grep', 'ag']
 nnoremap <Leader>* :Grepper -cword -noprompt<CR>
 nnoremap <Leader>rg :Grepper -tool rg -grepprg rg -H --no-heading --vimgrep --sort path<CR>
 nnoremap <Leader>vg :Grepper -tool rg -grepprg rg -H --no-heading --vimgrep --sort path -g '!vendor' -g '!website' -g '!ui'<CR>
-
 set grepprg=internal
+
 let wiki_1 = {}
 let wiki_1.path = '~/vimwiki/'
 let wiki_1.path_html = '~/vimwiki_html/'
@@ -166,16 +167,15 @@ nnoremap <leader>glt :vertical :G log --author="Messier"<CR>
 xmap <leader>ggy :GBrowse!<CR>
 xmap <leader>ggp S]`>a()<ESC>hp
 map <leader>gB :MerginalToggle<CR>
+
 if exists('$TMUX')
 	nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
-
 	let g:tmuxline_separators = {
 		\ 'left' : '',
 		\ 'left_alt': '',
 		\ 'right' : '',
 		\ 'right_alt' : '',
 		\ 'space' : ' '}
-
 	let g:tmuxline_preset = {
 		\ 'a': ['#S'],
 		\ 'b': '#W',
@@ -186,6 +186,7 @@ if exists('$TMUX')
 		\ 'y': [ '%l:%M', '%a %b %e'],
 		\ 'z': '#h'}
 endif
+
 xmap ga <Plug>(EasyAlign)
 nmap yga <Plug>(EasyAlign)
 
@@ -194,7 +195,6 @@ let g:UltiSnipsListSnippets="<c-l>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsEditSplit="vertical"
-
 nnoremap ges :UltiSnipsEdit!<CR>
 
 augroup qs_colors
@@ -215,12 +215,9 @@ let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#bufferline#enabled = 0
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#wordcount#enabled = 1
-
 let g:airline#extensions#obsession#indicator_text = '' " U+F130 (microphone)
-
 let g:airline_symbols.notexists = ' ' "thinspace U+F059 (Question mark - as in 'where is it')
 let g:airline_symbols.dirty = ' ' "thinspace + storm cloud
-
 let g:airline_left_sep = '' " U+E0B0
 let g:airline_right_sep = '' " U+E0B2
 let g:airline_right_alt_sep = '' " U+E0B3
@@ -231,9 +228,6 @@ if exists('$TMUX')
 	let g:airline#extensions#tmuxline#enabled = 0
 endif
 
-let g:hcl_fmt_autosave = 0
-let g:tf_fmt_autosave = 0
-let g:nomad_fmt_autosave = 0
 let g:terraform_fmt_on_save=0
 let g:jedi#use_splits_not_buffers = "right"
 
@@ -383,7 +377,6 @@ nnoremap <F2> :call ToggleBg()<cr>
 nnoremap <F3> :call ToggleNumbers()<cr>
 nnoremap <F4> :ToggleWhitespace<cr>
 nnoremap <F5> :Todo<cr>
-
 
 noremap [[ ?{<CR>w99[{…
 noremap ][ /}<CR>b99]}…
