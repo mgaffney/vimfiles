@@ -230,11 +230,6 @@ let g:airline_selenized_normal_green = 0
 if exists('$TMUX')
 	let g:airline#extensions#tmuxline#enabled = 0
 endif
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_javascript_checkers = ['jshint']
-let g:syntastic_shell = '/opt/homebrew/bin/zsh'
-let g:syntastic_ignore_files = ['\m^/usr/include/', '\m\c\.html$']
 
 let g:hcl_fmt_autosave = 0
 let g:tf_fmt_autosave = 0
@@ -491,31 +486,6 @@ function! CopyMatches(reg)
 	execute 'let @'.reg.' = join(hits, "\n") . "\n"'
 endfunction
 command! -register CopyMatches call CopyMatches(<q-reg>)
-
-function! s:find_jshintrc(dir)
-	let l:found = globpath(a:dir, '.jshintrc')
-	if filereadable(l:found)
-		return l:found
-	endif
-
-	let l:parent = fnamemodify(a:dir, ':h')
-	if l:parent != a:dir
-		return s:find_jshintrc(l:parent)
-	endif
-
-	return "~/.jshintrc"
-endfunction
-
-function! UpdateJsHintConf()
-	let l:dir = expand('%:p:h')
-	let l:jshintrc = s:find_jshintrc(l:dir)
-	let g:syntastic_javascript_jshint_args = l:jshintrc
-endfunction
-
-augroup js_files
-	autocmd!
-	autocmd BufEnter * call UpdateJsHintConf()
-augroup END
 
 let g:projectionist_heuristics = {
 	\ '*.go': {
