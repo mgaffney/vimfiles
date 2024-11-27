@@ -15,6 +15,11 @@ setlocal formatoptions+=r
 
 setlocal noshowmode " must be set for g:go_echo_go_info to work correctly
 
+iabbr <buffer> todo // TODO(mgaffney) <c-r>=strftime("%m/%Y")<cr>:
+iabbr <buffer> note // NOTE(mgaffney):
+iabbr <buffer> bug // BUG(mgaffney):
+
+if !has("nvim")
 nnoremap <F6> :GoSameIdsAutoToggle<cr>
 nnoremap <F7> :GoSameIdsToggle<cr>
 
@@ -23,6 +28,8 @@ nnoremap <F7> :GoSameIdsToggle<cr>
 " Think 'find declarations'
 nmap <Leader>fd :GoDeclsDir<CR>
 
+nmap <Leader>gc :GoReferrers<CR>
+nmap <leader>rn :GoRename<CR>
 " disable vim-go :GoDef short cut (gd)
 " this is handled by LanguageClient [LC]
 " let g:go_def_mapping_enabled = 0
@@ -30,7 +37,7 @@ nmap <Leader>fd :GoDeclsDir<CR>
 
 " Show a list of interfaces which is implemented by the type under your cursor
 " with <leader>gh (think 'go hierarchy')
-nmap <Leader>gh <Plug>(go-implements)
+" nmap <Leader>gh <Plug>(go-implements)
 
 " Open the relevant Godoc for the word under the cursor with <leader>gd
 " nmap <Leader>gdv <Plug>(go-doc-vertical)
@@ -51,7 +58,7 @@ nmap <leader>gr <Plug>(go-run)
 nmap <leader>gtt <Plug>(go-test)
 nmap <leader>gtf <Plug>(go-test-func)
 nmap <leader>gtc <Plug>(go-coverage-browser)
-nmap <leader>gv <Plug>(go-vet)
+" nmap <leader>gv <Plug>(go-vet)
 " nmap <leader>gl :GoLint<CR>
 
 " By default the mapping gd is enabled which opens the target identifier in
@@ -63,12 +70,9 @@ nmap <Leader>vD <Plug>(go-def-type-vertical)
 nmap <Leader>td <Plug>(go-def-tab)
 nmap <Leader>tD <Plug>(go-def-type-tab)
 
+
 " nmap <Leader>ds <Plug>(go-def-split)
 " nmap <Leader>dv <Plug>(go-def-vertical)
-
-iabbr <buffer> todo // TODO(mgaffney) <c-r>=strftime("%m/%Y")<cr>:
-iabbr <buffer> note // NOTE(mgaffney):
-iabbr <buffer> bug // BUG(mgaffney):
 
 " iabbr <buffer> jim jimlambrt
 
@@ -204,6 +208,7 @@ let g:tagbar_type_go = {
     \ 'ctagsargs' : '-sort -silent'
 \ }
 
+endif
 " sign define godebugbreakpoint text=> texthl=GoDebugBreakpoint
 " sign define godebugbreakpoint text= texthl=GoDebugBreakpoint
 " sign define godebugbreakpoint text= texthl=GoDebugBreakpoint
