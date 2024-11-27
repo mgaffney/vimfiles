@@ -1,3 +1,0 @@
-_[:VIM_EVAL:]strftime('%A %B %e, %Y')[:END_EVAL:]_  
-_[:VIM_EVAL:]tolower(strftime('%l:%M %p'))[:END_EVAL:]_  
-# 
