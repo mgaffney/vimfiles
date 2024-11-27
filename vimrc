@@ -67,7 +67,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'ntpeters/vim-better-whitespace'
 	Plug 'nvim-lua/plenary.nvim'
 	Plug 'nvim-tree/nvim-web-devicons' " optional dependency for diffview.nvim
-	Plug 'preservim/nerdtree'
+	Plug 'preservim/nerdtree', { 'on': 'NERDTreeFind' }
 	Plug 'simrat39/rust-tools.nvim'
 	Plug 'sindrets/diffview.nvim'
 	Plug 'tomswartz07/vim-pg-explain-syntax'
@@ -374,11 +374,13 @@ vnoremap > >gv
 cnoremap w!! w !sudo tee % >/dev/null
 
 noremap <F1> <Esc>
-nnoremap <F8> :TagbarToggle<CR>
 nnoremap <F2> :call ToggleBg()<cr>
 nnoremap <F3> :call ToggleNumbers()<cr>
 nnoremap <F4> :ToggleWhitespace<cr>
 nnoremap <F5> :Todo<cr>
+nnoremap <F8> :TagbarToggle<CR>
+
+nnoremap <leader>m :TagbarOpenAutoClose<CR>
 
 noremap [[ ?{<CR>w99[{…
 noremap ][ /}<CR>b99]}…
