@@ -261,7 +261,7 @@ set encoding=utf-8				" The encoding displayed
 scriptencoding utf-8
 set nojoinspaces 				" One space between sentences not two
 set shortmess+=cfilmnrxoOtT		" abbrev. of messages (avoids 'hit enter')
-set virtualedit=onemore			" allow for cursor beyond last character
+set virtualedit=block			" allow for cursor beyond last character
 set history=10000
 set clipboard+=unnamed			" Yanks go on clipboard instead.
 set autowrite					" Writes on make/shell commands
