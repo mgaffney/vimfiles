@@ -540,4 +540,4 @@ if has('nvim')
 	" source $HOME/.vim/init.lua.vim
 endif
 
-" vim:tw=78:ts=4:sw=4:norl:
+" vim:tw=78:ts=2:sw=2:norl:
