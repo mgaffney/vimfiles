@@ -61,6 +61,8 @@ call plug#begin('~/.vim/plugged')
 	Plug 'majutsushi/tagbar'
 	Plug 'mhinz/vim-grepper'
 	Plug 'mileszs/ack.vim'
+	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+	Plug 'numToStr/Comment.nvim'
 	Plug 'neovim/nvim-lspconfig'
 	Plug 'ntpeters/vim-better-whitespace'
 	Plug 'nvim-lua/plenary.nvim'
@@ -79,7 +81,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'yegappan/taglist'
 	Plug 'zackhsi/fzf-tags'
 	Plug 'zimbatm/haproxy.vim'
-	Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+	" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 call plug#end()
 
 let g:solarized_term_italics = 0
@@ -537,7 +539,15 @@ au BufWritePre,FileWritePre * if @% !~# '\(://\)' | call mkdir(expand('<afile>:p
 set redrawtime=0
 
 if has('nvim')
+	" Find files using Telescope command-line sugar.
+	" nnoremap <leader>ff <cmd>Telescope find_files<cr>
+	" nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+	" nnoremap <leader>fb <cmd>Telescope buffers<cr>
+	" nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
 	" source $HOME/.vim/init.lua.vim
+	" lua require($HOME/.vim/"mitchellh")
+	" lua require("mitchellh")
 endif
 
 " vim:tw=78:ts=2:sw=2:norl:
