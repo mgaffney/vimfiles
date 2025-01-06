@@ -406,8 +406,8 @@ augroup plists
 augroup end
 
 if has('gui_running')
-	set guifont=Source\ Code\ Pro\ Nerd\ Complete:h12
-	set guifontwide=Source\ Code\ Pro\ Nerd\ Complete:h12
+	set guifont=SauceCodePro\ Nerd\ Font:h12
+	set guifontwide=SauceCodePro\ Nerd\ Font:h12
 	set background=light
 	if has("gui_macvim")
 		macmenu &File.New\ Tab key=<nop>
